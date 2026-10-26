@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # ReviewTrust
 
 An electronics review-pattern analysis platform. It detects observable patterns, not proven deception. Proposed scores are experimental and apply only to the submitted subset.
@@ -30,3 +31,6 @@ One approved step per message. Next: Step 2 with GPT-6.1 Sol, Medium reasoning, 
 ## Git
 
 The initial workspace is empty and has no local `.git` directory. Git inspection also fails with `fatal: cannot change to 'C:/Users/Samar'` in this execution environment. No branch, remote, history or commit has been verified. Repository initialization/configuration belongs to Step 2. No grounded push command is available yet; never push automatically.
+=======
+# Review-Trust
+>>>>>>> 6afe039a655b47ff45882b5f536d0def3c335eac
