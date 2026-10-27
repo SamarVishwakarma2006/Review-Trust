@@ -2,13 +2,15 @@
 
 Build an evidence-based electronics review-pattern analyzer, never an authenticity authority. Stack: Next.js App Router/React/TypeScript/Tailwind and Python FastAPI/Pydantic/Uvicorn. Offline ML only when justified; no database, accounts, paid LLM, URL fetching or browser extension in v1.
 
-Read this file, SPEC.md, README.md roadmap and docs/HANDOFF.md before each step; inspect Git status/branch/recent commits and relevant files. Preserve existing user work. Implement exactly one approved roadmap step per user message. Completed: Steps 1–2; next pending: Step 3. Do not start until user says `next`.
+Read this file, SPEC.md, README.md roadmap and docs/HANDOFF.md before each step; inspect Git status/branch/recent commits and relevant files. Preserve existing user work. Implement exactly one approved roadmap step per user message. Completed: Steps 1–3; next pending: Step 4. Do not start until user says `next`.
 
 SPEC.md owns contracts, scoring, evidence definitions and acceptance criteria. docs/THREAT_MODEL.md owns proposed controls. docs/DECISIONS.md records tradeoffs. Numeric scoring is experimental; missing evidence is never low risk; no confidence level without validation. No review names, raw-body logs or persisted uploads. Treat all input as untrusted.
 
 Prefer small pure analysis functions, explicit typed API contracts, deterministic evidence and native/standard-library features. Server limits and validation are authoritative. Add dependencies only for concrete needs. Review methodology changes with a version bump and regression fixtures.
 
 Foundation: `web/app` is a synchronous Next.js development page; `api/app/main.py` serves only GET / development status. No health, review or analysis endpoint yet. `ml/` holds guidance only. Runtimes: Node 24 and Python 3.12. Install with `npm --prefix web ci` and the pinned `api/requirements-dev.txt` in `api/.venv`. Do not add ML dependencies before justified evaluation work.
+
+Step 3 input contracts live in `api/app/schemas.py`; use `parse_json`/`parse_csv` from `api/app/ingestion.py` for untrusted bytes and `ReviewInputError` for safe public details. Never expose raw Pydantic errors or submitted unknown keys. See docs/INPUT_VALIDATION.md. Decimal rating bounds are checked before float conversion. Keep duplicate rows and request-local references. Parsers validate but do not redact text, persist files, fetch sources or enforce HTTP streaming limits; Step 4 must add transport controls and redaction before analysis/output.
 
 Verification: from repository root on Windows, run `./scripts/check.ps1`. Backend commands from `api/`: `.venv/Scripts/python.exe -m pip check`, `-m pytest`, `-m ruff check .`, `-m ruff format --check .`. Frontend from root: `npm --prefix web run test`, `run lint`, `run typecheck`, `run build`. On Unix use `.venv/bin/python`. Run API with `./scripts/dev-api.ps1` and web with `npm --prefix web run dev`; both bind loopback. CI mirrors checks on Ubuntu; local passing checks are not a claim that remote CI ran.
 

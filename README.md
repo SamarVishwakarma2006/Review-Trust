@@ -4,9 +4,9 @@ An electronics review-pattern analysis platform. It detects observable patterns,
 
 ## Current status
 
-Steps 1 and 2 are complete. The development-only Next.js page and FastAPI application start successfully; pinned dependencies, smoke tests, static checks and the production frontend build were verified locally. Review submission, scoring, datasets and deployment remain future work. GitHub Actions has been configured but has not yet been verified remotely.
+Steps 1–3 are complete. The Next.js and FastAPI development foundations have shared review schemas and in-memory JSON/CSV validation. Backend validation tests, the existing frontend smoke test, static checks and the production frontend build pass locally. Public review submission, scoring, datasets and deployment remain future work. GitHub Actions has been configured but has not yet been verified remotely.
 
-Read [SPEC.md](SPEC.md), [decisions](docs/DECISIONS.md), [threat model](docs/THREAT_MODEL.md), [engineering guidance](AGENTS.md) and [handoff](docs/HANDOFF.md).
+Read [SPEC.md](SPEC.md), [input validation interface](docs/INPUT_VALIDATION.md), [decisions](docs/DECISIONS.md), [threat model](docs/THREAT_MODEL.md), [engineering guidance](AGENTS.md) and [handoff](docs/HANDOFF.md).
 
 ## Development setup
 
@@ -26,7 +26,7 @@ If this machine's `python` alias fails, the Codex bundled runtime used for local
 & "$env:USERPROFILE/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/python.exe" -m venv api/.venv
 ```
 
-This fallback path is machine-specific; a normal Python 3.12 installation is preferred for independent development. Do not commit the virtual environment. No environment secrets or `.env` file are needed for Step 2.
+This fallback path is machine-specific; a normal Python 3.12 installation is preferred for independent development. Do not commit the virtual environment. No environment secrets or `.env` file are needed for the current foundation.
 
 On macOS/Linux:
 
@@ -50,7 +50,7 @@ Open two terminals at the repository root:
 npm --prefix web run dev
 ```
 
-For macOS/Linux, run `.venv/bin/python -m uvicorn app.main:app --host 127.0.0.1 --port 8000 --reload --no-access-log` from `api/`. Stop either server with Ctrl+C. API `GET /` returns only a development status. The web page does not call the API yet. `/health` and analysis endpoints belong to Step 4; ingestion schemas belong to Step 3. These development apps are not approved for public deployment.
+For macOS/Linux, run `.venv/bin/python -m uvicorn app.main:app --host 127.0.0.1 --port 8000 --reload --no-access-log` from `api/`. Stop either server with Ctrl+C. API `GET /` returns only a development status. The web page does not call the API yet. `/health` and analysis endpoints belong to Step 4; Step 3 ingestion is currently a tested library layer. These development apps are not approved for public deployment.
 
 Production frontend smoke check, after building: `npm --prefix web run start`.
 
@@ -86,7 +86,7 @@ Known tooling limitation: ESLint 9 is deprecated upstream but remains required b
 
 - [x] Step 1 — Architecture, Scoring Definition and Threat Model
 - [x] Step 2 — Repository and Development Foundation
-- [ ] Step 3 — Schemas and Review Validation
+- [x] Step 3 — Schemas and Review Validation
 - [ ] Step 4 — FastAPI Analysis Foundation
 - [ ] Step 5 — Functional Next.js Application
 - [ ] Step 6 — Explainable Detection Signals
@@ -99,7 +99,7 @@ Known tooling limitation: ESLint 9 is deprecated upstream but remains required b
 - [ ] Step 13 — Deployment and Production Verification
 - [ ] Step 14 — OPTIONAL URL Input (not authorized)
 
-One approved step per message. Next: Step 3 with GPT-6.1 Sol, Medium reasoning, after user says `next`.
+One approved step per message. Next: Step 4 with GPT-6.1 Sol, Medium reasoning, after user says `next`.
 
 ## Git
 

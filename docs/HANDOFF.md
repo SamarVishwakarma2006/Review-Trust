@@ -1,56 +1,59 @@
 # ReviewTrust handoff
 
-Date: 2026-10-27. Last verified step: Step 2 — Repository and Development Foundation.
+Date: 2026-10-27. Last verified step: Step 3 — Schemas and Review Validation.
 
-Status: COMPLETED. Manual commit pending under the user's instruction. Step 3 has not started.
+Status: COMPLETED. Manual commit pending under the user's instruction. Step 4 has not started.
 
 ## Changes
 
-- Added Next.js App Router/React/TypeScript/Tailwind development page under `web/` with an explicit unavailable-analysis message; no review UI or score.
-- Added FastAPI development root response under `api/`, a typed status schema, two API smoke tests and Ruff configuration. Health and analysis endpoints remain Step 4 work.
-- Added pinned runtime/development requirements, exact npm dependencies and lockfile, PowerShell development/check scripts, Git ignore/line-ending rules, offline ML directory guidance and GitHub Actions workflow.
-- Repaired already-committed README merge markers, retained the user's Git history and updated setup instructions, acceptance criteria and decisions. Next.js generated `web/AGENTS.md`; it is included as framework guidance.
+- Added strict canonical `ReviewInput` and `ReviewSubmission` models in `api/app/schemas.py`, with optional null metadata, finite 1–5 ratings, precise ISO timestamp handling, UTC normalization, row/text/aggregate limits and a one-product constraint.
+- Added in-memory JSON/CSV adapters and safe structured errors in `api/app/ingestion.py`. Preserve duplicates/local references, reject duplicate JSON keys and malformed CSV, support explicit column mapping, discard unmapped metadata and report only column positions. Error details are capped at 20 with total counts and safe field names.
+- Added validation/regression tests covering boundaries, hostile inputs, optional metadata, exact decimal range checks, timezone offsets, CSV records/encoding/mapping, error privacy and CSV/JSON equivalence.
+- Documented exact contracts, parser usage and integration boundaries in SPEC.md and docs/INPUT_VALIDATION.md; recorded D16–D20 and updated README/AGENTS.md. No dependencies, endpoints, frontend behavior or scoring were added.
 
-Files: `.gitignore`, `.gitattributes`, `.github/workflows/ci.yml`, `api/app/`, `api/tests/`, `api/pyproject.toml`, `api/requirements*.txt`, `web/app/`, `web/tests/`, `web/AGENTS.md`, web package/TypeScript/Next/PostCSS/ESLint/Vitest configuration, `ml/README.md`, `scripts/`, root AGENTS.md/README.md/SPEC.md, docs/DECISIONS.md and this file.
+Files: `api/app/schemas.py`, `api/app/ingestion.py`, `api/tests/test_ingestion.py`, `docs/INPUT_VALIDATION.md`, `AGENTS.md`, `README.md`, `SPEC.md`, `docs/DECISIONS.md` and this handoff.
 
 ## Verification
 
-- `./scripts/check.ps1`: PASS. Includes pip compatibility check; pytest (2 passed, no warnings); Ruff lint and format; Vitest (1 test passed); ESLint with zero warnings allowed; Next route generation/TypeScript and optimized Next build.
-- `npm ci` and `npm ls --all --json`: PASS, no invalid dependency peers. npm installation audit reported zero known vulnerabilities at setup time; not a full security audit.
-- Fresh Python environment under ignored `.tmp/verify-api`, install from `api/requirements-dev.txt`, `pip check` and pytest: PASS (2 tests).
-- API standalone Uvicorn and documented `scripts/dev-api.ps1`: successful startup; GET http://127.0.0.1:8000/ returned 200 and expected development JSON.
-- `npm run start` and `npm run dev` from web: successful startup; GET http://127.0.0.1:3000/ returned 200 with expected development page. Production stylesheet returned 200 with generated Tailwind utilities.
-- PowerShell parser checks, CI YAML parse, Git ignore checks, conflict-marker scan and `git diff --check`: PASS.
-- GitHub Actions: configured, not executed/verified remotely. No deployment or full visual/accessibility audit claimed. Local temporary servers stopped after checks.
+`./scripts/check.ps1`: PASS, including:
 
-Acceptance criteria: Step 2 PASS; see SPEC.md section 7.
+- `python -m pip check`: no broken requirements.
+- `python -m pytest` from api: 83 passed, including the existing API smoke tests.
+- `python -m ruff check .` and `python -m ruff format --check .` from api: PASS.
+- Frontend `npm run test`: 1 passed.
+- Frontend `npm run lint`, `npm run typecheck` and `npm run build`: PASS.
 
-## Known limitations
+Document links, roadmap count, conflict-marker and Git whitespace checks: PASS. Staging area empty. GitHub Actions has not been executed or verified remotely; no application startup recheck was needed because the existing API smoke tests pass and endpoint behavior is unchanged. No standalone production/performance/security audit is claimed.
 
-- ESLint 9.39.5 is upstream-deprecated but required by current bundled Next.js lint plugin peer ranges. Documented in D15; revisit for maintenance/Step 12. ESLint 10 was rejected by the full dependency compatibility check; no peer override remains.
-- npm 11 reports an unapproved optional `unrs-resolver` postinstall script. No approval was added; clean install, lint, tests and build pass with the bundled native dependency. No application functionality depends on approving it.
-- Default Windows Store `python`/`py` aliases failed in this environment. Verification used the Codex bundled Python 3.12.14 to create isolated venvs; README includes normal and machine-specific setup. Sandbox blocked network/loopback and temp operations; authorized verification ran outside it with a project-local temporary directory when needed.
-- No ingestion, analysis, persistence, CORS, upload/rate limits or production hardening exists yet. These are deliberately future roadmap steps. Do not deploy this foundation publicly.
+Acceptance criteria: Step 3 PASS; see SPEC.md section 7.
+
+## Integration notes and limitations
+
+- Use the byte adapters at the future API boundary. `validate_submission` is for already-decoded adapter input; it cannot enforce serialized byte size.
+- The byte parsers cap input at 1 MiB, but HTTP streaming/multipart-envelope limits, content encoding, CORS, rate/concurrency controls and request IDs still require Step 4 integration. CSV parser filenames are not used because it accepts bytes only.
+- Validated review text remains raw. Redact before analysis/output; never log/persist reviews, parser buffers or Pydantic validation exceptions. Discarded CSV columns are absent from canonical records; the caller still owns request buffers until cleanup.
+- CSV headers are trimmed and case-sensitive. Mapping is source-header -> canonical-field and replaces auto-mapping. Cap at 50 columns, 100 header code points and 5,000 code points per raw cell including ignored cells. CSV record numbers count the header as 1; JSON row numbers start at 1 for reviews. Structural parsing can fail fast; row validation is atomic.
+- Confidence, findings and scores are not implemented. Inputs remain unverified subsets. Known ESLint 9 deprecation from Step 2 remains documented in D15; no dependency changes this step.
 
 ## Git and manual commit
 
-Verified branch `main`, remote `origin` = `https://github.com/SamarVishwakarma2006/Review-Trust.git`. Existing HEAD before Step 2: `bc771e04a4d5cd43d54bfeb12af376124efcde14` (`First commit`). No staging, commit or push performed by the assistant.
+Verified branch `main`, remote `origin` = `https://github.com/SamarVishwakarma2006/Review-Trust.git`. Starting HEAD: `1e83e5f5ded58a3ef1684a4eea833de53ed4cc3a` (`chore: establish ReviewTrust development foundation`). User's Step 2 commit was present and working tree was clean before Step 3. No staging, commit or push performed by the assistant.
 
 From the repository root, review and run manually:
 
 ```powershell
 git status --short
-git add .gitattributes .gitignore .github api web ml scripts AGENTS.md README.md SPEC.md docs/DECISIONS.md docs/HANDOFF.md
+git add api/app/schemas.py api/app/ingestion.py api/tests/test_ingestion.py docs/INPUT_VALIDATION.md AGENTS.md README.md SPEC.md docs/DECISIONS.md docs/HANDOFF.md
 git diff --cached --stat
-git commit -m "chore: establish ReviewTrust development foundation"
+git commit -m "feat: add canonical review validation and CSV ingestion"
 git status
 git log -1 --oneline
 ```
 
-Optional manual push after reviewing the commit: `git push origin main`.
+Optional manual push after review: `git push origin main`.
 
 ## Next work
 
-Step 3 — Schemas and Review Validation: canonical review contracts, strict optional-field validation, bounded CSV processing/mapping, clear errors and unit tests. Consult SPEC.md and threat requirements before implementation. Do not implement analysis endpoints/scoring yet.
+Step 4 — FastAPI Analysis Foundation: health and analysis endpoints, explicit request/response contracts, integration of validated input adapters, safe HTTP errors and transport/abuse/privacy controls, deterministic experimental scoring and structured evidence with unavailable states, plus API integration tests. Follow SPEC.md score gates and version methodology; do not implement near-duplicate TF-IDF or frontend review submission yet.
 
-Next model: GPT-6.1 Sol — Medium (KEEP CURRENT MODEL — NO SWITCH REQUIRED if already selected). Fallback: GPT-5.6 Sol — Medium if available. Escalate manually only for a concrete unresolved cross-system validation/security issue. Stop until the user says `next`.
+Next model: GPT-6.1 Sol — Medium. KEEP CURRENT MODEL — NO SWITCH REQUIRED if already selected. Fallback: GPT-5.6 Sol — Medium if available. Request manual escalation if bounded request handling or cross-system resource/security design cannot be resolved with focused evidence. Stop until the user says `next`.
