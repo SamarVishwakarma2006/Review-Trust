@@ -1,12 +1,40 @@
 @import "tailwindcss";
 
-:root {
-  color-scheme: light;
-  background: #f5f7f6;
-  color: #162b26;
-  font-family: Arial, Helvetica, sans-serif;
-}
-
-body {
-  margin: 0;
-}
+:root { color-scheme: light; background: #f5f7f6; color: #162b26; font-family: Arial, Helvetica, sans-serif; }
+body { margin: 0; }
+main { max-width: 56rem; margin: auto; padding: 3rem 1rem; }
+header { margin-bottom: 2rem; }
+h1 { font-size: clamp(2.5rem, 8vw, 4rem); font-weight: 700; letter-spacing: -.04em; }
+h2 { font-size: 1.5rem; font-weight: 700; }
+h3 { font-size: 1.15rem; font-weight: 700; margin-top: 1.5rem; }
+h4, label, legend { font-weight: 600; }
+p { margin: .75rem 0; line-height: 1.65; }
+.intro { font-size: 1.35rem; }
+.eyebrow { color: #286453; font-size: .8rem; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; }
+.panel { background: white; border: 1px solid #c6d6ce; border-radius: 1rem; padding: clamp(1rem, 4vw, 2rem); margin-bottom: 1.5rem; overflow-wrap: anywhere; }
+.muted { color: #4f6259; font-size: .9rem; }
+fieldset { min-width: 0; margin-top: 1rem; }
+legend { padding-top: .5rem; }
+label { display: block; margin-top: .75rem; }
+textarea, select, input[type=file] { display: block; width: 100%; min-width: 0; border: 1px solid #829b8f; border-radius: .4rem; padding: .6rem; margin: .4rem 0; background: white; font: inherit; }
+textarea { resize: vertical; }
+input[type=checkbox], input[type=radio] { accent-color: #155940; margin-right: .4rem; }
+button, summary { cursor: pointer; }
+button { border: 1px solid #617c6e; border-radius: .45rem; padding: .65rem .9rem; margin: .4rem 0; font: inherit; }
+button:hover { background: #edf4ef; }
+button.primary { background: #155940; color: white; margin-top: 1rem; }
+button:disabled, fieldset:disabled { opacity: .65; }
+button:disabled { cursor: not-allowed; }
+:focus-visible { outline: 3px solid #1c70b6; outline-offset: 3px; }
+.actions { display: flex; gap: .5rem 1rem; flex-wrap: wrap; align-items: center; }
+.entry, .finding { border-bottom: 1px solid #dae3dc; padding: .75rem 0 1rem; }
+.confirmation { line-height: 1.6; margin-top: 1.5rem; }
+.score { background: #f1f6f2; padding: 1rem; border-radius: .5rem; margin-top: 1rem; }
+.score h3 { margin: 0; }
+.score-value { font-size: clamp(1.5rem, 6vw, 2.5rem); font-weight: 700; }
+ul { list-style: disc; padding-left: 1.3rem; line-height: 1.7; }
+.error { border-color: #a44b35; }
+summary { padding: .75rem 0; font-weight: 600; }
+blockquote { border-left: 3px solid #91b6a1; padding-left: .75rem; }
+.review-text { white-space: pre-wrap; }
+.evidence { margin: 1rem 0; }

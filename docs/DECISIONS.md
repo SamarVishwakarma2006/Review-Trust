@@ -47,3 +47,12 @@ References consulted: [Pydantic validators](https://docs.pydantic.dev/latest/con
 - D26: Safe errors include server-generated request IDs; unexpected failure logs include only fixed error code and ID. Preserve the development root response, add minimal health, disable slash redirects, and keep interactive docs disabled. API usage/configuration is documented in docs/API.md; native CORS preflight text is a documented protocol exception to JSON errors.
 
 Reference: [python-multipart streaming callback documentation](https://multipart.fastapiexpert.com/). Starlette request/CORS behavior was also checked against the installed pinned package source. Provider, dependency and full threat-model audits remain future release gates.
+
+## Step 5 — Functional Next.js application
+
+- D27: Keep the page synchronous with one client input component and a small results component. Use native controls, fetch, AbortController, FormData and a bounded header-only preview rather than adding form/CSV/state libraries. Optional metadata uses CSV; bulk splitting remains deferred.
+- D28: NEXT_PUBLIC_API_URL is a trusted build-time origin, with loopback default. Browser requests omit credentials, refuse redirects and caching, and never send the local filename. No proxy, persistence or analytics is introduced. Provider data handling remains a release gate.
+- D29: Generation guards reject stale request/file-read completions after cancel/reset/change/unmount. A 35-second browser deadline bounds waiting without claiming to terminate server workers. Failed requests preserve editable input; prior results clear on edits.
+- D30: Validate consumed result fields at the browser boundary, display safe structured errors rather than raw messages, and render evidence through React text nodes. Initial results expose all unavailable/experimental/coverage caveats. No new methodology or confidence estimate; polish remains Step 9.
+
+Framework guidance consulted locally: bundled Next.js server/client component and environment-variable guides for the pinned version. No new dependency was needed.

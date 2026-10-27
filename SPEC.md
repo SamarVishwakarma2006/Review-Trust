@@ -1,6 +1,6 @@
 # ReviewTrust specification
 
-Status: Steps 1–4 implemented through the experimental FastAPI foundation. Frontend submission and the later signal/research/release steps remain pending. Date: 2026-10-27.
+Status: Steps 1–5 implemented through the functional Next.js interface and experimental FastAPI foundation. Later signal/research/release steps remain pending. Date: 2026-10-27.
 Implemented methodology: `rt-patterns-0.1.0-experimental`, derived from `rt-patterns-0.1-draft`. Only exact repetition and the incentive phrase list below contribute to this version. All numerical thresholds are engineering hypotheses, not empirically validated authenticity thresholds.
 
 ## 1. Product and boundaries
@@ -127,6 +127,8 @@ Step 2: `web/`, `api/`, `ml/` and `docs/` exist; dependencies and transitive res
 Step 3: shared strict review/envelope schemas and JSON/CSV adapters enforce the specified bytes/rows/field/aggregate limits, date/rating/boolean semantics, one-product rule and optional null handling. CSV mapping, UTF-8/BOM, escaped/multiline quotes, malformed records and ignored-column warnings work. Duplicates and deterministic request-local references are preserved; errors are capped and contain no submitted values/unknown keys. Unit tests cover boundaries, invalid inputs, representation equivalence and regression cases. Existing app smoke tests and frontend checks remain passing. No new endpoints, scoring, database or dependencies.
 
 Step 4: health and JSON/multipart analysis endpoints return explicit result/error contracts. Exact repetition/incentive findings have reproducible evidence; unavailable contextual signals remain explicit. Score gates, max aggregation, exact half-up rounding, metadata-removal behavior and unvalidated confidence pass tests. Redacted output omits opaque source/product IDs. Actual-byte/envelope limits, no-spool uploads, safe errors/logs, exact CORS, peer rate budgets, bounded admission, slow-body deadlines and cancellation cleanup are tested. Live HTTP health/JSON/CSV and existing frontend checks pass. Numeric scoring remains experimental and subject to Steps 10/12 release decisions; no frontend submission or supervised model is implied.
+
+Step 5: synchronous Next.js page composes a client input/results interface. Editable pasted entries and bounded UTF-8 CSV header mapping submit canonical JSON/multipart directly to the configured API origin. Explicit English/electronics confirmation, privacy notice, loading, structured failures, retry advice, cancel/reset, stale-response rejection and client deadline are covered. Initial results show experimental/withheld scores, coverage denominators, unavailable findings, escaped supporting reviews and unvalidated confidence. Interaction/limit/contract tests, live browser JSON/CSV flows, keyboard focus, 320px overflow checks and production build pass. No new dependencies, storage, signals or scoring changes; final UI polish stays Step 9.
 
 MVP release gates:
 

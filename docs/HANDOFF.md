@@ -1,68 +1,64 @@
 # ReviewTrust handoff
 
-Date: 2026-10-27. Last verified step: Step 4 — FastAPI Analysis Foundation.
+Date: 2026-10-27. Last verified step: Step 5 — Functional Next.js Application.
 
-Status: COMPLETED. Manual commit pending under the user's instruction. Step 5 has not started.
+Status: COMPLETED. Manual commit pending under the user's instruction. Step 6 has not started.
 
-## Changes
+## Changes and files
 
-- Added GET /health plus JSON and multipart CSV analysis endpoints, preserving GET / development status. Request adapters share canonical validation; explicit public result/error models live in api/app/results.py.
-- Implemented deterministic rt-patterns-0.1.0-experimental: exact normalized repetition and four incentive-language mentions, max-penalty scoring with exact half-up rounding, withholding gates, derived evidence/pairs/spans, coverage and unvalidated confidence. Three contextual signals are explicitly unavailable; no TF-IDF or classifier is implied.
-- Added conservative common email/phone masking before matching/output, excluded placeholders from eligibility, omitted source/product identifiers from display records and bounded evidence references. No complete anonymization claim.
-- Added streamed actual-byte/envelope limits, no-spool multipart callbacks, exact-origin CORS, safe error envelopes/IDs, configurable bounded hashed peer token buckets, two-request admission, slow-body deadlines and cancellation slot retention. Unexpected errors log only code and random request ID. No files/review history are persisted.
-- Added one pinned runtime dependency (python-multipart 0.0.32), environment example, analysis/API tests and API documentation; disabled development proxy headers and updated project guidance/status.
+- Added web/app/analyzer.tsx: editable review entries, CSV file/header mapping, scope confirmation, privacy notice, loading/errors, cancel/reset, stale-request/file-read guards and a 35-second client deadline.
+- Added web/lib/input.ts and api.ts: bounded preview/convenience checks, canonical JSON/native multipart, trusted configurable API origin, no credentials/cache/redirects, consumed-response validation and safe error formatting. Fixed upload filename avoids exposing local filenames.
+- Added web/app/results.tsx: experimental/withheld score, confidence unset, field/signal coverage denominators, unavailable findings, collapsible escaped evidence and limitations.
+- Updated web/app/page.tsx, globals.css, layout.tsx and tests/page.test.tsx. Page remains synchronous; dependencies and API implementation are unchanged.
+- Added web/.env.example and docs/FRONTEND.md. Updated README checklist, AGENTS.md, SPEC.md, docs/API.md, DECISIONS.md, THREAT_MODEL.md and this handoff.
 
-## Files
+## Actual verification
 
-New: api/.env.example; api/app/analysis.py, results.py, security.py, uploads.py; api/tests/test_analysis.py, test_api.py; docs/API.md.
-
-Modified: api/app/ingestion.py, main.py; api/requirements.txt; api/tests/test_smoke.py; scripts/dev-api.ps1; AGENTS.md, README.md, SPEC.md; docs/DECISIONS.md, INPUT_VALIDATION.md, THREAT_MODEL.md and this file. Frontend source remains unchanged.
-
-## Verification
-
-`./scripts/check.ps1`: PASS:
+`./scripts/check.ps1`: PASS.
 
 - Python pip check: no broken requirements.
-- Backend pytest: 141 passed, including retained ingestion tests, score/evidence/coverage cases, privacy, multipart/no-spool limits, safe errors, CORS, token refill/capacity/forwarded-header behavior, chunked/false/missing lengths, slow body and cancellation/worker completion.
-- Ruff lint and format: PASS (12 Python files).
-- Frontend component test: 1 passed.
-- Frontend lint, route generation/TypeScript and optimized production build: PASS.
+- Backend pytest: 141 passed.
+- Ruff lint/format: PASS (12 Python files).
+- Frontend Vitest: 12 passed. Covers declaration/canonical duplicates, reset/cancel/stale completions/unmount/deadline, network retry, CSV mapping and stale reads, Unicode/aggregate/byte limits, malformed headers, HTTP errors, response/config validation and inert script-like review text.
+- ESLint, Next route generation/TypeScript and optimized production build: PASS.
 
-Local live HTTP via scripts/dev-api.ps1: health returned ok; JSON and multipart CSV requests returned 200, 20 synthetic reviews and equivalent experimental score=100. Temporary server was stopped after verification. This value is a mechanical fixture result, not a measured authenticity benchmark.
+Live in-app browser with both loopback services: pasted synthetic review returned insufficient evidence and coverage; CSV upload mapped Opinion -> text and Stars -> rating, returned rating coverage and unmapped column position 3. Results focused automatically. Reset cleared file/mapping/input/results. Keyboard Tab from review input reached Add review. At 320px viewport, document scroll width was 305px (no horizontal overflow). Browser error log was empty. Screenshot is local ignored .tmp/step5-results.png. Development servers were stopped after testing.
 
-Document links, roadmap/marker/whitespace checks and empty staging area: PASS. GitHub Actions has not been executed/verified remotely. Full resource benchmarking, dependency/security audit and production verification remain later roadmap gates.
-
-Acceptance criteria: Step 4 PASS; see SPEC.md section 7.
+Targeted browser verification is not a complete accessibility/security audit. Remote GitHub Actions has not been run or verified by this step. No authenticity-accuracy or performance benchmark is claimed.
 
 ## Integration notes and limitations
 
-- Read docs/API.md before Step 5. Browser needs canonical JSON or multipart file/category/language/schema_version plus optional source-header -> canonical-field mapping JSON. Configure NEXT_PUBLIC_API_URL on the frontend in Step 5; no such browser configuration exists yet.
-- UI must expose experimental and insufficient-evidence states, coverage, limitations and no confidence level. Never render review content as HTML. Inputs are unverified English/electronics subsets; names/other personal details may remain after incomplete common-pattern masking.
-- Metadata-dependent signals and near-duplicates remain not_implemented. Version scoring changes and preserve gate/rounding invariants. The initial public numeric score is still subject to evaluation/release decisions in Steps 10/12.
-- Defaults: total body 1 MiB including multipart overhead; at most two admitted requests; ten-second body/processing budget; token bucket burst two/refill ten per minute by peer. Individual bounded parser calls are not preempted; cooperative checks reject expired work without an untracked abandoned CPU task. Provider connection/write budgets and distributed abuse controls require later verification.
-- Single process only until shared edge/proxy enforcement is verified. Limiter stores scoped HMAC keys, bounded to 10,000 with 60-second idle expiry; restarting clears state. Development disables proxy headers and access logs. Hosting data/log retention and TLS remain unverified.
-- python-multipart callback parsing uses no File/UploadFile/temp storage. Multipart diagnostic logging is suppressed to avoid malformed private header exposure. Native CORS preflight responses use short protocol text; actual endpoint errors use the safe JSON envelope.
-- Existing ESLint 9 deprecation remains D15. No dataset or paid model dependency was added.
+- NEXT_PUBLIC_API_URL defaults to http://127.0.0.1:8000. Set a trusted HTTP(S) origin in web/.env.local to override; restart dev/rebuild because Next embeds it at build time. API CORS is configured separately and api/.env.example is not auto-loaded.
+- Browser CSV preview reads a bounded file into memory but parses only the header. Data-row validation remains server-authoritative. Multipart overhead can push a file under 1 MiB over the server request cap; UI explains 413. Native FormData sets Content-Type/boundary.
+- Pasted entries contain text only. Optional metadata uses CSV; optional bulk splitting is deferred. Duplicates remain, malformed rows are never silently dropped. No persistent uploads/history, analytics or new dependencies.
+- UI result types describe consumed fields, not every API field; update web/lib/api.ts and fixtures when Step 6 changes contracts. React renders text inertly. Confidence stays unset and scores experimental, subject to later release decisions.
+- Cancellation stops client waiting and ignores late completions. Server retains its existing worker budget/admission semantics. No promise of immediate CPU cancellation or secure memory erasure.
+- Methodology is unchanged: rt-patterns-0.1.0-experimental. Near duplicates and contextual signals remain unavailable until Step 6. Final visual polish remains Step 9.
+- Single-process abuse controls, deployment proxy/provider logging/TLS review and ESLint 9 maintenance (D15) remain later gates.
 
-## Git and manual commit
+## Git and manual TODO
 
-Verified branch main, remote origin = https://github.com/SamarVishwakarma2006/Review-Trust.git. Starting HEAD: 7ca7fc9b7282967f46a6fffa30b48277a915ae07 (feat: add canonical review validation and CSV ingestion). The user's Step 3 commit was present and the working tree was clean before Step 4. No staging, commit or push performed by the assistant.
+Verified branch main, remote origin = https://github.com/SamarVishwakarma2006/Review-Trust.git. Starting HEAD c041e40 (feat: add experimental analysis API and evidence). The user's Step 4 commit was present and the working tree was clean before Step 5. No staging, commit or push was performed by the assistant.
 
 Review and run manually from the repository root:
 
 ```powershell
 git status --short
-git add api scripts/dev-api.ps1 AGENTS.md README.md SPEC.md docs
+git diff -- web AGENTS.md README.md SPEC.md docs
+git add web AGENTS.md README.md SPEC.md docs
 git diff --cached --stat
-git commit -m "feat: add experimental analysis API and evidence"
-git status
-git log -1 --oneline
+git diff --cached
+git commit -m "feat: add review submission and initial evidence interface"
+git status --short
+git show --stat --oneline HEAD
 ```
 
-Optional manual push after review: `git push origin main`.
+Manual TODO: review and commit Step 5, switch reasoning effort for Step 6, then say next. No push is required to complete this step.
 
-## Next work
+## ACTION REQUIRED — CODEX MODEL FOR NEXT STEP
 
-Step 5 — Functional Next.js Application: pasted-review entries, CSV selection/mapping, loading/error/abort states, configurable API integration and functional initial results. Keep limits/terms consistent with SPEC/API docs. Polished final evidence UI remains Step 9. Do not implement Step 6 signals yet.
+Current: Step 5, recommended GPT-6.1 Sol — Medium. Next: Step 6 — Explainable Detection Signals.
 
-Next model: GPT-6.1 Sol — Medium. KEEP CURRENT MODEL — NO SWITCH REQUIRED if already selected. Fallback GPT-5.6 Sol — Medium if available. Request manual escalation for a concrete unresolved cross-system data-contract or request/cancellation security failure. Stop until the user says next.
+SWITCH reasoning effort to High; keep GPT-6.1 Sol. Exact next recommendation: GPT-6.1 Sol — High. User performs the switch; no automatic switch is claimed. Fallback, if selectable: GPT-5.6 Sol — High.
+
+Complexity: Complex. Implement versioned near-duplicate evidence, timing bursts, rating distribution and conservative rating/text disagreement, while preserving incentive semantics, unavailable states and score gates. Read SPEC first; version methodology changes and add positive/negative/boundary regression fixtures. Verify evidence references, negation/abstention, missing metadata, arithmetic and API/UI compatibility, then run the full check. Escalate manually on a concrete unresolved methodology, evidence correctness or resource-bound blocker. Stop until next.

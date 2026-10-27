@@ -1,6 +1,6 @@
 # Analysis API — Step 4
 
-Local base URL: `http://127.0.0.1:8000`. Start with `./scripts/dev-api.ps1` from the repository root. Frontend submission arrives in Step 5. This experimental API has not passed the production release gates.
+Local base URL: `http://127.0.0.1:8000`. Start with `./scripts/dev-api.ps1` from the repository root. The Step 5 frontend submits directly; see [frontend usage](FRONTEND.md). This experimental API has not passed the production release gates.
 
 ## Endpoints
 
@@ -41,7 +41,7 @@ Current methodology: `rt-patterns-0.1.0-experimental`. Exact text repetition and
 
 Score is null with `status: insufficient_evidence` if fewer than 20 submitted reviews, fewer than 20 eligible text reviews, less than 80% eligible text coverage, or either scoring signal is unavailable. A review requires at least five word tokens after placeholder exclusion; each scoring signal requires ten eligible reviews. Otherwise the experimental score uses the exact half-up-rounded max-penalty formula in SPEC.md. Metadata cannot improve the score by being absent. A value of 100 is not verified authenticity. Confidence remains `not_validated`, with `level: null`.
 
-The input subset and its declared electronics/English scope remain unverified. Common email/phone masking is conservative and incomplete; names and other personal details can remain in text. Users must remove personal information before upload. Review text is untrusted inert content; a future UI must render it as escaped text.
+The input subset and its declared electronics/English scope remain unverified. Common email/phone masking is conservative and incomplete; names and other personal details can remain in text. Users must remove personal information before upload. Review text is untrusted inert content; the frontend renders it as escaped text.
 
 ## Errors and response headers
 
