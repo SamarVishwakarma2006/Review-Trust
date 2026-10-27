@@ -1,64 +1,62 @@
 # ReviewTrust handoff
 
-Date: 2026-10-27. Last verified step: Step 5 — Functional Next.js Application.
+Date: 2026-10-27. Last verified step: Step 6 — Explainable Detection Signals.
 
-Status: COMPLETED. Manual commit pending under the user's instruction. Step 6 has not started.
+Status: COMPLETED. Manual commit pending under the user's instruction. Step 7 has not started.
 
 ## Changes and files
 
-- Added web/app/analyzer.tsx: editable review entries, CSV file/header mapping, scope confirmation, privacy notice, loading/errors, cancel/reset, stale-request/file-read guards and a 35-second client deadline.
-- Added web/lib/input.ts and api.ts: bounded preview/convenience checks, canonical JSON/native multipart, trusted configurable API origin, no credentials/cache/redirects, consumed-response validation and safe error formatting. Fixed upload filename avoids exposing local filenames.
-- Added web/app/results.tsx: experimental/withheld score, confidence unset, field/signal coverage denominators, unavailable findings, collapsible escaped evidence and limitations.
-- Updated web/app/page.tsx, globals.css, layout.tsx and tests/page.test.tsx. Page remains synchronous; dependencies and API implementation are unchanged.
-- Added web/.env.example and docs/FRONTEND.md. Updated README checklist, AGENTS.md, SPEC.md, docs/API.md, DECISIONS.md, THREAT_MODEL.md and this handoff.
+- Added api/app/signals.py: bounded sparse unigram/bigram TF-IDF repetition, UTC three-day timing windows, exact rating-value distributions and frozen rt-en-polarity-0.1 disagreement with conservative abstention. Uses only the standard library; no dependencies or datasets added.
+- Updated api/app/analysis.py and results.py to methodology rt-patterns-0.2.0-experimental, typed contextual values/evidence and explicit availability reasons. Repetition/incentives remain the only scoring signals. Preserve max aggregation, exact half-up rounding, coverage gates, masking and unset confidence.
+- Added api/tests/test_signals.py; updated test_analysis.py and test_api.py. Fixtures cover thresholds, UTC normalization, cosine formula, exact/near pairs, feature-cap withholding, deadlines, metadata/order invariance, cue spans, abstention, evidence caps, maximum rows and JSON/CSV equivalence.
+- Updated web/lib/api.ts, web/app/results.tsx and web/tests/page.test.tsx to validate the matching methodology and display similarity method, histogram, timing window and rating/date/polarity evidence. Contextual findings are visibly outside the score.
+- Updated AGENTS.md, README.md checklist, SPEC.md methodology/acceptance, docs/API.md, FRONTEND.md, DECISIONS.md, THREAT_MODEL.md and this file.
 
 ## Actual verification
 
-`./scripts/check.ps1`: PASS.
+`./scripts/check.ps1`: PASS (186 backend tests, 13 frontend tests, pip dependency check, Ruff lint/format, frontend lint/type check and optimized production build).
 
-- Python pip check: no broken requirements.
-- Backend pytest: 141 passed.
-- Ruff lint/format: PASS (12 Python files).
-- Frontend Vitest: 12 passed. Covers declaration/canonical duplicates, reset/cancel/stale completions/unmount/deadline, network retry, CSV mapping and stale reads, Unicode/aggregate/byte limits, malformed headers, HTTP errors, response/config validation and inert script-like review text.
-- ESLint, Next route generation/TypeScript and optimized production build: PASS.
+Final review aligned polarity evidence tokenization with the direction rule, preventing a cue inside an apostrophe-containing non-cue token from being reported. Added an emoji/offset regression. After this backend-only change: **187 backend tests passed**, Ruff lint/format PASS (14 Python files). Frontend source did not change after the successful full check.
 
-Live in-app browser with both loopback services: pasted synthetic review returned insufficient evidence and coverage; CSV upload mapped Opinion -> text and Stars -> rating, returned rating coverage and unmapped column position 3. Results focused automatically. Reset cleared file/mapping/input/results. Keyboard Tab from review input reached Add review. At 320px viewport, document scroll width was 305px (no horizontal overflow). Browser error log was empty. Screenshot is local ignored .tmp/step5-results.png. Development servers were stopped after testing.
+Live in-app browser with loopback API and web services: uploaded a 20-row synthetic CSV with ratings/dates. All five findings returned observed, timing window Jan 1–3 contained 19/20 dated reviews across a 31-day span, rating histogram showed twenty 1-star ratings, and lexicon disagreement exposed supported positive direction. Score 0 arose from intentionally repeated/incentive fixture text, not a measured authenticity judgment. Contextual-only labels, version and unvalidated confidence were visible. Browser error log was empty. Screenshot: ignored .tmp/step6-results.png. Temporary servers were stopped.
 
-Targeted browser verification is not a complete accessibility/security audit. Remote GitHub Actions has not been run or verified by this step. No authenticity-accuracy or performance benchmark is claimed.
+Full resource benchmarking and independent validity evaluation are still Step 10. Targeted tests are not proof of production performance, sentiment/deception accuracy, complete anonymization or comprehensive accessibility. Remote GitHub Actions was not run or verified by this step.
 
 ## Integration notes and limitations
 
-- NEXT_PUBLIC_API_URL defaults to http://127.0.0.1:8000. Set a trusted HTTP(S) origin in web/.env.local to override; restart dev/rebuild because Next embeds it at build time. API CORS is configured separately and api/.env.example is not auto-loaded.
-- Browser CSV preview reads a bounded file into memory but parses only the header. Data-row validation remains server-authoritative. Multipart overhead can push a file under 1 MiB over the server request cap; UI explains 413. Native FormData sets Content-Type/boundary.
-- Pasted entries contain text only. Optional metadata uses CSV; optional bulk splitting is deferred. Duplicates remain, malformed rows are never silently dropped. No persistent uploads/history, analytics or new dependencies.
-- UI result types describe consumed fields, not every API field; update web/lib/api.ts and fixtures when Step 6 changes contracts. React renders text inertly. Confidence stays unset and scores experimental, subject to later release decisions.
-- Cancellation stops client waiting and ignores late completions. Server retains its existing worker budget/admission semantics. No promise of immediate CPU cancellation or secure memory erasure.
-- Methodology is unchanged: rt-patterns-0.1.0-experimental. Near duplicates and contextual signals remain unavailable until Step 6. Final visual polish remains Step 9.
-- Single-process abuse controls, deployment proxy/provider logging/TLS review and ESLint 9 maintenance (D15) remain later gates.
+- Read SPEC.md section 5 for the complete frozen algorithm and lexicon, including whole-row abstention and exact eligibility/window/tie rules. Methodology changes require another version bump and regression fixtures.
+- TF-IDF fits only within the submitted eligible rows, including duplicates. Raw TF, smoothed IDF, L2 normalization, no stemming/stop words; exact equality or cosine >=0.90 qualifies. At most 20,000 features; overflow marks repetition unavailable and withholds the score instead of pruning or returning an exact-only score. Existing timeouts return no partial analysis.
+- All-pairs sparse comparison is bounded to 124,750 pairs and checks the cooperative deadline. Full CPU/memory/concurrency measurements remain Step 10. The maximum-row fixture and feature-cap fixture are mechanical tests, not benchmarks.
+- Score.evaluated_signal_ids contains only available repetition/incentive methods; Coverage.evaluated_signal_ids also includes contextual methods. Availability of context cannot substitute for a missing scoring signal. Metadata removal cannot improve or alter the score.
+- Timing requires >=20 dates, >=80% coverage and >=28 elapsed days. Rating distribution requires >=20 ratings and >=80% coverage. Disagreement requires >=20 rated supported-direction rows and explicitly reports its denominator; it does not impose the scoring panel's five-token gate or an extra 80% gate.
+- Sparse lexical rules miss many meanings, languages, negations and sarcasm. Quoted/negated incentive phrases still count as mentions, never conduct. No classifier was trained and no confidence level is justified.
+- Evidence may return submitted rating and normalized UTC day alongside redacted text; IDs remain omitted. Phrase/cue offsets index displayed Unicode code points. Pair previews are at most ten; single-row evidence at most twenty. Truncation flags refer to omitted matching references, not every omitted pair.
+- Browser rejects methodology versions other than rt-patterns-0.2.0-experimental; deploy matching web/API builds. No stored-result migration is needed because results are not persisted. Final UI polish is Step 9.
+- Existing privacy, single-process admission/cancellation, proxy/provider retention/TLS and dependency audit limitations remain in force. ESLint 9 maintenance is still D15.
 
 ## Git and manual TODO
 
-Verified branch main, remote origin = https://github.com/SamarVishwakarma2006/Review-Trust.git. Starting HEAD c041e40 (feat: add experimental analysis API and evidence). The user's Step 4 commit was present and the working tree was clean before Step 5. No staging, commit or push was performed by the assistant.
+Starting HEAD: 4e785f9 (Added review submission and initial evidence interface), branch main. The user's Step 5 commit was present and the working tree was clean before Step 6. No staging, commit or push was performed by the assistant.
 
-Review and run manually from the repository root:
+Review and commit manually from the repository root:
 
 ```powershell
 git status --short
-git diff -- web AGENTS.md README.md SPEC.md docs
-git add web AGENTS.md README.md SPEC.md docs
+git diff -- api web AGENTS.md README.md SPEC.md docs
+git add api web AGENTS.md README.md SPEC.md docs
 git diff --cached --stat
 git diff --cached
-git commit -m "feat: add review submission and initial evidence interface"
+git commit -m "feat: add versioned explainable review detection signals"
 git status --short
 git show --stat --oneline HEAD
 ```
 
-Manual TODO: review and commit Step 5, switch reasoning effort for Step 6, then say next. No push is required to complete this step.
+Manual TODO: review/commit Step 6, keep the recommended model/effort, then say next. No push is required for step completion.
 
 ## ACTION REQUIRED — CODEX MODEL FOR NEXT STEP
 
-Current: Step 5, recommended GPT-6.1 Sol — Medium. Next: Step 6 — Explainable Detection Signals.
+Current: Step 6, recommended GPT-6.1 Sol — High. Next: Step 7 — Dataset Audit and Labelling System.
 
-SWITCH reasoning effort to High; keep GPT-6.1 Sol. Exact next recommendation: GPT-6.1 Sol — High. User performs the switch; no automatic switch is claimed. Fallback, if selectable: GPT-5.6 Sol — High.
+KEEP GPT-6.1 Sol — High if already selected; no switch required. User controls model settings; no automatic switch is claimed. Fallback if selectable: GPT-5.6 Sol — High.
 
-Complexity: Complex. Implement versioned near-duplicate evidence, timing bursts, rating distribution and conservative rating/text disagreement, while preserving incentive semantics, unavailable states and score gates. Read SPEC first; version methodology changes and add positive/negative/boundary regression fixtures. Verify evidence references, negation/abstention, missing metadata, arithmetic and API/UI compatibility, then run the full check. Escalate manually on a concrete unresolved methodology, evidence correctness or resource-bound blocker. Stop until next.
+Complexity: Complex. Next scope: audit dataset provenance, license/permissions, electronics relevance, language, label provenance and data quality; design reproducible manifests and product/duplicate-cluster splits that prevent leakage. Do not assume sentiment/platform labels are deception ground truth; unsupported targets must lead to a documented no-train decision rather than invented labels. Test audit/split mechanics with synthetic fixtures and run the full project checks. Request manual escalation on a concrete unresolved permission/provenance, target-validity or leakage blocker. Stop until next.

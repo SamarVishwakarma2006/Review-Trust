@@ -4,7 +4,7 @@ from typing import Literal
 
 from pydantic import BaseModel, ConfigDict, Field
 
-METHODOLOGY_VERSION = "rt-patterns-0.1.0-experimental"
+METHODOLOGY_VERSION = "rt-patterns-0.2.0-experimental"
 SignalId = Literal[
     "text_repetition",
     "incentive_language",
@@ -30,6 +30,37 @@ class FractionEvidence(ResultModel):
     fraction: float = Field(ge=0, le=1)
 
 
+class BurstEvidence(FractionEvidence):
+    window_start: str
+    window_end: str
+    observed_span_days: int = Field(ge=28)
+
+
+class RatingBin(ResultModel):
+    rating: float = Field(ge=1, le=5)
+    count: int = Field(ge=1)
+
+
+class RatingEvidence(ResultModel):
+    rated_reviews: int = Field(ge=20)
+    histogram: list[RatingBin] = Field(max_length=500)
+    mean: float = Field(ge=1, le=5)
+    low_share: float = Field(ge=0, le=1)
+    high_share: float = Field(ge=0, le=1)
+
+
+AvailabilityReason = Literal[
+    "insufficient_eligible_text",
+    "feature_limit",
+    "insufficient_dated_reviews",
+    "low_timestamp_coverage",
+    "insufficient_time_span",
+    "insufficient_rated_reviews",
+    "low_rating_coverage",
+    "insufficient_supported_polarity",
+]
+
+
 class PhraseMatch(ResultModel):
     phrase: str
     start: int = Field(ge=0)
@@ -39,11 +70,16 @@ class PhraseMatch(ResultModel):
 class ReviewEvidence(ResultModel):
     review_refs: list[str] = Field(min_length=1, max_length=2)
     matches: list[PhraseMatch] = Field(default_factory=list, max_length=4)
+    match_kind: Literal["exact", "tfidf"] | None = None
+    similarity: float | None = Field(default=None, ge=0, le=1)
+    rating: float | None = Field(default=None, ge=1, le=5)
+    timestamp_day: str | None = None
+    polarity: Literal["positive", "negative"] | None = None
 
 
 class Finding(ResultModel):
     signal_id: SignalId
-    value: FractionEvidence | None
+    value: BurstEvidence | RatingEvidence | FractionEvidence | None
     assessment: Literal["observed", "not_observed", "unavailable"]
     explanation: str
     supporting_review_refs: list[str] = Field(max_length=20)
@@ -52,8 +88,8 @@ class Finding(ResultModel):
     references_truncated: bool
     required_fields: list[str]
     coverage: SignalCoverage
-    availability_reason: Literal["insufficient_eligible_text", "not_implemented"] | None
-    methodology_version: Literal["rt-patterns-0.1.0-experimental"] = METHODOLOGY_VERSION
+    availability_reason: AvailabilityReason | None
+    methodology_version: Literal["rt-patterns-0.2.0-experimental"] = METHODOLOGY_VERSION
 
 
 class Score(ResultModel):
@@ -105,7 +141,7 @@ class WarningInfo(ResultModel):
 
 class AnalysisResult(ResultModel):
     schema_version: Literal["1"] = "1"
-    methodology_version: Literal["rt-patterns-0.1.0-experimental"] = METHODOLOGY_VERSION
+    methodology_version: Literal["rt-patterns-0.2.0-experimental"] = METHODOLOGY_VERSION
     experimental: Literal[True] = True
     origin: Literal["paste", "csv"]
     scope: Literal["submitted_subset"] = "submitted_subset"

@@ -428,3 +428,33 @@ def test_cpu_deadline_does_not_return_success_or_abandon_running_work(monkeypatc
         response = session.post("/v1/analyze", json=payload())
     assert response.status_code == 503
     assert app.state.controls.active == 0
+
+
+def test_expanded_signal_contract_is_identical_for_json_and_csv(client):
+    rows = [
+        {
+            "text": "This excellent display received this product for free.",
+            "rating": 1,
+            "timestamp": "2020-01-01",
+        }
+    ] * 19
+    rows += [{"text": rows[0]["text"], "rating": 1, "timestamp": "2020-02-01"}]
+    json_response = client.post("/v1/analyze", json=payload(rows))
+    csv = "text,rating,timestamp\n" + "\n".join(
+        f"{r['text']},{r['rating']},{r['timestamp']}" for r in rows
+    )
+    csv_response = client.post(
+        "/v1/analyze/csv",
+        files={"file": ("synthetic.csv", csv.encode(), "text/csv")},
+        data={"category": "electronics", "language": "en", "schema_version": "1"},
+    )
+    assert json_response.status_code == csv_response.status_code == 200
+    a, b = json_response.json(), csv_response.json()
+    assert a["methodology_version"] == "rt-patterns-0.2.0-experimental"
+    assert a["findings"] == b["findings"]
+    assert a["score"] == b["score"]
+    assert all(f["assessment"] == "observed" for f in a["findings"])
+    assert a["findings"][2]["value"]["window_end"] == "2020-01-03"
+    assert a["findings"][3]["value"]["histogram"] == [{"rating": 1.0, "count": 20}]
+    assert a["findings"][4]["evidence"][0]["polarity"] == "positive"
+    assert a["confidence"]["level"] is None

@@ -37,7 +37,11 @@ def test_complete_result_is_explicitly_experimental_and_context_signals_are_unav
     for finding in output.findings[2:]:
         assert finding.value is None
         assert finding.assessment == "unavailable"
-        assert finding.availability_reason == "not_implemented"
+        assert finding.availability_reason in {
+            "insufficient_dated_reviews",
+            "insufficient_rated_reviews",
+            "insufficient_supported_polarity",
+        }
         assert finding.supporting_review_refs == []
         assert finding.coverage.evaluated == 0
     assert AnalysisResult.model_validate_json(output.model_dump_json()) == output
@@ -104,7 +108,7 @@ def test_metadata_removal_and_input_order_do_not_change_score():
     coverage = result(with_metadata).coverage
     assert coverage.fields["rating"].present == 20
     assert coverage.fields["verified_purchase"].present == 20
-    assert coverage.signals["rating_distribution"].evaluated == 0
+    assert coverage.signals["rating_distribution"].evaluated == 20
 
 
 def test_evidence_references_resolve_and_repetition_pairs_are_actual_matches():

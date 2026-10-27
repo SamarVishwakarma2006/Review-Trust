@@ -4,7 +4,7 @@ An electronics review-pattern analysis platform. It detects observable patterns,
 
 ## Current status
 
-Steps 1–5 are complete. The Next.js interface supports editable pasted reviews, CSV header mapping, direct API submission, cancel/reset, safe errors and initial evidence results. FastAPI provides bounded analysis with experimental scoring, masking and explicit insufficient-evidence states. Backend/API tests, frontend interaction tests, static checks and the production frontend build pass locally. Dataset/ML work and production release remain pending. GitHub Actions is configured but has not yet been verified remotely.
+Steps 1–6 are complete. The Next.js interface supports editable pasted reviews, CSV header mapping, direct API submission, cancel/reset, safe errors and initial evidence results. FastAPI provides bounded analysis with experimental scoring, masking and explicit insufficient-evidence states. Backend/API tests, frontend interaction tests, static checks and the production frontend build pass locally. Dataset/ML work and production release remain pending. GitHub Actions is configured but has not yet been verified remotely.
 
 Read [SPEC.md](SPEC.md), [API usage/configuration](docs/API.md), [input validation interface](docs/INPUT_VALIDATION.md), [decisions](docs/DECISIONS.md), [threat model](docs/THREAT_MODEL.md), [engineering guidance](AGENTS.md) and [handoff](docs/HANDOFF.md).
 
@@ -52,7 +52,7 @@ npm --prefix web run dev
 
 For macOS/Linux, run `.venv/bin/python -m uvicorn app.main:app --host 127.0.0.1 --port 8000 --reload --no-access-log --no-proxy-headers` from `api/`. Stop either server with Ctrl+C. API `GET /` retains the development status; `GET /health` returns `{"status":"ok"}`. `POST /v1/analyze` accepts canonical JSON; `POST /v1/analyze/csv` accepts multipart CSV plus required metadata. The web page calls the API directly; confirm English reviews for one electronics product before submitting. These development apps are not approved for public deployment.
 
-Current analysis uses only exact repetition and four incentive-language phrases, under methodology `rt-patterns-0.1.0-experimental`. Metadata-dependent and near-duplicate signals remain unavailable. Scores are withheld below evidence gates; confidence remains unvalidated. Common email/phone masking is incomplete, so remove personal information before submitting.
+Methodology `rt-patterns-0.2.0-experimental` adds TF-IDF near repetition, timing windows, rating distributions and conservative lexicon disagreement. Only repetition and four incentive phrases affect the score; the other findings are contextual. Each signal has explicit evidence gates, and excessive similarity vocabulary withholds the score. See SPEC.md for exact rules and limitations. Scores are withheld below evidence gates; confidence remains unvalidated. Common email/phone masking is incomplete, so remove personal information before submitting.
 
 Default API budgets: 1 MiB total request including upload envelope, two admitted requests, ten-second body/processing deadline, peer token bucket with burst two/refill ten per minute. Optional process settings are listed in [docs/API.md](docs/API.md) and `api/.env.example`; the example file is not automatically loaded. Use one API process until deployment-specific shared abuse controls are verified. Do not trust forwarded identity headers by default.
 
@@ -95,7 +95,7 @@ Known tooling limitation: ESLint 9 is deprecated upstream but remains required b
 - [x] Step 3 — Schemas and Review Validation
 - [x] Step 4 — FastAPI Analysis Foundation
 - [x] Step 5 — Functional Next.js Application
-- [ ] Step 6 — Explainable Detection Signals
+- [x] Step 6 — Explainable Detection Signals
 - [ ] Step 7 — Dataset Audit and Labelling System
 - [ ] Step 8 — ML Baseline and Evaluation (document no-train decision if labels unsupported)
 - [ ] Step 9 — Final Trust Score and Evidence UI
@@ -105,7 +105,7 @@ Known tooling limitation: ESLint 9 is deprecated upstream but remains required b
 - [ ] Step 13 — Deployment and Production Verification
 - [ ] Step 14 — OPTIONAL URL Input (not authorized)
 
-One approved step per message. Next: Step 6 with GPT-6.1 Sol, High reasoning, after user says `next`.
+One approved step per message. Next: Step 7 with GPT-6.1 Sol, High reasoning, after user says `next`.
 
 ## Git
 

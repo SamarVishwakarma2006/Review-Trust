@@ -1,13 +1,18 @@
+export type FractionEvidence = { matching_reviews: number; eligible_reviews: number; fraction: number };
+export type BurstEvidence = FractionEvidence & { window_start: string; window_end: string; observed_span_days: number };
+export type RatingEvidence = { rated_reviews: number; histogram: { rating: number; count: number }[]; mean: number; low_share: number; high_share: number };
+export type SignalValue = FractionEvidence | BurstEvidence | RatingEvidence;
+
 export type AnalysisResult = {
   schema_version: "1"; methodology_version: string; experimental: true;
   scope: "submitted_subset"; origin: "paste" | "csv"; review_count: number;
   score: { status: "experimental" | "insufficient_evidence"; value: number | null; reason_codes: string[] };
   confidence: { status: "not_validated"; level: null; explanation: string };
   coverage: { fields: Record<string, { present: number; missing: number }>; redactions: Record<string, number> };
-  findings: { signal_id: string; assessment: "observed" | "not_observed" | "unavailable";
+  findings: { value: SignalValue | null; signal_id: string; assessment: "observed" | "not_observed" | "unavailable";
     explanation: string; coverage: { eligible: number; evaluated: number; total: number }; availability_reason: string | null;
     matching_review_count: number; references_truncated: boolean; supporting_review_refs: string[];
-    evidence: { review_refs: string[]; matches: { phrase: string; start: number; end: number }[] }[] }[];
+    evidence: { review_refs: string[]; match_kind?: "exact" | "tfidf" | null; similarity?: number | null; rating?: number | null; timestamp_day?: string | null; polarity?: "positive" | "negative" | null; matches: { phrase: string; start: number; end: number }[] }[] }[];
   reviews: { ref: string; text: string; title: string | null }[];
   warnings: { code: string; column_positions: number[] }[];
   limitations: string[];
@@ -17,9 +22,21 @@ const object = (x: unknown): x is Record<string, unknown> => typeof x === "objec
 const strings = (x: unknown): x is string[] => Array.isArray(x) && x.every(v => typeof v === "string");
 const count = (x: unknown): x is number => Number.isSafeInteger(x) && (x as number) >= 0;
 
+const range = (x: unknown, low: number, high: number): x is number => typeof x === "number" && Number.isFinite(x) && x >= low && x <= high;
+const day = (x: unknown): x is string => typeof x === "string" && /^\d{4}-\d{2}-\d{2}$/.test(x);
+function validValue(value: unknown, signal: unknown): boolean {
+  if (value === null) return true;
+  if (!object(value)) return false;
+  if (signal === "rating_distribution") return count(value.rated_reviews) && value.rated_reviews >= 20 &&
+    range(value.mean, 1, 5) && range(value.low_share, 0, 1) && range(value.high_share, 0, 1) &&
+    Array.isArray(value.histogram) && value.histogram.length <= 500 && value.histogram.every(b => object(b) && range(b.rating, 1, 5) && count(b.count) && b.count > 0);
+  if (!count(value.matching_reviews) || !count(value.eligible_reviews) || value.eligible_reviews < 1 || !range(value.fraction, 0, 1)) return false;
+  return signal !== "review_burst" || day(value.window_start) && day(value.window_end) && count(value.observed_span_days) && value.observed_span_days >= 28;
+}
+
 // Validate consumed fields before rendering; unknown fields are not displayed.
 export function isResult(x: unknown): x is AnalysisResult {
-  if (!object(x) || x.schema_version !== "1" || typeof x.methodology_version !== "string" || x.experimental !== true ||
+  if (!object(x) || x.schema_version !== "1" || x.methodology_version !== "rt-patterns-0.2.0-experimental" || x.experimental !== true ||
     x.scope !== "submitted_subset" || !["paste", "csv"].includes(String(x.origin)) || !count(x.review_count) || x.review_count < 1 || x.review_count > 500) return false;
   const s = x.score, c = x.confidence, coverage = x.coverage;
   if (!object(s) || !strings(s.reason_codes) || !(s.status === "insufficient_evidence" && s.value === null ||
@@ -34,11 +51,14 @@ export function isResult(x: unknown): x is AnalysisResult {
   if (refs.size !== x.review_count) return false;
   const validRefs = (v: unknown) => strings(v) && v.every(ref => refs.has(ref));
   return Array.isArray(x.findings) && x.findings.length <= 20 && x.findings.every(f => object(f) &&
-    typeof f.signal_id === "string" && ["observed", "not_observed", "unavailable"].includes(String(f.assessment)) &&
+    typeof f.signal_id === "string" && validValue(f.value, f.signal_id) && ["observed", "not_observed", "unavailable"].includes(String(f.assessment)) &&
     typeof f.explanation === "string" && (f.availability_reason === null || typeof f.availability_reason === "string") &&
     count(f.matching_review_count) && typeof f.references_truncated === "boolean" && validRefs(f.supporting_review_refs) &&
     object(f.coverage) && count(f.coverage.eligible) && count(f.coverage.evaluated) && count(f.coverage.total) &&
-    Array.isArray(f.evidence) && f.evidence.every(e => object(e) && validRefs(e.review_refs) && Array.isArray(e.matches) &&
+    Array.isArray(f.evidence) && f.evidence.every(e => object(e) && validRefs(e.review_refs) &&
+      (e.match_kind == null || e.match_kind === "exact" || e.match_kind === "tfidf") &&
+      (e.similarity == null || range(e.similarity, 0, 1)) && (e.rating == null || range(e.rating, 1, 5)) &&
+      (e.timestamp_day == null || day(e.timestamp_day)) && (e.polarity == null || e.polarity === "positive" || e.polarity === "negative") && Array.isArray(e.matches) &&
       e.matches.every(m => object(m) && typeof m.phrase === "string" && count(m.start) && count(m.end)))) &&
     Array.isArray(x.warnings) && x.warnings.every(w => object(w) && typeof w.code === "string" && Array.isArray(w.column_positions) && w.column_positions.every(count));
 }

@@ -20,15 +20,25 @@ export default function Results({ result }: { result: AnalysisResult }) {
     <h3>Findings</h3>
     {result.findings.map((f, i) => <article className="finding" key={i}>
       <h4>{readable(f.signal_id)} — {readable(f.assessment)}</h4>
+      {!["text_repetition", "incentive_language"].includes(f.signal_id) && <p className="muted">Context only — does not affect the score.</p>}
       <p>{f.explanation}</p>
+      {f.value && "histogram" in f.value && <>
+        <p>Mean rating: {f.value.mean.toFixed(2)} / 5. Ratings ≤2: {(f.value.low_share * 100).toFixed(1)}%; ratings ≥4: {(f.value.high_share * 100).toFixed(1)}%.</p>
+        <ul aria-label="Rating histogram">{f.value.histogram.map(bin => <li key={bin.rating}>{bin.rating} {bin.rating === 1 ? "star" : "stars"}: {bin.count} / {f.value && "rated_reviews" in f.value ? f.value.rated_reviews : 0} rated reviews</li>)}</ul>
+      </>}
+      {f.value && "window_start" in f.value && <p>UTC window: {f.value.window_start} through {f.value.window_end}. Observed date span: {f.value.observed_span_days} days.</p>}
+      {f.value && "matching_reviews" in f.value && <p>{f.value.matching_reviews} / {f.value.eligible_reviews} eligible reviews in this pattern.</p>}
       <p>{f.coverage.eligible} / {f.coverage.total} eligible; {f.coverage.evaluated} / {f.coverage.total} evaluated.</p>
       {f.availability_reason && <p>Unavailable reason: {readable(f.availability_reason)}.</p>}
       {f.references_truncated && <p>Evidence preview is limited; {f.matching_review_count} matching reviews in total.</p>}
       {f.evidence.length > 0 && <details><summary>Inspect supporting reviews ({f.supporting_review_refs.length} references)</summary>
         {f.evidence.map((e, n) => <div key={n} className="evidence">
+          {e.match_kind && <p>Pair method: {e.match_kind === "exact" ? "exact normalized text" : "word TF-IDF cosine"}{e.similarity != null ? `; similarity ${e.similarity.toFixed(4)}` : ""}. Similarity is not an authenticity probability.</p>}
+          {e.rating != null && <p>Submitted rating: {e.rating} / 5{e.polarity ? `; lexicon direction: ${e.polarity}` : ""}.</p>}
+          {e.timestamp_day && <p>Submitted date (UTC): {e.timestamp_day}</p>}
           <p>Evidence references: {e.review_refs.join(" + ")}</p>
           {e.review_refs.map(ref => { const review = reviews.get(ref)!; return <blockquote key={ref}><strong>{ref}</strong>{review.title && <p>{review.title}</p>}<p className="review-text">{review.text}</p></blockquote>; })}
-          {e.matches.map((match, j) => <p key={j}>Phrase mention: “{match.phrase}” (characters {match.start}–{match.end}, zero-based Unicode offsets).</p>)}
+          {e.matches.map((match, j) => <p key={j}>Matched word or phrase: “{match.phrase}” (characters {match.start}–{match.end}, zero-based Unicode offsets).</p>)}
         </div>)}
       </details>}
     </article>)}

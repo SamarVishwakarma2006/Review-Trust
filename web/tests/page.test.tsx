@@ -5,12 +5,12 @@ import { analyze, apiBase, isResult, type AnalysisResult } from "../lib/api";
 import { csvHeaders, pasteBody } from "../lib/input";
 
 const result: AnalysisResult = {
-  schema_version: "1", methodology_version: "rt-patterns-0.1.0-experimental", experimental: true,
+  schema_version: "1", methodology_version: "rt-patterns-0.2.0-experimental", experimental: true,
   scope: "submitted_subset", origin: "paste", review_count: 1,
   score: { status: "insufficient_evidence", value: null, reason_codes: ["too_few_reviews"] },
   confidence: { status: "not_validated", level: null, explanation: "Inspect evidence coverage instead." },
   coverage: { fields: { text: { present: 1, missing: 0 } }, redactions: { email: 0, phone: 0 } },
-  findings: [{ signal_id: "incentive_language", assessment: "observed", explanation: "A phrase mention was observed.",
+  findings: [{ value: { matching_reviews: 1, eligible_reviews: 1, fraction: 1 }, signal_id: "incentive_language", assessment: "observed", explanation: "A phrase mention was observed.",
     coverage: { eligible: 1, evaluated: 1, total: 1 }, availability_reason: null, matching_review_count: 1,
     references_truncated: false, supporting_review_refs: ["r1"], evidence: [{ review_refs: ["r1"], matches: [] }] }],
   reviews: [{ ref: "r1", text: '<script>alert("synthetic")</script>', title: null }],
@@ -147,4 +147,21 @@ test("unmount aborts the active request", async () => {
   const fetcher = vi.fn(() => new Promise<Response>(() => {})); vi.stubGlobal("fetch", fetcher);
   const view = render(<Home />); fill(); submit(); view.unmount();
   await waitFor(() => expect((fetcher.mock.calls[0] as unknown as [string, RequestInit])[1].signal?.aborted).toBe(true));
+});
+
+test("versioned contextual evidence displays histogram, dates, rating direction and pair similarity", async () => {
+  const contextual: AnalysisResult = { ...result, findings: [
+    { ...result.findings[0], signal_id: "text_repetition", evidence: [{ review_refs: ["r1"], matches: [], match_kind: "tfidf", similarity: 0.95 }] },
+    { ...result.findings[0], signal_id: "rating_distribution", value: { rated_reviews: 20, histogram: [{ rating: 4.5, count: 20 }], mean: 4.5, low_share: 0, high_share: 1 } },
+    { ...result.findings[0], signal_id: "review_burst", value: { matching_reviews: 10, eligible_reviews: 20, fraction: 0.5, window_start: "2020-01-01", window_end: "2020-01-03", observed_span_days: 28 }, evidence: [{ review_refs: ["r1"], matches: [], timestamp_day: "2020-01-02" }] },
+    { ...result.findings[0], signal_id: "rating_text_disagreement", evidence: [{ review_refs: ["r1"], matches: [], rating: 1, polarity: "positive" }] },
+  ] };
+  vi.stubGlobal("fetch", vi.fn().mockResolvedValue(response(contextual)));
+  render(<Home />); fill(); submit(); await screen.findByText(/4.5 stars: 20/);
+  expect(screen.getAllByText("Context only — does not affect the score.")).toHaveLength(3);
+  expect(screen.getByText(/Submitted date \(UTC\): 2020-01-02/)).toBeTruthy();
+  expect(screen.getByText(/lexicon direction: positive/)).toBeTruthy();
+  expect(screen.getByText(/similarity 0.9500/)).toBeTruthy();
+  expect(isResult({ ...result, methodology_version: "rt-patterns-0.1.0-experimental" })).toBe(false);
+  expect(isResult({ ...contextual, findings: [{ ...contextual.findings[1], value: { histogram: "invalid" } }] })).toBe(false);
 });

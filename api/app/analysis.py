@@ -3,7 +3,6 @@
 import re
 import time
 import unicodedata
-from collections import defaultdict
 
 from app.ingestion import IngestedReviews, ReviewInputError
 from app.results import (
@@ -21,6 +20,7 @@ from app.results import (
     WarningInfo,
 )
 from app.schemas import REVIEW_FIELDS
+from app.signals import burst, disagreement, rating_distribution, repetition
 
 INCENTIVE_PHRASES = (
     "in exchange for a review",
@@ -59,8 +59,8 @@ def redact(text: str, counts: dict[str, int]) -> str:
     return _PHONE.sub(phone, _EMAIL.sub(email, text))
 
 
-def _text_finding(signal_id, eligible, total, matching, evidence, explanation):
-    available = eligible >= 10
+def _text_finding(signal_id, eligible, total, matching, evidence, explanation, feature_limit=False):
+    available = eligible >= 10 and not feature_limit
     refs = list(dict.fromkeys(ref for item in evidence for ref in item.review_refs))
     return Finding(
         signal_id=signal_id,
@@ -72,7 +72,11 @@ def _text_finding(signal_id, eligible, total, matching, evidence, explanation):
         assessment=("observed" if matching else "not_observed") if available else "unavailable",
         explanation=explanation
         if available
-        else "At least 10 reviews with five word tokens are required.",
+        else (
+            "Similarity exceeds 20,000 features; repetition is unavailable without pruning."
+            if feature_limit
+            else "At least 10 reviews with five word tokens are required."
+        ),
         supporting_review_refs=refs if available else [],
         evidence=evidence if available else [],
         matching_review_count=matching if available else 0,
@@ -81,7 +85,9 @@ def _text_finding(signal_id, eligible, total, matching, evidence, explanation):
         coverage=SignalCoverage(
             eligible=eligible, evaluated=eligible if available else 0, total=total
         ),
-        availability_reason=None if available else "insufficient_eligible_text",
+        availability_reason=None
+        if available
+        else ("feature_limit" if feature_limit else "insufficient_eligible_text"),
     )
 
 
@@ -90,7 +96,7 @@ def analyze(batch: IngestedReviews, deadline: float) -> AnalysisResult:
     total = len(batch.submission.reviews)
     counts = {"email": 0, "phone": 0}
     display = []
-    groups = defaultdict(list)
+    eligible_rows = []
     incentives = []
     eligible = 0
     for ref, review in zip(batch.review_refs, batch.submission.reviews, strict=True):
@@ -102,7 +108,7 @@ def analyze(batch: IngestedReviews, deadline: float) -> AnalysisResult:
         if len(_WORDS.findall(normalized)) < 5:
             continue
         eligible += 1
-        groups[normalized].append(ref)
+        eligible_rows.append((ref, normalized))
         matches = []
         for phrase, pattern in _INCENTIVE_PATTERNS:
             match = pattern.search(text)
@@ -110,15 +116,11 @@ def analyze(batch: IngestedReviews, deadline: float) -> AnalysisResult:
                 matches.append(PhraseMatch(phrase=phrase, start=match.start(), end=match.end()))
         if matches:
             incentives.append(ReviewEvidence(review_refs=[ref], matches=matches))
-    duplicate_count = 0
-    pairs = []
-    for refs in groups.values():
-        check_deadline(deadline)
-        if len(refs) > 1:
-            duplicate_count += len(refs)
-            for ref in refs[1:]:
-                if len(pairs) < 10:
-                    pairs.append(ReviewEvidence(review_refs=[refs[0], ref]))
+    duplicate_count, pairs, feature_limit = (
+        repetition(eligible_rows, lambda: check_deadline(deadline))
+        if eligible >= 10
+        else (0, [], False)
+    )
     findings = [
         _text_finding(
             "text_repetition",
@@ -126,9 +128,11 @@ def analyze(batch: IngestedReviews, deadline: float) -> AnalysisResult:
             total,
             duplicate_count,
             pairs,
-            f"{duplicate_count} of {eligible} eligible reviews share exact normalized text "
-            "with another review. Templates and duplicate ingestion are alternative explanations; "
-            "are not evaluated in this version.",
+            f"{duplicate_count} of {eligible} eligible reviews share exact normalized text or "
+            "word unigram/bigram TF-IDF cosine >=0.90 with another review. "
+            "Templates, product descriptions and duplicate ingestion are alternative explanations. "
+            "Similarity is fitted only within this subset and is not an authenticity probability.",
+            feature_limit,
         ),
         _text_finding(
             "incentive_language",
@@ -140,28 +144,15 @@ def analyze(batch: IngestedReviews, deadline: float) -> AnalysisResult:
             "Mentions, quotations and negations do not establish participation or manipulation.",
         ),
     ]
-    for signal_id, required in (
-        ("review_burst", ["timestamp"]),
-        ("rating_distribution", ["rating"]),
-        ("rating_text_disagreement", ["rating", "text"]),
-    ):
-        # No eligibility claim for a contextual method that has not been implemented.
-        findings.append(
-            Finding(
-                signal_id=signal_id,
-                value=None,
-                assessment="unavailable",
-                explanation="This signal is not implemented in this methodology version.",
-                supporting_review_refs=[],
-                evidence=[],
-                matching_review_count=0,
-                references_truncated=False,
-                required_fields=required,
-                coverage=SignalCoverage(eligible=0, evaluated=0, total=total),
-                availability_reason="not_implemented",
-            )
-        )
+    findings.extend(
+        [
+            burst(batch.submission.reviews, batch.review_refs, lambda: check_deadline(deadline)),
+            rating_distribution(batch.submission.reviews, batch.review_refs),
+            disagreement(batch.submission.reviews, display, lambda: check_deadline(deadline)),
+        ]
+    )
     evaluated = [finding.signal_id for finding in findings if finding.availability_reason is None]
+    scoring_evaluated = [f.signal_id for f in findings[:2] if f.availability_reason is None]
     reasons = []
     if total < 20:
         reasons.append("too_few_reviews")
@@ -169,7 +160,7 @@ def analyze(batch: IngestedReviews, deadline: float) -> AnalysisResult:
         reasons.append("too_few_eligible_reviews")
     if eligible * 5 < total * 4:
         reasons.append("low_text_coverage")
-    if len(evaluated) < 2:
+    if len(scoring_evaluated) < 2:
         reasons.append("scoring_signal_unavailable")
     # Exact half-up rounding of 100 * (1 - max(d, i)); avoids float half-boundary errors.
     value = (
@@ -188,7 +179,7 @@ def analyze(batch: IngestedReviews, deadline: float) -> AnalysisResult:
             status="insufficient_evidence" if reasons else "experimental",
             value=value,
             reason_codes=reasons,
-            evaluated_signal_ids=evaluated,
+            evaluated_signal_ids=scoring_evaluated,
         ),
         coverage=Coverage(
             total_reviews=total,
@@ -215,7 +206,7 @@ def analyze(batch: IngestedReviews, deadline: float) -> AnalysisResult:
             "all product reviews.",
             "A score of 100 means neither included pattern was observed in eligible text, "
             "not verified authenticity.",
-            "Exact repetition and a limited English phrase list miss many patterns "
+            "Text similarity and a limited English phrase list miss many patterns "
             "and can produce false positives.",
             "Email/phone masking is incomplete and may hide benign numbers; "
             "remove personal details before submitting.",
@@ -223,8 +214,10 @@ def analyze(batch: IngestedReviews, deadline: float) -> AnalysisResult:
             "no full anonymization is claimed.",
             "Masking and normalization may remove distinctions between reviews; "
             "redaction placeholders are excluded from matching.",
-            "Timing, rating distribution, sentiment disagreement and "
-            "near-duplicate similarity are unavailable.",
+            "Timing, rating distribution and lexicon disagreement are contextual only and do not "
+            "change the score. Genuine launches, product quality and sarcasm can explain findings.",
+            "Similarity depends on this submission vocabulary; the feature cap withholds "
+            "repetition and the score instead of silently pruning terms.",
         ],
     )
     check_deadline(deadline)

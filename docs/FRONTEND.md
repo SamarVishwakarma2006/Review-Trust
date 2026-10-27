@@ -27,3 +27,7 @@ Initial results show experimental or insufficient-evidence score, withholding re
 Native controls have labels, fieldsets and visible keyboard focus. Results/errors receive focus; loading/cancel/reset use a status region and failures use an alert. Responsive CSS was checked at 320px without horizontal page overflow. This is targeted verification, not a complete accessibility audit.
 
 Tests: `npm --prefix web run test`. The suite covers canonical submission, duplicate preservation, declaration, reset/cancel/unmount/deadline, stale file reads, network retry, CSV mapping, Unicode/byte limits, malformed headers, safe errors, escaped text and response validation. Tests use synthetic data only.
+
+## Step 6 signals
+
+The browser now accepts rt-patterns-0.2.0-experimental and validates the new value/evidence fields it displays. Results include TF-IDF pair method/similarity, exact rating histogram/mean/shares, UTC timing window and submitted rating/lexicon direction. Contextual findings are labelled as not affecting the score. Supporting dates/ratings may be returned in evidence; IDs remain omitted. Similarity values are not authenticity probabilities. Old methodology responses are rejected rather than rendered under new rules. API/web builds must match. See SPEC.md for the complete algorithm, eligibility gates, feature limit and frozen word inventory.
