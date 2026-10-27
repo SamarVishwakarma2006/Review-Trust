@@ -12,8 +12,9 @@ def test_development_app_starts_and_returns_minimal_status():
     assert response.headers["cache-control"] == "no-store"
 
 
-def test_review_submission_is_not_available_in_foundation():
+def test_empty_review_submission_is_rejected():
     with TestClient(app) as client:
         response = client.post("/v1/analyze", json={})
 
-    assert response.status_code == 404
+    assert response.status_code == 422
+    assert response.json()["error"]["code"] == "invalid_submission"

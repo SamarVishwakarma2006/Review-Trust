@@ -1,6 +1,6 @@
 # Threat model
 
-Step 1 proposal, 2026-10-27. Controls below are requirements, not implemented guarantees. Security verification is required in Step 12 and production in Step 13.
+Step 1 proposal, updated through Step 4 on 2026-10-27. The table records requirements and residual risks; implemented controls below have focused local verification, not a completed security audit. Security verification is required in Step 12 and production in Step 13.
 
 Assets: submitted text/metadata, user privacy, service availability, methodology integrity, evidence references and deployment secrets. Actors: normal users, abusive anonymous clients, malicious CSV/review authors, misleading dataset publishers and dependency attackers. Boundaries: browser/API, parser/canonical records, public data/offline training, build/deployment and hosting logs.
 
@@ -21,3 +21,9 @@ Assets: submitted text/metadata, user privacy, service availability, methodology
 Initial budget/limit values are hypotheses to test in Step 10. Do not add Redis solely to satisfy a hypothetical distributed deployment. If deployment topology cannot enforce the design, block release or choose a verified native edge control. Endpoint access requires no account; rate controls protect availability and are not identity verification.
 
 No legal compliance certification is implied. Dataset licenses and production privacy disclosures need review against actual sources, providers and deployment jurisdictions.
+
+## Step 4 implementation evidence
+
+Actual-byte and multipart-envelope caps, strict headers/content encoding, in-memory no-spool callbacks, row/field limits, exact origin allowlist, safe result/error contracts, conservative email/phone masking, hashed bounded token buckets, two-request admission, slow-body deadline and cancellation slot retention have focused tests. Unexpected errors log only a fixed error code and random request ID. Multipart parser diagnostics are silenced because malformed headers can contain private values. The local development command disables access logs and proxy headers.
+
+Retained release work: measured peak-load/time/memory behavior; provider logs and retention; proxy/edge enforcement across instances; TLS and host connection/header/write budgets; dependency and rendering audits; dataset/model integrity; public methodology/contact content. Cooperative CPU deadline checks do not preempt a bounded library call, and masking is incomplete. Application controls do not establish production compliance or protection against distributed abuse.

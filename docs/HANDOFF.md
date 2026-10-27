@@ -1,51 +1,60 @@
 # ReviewTrust handoff
 
-Date: 2026-10-27. Last verified step: Step 3 — Schemas and Review Validation.
+Date: 2026-10-27. Last verified step: Step 4 — FastAPI Analysis Foundation.
 
-Status: COMPLETED. Manual commit pending under the user's instruction. Step 4 has not started.
+Status: COMPLETED. Manual commit pending under the user's instruction. Step 5 has not started.
 
 ## Changes
 
-- Added strict canonical `ReviewInput` and `ReviewSubmission` models in `api/app/schemas.py`, with optional null metadata, finite 1–5 ratings, precise ISO timestamp handling, UTC normalization, row/text/aggregate limits and a one-product constraint.
-- Added in-memory JSON/CSV adapters and safe structured errors in `api/app/ingestion.py`. Preserve duplicates/local references, reject duplicate JSON keys and malformed CSV, support explicit column mapping, discard unmapped metadata and report only column positions. Error details are capped at 20 with total counts and safe field names.
-- Added validation/regression tests covering boundaries, hostile inputs, optional metadata, exact decimal range checks, timezone offsets, CSV records/encoding/mapping, error privacy and CSV/JSON equivalence.
-- Documented exact contracts, parser usage and integration boundaries in SPEC.md and docs/INPUT_VALIDATION.md; recorded D16–D20 and updated README/AGENTS.md. No dependencies, endpoints, frontend behavior or scoring were added.
+- Added GET /health plus JSON and multipart CSV analysis endpoints, preserving GET / development status. Request adapters share canonical validation; explicit public result/error models live in api/app/results.py.
+- Implemented deterministic rt-patterns-0.1.0-experimental: exact normalized repetition and four incentive-language mentions, max-penalty scoring with exact half-up rounding, withholding gates, derived evidence/pairs/spans, coverage and unvalidated confidence. Three contextual signals are explicitly unavailable; no TF-IDF or classifier is implied.
+- Added conservative common email/phone masking before matching/output, excluded placeholders from eligibility, omitted source/product identifiers from display records and bounded evidence references. No complete anonymization claim.
+- Added streamed actual-byte/envelope limits, no-spool multipart callbacks, exact-origin CORS, safe error envelopes/IDs, configurable bounded hashed peer token buckets, two-request admission, slow-body deadlines and cancellation slot retention. Unexpected errors log only code and random request ID. No files/review history are persisted.
+- Added one pinned runtime dependency (python-multipart 0.0.32), environment example, analysis/API tests and API documentation; disabled development proxy headers and updated project guidance/status.
 
-Files: `api/app/schemas.py`, `api/app/ingestion.py`, `api/tests/test_ingestion.py`, `docs/INPUT_VALIDATION.md`, `AGENTS.md`, `README.md`, `SPEC.md`, `docs/DECISIONS.md` and this handoff.
+## Files
+
+New: api/.env.example; api/app/analysis.py, results.py, security.py, uploads.py; api/tests/test_analysis.py, test_api.py; docs/API.md.
+
+Modified: api/app/ingestion.py, main.py; api/requirements.txt; api/tests/test_smoke.py; scripts/dev-api.ps1; AGENTS.md, README.md, SPEC.md; docs/DECISIONS.md, INPUT_VALIDATION.md, THREAT_MODEL.md and this file. Frontend source remains unchanged.
 
 ## Verification
 
-`./scripts/check.ps1`: PASS, including:
+`./scripts/check.ps1`: PASS:
 
-- `python -m pip check`: no broken requirements.
-- `python -m pytest` from api: 83 passed, including the existing API smoke tests.
-- `python -m ruff check .` and `python -m ruff format --check .` from api: PASS.
-- Frontend `npm run test`: 1 passed.
-- Frontend `npm run lint`, `npm run typecheck` and `npm run build`: PASS.
+- Python pip check: no broken requirements.
+- Backend pytest: 141 passed, including retained ingestion tests, score/evidence/coverage cases, privacy, multipart/no-spool limits, safe errors, CORS, token refill/capacity/forwarded-header behavior, chunked/false/missing lengths, slow body and cancellation/worker completion.
+- Ruff lint and format: PASS (12 Python files).
+- Frontend component test: 1 passed.
+- Frontend lint, route generation/TypeScript and optimized production build: PASS.
 
-Document links, roadmap count, conflict-marker and Git whitespace checks: PASS. Staging area empty. GitHub Actions has not been executed or verified remotely; no application startup recheck was needed because the existing API smoke tests pass and endpoint behavior is unchanged. No standalone production/performance/security audit is claimed.
+Local live HTTP via scripts/dev-api.ps1: health returned ok; JSON and multipart CSV requests returned 200, 20 synthetic reviews and equivalent experimental score=100. Temporary server was stopped after verification. This value is a mechanical fixture result, not a measured authenticity benchmark.
 
-Acceptance criteria: Step 3 PASS; see SPEC.md section 7.
+Document links, roadmap/marker/whitespace checks and empty staging area: PASS. GitHub Actions has not been executed/verified remotely. Full resource benchmarking, dependency/security audit and production verification remain later roadmap gates.
+
+Acceptance criteria: Step 4 PASS; see SPEC.md section 7.
 
 ## Integration notes and limitations
 
-- Use the byte adapters at the future API boundary. `validate_submission` is for already-decoded adapter input; it cannot enforce serialized byte size.
-- The byte parsers cap input at 1 MiB, but HTTP streaming/multipart-envelope limits, content encoding, CORS, rate/concurrency controls and request IDs still require Step 4 integration. CSV parser filenames are not used because it accepts bytes only.
-- Validated review text remains raw. Redact before analysis/output; never log/persist reviews, parser buffers or Pydantic validation exceptions. Discarded CSV columns are absent from canonical records; the caller still owns request buffers until cleanup.
-- CSV headers are trimmed and case-sensitive. Mapping is source-header -> canonical-field and replaces auto-mapping. Cap at 50 columns, 100 header code points and 5,000 code points per raw cell including ignored cells. CSV record numbers count the header as 1; JSON row numbers start at 1 for reviews. Structural parsing can fail fast; row validation is atomic.
-- Confidence, findings and scores are not implemented. Inputs remain unverified subsets. Known ESLint 9 deprecation from Step 2 remains documented in D15; no dependency changes this step.
+- Read docs/API.md before Step 5. Browser needs canonical JSON or multipart file/category/language/schema_version plus optional source-header -> canonical-field mapping JSON. Configure NEXT_PUBLIC_API_URL on the frontend in Step 5; no such browser configuration exists yet.
+- UI must expose experimental and insufficient-evidence states, coverage, limitations and no confidence level. Never render review content as HTML. Inputs are unverified English/electronics subsets; names/other personal details may remain after incomplete common-pattern masking.
+- Metadata-dependent signals and near-duplicates remain not_implemented. Version scoring changes and preserve gate/rounding invariants. The initial public numeric score is still subject to evaluation/release decisions in Steps 10/12.
+- Defaults: total body 1 MiB including multipart overhead; at most two admitted requests; ten-second body/processing budget; token bucket burst two/refill ten per minute by peer. Individual bounded parser calls are not preempted; cooperative checks reject expired work without an untracked abandoned CPU task. Provider connection/write budgets and distributed abuse controls require later verification.
+- Single process only until shared edge/proxy enforcement is verified. Limiter stores scoped HMAC keys, bounded to 10,000 with 60-second idle expiry; restarting clears state. Development disables proxy headers and access logs. Hosting data/log retention and TLS remain unverified.
+- python-multipart callback parsing uses no File/UploadFile/temp storage. Multipart diagnostic logging is suppressed to avoid malformed private header exposure. Native CORS preflight responses use short protocol text; actual endpoint errors use the safe JSON envelope.
+- Existing ESLint 9 deprecation remains D15. No dataset or paid model dependency was added.
 
 ## Git and manual commit
 
-Verified branch `main`, remote `origin` = `https://github.com/SamarVishwakarma2006/Review-Trust.git`. Starting HEAD: `1e83e5f5ded58a3ef1684a4eea833de53ed4cc3a` (`chore: establish ReviewTrust development foundation`). User's Step 2 commit was present and working tree was clean before Step 3. No staging, commit or push performed by the assistant.
+Verified branch main, remote origin = https://github.com/SamarVishwakarma2006/Review-Trust.git. Starting HEAD: 7ca7fc9b7282967f46a6fffa30b48277a915ae07 (feat: add canonical review validation and CSV ingestion). The user's Step 3 commit was present and the working tree was clean before Step 4. No staging, commit or push performed by the assistant.
 
-From the repository root, review and run manually:
+Review and run manually from the repository root:
 
 ```powershell
 git status --short
-git add api/app/schemas.py api/app/ingestion.py api/tests/test_ingestion.py docs/INPUT_VALIDATION.md AGENTS.md README.md SPEC.md docs/DECISIONS.md docs/HANDOFF.md
+git add api scripts/dev-api.ps1 AGENTS.md README.md SPEC.md docs
 git diff --cached --stat
-git commit -m "feat: add canonical review validation and CSV ingestion"
+git commit -m "feat: add experimental analysis API and evidence"
 git status
 git log -1 --oneline
 ```
@@ -54,6 +63,6 @@ Optional manual push after review: `git push origin main`.
 
 ## Next work
 
-Step 4 — FastAPI Analysis Foundation: health and analysis endpoints, explicit request/response contracts, integration of validated input adapters, safe HTTP errors and transport/abuse/privacy controls, deterministic experimental scoring and structured evidence with unavailable states, plus API integration tests. Follow SPEC.md score gates and version methodology; do not implement near-duplicate TF-IDF or frontend review submission yet.
+Step 5 — Functional Next.js Application: pasted-review entries, CSV selection/mapping, loading/error/abort states, configurable API integration and functional initial results. Keep limits/terms consistent with SPEC/API docs. Polished final evidence UI remains Step 9. Do not implement Step 6 signals yet.
 
-Next model: GPT-6.1 Sol — Medium. KEEP CURRENT MODEL — NO SWITCH REQUIRED if already selected. Fallback: GPT-5.6 Sol — Medium if available. Request manual escalation if bounded request handling or cross-system resource/security design cannot be resolved with focused evidence. Stop until the user says `next`.
+Next model: GPT-6.1 Sol — Medium. KEEP CURRENT MODEL — NO SWITCH REQUIRED if already selected. Fallback GPT-5.6 Sol — Medium if available. Request manual escalation for a concrete unresolved cross-system data-contract or request/cancellation security failure. Stop until the user says next.

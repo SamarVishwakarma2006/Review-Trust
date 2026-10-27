@@ -4,9 +4,9 @@ An electronics review-pattern analysis platform. It detects observable patterns,
 
 ## Current status
 
-Steps 1–3 are complete. The Next.js and FastAPI development foundations have shared review schemas and in-memory JSON/CSV validation. Backend validation tests, the existing frontend smoke test, static checks and the production frontend build pass locally. Public review submission, scoring, datasets and deployment remain future work. GitHub Actions has been configured but has not yet been verified remotely.
+Steps 1–4 are complete. FastAPI now exposes bounded JSON/CSV analysis with experimental scoring, structured evidence, conservative email/phone masking and explicit insufficient-evidence states. The Next.js page remains a development placeholder; browser review submission is Step 5. Backend/API tests, the frontend smoke test, static checks and production frontend build pass locally. Dataset/ML work and production release remain pending. GitHub Actions is configured but has not yet been verified remotely.
 
-Read [SPEC.md](SPEC.md), [input validation interface](docs/INPUT_VALIDATION.md), [decisions](docs/DECISIONS.md), [threat model](docs/THREAT_MODEL.md), [engineering guidance](AGENTS.md) and [handoff](docs/HANDOFF.md).
+Read [SPEC.md](SPEC.md), [API usage/configuration](docs/API.md), [input validation interface](docs/INPUT_VALIDATION.md), [decisions](docs/DECISIONS.md), [threat model](docs/THREAT_MODEL.md), [engineering guidance](AGENTS.md) and [handoff](docs/HANDOFF.md).
 
 ## Development setup
 
@@ -50,7 +50,11 @@ Open two terminals at the repository root:
 npm --prefix web run dev
 ```
 
-For macOS/Linux, run `.venv/bin/python -m uvicorn app.main:app --host 127.0.0.1 --port 8000 --reload --no-access-log` from `api/`. Stop either server with Ctrl+C. API `GET /` returns only a development status. The web page does not call the API yet. `/health` and analysis endpoints belong to Step 4; Step 3 ingestion is currently a tested library layer. These development apps are not approved for public deployment.
+For macOS/Linux, run `.venv/bin/python -m uvicorn app.main:app --host 127.0.0.1 --port 8000 --reload --no-access-log --no-proxy-headers` from `api/`. Stop either server with Ctrl+C. API `GET /` retains the development status; `GET /health` returns `{"status":"ok"}`. `POST /v1/analyze` accepts canonical JSON; `POST /v1/analyze/csv` accepts multipart CSV plus required metadata. The web page does not call the API yet. These development apps are not approved for public deployment.
+
+Current analysis uses only exact repetition and four incentive-language phrases, under methodology `rt-patterns-0.1.0-experimental`. Metadata-dependent and near-duplicate signals remain unavailable. Scores are withheld below evidence gates; confidence remains unvalidated. Common email/phone masking is incomplete, so remove personal information before submitting.
+
+Default API budgets: 1 MiB total request including upload envelope, two admitted requests, ten-second body/processing deadline, peer token bucket with burst two/refill ten per minute. Optional process settings are listed in [docs/API.md](docs/API.md) and `api/.env.example`; the example file is not automatically loaded. Use one API process until deployment-specific shared abuse controls are verified. Do not trust forwarded identity headers by default.
 
 Production frontend smoke check, after building: `npm --prefix web run start`.
 
@@ -87,7 +91,7 @@ Known tooling limitation: ESLint 9 is deprecated upstream but remains required b
 - [x] Step 1 — Architecture, Scoring Definition and Threat Model
 - [x] Step 2 — Repository and Development Foundation
 - [x] Step 3 — Schemas and Review Validation
-- [ ] Step 4 — FastAPI Analysis Foundation
+- [x] Step 4 — FastAPI Analysis Foundation
 - [ ] Step 5 — Functional Next.js Application
 - [ ] Step 6 — Explainable Detection Signals
 - [ ] Step 7 — Dataset Audit and Labelling System
@@ -99,7 +103,7 @@ Known tooling limitation: ESLint 9 is deprecated upstream but remains required b
 - [ ] Step 13 — Deployment and Production Verification
 - [ ] Step 14 — OPTIONAL URL Input (not authorized)
 
-One approved step per message. Next: Step 4 with GPT-6.1 Sol, Medium reasoning, after user says `next`.
+One approved step per message. Next: Step 5 with GPT-6.1 Sol, Medium reasoning, after user says `next`.
 
 ## Git
 

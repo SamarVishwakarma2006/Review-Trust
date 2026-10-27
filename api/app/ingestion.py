@@ -119,10 +119,11 @@ def _reject_json_constant(value: str) -> None:
     raise ValueError
 
 
-def parse_json(data: bytes, *, today: date | None = None) -> IngestedReviews:
+def decode_json(data: bytes) -> object:
+    """Bounded strict JSON decoding, also used for multipart column mapping."""
     _check_body(data)
     try:
-        payload = json.loads(
+        return json.loads(
             data.decode("utf-8"),
             object_pairs_hook=_unique_object,
             parse_constant=_reject_json_constant,
@@ -132,7 +133,10 @@ def parse_json(data: bytes, *, today: date | None = None) -> IngestedReviews:
         raise ReviewInputError(
             "malformed_json", "Supply valid UTF-8 JSON without duplicate keys.", 400
         ) from None
-    result = validate_submission(payload, today=today)
+
+
+def parse_json(data: bytes, *, today: date | None = None) -> IngestedReviews:
+    result = validate_submission(decode_json(data), today=today)
     if result.submission.origin != "paste":
         raise ReviewInputError("origin_mismatch", "JSON submissions must use paste origin.")
     return result
