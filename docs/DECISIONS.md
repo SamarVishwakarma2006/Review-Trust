@@ -15,4 +15,14 @@
 | D09 | No stored IDs or public export in v1 | Stable reviewer tracking and sharing are unnecessary privacy exposure. |
 | D10 | Single API process initially; verified edge abuse controls before scaling | Per-process limiters cannot enforce global limits. Do not add distributed infrastructure without measured need. |
 
-Deferred: dependency versions to Step 2; full lexicon to Step 6; dataset/license choices to Step 7; score defensibility and performance thresholds to Step 10; operator contact to Step 11; hosting/log retention and deployment-specific enforcement to Steps 12–13.
+Deferred: full lexicon to Step 6; dataset/license choices to Step 7; score defensibility and performance thresholds to Step 10; operator contact to Step 11; hosting/log retention and deployment-specific enforcement to Steps 12–13.
+
+## Step 2 — Development foundation
+
+- D11: Use Node 24 and Python 3.12 as documented/CI runtime baselines. Pin npm direct dependencies and commit its lockfile; separate fully pinned Python runtime and development requirements. Do not install data-science packages before the corresponding work requires them.
+- D12: A synchronous React foundation page and a minimal API root status permit startup and smoke testing without implementing Step 3/4/5 features. No runtime API URL configuration or CORS is needed until browser/API integration; no secrets are currently used.
+- D13: Vitest plus React Testing Library covers the page; pytest plus FastAPI TestClient covers the backend; Ruff provides Python lint/format checks. Use the current Starlette-supported httpx2 test transport. CI runs on Ubuntu; local Windows startup is verified separately.
+- D14: Preserve the user's Git history and `main` branch. Resolve the committed README conflict markers by keeping the full ReviewTrust documentation. User performs staging, commits and pushes manually after each step.
+- D15: Pin ESLint 9.39.5 because the current React/import/accessibility plugins bundled with eslint-config-next reject ESLint 10 in their peer ranges. ESLint 9 emits an upstream end-of-support warning; this is a development-tool maintenance limitation, not a reason to override peer requirements. Revisit when those plugins support ESLint 10 and during Step 12. npm install reported zero known vulnerabilities at setup time; this is not a security guarantee.
+
+Implementation references consulted: [Next.js installation](https://nextjs.org/docs/app/getting-started/installation), [Next.js Vitest guide](https://nextjs.org/docs/app/guides/testing/vitest), and [FastAPI first steps](https://fastapi.tiangolo.com/tutorial/first-steps/). Dependency pins reflect registry resolution and local compatibility checks, not a completed production security audit.

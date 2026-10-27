@@ -1,6 +1,6 @@
 # ReviewTrust specification
 
-Status: Step 1 design complete; no application implemented. Date: 2026-10-27.
+Status: Step 1 design complete; Step 2 development foundation added. Analysis features remain unimplemented. Date: 2026-10-27.
 Methodology proposal: `rt-patterns-0.1-draft`. All numerical thresholds below are engineering hypotheses, not empirically validated authenticity thresholds.
 
 ## 1. Product and boundaries
@@ -109,6 +109,8 @@ When labels justify classification, report computed precision, recall, F1, confu
 ## 7. Acceptance criteria
 
 Step 1: architecture and trust boundaries specified; contracts/limits/error handling defined; aggregation and withholding unambiguous; evidence distinct from confidence; threat controls and residual risks recorded; decisions, roadmap and handoff present; no application scaffolding created.
+
+Step 2: `web/`, `api/`, `ml/` and `docs/` exist; dependencies and transitive resolutions are pinned; generated files/secrets/data are ignored; clean setup and start commands are documented; frontend component and backend API smoke tests, lint/type checks and frontend production build pass; both applications respond over local HTTP; CI contains equivalent checks; README is free of merge markers. Only a development placeholder page and API root status are implemented, without ingestion, scoring or analysis endpoints. Git staging/committing remains manual under the user's updated instruction.
 
 MVP release gates:
 

@@ -2,13 +2,17 @@
 
 Build an evidence-based electronics review-pattern analyzer, never an authenticity authority. Stack: Next.js App Router/React/TypeScript/Tailwind and Python FastAPI/Pydantic/Uvicorn. Offline ML only when justified; no database, accounts, paid LLM, URL fetching or browser extension in v1.
 
-Read this file, SPEC.md, README.md roadmap and docs/HANDOFF.md before each step; inspect Git status/branch/recent commits and relevant files. Preserve existing user work. Implement exactly one approved roadmap step per user message. Current completed design: Step 1; next pending: Step 2. Do not start until user says `next`.
+Read this file, SPEC.md, README.md roadmap and docs/HANDOFF.md before each step; inspect Git status/branch/recent commits and relevant files. Preserve existing user work. Implement exactly one approved roadmap step per user message. Completed: Steps 1–2; next pending: Step 3. Do not start until user says `next`.
 
 SPEC.md owns contracts, scoring, evidence definitions and acceptance criteria. docs/THREAT_MODEL.md owns proposed controls. docs/DECISIONS.md records tradeoffs. Numeric scoring is experimental; missing evidence is never low risk; no confidence level without validation. No review names, raw-body logs or persisted uploads. Treat all input as untrusted.
 
 Prefer small pure analysis functions, explicit typed API contracts, deterministic evidence and native/standard-library features. Server limits and validation are authoritative. Add dependencies only for concrete needs. Review methodology changes with a version bump and regression fixtures.
 
-Verification currently: documentation inspection only; no runnable application exists. Step 2 must establish exact backend pytest and frontend test/lint/typecheck/build commands and CI, then record them here and in README. Never report nonexistent checks as passed.
+Foundation: `web/app` is a synchronous Next.js development page; `api/app/main.py` serves only GET / development status. No health, review or analysis endpoint yet. `ml/` holds guidance only. Runtimes: Node 24 and Python 3.12. Install with `npm --prefix web ci` and the pinned `api/requirements-dev.txt` in `api/.venv`. Do not add ML dependencies before justified evaluation work.
+
+Verification: from repository root on Windows, run `./scripts/check.ps1`. Backend commands from `api/`: `.venv/Scripts/python.exe -m pip check`, `-m pytest`, `-m ruff check .`, `-m ruff format --check .`. Frontend from root: `npm --prefix web run test`, `run lint`, `run typecheck`, `run build`. On Unix use `.venv/bin/python`. Run API with `./scripts/dev-api.ps1` and web with `npm --prefix web run dev`; both bind loopback. CI mirrors checks on Ubuntu; local passing checks are not a claim that remote CI ran.
+
+Known tooling constraint: eslint-config-next's bundled React/import/accessibility plugins require ESLint 9, which emits an upstream deprecation warning. Keep compatible pins and revisit D15 before deployment; do not force invalid peer resolutions. Next.js creates `web/AGENTS.md`; preserve its framework guidance. Generated next-env.d.ts, build output and virtual environments are ignored. Never log raw reviews or add real user data to tests.
 
 After each step: run relevant checks, fix failures, update README checklist and handoff, and update guidance when meaningful. User override: do not stage or commit automatically. Provide exact commands for the user to review, stage all step-related files, commit with a descriptive message, and inspect the commit. Provide initialization commands if Git is absent. Manual commit pending does not block an otherwise verified step. Never push without explicit user permission; provide a push command only when the remote and branch are verified. If tests fail, mark the step BLOCKED and stop. Never invent remote/branch/hash or claim a manual commit succeeded without verification.
 

@@ -1,0 +1,23 @@
+# Dependencies and generated output
+node_modules/
+.next/
+out/
+coverage/
+*.tsbuildinfo
+web/next-env.d.ts
+.venv/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.ruff_cache/
+.mypy_cache/
+.tmp/
+
+# Local configuration and data
+.env*
+!.env.example
+*.log
+ml/data/
+ml/artifacts/
+.DS_Store
+Thumbs.db
