@@ -4,9 +4,9 @@ An electronics review-pattern analysis platform. It detects observable patterns,
 
 ## Current status
 
-Steps 1–6 are complete. The Next.js interface supports editable pasted reviews, CSV header mapping, direct API submission, cancel/reset, safe errors and initial evidence results. FastAPI provides bounded analysis with experimental scoring, masking and explicit insufficient-evidence states. Backend/API tests, frontend interaction tests, static checks and the production frontend build pass locally. Dataset/ML work and production release remain pending. GitHub Actions is configured but has not yet been verified remotely.
+Steps 1–7 are complete. The Next.js interface supports editable pasted reviews, CSV header mapping, direct API submission, cancel/reset, safe errors and initial evidence results. FastAPI provides bounded analysis with experimental scoring, masking and explicit insufficient-evidence states. Backend/API tests, frontend interaction tests, static checks and the production frontend build pass locally. Dataset candidate audits and a reproducible synthetic labelling/split workflow are complete. No real dataset is admitted; model/evaluation and production release work remain pending. GitHub Actions is configured but has not yet been verified remotely.
 
-Read [SPEC.md](SPEC.md), [API usage/configuration](docs/API.md), [input validation interface](docs/INPUT_VALIDATION.md), [decisions](docs/DECISIONS.md), [threat model](docs/THREAT_MODEL.md), [engineering guidance](AGENTS.md) and [handoff](docs/HANDOFF.md).
+Read [SPEC.md](SPEC.md), [API usage/configuration](docs/API.md), [input validation interface](docs/INPUT_VALIDATION.md), [decisions](docs/DECISIONS.md), [threat model](docs/THREAT_MODEL.md), [dataset audit](docs/DATASET_AUDIT.md), [offline workflow](ml/README.md), [engineering guidance](AGENTS.md) and [handoff](docs/HANDOFF.md).
 
 ## Development setup
 
@@ -76,6 +76,9 @@ Push-Location api
 & ./.venv/Scripts/python.exe -m ruff check .
 & ./.venv/Scripts/python.exe -m ruff format --check .
 Pop-Location
+& ./api/.venv/Scripts/python.exe -m unittest discover -s ml/tests -v
+& ./api/.venv/Scripts/python.exe -m ruff check ml --config api/pyproject.toml
+& ./api/.venv/Scripts/python.exe -m ruff format --check ml --config api/pyproject.toml
 npm --prefix web run test
 npm --prefix web run lint
 npm --prefix web run typecheck
@@ -96,7 +99,7 @@ Known tooling limitation: ESLint 9 is deprecated upstream but remains required b
 - [x] Step 4 — FastAPI Analysis Foundation
 - [x] Step 5 — Functional Next.js Application
 - [x] Step 6 — Explainable Detection Signals
-- [ ] Step 7 — Dataset Audit and Labelling System
+- [x] Step 7 — Dataset Audit and Labelling System
 - [ ] Step 8 — ML Baseline and Evaluation (document no-train decision if labels unsupported)
 - [ ] Step 9 — Final Trust Score and Evidence UI
 - [ ] Step 10 — Benchmark and Model Report
@@ -105,7 +108,7 @@ Known tooling limitation: ESLint 9 is deprecated upstream but remains required b
 - [ ] Step 13 — Deployment and Production Verification
 - [ ] Step 14 — OPTIONAL URL Input (not authorized)
 
-One approved step per message. Next: Step 7 with GPT-6.1 Sol, High reasoning, after user says `next`.
+One approved step per message. Next: Step 8 with GPT-6.1 Sol, High reasoning, after user says `next`.
 
 ## Git
 

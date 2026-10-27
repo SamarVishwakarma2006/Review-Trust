@@ -1,0 +1,64 @@
+{
+  "audit_version": "rt-source-audit-0.1.0",
+  "reviewed_on": "2026-10-27",
+  "decision": "No real dataset admitted; synthetic workflow only. Step 8 must resolve training eligibility separately.",
+  "sources": [
+    {
+      "source_id": "synthetic-fixture-v1",
+      "admission": "synthetic_only",
+      "origin": "Project-authored synthetic electronics scenarios in ml/fixtures/synthetic.jsonl",
+      "permission": "Project-authored test mechanics only; no third-party review text",
+      "label_provenance": "Scenario votes, not observed real-world deception",
+      "redistribution": "Synthetic fixture and derived manifest may be versioned",
+      "raw_artifact_sha256": null,
+      "profile_status": "Measured only by the runnable local audit",
+      "training_authorized": false
+    },
+    {
+      "source_id": "amazon-reviews-2023-electronics",
+      "admission": "not_approved",
+      "release": "Amazon Reviews'23, Electronics; metadata audit only",
+      "origin": "McAuley Lab release of Amazon reviews",
+      "references": ["https://amazon-reviews-2023.github.io/", "https://huggingface.co/datasets/McAuley-Lab/Amazon-Reviews-2023/discussions/1"],
+      "permission": "Maintainer says they cannot assign a dataset licence; research availability is not project clearance",
+      "redistribution": "ReviewTrust has not established review-text, excerpt or commercial-use rights",
+      "scope": "Electronics category exists; card declares English; actual subset language unmeasured",
+      "fields": "Published schema includes text, rating, product identifiers, timestamp and verified purchase; remove user identifiers/images/links",
+      "label_provenance": "No documented deception target in the published review schema; ratings and verified purchase do not establish authenticity",
+      "profile_status": "Missingness, imbalance, duplicate rates and exact acquisition revision unmeasured; no download",
+      "raw_artifact_sha256": null,
+      "training_authorized": false
+    },
+    {
+      "source_id": "yelpchi",
+      "admission": "not_approved",
+      "release": "YelpCHI maintainer description; metadata audit only",
+      "origin": "Yelp hotel/restaurant reviews described by Rayana, citing Mukherjee et al. 2013",
+      "references": ["https://shebuti.com/yelpchi-dataset/"],
+      "permission": "Maintainer requests email for access; inspected page supplies no explicit reuse licence",
+      "redistribution": "Not established; no request sent and no data acquired",
+      "scope": "Hotels/restaurants in Chicago, outside electronics; actual language unmeasured",
+      "fields": "Maintainer describes review text, rating, timestamp, user and product information",
+      "label_provenance": "Recommended/filtered platform decisions are proxy labels, not independent deception verification",
+      "reported_class_balance": "Publisher reports 13.23% filtered; not independently measured",
+      "profile_status": "Missingness, duplicates and actual subset quality unmeasured",
+      "raw_artifact_sha256": null,
+      "training_authorized": false
+    },
+    {
+      "source_id": "ott-2011-hotel-study",
+      "admission": "not_approved",
+      "release": "ACL 2011 study; not an audit of the later v1.4 archive",
+      "origin": "Ott, Choi, Cardie and Hancock, Finding Deceptive Opinion Spam by Any Stretch of the Imagination",
+      "references": ["https://aclanthology.org/P11-1032/", "https://aclanthology.org/P11-1032.pdf"],
+      "permission": "Paper and dataset link are available; dataset reuse/excerpt terms were not established by this audit",
+      "redistribution": "Not established; no review archive downloaded",
+      "scope": "Hotel-review study, outside electronics; historical collection and elicitation shift",
+      "label_provenance": "Study contrasts prompted fictitious reviews with presumed truthful platform reviews; this task does not establish electronics target validity",
+      "reported_class_balance": "Paper reports 400 presumed truthful and 400 elicited deceptive positive reviews; not a local measurement",
+      "profile_status": "Archive version, missing metadata, duplicates and local label distribution unmeasured",
+      "raw_artifact_sha256": null,
+      "training_authorized": false
+    }
+  ]
+}

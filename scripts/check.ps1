@@ -13,6 +13,18 @@ try {
 } finally {
     Pop-Location
 }
+Push-Location $repoRoot
+try {
+    $auditPython = Join-Path $repoRoot 'api/.venv/Scripts/python.exe'
+    & $auditPython -m unittest discover -s ml/tests -v
+    if ($LASTEXITCODE -ne 0) { throw 'Offline audit tests failed.' }
+    & $auditPython -m ruff check ml --config api/pyproject.toml
+    if ($LASTEXITCODE -ne 0) { throw 'Offline audit lint failed.' }
+    & $auditPython -m ruff format --check ml --config api/pyproject.toml
+    if ($LASTEXITCODE -ne 0) { throw 'Offline audit format check failed.' }
+} finally {
+    Pop-Location
+}
 Push-Location (Join-Path $repoRoot 'web')
 try {
     foreach ($check in @('test', 'lint', 'typecheck', 'build')) {

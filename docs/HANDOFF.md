@@ -1,62 +1,73 @@
 # ReviewTrust handoff
 
-Date: 2026-10-27. Last verified step: Step 6 — Explainable Detection Signals.
+Date: 2026-10-27. Last verified step: Step 7 — Dataset Audit and Labelling System.
 
-Status: COMPLETED. Manual commit pending under the user's instruction. Step 7 has not started.
+Status: COMPLETED. Manual commit pending under the user's instruction. Step 8 has not started.
 
 ## Changes and files
 
-- Added api/app/signals.py: bounded sparse unigram/bigram TF-IDF repetition, UTC three-day timing windows, exact rating-value distributions and frozen rt-en-polarity-0.1 disagreement with conservative abstention. Uses only the standard library; no dependencies or datasets added.
-- Updated api/app/analysis.py and results.py to methodology rt-patterns-0.2.0-experimental, typed contextual values/evidence and explicit availability reasons. Repetition/incentives remain the only scoring signals. Preserve max aggregation, exact half-up rounding, coverage gates, masking and unset confidence.
-- Added api/tests/test_signals.py; updated test_analysis.py and test_api.py. Fixtures cover thresholds, UTC normalization, cosine formula, exact/near pairs, feature-cap withholding, deadlines, metadata/order invariance, cue spans, abstention, evidence caps, maximum rows and JSON/CSV equivalence.
-- Updated web/lib/api.ts, web/app/results.tsx and web/tests/page.test.tsx to validate the matching methodology and display similarity method, histogram, timing window and rating/date/polarity evidence. Contextual findings are visibly outside the score.
-- Updated AGENTS.md, README.md checklist, SPEC.md methodology/acceptance, docs/API.md, FRONTEND.md, DECISIONS.md, THREAT_MODEL.md and this file.
+- Added docs/DATASET_AUDIT.md and ml/sources.json: primary-source metadata audit of Amazon Reviews'23 Electronics, YelpCHI and the Ott ACL 2011 study. All real candidates remain not_approved because relevant permission/target/domain gates are unresolved. No archives or real review text were downloaded and no contact was made.
+- Added docs/LABELLING.md: rt-labels-0.1 target definitions, independent role votes, external-evidence requirements, proxy/uncertainty abstention, blinded review, conflict retention and versioned adjudication. No real annotation round or human-agreement statistic is claimed.
+- Added ml/audit.py: standard-library bounded normalized JSONL validation, consensus mechanics, quality counts, product/exact/near connected components, label-independent deterministic split assignment, create-only manifests and full recomputation verification. Only synthetic-fixture-v1 is admitted; training_authorized is always false.
+- Added ml/fixtures/synthetic.jsonl and synthetic.manifest.json, plus ml/tests/test_audit.py. Only project-authored synthetic text is versioned; generated research outputs stay ignored.
+- Updated ml/README.md, scripts/check.ps1 and .github/workflows/ci.yml for offline usage/tests/lint without new dependencies.
+- Updated AGENTS.md, README.md checklist, SPEC.md dataset/acceptance rules, docs/DECISIONS.md, THREAT_MODEL.md and this handoff. Public API, scoring methodology and browser implementation are unchanged.
 
 ## Actual verification
 
-`./scripts/check.ps1`: PASS (186 backend tests, 13 frontend tests, pip dependency check, Ruff lint/format, frontend lint/type check and optimized production build).
+`./scripts/check.ps1`: PASS.
 
-Final review aligned polarity evidence tokenization with the direction rule, preventing a cue inside an apostrophe-containing non-cue token from being reported. Added an emoji/offset regression. After this backend-only change: **187 backend tests passed**, Ruff lint/format PASS (14 Python files). Frontend source did not change after the successful full check.
+- pip dependency check: no broken requirements.
+- Backend pytest: 187 passed; Ruff lint/format passed (14 backend Python files).
+- Offline unittest: 13 passed, including permission rejection before record-file access, consensus/proxy/conflict behavior, exact/near threshold and transitive grouping, product separation, input/aggregate/decimal/Unicode limits, deterministic label-independent membership, giant-component diagnostics, frozen manifest equivalence, tamper detection and no-overwrite/output confinement.
+- Offline Ruff lint/format: PASS using api/pyproject.toml.
+- Frontend Vitest: 13 passed; ESLint, Next route generation/TypeScript and optimized production build: PASS.
+- CLI wrote an ignored synthetic manifest and verified it by full recomputation. The committed expected manifest also verifies. Source bytes were normalized to LF so Windows and Ubuntu checkout semantics agree with .gitattributes.
+- Document links, seven checked roadmap steps, merge-marker/whitespace checks, PowerShell script syntax and empty staging area verified locally.
 
-Live in-app browser with loopback API and web services: uploaded a 20-row synthetic CSV with ratings/dates. All five findings returned observed, timing window Jan 1–3 contained 19/20 dated reviews across a 31-day span, rating histogram showed twenty 1-star ratings, and lexicon disagreement exposed supported positive direction. Score 0 arose from intentionally repeated/incentive fixture text, not a measured authenticity judgment. Contextual-only labels, version and unvalidated confidence were visible. Browser error log was empty. Screenshot: ignored .tmp/step6-results.png. Temporary servers were stopped.
+Configured CI now includes offline tests and lint. No remote GitHub Actions run was executed or verified. No real-data validity/performance/accuracy metric was measured. No development servers were needed or started for this offline-only step.
 
-Full resource benchmarking and independent validity evaluation are still Step 10. Targeted tests are not proof of production performance, sentiment/deception accuracy, complete anonymization or comprehensive accessibility. Remote GitHub Actions was not run or verified by this step.
+## Synthetic audit result
+
+24 authored rows; 12 product groups; one cross-product exact duplicate joins two products, yielding 11 connected components, largest size 4. No near pair in the committed fixture; separate transitive and exact-threshold tests cover near grouping. Missing ratings: 8; missing dates: 6. Text lengths: 65–73 code points, 1,672 total. Synthetic scenario labels: 12 per class. Default seed 20261027 gives train 20, validation 2 and test 2, each with both scenario classes. There are no split diagnostics in this fixture. These are mechanical fixture results, not real-world data or model evaluation.
+
+Exact fixture artifact SHA-256: cfa6c6f552a1587c8f4124839e021eaa67fa440b8d54b792835a55798d5ad4ff.
+Frozen synthetic manifest SHA-256: ba609938be807bf2539ef48766f3faf54a1ee8b267a91b66a281b07785d56582.
 
 ## Integration notes and limitations
 
-- Read SPEC.md section 5 for the complete frozen algorithm and lexicon, including whole-row abstention and exact eligibility/window/tie rules. Methodology changes require another version bump and regression fixtures.
-- TF-IDF fits only within the submitted eligible rows, including duplicates. Raw TF, smoothed IDF, L2 normalization, no stemming/stop words; exact equality or cosine >=0.90 qualifies. At most 20,000 features; overflow marks repetition unavailable and withholds the score instead of pruning or returning an exact-only score. Existing timeouts return no partial analysis.
-- All-pairs sparse comparison is bounded to 124,750 pairs and checks the cooperative deadline. Full CPU/memory/concurrency measurements remain Step 10. The maximum-row fixture and feature-cap fixture are mechanical tests, not benchmarks.
-- Score.evaluated_signal_ids contains only available repetition/incentive methods; Coverage.evaluated_signal_ids also includes contextual methods. Availability of context cannot substitute for a missing scoring signal. Metadata removal cannot improve or alter the score.
-- Timing requires >=20 dates, >=80% coverage and >=28 elapsed days. Rating distribution requires >=20 ratings and >=80% coverage. Disagreement requires >=20 rated supported-direction rows and explicitly reports its denominator; it does not impose the scoring panel's five-token gate or an extra 80% gate.
-- Sparse lexical rules miss many meanings, languages, negations and sarcasm. Quoted/negated incentive phrases still count as mentions, never conduct. No classifier was trained and no confidence level is justified.
-- Evidence may return submitted rating and normalized UTC day alongside redacted text; IDs remain omitted. Phrase/cue offsets index displayed Unicode code points. Pair previews are at most ten; single-row evidence at most twenty. Truncation flags refer to omitted matching references, not every omitted pair.
-- Browser rejects methodology versions other than rt-patterns-0.2.0-experimental; deploy matching web/API builds. No stored-result migration is needed because results are not persisted. Final UI polish is Step 9.
-- Existing privacy, single-process admission/cancellation, proxy/provider retention/TLS and dependency audit limitations remain in force. ESLint 9 maintenance is still D15.
+- Read docs/DATASET_AUDIT.md, docs/LABELLING.md and ml/README.md before Step 8. Source cards distinguish published reports from unmeasured local quantities. A source download, repository wrapper licence or approval to another person is not ReviewTrust admission.
+- This is a bounded synthetic research harness, with no real-data admission override or training command. CLI source checks run before normal record processing; audit also enforces the synthetic source ID. Declaring an arbitrary file synthetic is not proof of its provenance. Real admission needs a reviewed implementation/card revision with actual rights, scope and target evidence.
+- Input limits: 10 MiB, 500 rows, 5,000 text code points each and 250,000 aggregate. Strict fields/IDs/dates/ratings/votes, duplicate IDs/keys and malformed input reject atomically. No silent truncation, filtering or independent chunk splits.
+- Product groups must already map the same underlying product across releases. Normalized equality/trigram Jaccard >=0.80 and shared product keys form one transitive graph before splitting. Undetected paraphrases and incorrect product mapping remain leakage risks; larger datasets need a reviewed global index.
+- SHA-256 seeded component buckets use expected 70/15/15 group proportions without labels or rebalancing. Empty/missing-class/incomplete-scope partitions are explicit diagnostics. Do not reroll seeds or divide components to obtain convenient metrics.
+- Scenario consensus requires at least two distinct supported unanimous role votes and evidence references; proxies, missing evidence, unknown votes and conflicts abstain. Distinct strings do not establish real reviewer independence or evidence truth. The resolver's external_documentation branch is not real-data admission authority.
+- Manifests freeze exact bytes, selected source card, pipeline/seed, record/group/text hashes, labels and membership. They omit body text/product keys/paths; hashes are not anonymization guarantees. Real data and derived artifacts remain governed by permissions/retention and ignored by Git. Only synthetic examples are committed.
+- Deployed methodology remains rt-patterns-0.2.0-experimental, confidence unset. Full resource/validity evaluation, proxy/provider privacy/security and deployment gates remain later work. ESLint 9 maintenance remains D15.
 
 ## Git and manual TODO
 
-Starting HEAD: 4e785f9 (Added review submission and initial evidence interface), branch main. The user's Step 5 commit was present and the working tree was clean before Step 6. No staging, commit or push was performed by the assistant.
+Starting HEAD: 778754a (Added versioned explainable review detection signals), branch main. The user's Step 6 commit was present and the working tree was clean before Step 7. Verified origin: https://github.com/SamarVishwakarma2006/Review-Trust.git. No staging, commit or push was performed by the assistant.
 
 Review and commit manually from the repository root:
 
 ```powershell
 git status --short
-git diff -- api web AGENTS.md README.md SPEC.md docs
-git add api web AGENTS.md README.md SPEC.md docs
+git diff -- ml scripts/check.ps1 .github/workflows/ci.yml AGENTS.md README.md SPEC.md docs
+git add ml scripts/check.ps1 .github/workflows/ci.yml AGENTS.md README.md SPEC.md docs
 git diff --cached --stat
 git diff --cached
-git commit -m "feat: add versioned explainable review detection signals"
+git commit -m "feat: add dataset audit and reproducible labelling splits"
 git status --short
 git show --stat --oneline HEAD
 ```
 
-Manual TODO: review/commit Step 6, keep the recommended model/effort, then say next. No push is required for step completion.
+Manual TODO: review/commit Step 7, keep the recommended model/effort, then say next. No push is required for step completion.
 
 ## ACTION REQUIRED — CODEX MODEL FOR NEXT STEP
 
-Current: Step 6, recommended GPT-6.1 Sol — High. Next: Step 7 — Dataset Audit and Labelling System.
+Current: Step 7, recommended GPT-6.1 Sol — High. Next: Step 8 — ML Baseline and Evaluation.
 
-KEEP GPT-6.1 Sol — High if already selected; no switch required. User controls model settings; no automatic switch is claimed. Fallback if selectable: GPT-5.6 Sol — High.
+KEEP GPT-6.1 Sol — High if already selected; no switch required. User controls model/effort; no automatic switch is claimed. Fallback if selectable: GPT-5.6 Sol — High.
 
-Complexity: Complex. Next scope: audit dataset provenance, license/permissions, electronics relevance, language, label provenance and data quality; design reproducible manifests and product/duplicate-cluster splits that prevent leakage. Do not assume sentiment/platform labels are deception ground truth; unsupported targets must lead to a documented no-train decision rather than invented labels. Test audit/split mechanics with synthetic fixtures and run the full project checks. Request manual escalation on a concrete unresolved permission/provenance, target-validity or leakage blocker. Stop until next.
+Complexity: Complex. Step 8 must explicitly assess training eligibility from the source/label audit. Current evidence supplies no admitted electronics deception target, so prepare a documented no-train outcome and justified heuristic/mechanical evaluation unless new evidence resolves those gates. Do not train on synthetic scenarios/proxy labels as authenticity truth or fabricate independent precision/recall/calibration. Test any evaluation workflow and regression invariants, preserve frozen splits/train-only learned preprocessing, and run the full repository checks. Request manual escalation on a concrete unresolved target-validity, permission/provenance or leakage blocker. Stop until next.
