@@ -28,7 +28,7 @@ The descriptive TF-IDF vocabulary is computed only within each submitted subset 
 
 [Evaluation record](EVALUATION.md) and ml/fixtures/mechanics.expected.json record 17 fixed synthetic cases against the actual production analysis function. Their expected counts, availability and arithmetic outcomes were declared as mechanics, not deception labels. Evidence references/spans, unset confidence, withheld-score semantics, metadata independence and selected redaction/feature-limit behavior were checked. Successful reproduction includes intentionally visible failure modes and does not establish detection validity.
 
-Precision, recall, F1, confusion matrix and probability calibration are null with an explicit no-independent-target reason. No percentage accuracy, real-world false-positive rate or calibration estimate is justified. No timing/memory benchmark is claimed here; full benchmarking belongs to Step 10.
+Precision, recall, F1, confusion matrix and probability calibration are null with an explicit no-independent-target reason. No percentage accuracy, real-world false-positive rate or calibration estimate is justified. The Step 8 evaluation did not measure time/memory; the separate Step 10 measurements are linked below.
 
 ## Failure modes and use limits
 
@@ -40,4 +40,10 @@ Source sampling, corpus composition, language, collection method and time shifts
 
 A new research revision must establish permitted acquisition/use/retention/excerpts, actual electronics/language relevance, independently documented target semantics, an audited annotation round, real class support and missingness, and an appropriate global product/duplicate grouping review. Freeze the target, source artifacts, splits and evaluation protocol first. Fit learned preprocessing/vocabularies on train only, tune on validation only and reserve an independent test for the declared evaluation. Changes to source admission, split logic or target validity need reviewed code/card updates; editing a source JSON flag cannot enable this runner to train.
 
-Until those gates are satisfied, continue with transparent findings and mechanical robustness checks. Public numeric-score defensibility remains subject to Steps 10 and 12. This no-train outcome completes the authorized Step 8 alternative; it does not mark later release gates complete.
+Until those gates are satisfied, continue with transparent findings and mechanical robustness checks. Step 10 explicitly did not justify public numeric scores: publish findings/coverage with the score withheld. Step 12 must enforce and verify that release policy before deployment. The current loopback development index remains experimental. These outcomes do not approve deployment.
+
+## Step 10 measured report
+
+The [benchmark](BENCHMARK.md) and [measurement record](benchmarks/20261028.json) add three fresh-process wall/CPU/RSS samples for nine authored resource cases, six fixed sampling observations and controlled admission/rate/slow-body probes. The original 17 mechanics cases and report remain unchanged. The same 40-row batch yields index 50 in full, 0 or 100 for its respective halves and 45 for the fixed seeded sample. This is sample sensitivity, not a confidence interval or real-world error estimate.
+
+NFKC expansion of a valid 756,092-byte stress request produces an 8,275,593-byte response; declared language is not language detection. No hosting budget or browser rendering claim follows from fast local API measurements. No limit was raised; resource amplification, production worker/proxy behavior, browser timings and score-release enforcement remain security/deployment gates. NO TRAIN, null supervised metrics and unset confidence are unchanged.

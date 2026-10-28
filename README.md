@@ -4,7 +4,7 @@ An electronics review-pattern analysis platform. It detects observable patterns,
 
 ## Current status
 
-Steps 1–9 are complete. The Next.js interface supports editable pasted reviews, CSV header mapping, direct API submission, cancel/reset, safe errors and a polished evidence view with explicit coverage, prioritised navigation, accessible charts and highlighted supporting text. FastAPI provides bounded analysis with experimental scoring, masking and explicit insufficient-evidence states. Backend/API tests, frontend interaction tests, static checks and the production frontend build pass locally. Dataset candidate audits and a reproducible synthetic labelling/split workflow are complete. No real dataset is admitted. Step 8 completed the documented no-train alternative and a reproducible 17-case mechanics evaluation of the production baseline; no classifier accuracy or calibration is claimed. Full benchmarking and production release remain pending. GitHub Actions is configured but has not yet been verified remotely.
+Steps 1–10 are complete. The Next.js interface supports editable pasted reviews, CSV header mapping, direct API submission, cancel/reset, safe errors and an evidence view with explicit coverage, prioritised navigation, accessible charts and highlighted supporting text. FastAPI provides bounded analysis with experimental scoring, masking and explicit insufficient-evidence states. Dataset audits, a synthetic labelling/split workflow, a no-train baseline evaluation and local resource/robustness benchmarks are complete. No real dataset, trained model, independent accuracy or calibration is available. Public numeric scores are not approved: enforce withholding before deployment. Production content, security review and deployment remain pending. Local checks pass; GitHub Actions is configured but has not been verified remotely.
 
 Read [SPEC.md](SPEC.md), [API usage/configuration](docs/API.md), [input validation interface](docs/INPUT_VALIDATION.md), [decisions](docs/DECISIONS.md), [threat model](docs/THREAT_MODEL.md), [dataset audit](docs/DATASET_AUDIT.md), [offline workflow](ml/README.md), [model card](docs/MODEL_CARD.md), [evaluation record](docs/EVALUATION.md), [engineering guidance](AGENTS.md) and [handoff](docs/HANDOFF.md).
 
@@ -102,13 +102,15 @@ Known tooling limitation: ESLint 9 is deprecated upstream but remains required b
 - [x] Step 7 — Dataset Audit and Labelling System
 - [x] Step 8 — ML Baseline and Evaluation (no-train decision and mechanical evaluation)
 - [x] Step 9 — Final Trust Score and Evidence UI
-- [ ] Step 10 — Benchmark and Model Report
+- [x] Step 10 — Benchmark and Model Report
 - [ ] Step 11 — Public Website and Product Content
 - [ ] Step 12 — Pre-Deployment Security Audit
 - [ ] Step 13 — Deployment and Production Verification
 - [ ] Step 14 — OPTIONAL URL Input (not authorized)
 
-One approved step per message. Next: Step 10 with GPT-6.1 Sol, High reasoning, after user says `next`.
+One approved step per message. Next: Step 11 with GPT-6 Luna, Medium reasoning (GPT-6.1 Sol Medium for complex implementation), after user says `next`. A real contact/dispute destination must be supplied before Step 11 can complete.
+
+Step 10: [benchmark and release report](docs/BENCHMARK.md), [measured synthetic record](docs/benchmarks/20261028.json) and [model card](docs/MODEL_CARD.md). Reproduce with `api/.venv/Scripts/python.exe -m ml.benchmark --output ml/artifacts/my-benchmark.json`; verify the committed record with `--verify docs/benchmarks/20261028.json`. No independent accuracy/calibration is available. Public numeric scores are not approved: enforce findings/coverage with score withheld before deployment, subject to Step 12 review. Local development retains the experimental index. Provider/browser performance and Unicode response amplification remain release gates.
 
 ## Git
 
