@@ -4,7 +4,7 @@ An electronics review-pattern analysis platform. It detects observable patterns,
 
 ## Current status
 
-Steps 1–10 are complete. The Next.js interface supports editable pasted reviews, CSV header mapping, direct API submission, cancel/reset, safe errors and an evidence view with explicit coverage, prioritised navigation, accessible charts and highlighted supporting text. FastAPI provides bounded analysis with experimental scoring, masking and explicit insufficient-evidence states. Dataset audits, a synthetic labelling/split workflow, a no-train baseline evaluation and local resource/robustness benchmarks are complete. No real dataset, trained model, independent accuracy or calibration is available. Public numeric scores are not approved: enforce withholding before deployment. Production content, security review and deployment remain pending. Local checks pass; GitHub Actions is configured but has not been verified remotely.
+Steps 1–11 are complete. The Next.js interface supports editable pasted reviews, CSV header mapping, direct API submission, cancel/reset, safe errors and an evidence view with explicit coverage, prioritised navigation, accessible charts and highlighted supporting text. FastAPI provides bounded analysis with experimental scoring, masking and explicit insufficient-evidence states. Dataset audits, a synthetic labelling/split workflow, a no-train baseline evaluation and local resource/robustness benchmarks are complete. No real dataset, trained model, independent accuracy or calibration is available. Public numeric scores are not approved: enforce withholding before deployment. Website content is implemented; the contact address is intentionally blank at the owner’s request. Security review and deployment remain pending. Local checks pass; GitHub Actions is configured but has not been verified remotely.
 
 Read [SPEC.md](SPEC.md), [API usage/configuration](docs/API.md), [input validation interface](docs/INPUT_VALIDATION.md), [decisions](docs/DECISIONS.md), [threat model](docs/THREAT_MODEL.md), [dataset audit](docs/DATASET_AUDIT.md), [offline workflow](ml/README.md), [model card](docs/MODEL_CARD.md), [evaluation record](docs/EVALUATION.md), [engineering guidance](AGENTS.md) and [handoff](docs/HANDOFF.md).
 
@@ -103,15 +103,23 @@ Known tooling limitation: ESLint 9 is deprecated upstream but remains required b
 - [x] Step 8 — ML Baseline and Evaluation (no-train decision and mechanical evaluation)
 - [x] Step 9 — Final Trust Score and Evidence UI
 - [x] Step 10 — Benchmark and Model Report
-- [ ] Step 11 — Public Website and Product Content
+- [x] Step 11 — Public Website and Product Content
 - [ ] Step 12 — Pre-Deployment Security Audit
 - [ ] Step 13 — Deployment and Production Verification
 - [ ] Step 14 — OPTIONAL URL Input (not authorized)
 
-One approved step per message. Next: Step 11 with GPT-6 Luna, Medium reasoning (GPT-6.1 Sol Medium for complex implementation), after user says `next`. A real contact/dispute destination must be supplied before Step 11 can complete.
+One approved step per message. Next: Step 12 with GPT-6 Astra, High reasoning, after user says `next`. Contact is intentionally blank under the user’s Step 11 override; add and verify a real destination before public launch.
 
 Step 10: [benchmark and release report](docs/BENCHMARK.md), [measured synthetic record](docs/benchmarks/20261028.json) and [model card](docs/MODEL_CARD.md). Reproduce with `api/.venv/Scripts/python.exe -m ml.benchmark --output ml/artifacts/my-benchmark.json`; verify the committed record with `--verify docs/benchmarks/20261028.json`. No independent accuracy/calibration is available. Public numeric scores are not approved: enforce findings/coverage with score withheld before deployment, subject to Step 12 review. Local development retains the experimental index. Provider/browser performance and Unicode response amplification remain release gates.
+
+## Website content and contact setup
+
+The landing page keeps the analyzer at `/#analyze`. Public information routes: `/how-it-works`, `/methodology`, `/privacy` and `/contact`. See [content and owner setup](docs/CONTENT.md). These are local development pages; indexing and public deployment remain disabled/pending review.
+
+To add your contact address later, edit `CONTACT_EMAIL` in [web/lib/contact.ts](web/lib/contact.ts), replacing the empty string with a real monitored email, then rebuild/restart the web app. Until then, the address space is blank and the page clearly states contact/dispute submission is unavailable. There is no contact form, message storage, automatic sending or invented address. The privacy page follows the same setting. Verify the configured email application/recipient and mailbox privacy practices before launch.
 
 ## Git
 
 Repository: `https://github.com/SamarVishwakarma2006/Review-Trust.git`, remote `origin`, branch `main`. The previously committed README merge markers were removed in Step 2. Commits and pushes are manual; the assistant provides commands after each step and does not stage or commit automatically.
+
+Benchmark CI repair (2026-10-28): isolated the worker test's subprocess mock so Linux processor detection can run independently. The regression and full local checks pass; the frozen benchmark record remains unchanged. See [repair details](docs/BENCHMARK.md#ci-test-repair--2026-10-28). Remote CI rerun remains unverified.

@@ -5,6 +5,7 @@ import copy
 import io
 import json
 import subprocess
+import sys
 import tempfile
 import unittest
 from pathlib import Path
@@ -97,15 +98,28 @@ class BenchmarkTests(unittest.TestCase):
             self.assertTrue(kwargs["capture_output"] and kwargs["check"])
             return subprocess.CompletedProcess(command, 0, stdout=encoded(by_id[command[4]]))
 
-        with patch.object(benchmark.subprocess, "run", side_effect=child) as run:
+        def processor():
+            # Linux platform.processor() uses a subprocess. Exercise that boundary
+            # on every host without requiring the Unix-only uname executable.
+            return subprocess.check_output(
+                [sys.executable, "-c", "print('synthetic-processor')"], text=True
+            ).strip()
+
+        # Replacing an attribute on benchmark.subprocess would mutate the shared
+        # stdlib module and intercept platform.processor()'s unrelated process.
+        with patch.object(benchmark, "subprocess") as processes:
+            run = processes.run
+            run.side_effect = child
             with patch.object(
                 benchmark, "admission_probe", new=AsyncMock(return_value=self.report["admission"])
             ):
                 with patch.object(
                     benchmark, "default_rate_probe", return_value=self.report["default_rate"]
                 ):
-                    report = benchmark.build_report()
+                    with patch.object(benchmark.platform, "processor", side_effect=processor):
+                        report = benchmark.build_report()
         self.assertEqual(run.call_count, 27)
+        self.assertEqual(report["environment"]["processor"], "synthetic-processor")
         benchmark.verify_report(report)
 
     def test_hard_child_timeout_exits_with_fixed_safe_error(self):
