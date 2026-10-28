@@ -28,3 +28,5 @@ The committed synthetic manifest freezes all row assignments and hashes. Reprodu
 ## Step 8 input
 
 No approved in-domain deception target exists after this audit. Step 8 must explicitly assess the no-train path and use justified heuristic/mechanical evaluation unless new evidence resolves both permissions and target validity. Synthetic fixtures cannot justify classifier training, probability calibration, confidence levels or an authenticity-accuracy claim. This handoff is an audit result; it does not execute Step 8 or select a model.
+
+Step 8 follow-up (2026-10-28): [model card](MODEL_CARD.md) records NO TRAIN and [evaluation record](EVALUATION.md) documents the mechanical baseline checks. The original audit evidence and source cards remain frozen.

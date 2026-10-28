@@ -4,9 +4,9 @@ An electronics review-pattern analysis platform. It detects observable patterns,
 
 ## Current status
 
-Steps 1–7 are complete. The Next.js interface supports editable pasted reviews, CSV header mapping, direct API submission, cancel/reset, safe errors and initial evidence results. FastAPI provides bounded analysis with experimental scoring, masking and explicit insufficient-evidence states. Backend/API tests, frontend interaction tests, static checks and the production frontend build pass locally. Dataset candidate audits and a reproducible synthetic labelling/split workflow are complete. No real dataset is admitted; model/evaluation and production release work remain pending. GitHub Actions is configured but has not yet been verified remotely.
+Steps 1–8 are complete. The Next.js interface supports editable pasted reviews, CSV header mapping, direct API submission, cancel/reset, safe errors and initial evidence results. FastAPI provides bounded analysis with experimental scoring, masking and explicit insufficient-evidence states. Backend/API tests, frontend interaction tests, static checks and the production frontend build pass locally. Dataset candidate audits and a reproducible synthetic labelling/split workflow are complete. No real dataset is admitted. Step 8 completed the documented no-train alternative and a reproducible 17-case mechanics evaluation of the production baseline; no classifier accuracy or calibration is claimed. Final UI, full benchmarking and production release remain pending. GitHub Actions is configured but has not yet been verified remotely.
 
-Read [SPEC.md](SPEC.md), [API usage/configuration](docs/API.md), [input validation interface](docs/INPUT_VALIDATION.md), [decisions](docs/DECISIONS.md), [threat model](docs/THREAT_MODEL.md), [dataset audit](docs/DATASET_AUDIT.md), [offline workflow](ml/README.md), [engineering guidance](AGENTS.md) and [handoff](docs/HANDOFF.md).
+Read [SPEC.md](SPEC.md), [API usage/configuration](docs/API.md), [input validation interface](docs/INPUT_VALIDATION.md), [decisions](docs/DECISIONS.md), [threat model](docs/THREAT_MODEL.md), [dataset audit](docs/DATASET_AUDIT.md), [offline workflow](ml/README.md), [model card](docs/MODEL_CARD.md), [evaluation record](docs/EVALUATION.md), [engineering guidance](AGENTS.md) and [handoff](docs/HANDOFF.md).
 
 ## Development setup
 
@@ -100,7 +100,7 @@ Known tooling limitation: ESLint 9 is deprecated upstream but remains required b
 - [x] Step 5 — Functional Next.js Application
 - [x] Step 6 — Explainable Detection Signals
 - [x] Step 7 — Dataset Audit and Labelling System
-- [ ] Step 8 — ML Baseline and Evaluation (document no-train decision if labels unsupported)
+- [x] Step 8 — ML Baseline and Evaluation (no-train decision and mechanical evaluation)
 - [ ] Step 9 — Final Trust Score and Evidence UI
 - [ ] Step 10 — Benchmark and Model Report
 - [ ] Step 11 — Public Website and Product Content
@@ -108,7 +108,7 @@ Known tooling limitation: ESLint 9 is deprecated upstream but remains required b
 - [ ] Step 13 — Deployment and Production Verification
 - [ ] Step 14 — OPTIONAL URL Input (not authorized)
 
-One approved step per message. Next: Step 8 with GPT-6.1 Sol, High reasoning, after user says `next`.
+One approved step per message. Next: Step 9 with GPT-6.1 Sol, Medium reasoning, after user says `next`.
 
 ## Git
 

@@ -1,6 +1,6 @@
 # Offline research — Step 7
 
-The source audit and bounded labelling/split workflow are implemented. No real dataset is admitted for training. Current evidence supports preparing Step 8's training decision; no classifier has been trained.
+The source audit and bounded labelling/split workflow are implemented. No real dataset is admitted for training. Step 8 completed the no-train decision and synthetic mechanics evaluation; no classifier has been trained.
 
 Read [dataset audit](../docs/DATASET_AUDIT.md), [labelling protocol](../docs/LABELLING.md) and SPEC.md section 6. Source cards are in sources.json. Only project-authored synthetic rows and their expected manifest are versioned under fixtures/.
 
@@ -41,3 +41,11 @@ Pipeline rt-audit-split-0.1.0 groups the entire admitted bounded corpus before a
 Sort records by their opaque record_id. Component hash = SHA-256 of canonical sorted member-ID JSON. Bucket = integer SHA-256 of pipeline_version:seed:component_hash modulo 100. Buckets 0–69 train, 70–84 validation, 85–99 test. A component always stays whole. These are expected group proportions, not exact row ratios; no stratification, class-driven rebalancing or seed rerolling. Labels never affect assignment. Empty partitions, missing binary support/unknown labels, unsupported language/category and missing product groups are explicit diagnostics. Do not use diagnostic-bearing splits for a supervised experiment.
 
 The manifest freezes exact input bytes, selected source card, labels, groups and test membership. --verify recomputes and compares the complete report; source-byte, label, metadata or grouping changes fail verification. --output only writes a new file under ml/artifacts/ and refuses overwrite. The committed fixture manifest tests Windows/Ubuntu repeatability with LF source bytes from .gitattributes. Training preprocessing, vocabulary selection and thresholds must be fitted/tuned using train/validation only; test stays untouched until the declared evaluation. Sampling/source/time-shift choices and all excluded records must be documented for any future real experiment.
+
+## Step 8 — No-train decision and mechanics evaluation
+
+Step 8 explicitly chose NO TRAIN because the recorded source audit supplies no admitted real electronics deception target. See [model card](../docs/MODEL_CARD.md) and [evaluation record](../docs/EVALUATION.md). No classifier, learned weights, ML package or calibration was added. The current production heuristic panel remains the baseline.
+
+Run `api/.venv/Scripts/python.exe -m ml.evaluate --output ml/artifacts/my-mechanics.json` from the repository root, then `--verify ml/artifacts/my-mechanics.json` or `--verify ml/fixtures/mechanics.expected.json`. Use the existing API environment because this runner imports the pinned production analysis dependencies; the audit/split tool itself remains standard-library only. It runs 17 authored cases, checks the existing source/manifest freeze, and writes summaries/implementation hashes without raw review bodies. Output is create-only. Decimal-fraction report comparison uses the same strict JSON decoder on both sides to preserve round-trip verification.
+
+The current runner rejects changed source admission/training flags for manual review and always reports no_train; it does not offer a training override. Precision/recall/F1/confusion matrix/calibration remain explicitly null. Mechanical expected outcomes do not establish classifier accuracy. The existing unittest discovery command and CI checks include evaluation integrity tests automatically. Full benchmark work remains Step 10.
