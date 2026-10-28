@@ -22,7 +22,7 @@ Errors use fixed HTTP-status explanations and safe structured row/field details,
 
 ## Results and accessibility
 
-Initial results show experimental or insufficient-evidence score, withholding reasons, unvalidated confidence, field and signal coverage with denominators, unavailable reasons, warnings, limitations and methodology version. Collapsible evidence displays actual returned reference pairs and escaped review text; phrase offsets are zero-based Unicode code points with an exclusive end. No HTML interpretation, risk bands or authenticity claims. Final presentation work belongs to Step 9.
+Results show experimental or insufficient-evidence score, withholding reasons, unvalidated confidence, field and signal coverage with denominators, unavailable reasons, warnings, limitations and methodology version. Collapsible evidence displays actual returned reference pairs and escaped review text; phrase offsets are zero-based Unicode code points with an exclusive end. No HTML interpretation, risk bands or authenticity claims. Step 9 adds the presentation and navigation described below.
 
 Native controls have labels, fieldsets and visible keyboard focus. Results/errors receive focus; loading/cancel/reset use a status region and failures use an alert. Responsive CSS was checked at 320px without horizontal page overflow. This is targeted verification, not a complete accessibility audit.
 
@@ -31,3 +31,15 @@ Tests: `npm --prefix web run test`. The suite covers canonical submission, dupli
 ## Step 6 signals
 
 The browser now accepts rt-patterns-0.2.0-experimental and validates the new value/evidence fields it displays. Results include TF-IDF pair method/similarity, exact rating histogram/mean/shares, UTC timing window and submitted rating/lexicon direction. Contextual findings are labelled as not affecting the score. Supporting dates/ratings may be returned in evidence; IDs remain omitted. Similarity values are not authenticity probabilities. Old methodology responses are rejected rather than rendered under new rules. API/web builds must match. See SPEC.md for the complete algorithm, eligibility gates, feature limit and frozen word inventory.
+
+## Step 9 presentation
+
+The overview places the experimental score or explicit insufficient-evidence state beside submitted/eligible counts, available method counts and unvalidated confidence. Withholding reasons are readable requirements; zero remains a numeric result, never a stand-in for unavailable. All score values use the same neutral styling. There are no traffic-light risk bands, authenticity probabilities or trained-model claims.
+
+The first three findings are navigation links, ordered by observed, unavailable, then not_observed; scoring methods come first within each state, followed by source order. The view discloses the rule and says it is not a severity rating. Links focus the matching full finding heading. All findings remain visible; missing evidence is not hidden because other signals were observed.
+
+Coverage is a native keyboard-operable eligible/evaluated radio selector with five returned method counts, denominator text and explicit gaps. Eligibility means usable method inputs; sample/coverage gates may still prevent evaluation. Bars are decorative to assistive technology and the text list carries the values. Field presence/missing counts are in a separate disclosure. Available rating distributions show exact-value bins and counts with the mean/extreme shares; unavailable methods do not show invented charts. UTC windows remain textual because the API does not provide a full time series.
+
+Supporting evidence uses native disclosures, actual returned pairs/references and truncation notes. Text and titles remain React text nodes. Returned single-review match spans use mark elements after code-point-aware splitting; overlapping spans merge, and the response boundary rejects reversed or out-of-range spans. Context stays visible, with a warning that highlighted wording does not establish conduct. Pair cosines remain distinct from authenticity probabilities.
+
+Targeted checks cover zero/withheld/100 presentation, priority stability, charts/text, missing methods, escaped HTML-like titles, emoji offsets, malformed spans and all original form/network/cancel/reset states. Live local JSON/CSV, keyboard chart/anchor/disclosure controls and responsive widths 320/1280 were checked. This is targeted accessibility verification, not a full audit. Exports/sharing/history are deferred; no dependency, scoring or model change was required.

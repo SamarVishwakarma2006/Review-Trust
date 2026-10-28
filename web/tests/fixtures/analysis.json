@@ -1,0 +1,836 @@
+{
+  "schema_version": "1",
+  "methodology_version": "rt-patterns-0.2.0-experimental",
+  "experimental": true,
+  "origin": "paste",
+  "scope": "submitted_subset",
+  "review_count": 20,
+  "score": {
+    "status": "experimental",
+    "value": 75,
+    "reason_codes": [],
+    "evaluated_signal_ids": [
+      "text_repetition",
+      "incentive_language"
+    ]
+  },
+  "coverage": {
+    "total_reviews": 20,
+    "fields": {
+      "product_id": {
+        "present": 0,
+        "missing": 20
+      },
+      "rating": {
+        "present": 20,
+        "missing": 0
+      },
+      "source_id": {
+        "present": 0,
+        "missing": 20
+      },
+      "text": {
+        "present": 20,
+        "missing": 0
+      },
+      "timestamp": {
+        "present": 20,
+        "missing": 0
+      },
+      "title": {
+        "present": 1,
+        "missing": 19
+      },
+      "verified_purchase": {
+        "present": 0,
+        "missing": 20
+      }
+    },
+    "signals": {
+      "text_repetition": {
+        "eligible": 20,
+        "evaluated": 20,
+        "total": 20
+      },
+      "incentive_language": {
+        "eligible": 20,
+        "evaluated": 20,
+        "total": 20
+      },
+      "review_burst": {
+        "eligible": 20,
+        "evaluated": 20,
+        "total": 20
+      },
+      "rating_distribution": {
+        "eligible": 20,
+        "evaluated": 20,
+        "total": 20
+      },
+      "rating_text_disagreement": {
+        "eligible": 0,
+        "evaluated": 0,
+        "total": 20
+      }
+    },
+    "evaluated_signal_ids": [
+      "text_repetition",
+      "incentive_language",
+      "review_burst",
+      "rating_distribution"
+    ],
+    "unavailable_signal_ids": [
+      "rating_text_disagreement"
+    ],
+    "source_declaration": "paste",
+    "scope": "unverified_subset",
+    "redactions": {
+      "email": 0,
+      "phone": 0
+    }
+  },
+  "confidence": {
+    "status": "not_validated",
+    "level": null,
+    "explanation": "Confidence has not been validated; inspect evidence coverage instead."
+  },
+  "findings": [
+    {
+      "signal_id": "text_repetition",
+      "value": {
+        "matching_reviews": 5,
+        "eligible_reviews": 20,
+        "fraction": 0.25
+      },
+      "assessment": "observed",
+      "explanation": "5 of 20 eligible reviews share exact normalized text or word unigram/bigram TF-IDF cosine >=0.90 with another review. Templates, product descriptions and duplicate ingestion are alternative explanations. Similarity is fitted only within this subset and is not an authenticity probability.",
+      "supporting_review_refs": [
+        "r1",
+        "r2",
+        "r3",
+        "r4",
+        "r5"
+      ],
+      "evidence": [
+        {
+          "review_refs": [
+            "r1",
+            "r2"
+          ],
+          "matches": [],
+          "match_kind": "exact",
+          "similarity": 1.0,
+          "rating": null,
+          "timestamp_day": null,
+          "polarity": null
+        },
+        {
+          "review_refs": [
+            "r1",
+            "r3"
+          ],
+          "matches": [],
+          "match_kind": "exact",
+          "similarity": 1.0,
+          "rating": null,
+          "timestamp_day": null,
+          "polarity": null
+        },
+        {
+          "review_refs": [
+            "r1",
+            "r4"
+          ],
+          "matches": [],
+          "match_kind": "exact",
+          "similarity": 1.0,
+          "rating": null,
+          "timestamp_day": null,
+          "polarity": null
+        },
+        {
+          "review_refs": [
+            "r1",
+            "r5"
+          ],
+          "matches": [],
+          "match_kind": "exact",
+          "similarity": 1.0,
+          "rating": null,
+          "timestamp_day": null,
+          "polarity": null
+        },
+        {
+          "review_refs": [
+            "r2",
+            "r3"
+          ],
+          "matches": [],
+          "match_kind": "exact",
+          "similarity": 1.0,
+          "rating": null,
+          "timestamp_day": null,
+          "polarity": null
+        },
+        {
+          "review_refs": [
+            "r2",
+            "r4"
+          ],
+          "matches": [],
+          "match_kind": "exact",
+          "similarity": 1.0,
+          "rating": null,
+          "timestamp_day": null,
+          "polarity": null
+        },
+        {
+          "review_refs": [
+            "r2",
+            "r5"
+          ],
+          "matches": [],
+          "match_kind": "exact",
+          "similarity": 1.0,
+          "rating": null,
+          "timestamp_day": null,
+          "polarity": null
+        },
+        {
+          "review_refs": [
+            "r3",
+            "r4"
+          ],
+          "matches": [],
+          "match_kind": "exact",
+          "similarity": 1.0,
+          "rating": null,
+          "timestamp_day": null,
+          "polarity": null
+        },
+        {
+          "review_refs": [
+            "r3",
+            "r5"
+          ],
+          "matches": [],
+          "match_kind": "exact",
+          "similarity": 1.0,
+          "rating": null,
+          "timestamp_day": null,
+          "polarity": null
+        },
+        {
+          "review_refs": [
+            "r4",
+            "r5"
+          ],
+          "matches": [],
+          "match_kind": "exact",
+          "similarity": 1.0,
+          "rating": null,
+          "timestamp_day": null,
+          "polarity": null
+        }
+      ],
+      "matching_review_count": 5,
+      "references_truncated": false,
+      "required_fields": [
+        "text"
+      ],
+      "coverage": {
+        "eligible": 20,
+        "evaluated": 20,
+        "total": 20
+      },
+      "availability_reason": null,
+      "methodology_version": "rt-patterns-0.2.0-experimental"
+    },
+    {
+      "signal_id": "incentive_language",
+      "value": {
+        "matching_reviews": 1,
+        "eligible_reviews": 20,
+        "fraction": 0.05
+      },
+      "assessment": "observed",
+      "explanation": "1 of 20 eligible reviews mention a listed incentive phrase. Mentions, quotations and negations do not establish participation or manipulation.",
+      "supporting_review_refs": [
+        "r7"
+      ],
+      "evidence": [
+        {
+          "review_refs": [
+            "r7"
+          ],
+          "matches": [
+            {
+              "phrase": "received this product for free",
+              "start": 56,
+              "end": 86
+            }
+          ],
+          "match_kind": null,
+          "similarity": null,
+          "rating": null,
+          "timestamp_day": null,
+          "polarity": null
+        }
+      ],
+      "matching_review_count": 1,
+      "references_truncated": false,
+      "required_fields": [
+        "text"
+      ],
+      "coverage": {
+        "eligible": 20,
+        "evaluated": 20,
+        "total": 20
+      },
+      "availability_reason": null,
+      "methodology_version": "rt-patterns-0.2.0-experimental"
+    },
+    {
+      "signal_id": "review_burst",
+      "value": {
+        "matching_reviews": 10,
+        "eligible_reviews": 20,
+        "fraction": 0.5,
+        "window_start": "2020-01-01",
+        "window_end": "2020-01-03",
+        "observed_span_days": 31
+      },
+      "assessment": "observed",
+      "explanation": "The busiest inclusive three-day UTC window, 2020-01-01 to 2020-01-03, contains 10/20 dated reviews. The 50% threshold is met. Ties use the earliest observed start day. Launches, promotions and selected samples can explain timing concentrations.",
+      "supporting_review_refs": [
+        "r1",
+        "r2",
+        "r3",
+        "r4",
+        "r5",
+        "r6",
+        "r7",
+        "r8",
+        "r9",
+        "r10"
+      ],
+      "evidence": [
+        {
+          "review_refs": [
+            "r1"
+          ],
+          "matches": [],
+          "match_kind": null,
+          "similarity": null,
+          "rating": null,
+          "timestamp_day": "2020-01-01",
+          "polarity": null
+        },
+        {
+          "review_refs": [
+            "r2"
+          ],
+          "matches": [],
+          "match_kind": null,
+          "similarity": null,
+          "rating": null,
+          "timestamp_day": "2020-01-01",
+          "polarity": null
+        },
+        {
+          "review_refs": [
+            "r3"
+          ],
+          "matches": [],
+          "match_kind": null,
+          "similarity": null,
+          "rating": null,
+          "timestamp_day": "2020-01-01",
+          "polarity": null
+        },
+        {
+          "review_refs": [
+            "r4"
+          ],
+          "matches": [],
+          "match_kind": null,
+          "similarity": null,
+          "rating": null,
+          "timestamp_day": "2020-01-01",
+          "polarity": null
+        },
+        {
+          "review_refs": [
+            "r5"
+          ],
+          "matches": [],
+          "match_kind": null,
+          "similarity": null,
+          "rating": null,
+          "timestamp_day": "2020-01-01",
+          "polarity": null
+        },
+        {
+          "review_refs": [
+            "r6"
+          ],
+          "matches": [],
+          "match_kind": null,
+          "similarity": null,
+          "rating": null,
+          "timestamp_day": "2020-01-01",
+          "polarity": null
+        },
+        {
+          "review_refs": [
+            "r7"
+          ],
+          "matches": [],
+          "match_kind": null,
+          "similarity": null,
+          "rating": null,
+          "timestamp_day": "2020-01-01",
+          "polarity": null
+        },
+        {
+          "review_refs": [
+            "r8"
+          ],
+          "matches": [],
+          "match_kind": null,
+          "similarity": null,
+          "rating": null,
+          "timestamp_day": "2020-01-01",
+          "polarity": null
+        },
+        {
+          "review_refs": [
+            "r9"
+          ],
+          "matches": [],
+          "match_kind": null,
+          "similarity": null,
+          "rating": null,
+          "timestamp_day": "2020-01-01",
+          "polarity": null
+        },
+        {
+          "review_refs": [
+            "r10"
+          ],
+          "matches": [],
+          "match_kind": null,
+          "similarity": null,
+          "rating": null,
+          "timestamp_day": "2020-01-01",
+          "polarity": null
+        }
+      ],
+      "matching_review_count": 10,
+      "references_truncated": false,
+      "required_fields": [
+        "timestamp"
+      ],
+      "coverage": {
+        "eligible": 20,
+        "evaluated": 20,
+        "total": 20
+      },
+      "availability_reason": null,
+      "methodology_version": "rt-patterns-0.2.0-experimental"
+    },
+    {
+      "signal_id": "rating_distribution",
+      "value": {
+        "rated_reviews": 20,
+        "histogram": [
+          {
+            "rating": 2.0,
+            "count": 2
+          },
+          {
+            "rating": 5.0,
+            "count": 18
+          }
+        ],
+        "mean": 4.7,
+        "low_share": 0.1,
+        "high_share": 0.9
+      },
+      "assessment": "observed",
+      "explanation": "2/20 ratings are at most 2 and 18/20 are at least 4; mean 4.7000. The 90% concentration threshold is met. Product quality and sample selection can explain this.",
+      "supporting_review_refs": [
+        "r1",
+        "r2",
+        "r3",
+        "r4",
+        "r5",
+        "r6",
+        "r7",
+        "r8",
+        "r9",
+        "r10",
+        "r11",
+        "r12",
+        "r13",
+        "r14",
+        "r15",
+        "r16",
+        "r17",
+        "r18"
+      ],
+      "evidence": [
+        {
+          "review_refs": [
+            "r1"
+          ],
+          "matches": [],
+          "match_kind": null,
+          "similarity": null,
+          "rating": 5.0,
+          "timestamp_day": null,
+          "polarity": null
+        },
+        {
+          "review_refs": [
+            "r2"
+          ],
+          "matches": [],
+          "match_kind": null,
+          "similarity": null,
+          "rating": 5.0,
+          "timestamp_day": null,
+          "polarity": null
+        },
+        {
+          "review_refs": [
+            "r3"
+          ],
+          "matches": [],
+          "match_kind": null,
+          "similarity": null,
+          "rating": 5.0,
+          "timestamp_day": null,
+          "polarity": null
+        },
+        {
+          "review_refs": [
+            "r4"
+          ],
+          "matches": [],
+          "match_kind": null,
+          "similarity": null,
+          "rating": 5.0,
+          "timestamp_day": null,
+          "polarity": null
+        },
+        {
+          "review_refs": [
+            "r5"
+          ],
+          "matches": [],
+          "match_kind": null,
+          "similarity": null,
+          "rating": 5.0,
+          "timestamp_day": null,
+          "polarity": null
+        },
+        {
+          "review_refs": [
+            "r6"
+          ],
+          "matches": [],
+          "match_kind": null,
+          "similarity": null,
+          "rating": 5.0,
+          "timestamp_day": null,
+          "polarity": null
+        },
+        {
+          "review_refs": [
+            "r7"
+          ],
+          "matches": [],
+          "match_kind": null,
+          "similarity": null,
+          "rating": 5.0,
+          "timestamp_day": null,
+          "polarity": null
+        },
+        {
+          "review_refs": [
+            "r8"
+          ],
+          "matches": [],
+          "match_kind": null,
+          "similarity": null,
+          "rating": 5.0,
+          "timestamp_day": null,
+          "polarity": null
+        },
+        {
+          "review_refs": [
+            "r9"
+          ],
+          "matches": [],
+          "match_kind": null,
+          "similarity": null,
+          "rating": 5.0,
+          "timestamp_day": null,
+          "polarity": null
+        },
+        {
+          "review_refs": [
+            "r10"
+          ],
+          "matches": [],
+          "match_kind": null,
+          "similarity": null,
+          "rating": 5.0,
+          "timestamp_day": null,
+          "polarity": null
+        },
+        {
+          "review_refs": [
+            "r11"
+          ],
+          "matches": [],
+          "match_kind": null,
+          "similarity": null,
+          "rating": 5.0,
+          "timestamp_day": null,
+          "polarity": null
+        },
+        {
+          "review_refs": [
+            "r12"
+          ],
+          "matches": [],
+          "match_kind": null,
+          "similarity": null,
+          "rating": 5.0,
+          "timestamp_day": null,
+          "polarity": null
+        },
+        {
+          "review_refs": [
+            "r13"
+          ],
+          "matches": [],
+          "match_kind": null,
+          "similarity": null,
+          "rating": 5.0,
+          "timestamp_day": null,
+          "polarity": null
+        },
+        {
+          "review_refs": [
+            "r14"
+          ],
+          "matches": [],
+          "match_kind": null,
+          "similarity": null,
+          "rating": 5.0,
+          "timestamp_day": null,
+          "polarity": null
+        },
+        {
+          "review_refs": [
+            "r15"
+          ],
+          "matches": [],
+          "match_kind": null,
+          "similarity": null,
+          "rating": 5.0,
+          "timestamp_day": null,
+          "polarity": null
+        },
+        {
+          "review_refs": [
+            "r16"
+          ],
+          "matches": [],
+          "match_kind": null,
+          "similarity": null,
+          "rating": 5.0,
+          "timestamp_day": null,
+          "polarity": null
+        },
+        {
+          "review_refs": [
+            "r17"
+          ],
+          "matches": [],
+          "match_kind": null,
+          "similarity": null,
+          "rating": 5.0,
+          "timestamp_day": null,
+          "polarity": null
+        },
+        {
+          "review_refs": [
+            "r18"
+          ],
+          "matches": [],
+          "match_kind": null,
+          "similarity": null,
+          "rating": 5.0,
+          "timestamp_day": null,
+          "polarity": null
+        }
+      ],
+      "matching_review_count": 18,
+      "references_truncated": false,
+      "required_fields": [
+        "rating"
+      ],
+      "coverage": {
+        "eligible": 20,
+        "evaluated": 20,
+        "total": 20
+      },
+      "availability_reason": null,
+      "methodology_version": "rt-patterns-0.2.0-experimental"
+    },
+    {
+      "signal_id": "rating_text_disagreement",
+      "value": null,
+      "assessment": "unavailable",
+      "explanation": "At least 20 rated reviews with supported wording are required; found 0. Lexicon rt-en-polarity-0.1; negated, mixed, quoted, conditional and unsupported wording abstains. Sarcasm and aspect differences remain limitations. This is a contextual rule, not a validated sentiment or deception classifier.",
+      "supporting_review_refs": [],
+      "evidence": [],
+      "matching_review_count": 0,
+      "references_truncated": false,
+      "required_fields": [
+        "rating",
+        "text"
+      ],
+      "coverage": {
+        "eligible": 0,
+        "evaluated": 0,
+        "total": 20
+      },
+      "availability_reason": "insufficient_supported_polarity",
+      "methodology_version": "rt-patterns-0.2.0-experimental"
+    }
+  ],
+  "reviews": [
+    {
+      "ref": "r1",
+      "text": "This repeated review describes a useful screen.",
+      "title": "<script>synthetic title</script>"
+    },
+    {
+      "ref": "r2",
+      "text": "This repeated review describes a useful screen.",
+      "title": null
+    },
+    {
+      "ref": "r3",
+      "text": "This repeated review describes a useful screen.",
+      "title": null
+    },
+    {
+      "ref": "r4",
+      "text": "This repeated review describes a useful screen.",
+      "title": null
+    },
+    {
+      "ref": "r5",
+      "text": "This repeated review describes a useful screen.",
+      "title": null
+    },
+    {
+      "ref": "r6",
+      "text": "The screen and battery work for synthetic sample 5.",
+      "title": null
+    },
+    {
+      "ref": "r7",
+      "text": "\ud83d\ude00 The screen and battery work for synthetic sample 6. I received this product for free.",
+      "title": null
+    },
+    {
+      "ref": "r8",
+      "text": "The screen and battery work for synthetic sample 7.",
+      "title": null
+    },
+    {
+      "ref": "r9",
+      "text": "The screen and battery work for synthetic sample 8.",
+      "title": null
+    },
+    {
+      "ref": "r10",
+      "text": "The screen and battery work for synthetic sample 9.",
+      "title": null
+    },
+    {
+      "ref": "r11",
+      "text": "The screen and battery work for synthetic sample 10.",
+      "title": null
+    },
+    {
+      "ref": "r12",
+      "text": "The screen and battery work for synthetic sample 11.",
+      "title": null
+    },
+    {
+      "ref": "r13",
+      "text": "The screen and battery work for synthetic sample 12.",
+      "title": null
+    },
+    {
+      "ref": "r14",
+      "text": "The screen and battery work for synthetic sample 13.",
+      "title": null
+    },
+    {
+      "ref": "r15",
+      "text": "The screen and battery work for synthetic sample 14.",
+      "title": null
+    },
+    {
+      "ref": "r16",
+      "text": "The screen and battery work for synthetic sample 15.",
+      "title": null
+    },
+    {
+      "ref": "r17",
+      "text": "The screen and battery work for synthetic sample 16.",
+      "title": null
+    },
+    {
+      "ref": "r18",
+      "text": "The screen and battery work for synthetic sample 17.",
+      "title": null
+    },
+    {
+      "ref": "r19",
+      "text": "The screen and battery work for synthetic sample 18. <img src=x onerror=alert(1)>",
+      "title": null
+    },
+    {
+      "ref": "r20",
+      "text": "The screen and battery work for synthetic sample 19.",
+      "title": null
+    }
+  ],
+  "warnings": [
+    {
+      "code": "unverified_subset",
+      "column_positions": []
+    }
+  ],
+  "limitations": [
+    "Experimental, unvalidated pattern index; not a probability of authenticity or product quality.",
+    "Only the submitted unverified subset is analyzed; it may not represent all product reviews.",
+    "A score of 100 means neither included pattern was observed in eligible text, not verified authenticity.",
+    "Text similarity and a limited English phrase list miss many patterns and can produce false positives.",
+    "Email/phone masking is incomplete and may hide benign numbers; remove personal details before submitting.",
+    "Names and other personal details may remain in review text; no full anonymization is claimed.",
+    "Masking and normalization may remove distinctions between reviews; redaction placeholders are excluded from matching.",
+    "Timing, rating distribution and lexicon disagreement are contextual only and do not change the score. Genuine launches, product quality and sarcasm can explain findings.",
+    "Similarity depends on this submission vocabulary; the feature cap withholds repetition and the score instead of silently pruning terms."
+  ]
+}

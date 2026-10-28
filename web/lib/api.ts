@@ -49,7 +49,15 @@ export function isResult(x: unknown): x is AnalysisResult {
     typeof r.ref === "string" && /^r[1-9]\d*$/.test(r.ref) && typeof r.text === "string" && (r.title === null || typeof r.title === "string"))) return false;
   const refs = new Set(x.reviews.map(r => r.ref));
   if (refs.size !== x.review_count) return false;
-  const validRefs = (v: unknown) => strings(v) && v.every(ref => refs.has(ref));
+  const validRefs = (v: unknown): v is string[] => strings(v) && v.every(ref => refs.has(ref));
+  const lengths = new Map<string, number>(x.reviews.map(r => [r.ref, Array.from(r.text).length]));
+  const validMatches = (matches: unknown, reviewRefs: unknown): boolean => {
+    if (!validRefs(reviewRefs)) return false;
+    const matchedRefs = reviewRefs;
+    return Array.isArray(matches) && matches.every(m => object(m) && typeof m.phrase === "string" &&
+      count(m.start) && count(m.end) && m.end > m.start && matchedRefs.length === 1 &&
+      m.end <= (lengths.get(matchedRefs[0]) ?? -1));
+  };
   return Array.isArray(x.findings) && x.findings.length <= 20 && x.findings.every(f => object(f) &&
     typeof f.signal_id === "string" && validValue(f.value, f.signal_id) && ["observed", "not_observed", "unavailable"].includes(String(f.assessment)) &&
     typeof f.explanation === "string" && (f.availability_reason === null || typeof f.availability_reason === "string") &&
@@ -58,8 +66,7 @@ export function isResult(x: unknown): x is AnalysisResult {
     Array.isArray(f.evidence) && f.evidence.every(e => object(e) && validRefs(e.review_refs) &&
       (e.match_kind == null || e.match_kind === "exact" || e.match_kind === "tfidf") &&
       (e.similarity == null || range(e.similarity, 0, 1)) && (e.rating == null || range(e.rating, 1, 5)) &&
-      (e.timestamp_day == null || day(e.timestamp_day)) && (e.polarity == null || e.polarity === "positive" || e.polarity === "negative") && Array.isArray(e.matches) &&
-      e.matches.every(m => object(m) && typeof m.phrase === "string" && count(m.start) && count(m.end)))) &&
+      (e.timestamp_day == null || day(e.timestamp_day)) && (e.polarity == null || e.polarity === "positive" || e.polarity === "negative") && validMatches(e.matches, e.review_refs))) &&
     Array.isArray(x.warnings) && x.warnings.every(w => object(w) && typeof w.code === "string" && Array.isArray(w.column_positions) && w.column_positions.every(count));
 }
 

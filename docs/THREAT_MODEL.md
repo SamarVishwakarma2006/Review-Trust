@@ -53,3 +53,9 @@ Product and detected duplicate connected components stay within one partition. F
 No real source admission, data acquisition, learned-model loading, training or probability calibration was introduced. The evaluator rejects source admission/training flag changes for a new review rather than treating them as authority. It recomputes the Step 7 freeze before exercising controlled production cases. Catalog/manifest/implementation hashes support reproducibility, not truth, rights or anonymization.
 
 Authored scenarios expose template/negation/paraphrase/sarcasm/masking limitations and abstention gates but cannot establish real-world validity. Report fields keep classifier metrics unavailable and confidence unset. Bounded verification reads, create-only artifact outputs, safe fixed failures, decimal-aware JSON comparison and no raw-review report content have integrity tests. Existing API transport/admission/cancellation controls and all production release gates remain in force; the offline evaluator does not certify those deployments.
+
+## Step 9 results boundary
+
+The results view keeps experimental/withheld states, unvalidated confidence, evidence gaps and a disclosed non-severity navigation order visible. Chart bars have denominator text and native keyboard controls; no probability or risk-band interpretation is added. Raw review/title content remains escaped React text, including highlighted matches. Code-point range splitting and response checks reject reversed/out-of-bounds offsets rather than trusting them as markup. No export/sharing/persistence or new chart dependency was introduced.
+
+Synthetic API-shaped fixtures cover unsafe-looking text, Unicode highlights, chart values and unavailable states. Live loopback JSON/CSV, keyboard focus/controls and mobile overflow were targeted checks, not a comprehensive rendering/security/accessibility certification. Provider, dependency, resource and production release gates remain open.
