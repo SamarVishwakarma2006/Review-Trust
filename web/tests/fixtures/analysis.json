@@ -1,14 +1,16 @@
 {
   "schema_version": "1",
-  "methodology_version": "rt-patterns-0.2.0-experimental",
+  "methodology_version": "rt-patterns-0.3.0-experimental",
   "experimental": true,
   "origin": "paste",
   "scope": "submitted_subset",
   "review_count": 20,
   "score": {
-    "status": "experimental",
-    "value": 75,
-    "reason_codes": [],
+    "status": "withheld",
+    "value": null,
+    "reason_codes": [
+      "public_score_not_validated"
+    ],
     "evaluated_signal_ids": [
       "text_repetition",
       "incentive_language"
@@ -244,7 +246,7 @@
         "total": 20
       },
       "availability_reason": null,
-      "methodology_version": "rt-patterns-0.2.0-experimental"
+      "methodology_version": "rt-patterns-0.3.0-experimental"
     },
     {
       "signal_id": "incentive_language",
@@ -288,7 +290,7 @@
         "total": 20
       },
       "availability_reason": null,
-      "methodology_version": "rt-patterns-0.2.0-experimental"
+      "methodology_version": "rt-patterns-0.3.0-experimental"
     },
     {
       "signal_id": "review_burst",
@@ -437,7 +439,7 @@
         "total": 20
       },
       "availability_reason": null,
-      "methodology_version": "rt-patterns-0.2.0-experimental"
+      "methodology_version": "rt-patterns-0.3.0-experimental"
     },
     {
       "signal_id": "rating_distribution",
@@ -690,7 +692,7 @@
         "total": 20
       },
       "availability_reason": null,
-      "methodology_version": "rt-patterns-0.2.0-experimental"
+      "methodology_version": "rt-patterns-0.3.0-experimental"
     },
     {
       "signal_id": "rating_text_disagreement",
@@ -711,7 +713,7 @@
         "total": 20
       },
       "availability_reason": "insufficient_supported_polarity",
-      "methodology_version": "rt-patterns-0.2.0-experimental"
+      "methodology_version": "rt-patterns-0.3.0-experimental"
     }
   ],
   "reviews": [

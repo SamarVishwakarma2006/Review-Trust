@@ -19,7 +19,7 @@ from app.results import (
     SignalCoverage,
     WarningInfo,
 )
-from app.schemas import REVIEW_FIELDS
+from app.schemas import MAX_TEXT_LENGTH, MAX_TOTAL_TEXT_LENGTH, REVIEW_FIELDS
 from app.signals import burst, disagreement, rating_distribution, repetition
 
 INCENTIVE_PHRASES = (
@@ -99,10 +99,20 @@ def analyze(batch: IngestedReviews, deadline: float) -> AnalysisResult:
     eligible_rows = []
     incentives = []
     eligible = 0
+    display_length = 0
     for ref, review in zip(batch.review_refs, batch.submission.reviews, strict=True):
         check_deadline(deadline)
         text = redact(review.text, counts)
         title = redact(review.title, counts) if review.title is not None else None
+        display_length += len(text) + len(title or "")
+        if (
+            len(text) > MAX_TEXT_LENGTH
+            or len(title or "") > 300
+            or display_length > MAX_TOTAL_TEXT_LENGTH
+        ):
+            raise ReviewInputError(
+                "normalized_text_limit", "Normalized text exceeds the allowed limits.", 413
+            )
         display.append(DisplayReview(ref=ref, text=text, title=title))
         normalized = " ".join(_PLACEHOLDER.sub(" ", text).casefold().split())
         if len(_WORDS.findall(normalized)) < 5:

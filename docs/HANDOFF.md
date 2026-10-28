@@ -1,102 +1,67 @@
 # ReviewTrust handoff
 
-Date: 2026-10-28. Last verified step: Step 11 — Public Website and Product Content.
+Date: 2026-10-28. Last verified step: Step 12 — Pre-Deployment Security Audit.
 
 ## REVIEWTRUST STEP HANDOFF
 
-Step/status: Step 11 COMPLETED under the user's explicit contact deferral. Manual commit pending. Step 12 has not started. No public deployment or numeric publication is approved.
+Step/status: Step 12 COMPLETED — repository audit, fixes and local verification. Public launch remains NO GO until the owner/provider gates in docs/SECURITY_AUDIT.md are resolved. Step 13 has not started. No staging, commit, push, provider change, mailbox message or deployment occurred.
 
-The user answered the contact question: leave the space blank so it can be edited afterward. This overrides the earlier requirement to provide a destination before Step 11 completion. The address is intentionally empty, and contact/dispute submission is explicitly unavailable until configured. A working monitored destination remains required before public launch.
+Ponytail full was explicitly requested and applied: reuse native controls, centralize public policy, bound/reject instead of truncate, retain pure offline arithmetic, add no dependency or speculative service. Existing pending Step 11 content/navigation/contact work was preserved.
 
 ## Changes and files
 
-- Updated web/app/page.tsx with an educational landing hero, evidence context, preparation guide, analyzer anchor and development release limits. Home stays synchronous and composes the unchanged client Analyzer.
-- Updated web/app/layout.tsx with a shared brand, primary/footer navigation and first-focusable skip link. Noindex stays in force. Updated globals.css for the responsive landing/content layout, native links, readable contact space and focus behavior without dependencies.
-- Added static routes web/app/how-it-works/page.tsx, methodology/page.tsx, privacy/page.tsx and contact/page.tsx. Each has a title, one h1/main and focusable #content. Content covers actual input/CSV flow, five signals, gaps, no-train decision, index limits, privacy and dispute guidance without authenticity/accuracy claims.
-- Added web/lib/contact.ts. CONTACT_EMAIL is an empty string by user request. Contact shows an empty address space plus unavailable messaging, with no mailto/form. A real owner address and rebuild enable only an escaped/encoded email link; privacy text derives its configured state from the same constant. No email was sent or mailbox verified.
-- Added web/tests/content.test.tsx with five content/navigation/contact checks. Scoped the existing personal-data warning selector in page.test.tsx to the analyzer region because the landing page also includes a preparation warning; no warning or analyzer behavior was removed.
-- Added docs/CONTENT.md with owner setup and actual checks. Updated AGENTS.md, README.md, SPEC.md, docs/FRONTEND.md, DECISIONS.md (D54–D56), THREAT_MODEL.md and this handoff.
+- api/app/main.py: both JSON and CSV HTTP routes unconditionally return null score with public_score_not_validated, preserving sample reasons/findings/coverage. Serialization and its 2 MiB UTF-8 cap occur inside worker admission, followed by a deadline check.
+- api/app/analysis.py: enforce post-NFKC/masking limits (5,000 text, 300 title, 250,000 aggregate code points), rejecting atomically with normalized_text_limit. No evidence truncation. api/app/results.py versions the contract to rt-patterns-0.3.0-experimental and adds withheld/public policy status/reason. security.py adds API CSP/no-referrer. Existing native multipart caps were reused rather than duplicated.
+- api/tests/test_security_audit.py adds seven cases for JSON/CSV withholding, text/title/aggregate normalization overflow, serialized response overflow and native part-header rejection. test_api.py updates public value/version expectations. Library arithmetic tests remain.
+- web/proxy.ts uses fresh native Next nonce/strict-dynamic support with exact trusted API connect origin and no-store/nosniff/DENY/no-referrer/permissions headers. layout.tsx selects dynamic rendering; page remains synchronous. Production script policy has no unsafe-inline/eval; bounded chart styles retain a documented inline style exception.
+- web/lib/api.ts rejects numeric scores, old methodology and missing public policy; presentation.ts explains withholding; results.tsx never renders numeric values, even from direct forged props. Public methodology/how-it-works/home copy and API-shaped fixtures/tests are updated. web/tests/security.test.tsx adds two policy/contract checks, discovered through the existing .test.tsx convention.
+- ml/benchmark.py advances resource runner to 0.2.0, requires public withholding and expects normalized stress rejection. New current docs/benchmarks/20261028-step12.json is reviewed and source-bound. The original Step 10 record is preserved as historical; it intentionally cannot verify against changed source. Tests now bind the new record, retaining the repaired mock isolation.
+- All seventeen authored mechanics case objects and cross-case relations were verified unchanged before refreshing ml/fixtures/mechanics.expected.json version/source bindings. No training, real dataset, threshold tuning, independent accuracy or confidence claim.
+- docs/SECURITY_AUDIT.md records scope, findings/fixes, evidence, dependency scan and actual launch gates. docs/security/dependencies-20261028.json records exact queried pins, npm metadata and manifest hashes. Updated README, SPEC, AGENTS, API, FRONTEND, CONTENT, EVALUATION, MODEL_CARD, BENCHMARK, THREAT_MODEL, DECISIONS (D57–D61), ml/README and this handoff.
 
 ## Actual verification
 
-`./scripts/check.ps1`: PASS.
+Final ./scripts/check.ps1: PASS.
 
 - pip check: no broken requirements.
-- Backend pytest: 187 passed; Ruff lint/format PASS (14 files).
-- Offline unittest: 28 passed; Ruff lint/format PASS (eight files). Step 8 mechanics and Step 10 measurement integrity checks remain passing; their source-bound artifacts are unchanged.
-- Frontend: 25 passed across three files. New tests verify internal route/hash targets, one main/h1, focusable skip target, shared navigation, retained noindex, blank/configured contact behavior and method/privacy limits.
-- ESLint, route generation/TypeScript and optimized production build: PASS. Home and four information routes prerender successfully.
+- Backend: 194 pytest tests passed; Ruff lint/format passed (15 Python files).
+- Offline: 28 unittest tests passed; Ruff lint/format passed (eight files). Seventeen mechanical outcomes/relations unchanged. Current mechanical reference hash: d467ae0e55089b2818942bc71ee37c0372ac9de7b0d0d8eaff16e3fb36d6a769.
+- Frontend: 27 tests across four files passed; ESLint, TypeScript/route types and production build passed. All page routes now dynamically render with Proxy for per-request nonces.
+- New resource measurement: 27 fresh-process samples plus controlled admission/rate/slow-body and fixed sampling checks passed. Current record hash: 33b84a98302b5c5f412f38f05822f66689ba6e8a359369bd4c8120919cbc7d6a. Stored record verification passed. Largest accepted observed child peak RSS: 60.43 MiB; dense median 1,437.28 ms. Former 756,092-byte expansion input now returns 413 normalized_text_limit, 175 bytes, median 46.66 ms. Measurements are local absolute observations, not hosting capacity guarantees.
+- npm audit: zero reported advisories (548 total dependency entries in metadata). OSV querybatch: 25 exact Python pins, no returned advisories/pagination. Package metadata only sent; runtime/development pins unchanged. This is point-in-time database evidence, not supply-chain certification. ESLint 9 maintenance debt retained without forcing peer resolution.
+- Live production HTTP: five pages and 404 have fresh CSP nonces matching every script tag and no-store semantics. Browser hydration, CSV mapping and 500-row/250,000-point accepted Unicode CSV submission pass; Score withheld, 500 rows and confidence unset are displayed. At 320px, client/scroll widths both 305px, including 20 expanded supporting-review text blocks. Browser error log empty. Temporary viewport/tab/API/web server cleaned up. No browser timing/host capacity or remote CI claim.
 
-Targeted live loopback production-browser verification:
+Early development checks corrected invocation directory, remaining version literal, reused the parser's existing native header limit, restored UTF-8 test encoding and followed .test.tsx discovery. The final full check is passing. No failed expectation was hidden or old benchmark silently overwritten.
 
-- Tab reaches Skip to content first. Return focuses main#content. Analyze your reviews moves/focuses #analyze.
-- A single authored synthetic English electronics review reaches the existing API and returns insufficient evidence with unset confidence. Result focus and Reset remain functional.
-- Home and every information route at a 320px viewport had equal document client/scroll widths of 305px, one main and no horizontal overflow. Contact visibly showed blank address space, unavailability and zero mail links.
-- At 1280px, document client/scroll widths were both 1265px; the home hero used approximately 560.7px/431.3px columns. Mobile/desktop screenshots were inspected. Temporary viewport override was reset.
-- Browser error log empty. Temporary production web server, API and browser tab were stopped/closed. No email sent. These are targeted interaction/layout checks, not comprehensive accessibility/security certification or provider-performance measurements.
+## Launch gates and residual limits
 
-An initial existing test had an ambiguous text selector after the landing page added a second privacy warning; the selector was scoped to the actual analyzer. Final checks pass. No backend, scoring methodology, input/result contract, source admission, research fixture or dependency changed. No remote CI or deployment was run or verified.
+Public launch is NOT approved. CONTACT_EMAIL stays intentionally blank at the user's request; a monitored destination/mailbox and privacy practices must be verified before launch. No address was invented or email sent.
 
-## Limits and manual owner setup
+Step 13 must verify actual owned HTTPS API/web origins, rebuilt public API URL/CORS, TLS/HSTS/header preservation, one-process/instance topology, proxy/edge identity and quotas, CPU/RAM/connection/read/write timeouts under deployed load, provider body/APM/crash/access-log/buffer capture and actual retention/access policy, contact readiness and remote CI. Keep noindex until approval. Do not infer provider settings from application tests or add workers without shared limits. If these cannot be demonstrated, stop public release. No speculative distributed service was added.
 
-- Edit CONTACT_EMAIL in web/lib/contact.ts, replacing the empty string with a real monitored email, then rebuild/restart the web app. Verify the recipient, email-client behavior and mailbox access/retention practices before launch. The blank user-requested state does not imply operational support. Synthetic configured-state tests do not validate a real mailbox.
-- The privacy page describes current implementation. Raw CSV bytes, including unmapped columns, reach the API; common masking is incomplete. No app persistence/analytics was added. Memory cleanup is not secure erasure; provider/proxy/mailbox retention remains unverified.
-- NO TRAIN and unvalidated confidence remain explicit. Public numeric scores are NOT APPROVED. Step 12 must enforce and test findings/coverage with score withheld across API/UI before deployment. Current local development arithmetic remains unchanged; explanatory copy does not enforce the release policy.
-- Review normalization/response amplification, worst-case browser rendering, dependency/runtime security, provider resource/logging limits and proxy/disconnect behavior before approval. Step 13 must verify the actual deployment. Keep noindex until release gates are resolved.
+Masking is incomplete; names and personal details can remain. CORS is not authentication; local peer hashing/admission do not solve distributed abuse. Cooperative deadlines do not preempt every native library call. Inline chart styles remain an explicit CSP exception; production scripts remain strict. NO TRAIN, no independent target/metrics and unset confidence persist. See the audit for evidence and limits.
 
 ## Git and manual TODO
 
-Starting HEAD: e8eac83 (Added reproducible resource benchmarks and score release decision), branch main. The user's Step 10 commit was present and the tree was clean before Step 11. Verified origin: https://github.com/SamarVishwakarma2006/Review-Trust.git. No staging, commit or push was performed by the assistant.
-
-Review and commit manually from repository root:
+Starting HEAD: 5afd244 (isolated benchmark worker mocks from platform subprocesses), branch main. Verified origin: https://github.com/SamarVishwakarma2006/Review-Trust.git. Step 11 files were already pending/uncommitted at start; the current audited workspace includes them. No assistant staging/commit/push. Commands below include that pending Step 11 work alongside Step 12; inspect the complete cached diff before committing. Split manually if separate historical commits are required.
 
 ```powershell
 git status --short
-git diff -- web AGENTS.md README.md SPEC.md docs
-git add web AGENTS.md README.md SPEC.md docs
+git diff
+git add AGENTS.md README.md SPEC.md api docs ml web
 git diff --cached --stat
 git diff --cached
-git commit -m "feat: add public information pages and editable blank contact destination"
+git commit -m "security: audit analyzer and enforce findings-only responses"
 git status --short
 git show --stat --oneline HEAD
 ```
 
-Manual TODO: review/commit Step 11, add contact later as requested, manually select the next recommended model/effort, then say next. No push is required for completion.
+Manual TODO: review and commit the audited changes, confirm remote CI through your normal manual publishing workflow, select the next model/effort and say next. Owner/provider launch gates remain required. No push is required for completing this local audit.
 
 ## ACTION REQUIRED — CODEX MODEL FOR NEXT STEP
 
-Current: Step 11, roadmap recommendation GPT-6 Luna — Medium (GPT-6.1 Sol — Medium for complex implementation). Next: Step 12 — Pre-Deployment Security Audit.
+Current: Step 12, recommended GPT-6 Astra — High. Next: Step 13 — Deployment and Production Verification. Complexity: Moderate, with hard owner/provider security gates.
 
-SWITCH manually to GPT-6 Astra — High if selectable. User performs the switch; no automatic switch is claimed. Fallback if selectable: GPT-6.1 Sol — High. Complexity: Critical.
+SWITCH manually to GPT-6.1 Sol — Medium if selectable. Fallback: GPT-5.6 Sol — Medium if selectable. No model switch is claimed. Rationale: bounded provider setup/integration and smoke verification using the completed security contract. Retain Ponytail full: native provider controls and existing tooling first, no speculative infrastructure.
 
-Rationale: the next step requires security judgment across untrusted input, rendering, dependencies, resource amplification, abuse controls, privacy and release configuration. Scope: audit/fix the application and dependencies, enforce the public numeric-score withholding decision across API/UI, review normalized/output bounds and worst-case rendering, data/logging/proxy/provider configuration and the intentionally deferred contact prerequisite. Do not deploy in this step. Test exploit/regression cases, deadlines/cancellation/admission, safe rendering/logging and privacy boundaries; intentionally refresh versioned fixtures/benchmarks only where changed semantics or bound implementation require it; run the full suite. Request manual escalation on a concrete unresolved security, provider or resource blocker. Stop until next.
-
-## REVIEWTRUST STEP HANDOFF — Step 10 CI repair, 2026-10-28
-
-Status: DONE. This is the specifically requested repair, not the start of Step 12. Existing uncommitted Step 11 work was preserved.
-
-Root cause reproduced: the worker test patched run on the shared subprocess module. On Linux, platform.processor invokes uname -p through subprocess.check_output/run, so the benchmark-worker assertion rejected processor discovery during build_report. In this checkout line 107 called build_report, before verify_report. A local reproduction selecting Python's subprocess-based processor lookup failed with the unexpected uname command.
-
-Fix: ml/tests/test_benchmark.py patches only the benchmark module's subprocess binding. Its processor regression invokes a real small Python subprocess independently of the 27 mocked worker calls, then verifies the generated report. README.md and docs/BENCHMARK.md record the repair. No production benchmark/API/scoring/dependency or frozen measurement file changed; no replacement baseline was generated.
-
-Actual verification: seven targeted benchmark tests PASS; stored benchmark verification PASS; ./scripts/check.ps1 PASS (187 backend pytest, 28 offline unittest, 25 frontend tests, pip check, Ruff lint/format, ESLint, TypeScript and optimized production build). Existing Step 11 content/analyzer tests pass. New remote GitHub Actions execution is not claimed.
-
-Git: branch main, starting HEAD e8eac83 (Added reproducible resource benchmarks and score release decision). Step 11 files were already uncommitted. No staging, commit or push performed. Review the fix and select only repair notes from README.md/this handoff when committing separately:
-
-```powershell
-git status --short
-git diff -- ml/tests/test_benchmark.py docs/BENCHMARK.md
-git add ml/tests/test_benchmark.py docs/BENCHMARK.md
-git add -p README.md docs/HANDOFF.md
-git diff --cached --stat
-git diff --cached
-git commit -m "test: isolate benchmark worker mocks from platform subprocesses"
-git show --stat --oneline HEAD
-git status --short
-```
-
-Manual TODO: review/commit the repair; preserve or separately commit the pending Step 11 changes. In interactive staging use split/edit as needed to select repair notes only; do not accidentally include the earlier Step 11 rewrite. Confirm a new remote CI run after your normal manual publishing workflow. No push was authorized or performed.
-
-## ACTION REQUIRED — CODEX MODEL FOR NEXT STEP (unchanged roadmap)
-
-Current task: Step 10 CI repair; recommendation GPT-6.1 Sol — Medium. Next roadmap step remains Step 12 — Pre-Deployment Security Audit; complexity Critical. Manually SWITCH to GPT-6 Astra — High if selectable; fallback GPT-6.1 Sol — High. No switch is claimed. Rationale: security/resource/release review requires deeper audit judgment. Scope/testing: untrusted input, dependencies, rendering, logging/privacy, abuse/deadline/cancellation controls, Unicode output amplification, public-score withholding and provider configuration, with exploit regressions and full checks. Escalate a concrete unresolved security/provider blocker. Step 12 was not started. Stop until next.
+Next scope/testing: resolve monitored contact and actual provider/origin/logging/retention/proxy/resource requirements before public exposure; prepare concrete configuration, verify remote CI and then authorized deployment/integration, health/error/CORS/HTTPS/header/nonce/withholding/cancellation/resource smoke tests. Never claim unavailable provider evidence or public approval. Escalate a concrete unresolved security, proxy/edge, retention or capacity issue to GPT-6 Astra — High (fallback GPT-6.1 Sol — High). Do not start optional Step 14. Stop until next.

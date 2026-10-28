@@ -1,6 +1,6 @@
 # Model card — no-train baseline
 
-Decision date: 2026-10-28. Step 8 outcome: **NO TRAIN**. No learned model or weights were produced. The baseline remains the deterministic production panel under rt-patterns-0.2.0-experimental. This card describes an unvalidated experimental system, not an authenticity classifier.
+Decision date: 2026-10-28. Step 8 outcome: **NO TRAIN**. No learned model or weights were produced. The baseline remains the deterministic production panel under rt-patterns-0.3.0-experimental (offline arithmetic retained; public HTTP values withheld). This card describes an unvalidated experimental system, not an authenticity classifier.
 
 ## Evidence for the decision
 
@@ -47,3 +47,8 @@ Until those gates are satisfied, continue with transparent findings and mechanic
 The [benchmark](BENCHMARK.md) and [measurement record](benchmarks/20261028.json) add three fresh-process wall/CPU/RSS samples for nine authored resource cases, six fixed sampling observations and controlled admission/rate/slow-body probes. The original 17 mechanics cases and report remain unchanged. The same 40-row batch yields index 50 in full, 0 or 100 for its respective halves and 45 for the fixed seeded sample. This is sample sensitivity, not a confidence interval or real-world error estimate.
 
 NFKC expansion of a valid 756,092-byte stress request produces an 8,275,593-byte response; declared language is not language detection. No hosting budget or browser rendering claim follows from fast local API measurements. No limit was raised; resource amplification, production worker/proxy behavior, browser timings and score-release enforcement remain security/deployment gates. NO TRAIN, null supervised metrics and unset confidence are unchanged.
+
+
+## Step 12 security update
+
+Both HTTP routes and the browser now enforce public numeric withholding, without an opt-out. The offline library retains the unvalidated formula and all seventeen authored outcomes. Methodology 0.3.0 adds normalized/masked text budgets and bounded public serialization. The prior expansion stress input now returns a safe 413 instead of an 8.3 MB response. Source/version bindings were intentionally reviewed/refreshed; current measurements are in [Step 12 record](benchmarks/20261028-step12.json), with the original Step 10 record preserved as historical. [Security audit](SECURITY_AUDIT.md) records local fixes and unresolved owner/provider launch gates. NO TRAIN, unsupported independent metrics and unset confidence remain unchanged.

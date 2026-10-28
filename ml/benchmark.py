@@ -30,7 +30,7 @@ from fastapi.testclient import TestClient  # noqa: E402
 # isort: on
 
 ROOT = Path(__file__).resolve().parent.parent
-VERSION = "rt-resource-benchmark-0.1.0"
+VERSION = "rt-resource-benchmark-0.2.0"
 LIMIT = 1_048_576
 CASE_IDS = (
     "small_20",
@@ -106,7 +106,7 @@ def request_case(case_id):
         route, media = "/v1/analyze/csv", "multipart/form-data; boundary=bench"
     elif case_id in {"json_exact_1mib", "over_1mib"}:
         body += b" " * (LIMIT - len(body) + (case_id == "over_1mib"))
-    return body, route, media, 413 if case_id == "over_1mib" else 200
+    return body, route, media, 413 if case_id in {"over_1mib", "unicode_expansion"} else 200
 
 
 def peak_rss():
@@ -165,9 +165,16 @@ def measure(case_id):
         "peak_rss_bytes": peak_rss(),
         "response_bytes": len(response.content),
         "score": result.get("score", {}).get("value"),
+        "public_score_withheld": expected != 200
+        or (
+            result["score"]["value"] is None
+            and "public_score_not_validated" in result["score"]["reason_codes"]
+        ),
         "confidence_unset": result.get("confidence", {}).get("level") is None,
         "availability": {f["signal_id"]: f["assessment"] for f in result.get("findings", [])},
-        "passed": response.status_code == expected,
+        "passed": response.status_code == expected
+        and result.get("score", {}).get("value") is None
+        and (case_id != "unicode_expansion" or code == "normalized_text_limit"),
     }
 
 
@@ -385,7 +392,7 @@ def build_report():
         "default_rate": rate,
         "training_decision": mechanics["training_decision"],
         "supervised_metrics": mechanics["supervised_metrics"],
-        "public_numeric_score_decision": "not_approved_withhold_before_public_release",
+        "public_numeric_score_decision": "withheld_at_http_boundary",
         "passed": all(case["summary"]["passed"] for case in results)
         and admission["passed"]
         and rate["passed"],
@@ -431,6 +438,13 @@ def verify_report(report):
                 sample["status"] == status and sample["passed"] and sample["confidence_unset"],
                 "benchmark_outcome_changed",
             )
+            require(
+                sample["score"] is None and sample["public_score_withheld"], "public_score_exposed"
+            )
+            if case["case_id"] == "unicode_expansion":
+                require(
+                    sample["error_code"] == "normalized_text_limit", "normalization_guard_failed"
+                )
             for metric in ("wall_seconds", "cpu_seconds"):
                 value = sample[metric]
                 require(
@@ -450,7 +464,7 @@ def verify_report(report):
         "target_changed",
     )
     require(
-        report["public_numeric_score_decision"] == "not_approved_withhold_before_public_release",
+        report["public_numeric_score_decision"] == "withheld_at_http_boundary",
         "release_decision_changed",
     )
     require(report["admission"]["passed"] and report["default_rate"]["passed"], "probe_failed")

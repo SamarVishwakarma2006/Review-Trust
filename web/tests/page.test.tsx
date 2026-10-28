@@ -1,13 +1,13 @@
-import { act, cleanup, fireEvent, render, screen, waitFor } from "@testing-library/react";
+import { act, cleanup, fireEvent, render, screen, waitFor, within } from "@testing-library/react";
 import { afterEach, expect, test, vi } from "vitest";
 import Home from "../app/page";
 import { analyze, apiBase, isResult, type AnalysisResult } from "../lib/api";
 import { csvHeaders, pasteBody } from "../lib/input";
 
 const result: AnalysisResult = {
-  schema_version: "1", methodology_version: "rt-patterns-0.2.0-experimental", experimental: true,
+  schema_version: "1", methodology_version: "rt-patterns-0.3.0-experimental", experimental: true,
   scope: "submitted_subset", origin: "paste", review_count: 1,
-  score: { status: "insufficient_evidence", value: null, reason_codes: ["too_few_reviews"] },
+  score: { status: "insufficient_evidence", value: null, reason_codes: ["public_score_not_validated", "too_few_reviews"] },
   confidence: { status: "not_validated", level: null, explanation: "Inspect evidence coverage instead." },
   coverage: { fields: { text: { present: 1, missing: 0 } }, redactions: { email: 0, phone: 0 } },
   findings: [{ value: { matching_reviews: 1, eligible_reviews: 1, fraction: 1 }, signal_id: "incentive_language", assessment: "observed", explanation: "A phrase mention was observed.",
@@ -25,7 +25,7 @@ afterEach(() => { cleanup(); vi.unstubAllGlobals(); vi.restoreAllMocks(); vi.use
 test("requires declaration, keeps duplicate editable entries and sends canonical JSON without credentials", async () => {
   const fetcher = vi.fn().mockResolvedValue(response()); vi.stubGlobal("fetch", fetcher);
   render(<Home />);
-  expect(screen.getByText(/Remove names/)).toBeTruthy();
+  expect(within(screen.getByRole("region", { name: "Analyze a review subset" })).getByText(/Remove names/)).toBeTruthy();
   submit(); expect(await screen.findByRole("alert")).toBeTruthy(); expect(fetcher).not.toHaveBeenCalled();
   fill(); fireEvent.click(screen.getByRole("button", { name: "Add review" }));
   fireEvent.change(screen.getByLabelText("Review 2"), { target: { value: "This synthetic display is bright and clear." } });
@@ -61,13 +61,13 @@ test("cancel and reset abort active requests and ignore late completion", async 
 });
 
 test("network failure retains input; retry succeeds with an experimental score", async () => {
-  vi.stubGlobal("fetch", vi.fn().mockRejectedValueOnce(new TypeError("private network details")).mockResolvedValueOnce(response({ ...result, score: { status: "experimental", value: 100, reason_codes: [] } })));
+  vi.stubGlobal("fetch", vi.fn().mockRejectedValueOnce(new TypeError("private network details")).mockResolvedValueOnce(response({ ...result, score: { status: "withheld", value: null, reason_codes: ["public_score_not_validated"] } })));
   render(<Home />); fill(); submit();
   expect((await screen.findByRole("alert")).textContent).toContain("Could not reach");
   expect(screen.queryByText(/private network details/)).toBeNull();
   expect((screen.getByLabelText("Review 1") as HTMLTextAreaElement).value).toContain("synthetic");
-  submit(); await screen.findByText("100 / 100");
-  expect(screen.getByText(/Even 100 does not verify authenticity/)).toBeTruthy();
+  submit(); await screen.findByText("Score withheld");
+  expect(screen.getByText(/Numeric scores are withheld/)).toBeTruthy();
 });
 
 test("CSV preview maps explicit columns and sends file plus metadata with fixed filename", async () => {

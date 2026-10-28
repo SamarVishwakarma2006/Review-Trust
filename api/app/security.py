@@ -189,6 +189,8 @@ class RequestBoundary:
                 headers["Cache-Control"] = "no-store"
                 headers["X-Request-ID"] = request_id
                 headers["X-Content-Type-Options"] = "nosniff"
+                headers["Content-Security-Policy"] = "default-src 'none'; frame-ancestors 'none'"
+                headers["Referrer-Policy"] = "no-referrer"
                 if origin in self.settings.allowed_origins:
                     headers["Access-Control-Allow-Origin"] = origin
                     headers["Access-Control-Expose-Headers"] = "X-Request-ID, Retry-After"

@@ -11,7 +11,7 @@ afterEach(cleanup);
 test("real API fixture remains compatible; three summary links follow disclosed priority", () => {
   expect(isResult(fixture)).toBe(true);
   render(<Results result={result} />);
-  expect(screen.getByText("75 / 100")).toBeTruthy();
+  expect(screen.getByText("Score withheld")).toBeTruthy();
   const list = screen.getByRole("list", { name: "Priority findings" });
   // Scope via the ordered list so full-finding headings do not masquerade as summary links.
   expect(list.tagName).toBe("OL");
@@ -65,15 +65,18 @@ test("supporting text and Unicode match spans render as escaped highlighted cont
   expect(markedParts(text, [{ start: 999, end: 1000 }])).toEqual([{ text, marked: false }]);
 });
 
-test("zero and withheld scores stay distinct; unavailable reasons are actionable", () => {
-  render(<Results result={{ ...result, score: { ...result.score, value: 0 } }} />);
-  expect(screen.getByText("0 / 100")).toBeTruthy();
+test("numeric results are rejected and never rendered; unavailable reasons are actionable", () => {
+  const forged = { ...result, score: { ...result.score, value: 0 } } as unknown as AnalysisResult;
+  expect(isResult(forged)).toBe(false);
+  render(<Results result={forged} />);
+  expect(screen.getByText("Score withheld")).toBeTruthy();
+  expect(screen.queryByText("0 / 100")).toBeNull();
   cleanup();
   render(<Results result={{ ...result, score: { ...result.score, value: null, status: "insufficient_evidence", reason_codes: ["low_text_coverage"] } }} />);
   expect(screen.getByText("Insufficient evidence")).toBeTruthy();
   expect(screen.queryByText("0 / 100")).toBeNull();
   expect(screen.getByText("At least 80% of submitted reviews need eligible text.")).toBeTruthy();
-  expect(screen.getByText(/Even 100 does not verify authenticity/)).toBeTruthy();
+  expect(screen.getByText(/Numeric scores are withheld/)).toBeTruthy();
 });
 
 test("presentation priority preserves the source and treats gaps separately from absent observations", () => {

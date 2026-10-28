@@ -6,7 +6,7 @@ export type SignalValue = FractionEvidence | BurstEvidence | RatingEvidence;
 export type AnalysisResult = {
   schema_version: "1"; methodology_version: string; experimental: true;
   scope: "submitted_subset"; origin: "paste" | "csv"; review_count: number;
-  score: { status: "experimental" | "insufficient_evidence"; value: number | null; reason_codes: string[] };
+  score: { status: "withheld" | "insufficient_evidence"; value: null; reason_codes: string[] };
   confidence: { status: "not_validated"; level: null; explanation: string };
   coverage: { fields: Record<string, { present: number; missing: number }>; redactions: Record<string, number> };
   findings: { value: SignalValue | null; signal_id: string; assessment: "observed" | "not_observed" | "unavailable";
@@ -36,11 +36,11 @@ function validValue(value: unknown, signal: unknown): boolean {
 
 // Validate consumed fields before rendering; unknown fields are not displayed.
 export function isResult(x: unknown): x is AnalysisResult {
-  if (!object(x) || x.schema_version !== "1" || x.methodology_version !== "rt-patterns-0.2.0-experimental" || x.experimental !== true ||
+  if (!object(x) || x.schema_version !== "1" || x.methodology_version !== "rt-patterns-0.3.0-experimental" || x.experimental !== true ||
     x.scope !== "submitted_subset" || !["paste", "csv"].includes(String(x.origin)) || !count(x.review_count) || x.review_count < 1 || x.review_count > 500) return false;
   const s = x.score, c = x.confidence, coverage = x.coverage;
-  if (!object(s) || !strings(s.reason_codes) || !(s.status === "insufficient_evidence" && s.value === null ||
-    s.status === "experimental" && count(s.value) && s.value <= 100) ||
+  if (!object(s) || !strings(s.reason_codes) || !s.reason_codes.includes("public_score_not_validated") ||
+    !["withheld", "insufficient_evidence"].includes(String(s.status)) || s.value !== null ||
     !object(c) || c.status !== "not_validated" || c.level !== null || typeof c.explanation !== "string" ||
     !object(coverage) || !object(coverage.fields) || !object(coverage.redactions) ||
     !Object.values(coverage.fields).every(v => object(v) && count(v.present) && count(v.missing)) ||

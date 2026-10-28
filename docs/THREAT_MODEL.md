@@ -67,3 +67,16 @@ The benchmark only builds authored synthetic requests and reports aggregate outc
 Controlled two-slot load, default rate, slow-body timeout and existing cancellation tests cover local behavior. No provider, proxy, TLS, worker-process aggregate, sustained-load or public browser performance certification is implied. Local response amplification is observed: a 756,092-byte Unicode request expands to an 8,275,593-byte response after normalization. Step 12 must review response/normalized-text bounds and worst-case browser rendering against deployment memory budgets before approval. Existing raw-input caps stay in force; this step does not silently truncate or change methodology.
 
 Public numeric scoring is not approved by the synthetic evidence. Step 12 must enforce and test score withholding across API/UI before public deployment; development-only experimental numbers must not be mistaken for that release policy already being implemented. Findings/coverage and explicit unvalidated confidence remain the intended public behavior. No new training authorization or source admission occurred.
+
+## Step 11 content and contact boundary
+
+The information pages retain noindex and identify the service as a development preview. They describe observable patterns without accusations, classifier accuracy, validated confidence or purchasing advice. Static privacy copy distinguishes raw upload bytes from canonical filtering and acknowledges incomplete masking, ordinary memory cleanup and unverified provider retention. No new data collection, cookie/analytics integration, proxy or API route was introduced.
+
+The owner explicitly deferred the contact destination. A blank constant produces blank address space plus unavailable messaging, with no mailto/form or implied operational dispute intake. A configured owner address will be escaped as text and encoded in a fixed-subject mailto link; sending remains an explicit action in the visitor's email client. Synthetic tests cover both states. This is not proof that a mailbox is monitored or messages delivered. Add/check the real destination and mailbox privacy/retention practices before public launch.
+
+Targeted keyboard, mobile/desktop, navigation and live analyzer checks complement the existing suite without certifying complete accessibility/security. Public numeric-score withholding still requires API/UI enforcement in Step 12. Unicode response amplification, worst-case rendering, provider limits/logs, proxy behavior and deployment verification remain open release gates. No public deployment was performed.
+
+
+## Step 12 security update
+
+The local audit is complete: see [SECURITY_AUDIT.md](SECURITY_AUDIT.md). Both HTTP routes and UI enforce null scores; only the offline library retains numerical arithmetic. Methodology 0.3.0 adds normalized/masked text limits and 2 MiB serialization rejection. Next pages now render dynamically with fresh script nonces, no-store and anti-framing/referrer/permissions headers; inline chart styles remain documented. Escaped evidence, cancellation/reset and intentional blank contact are preserved. Current benchmark is benchmarks/20261028-step12.json; the original Step 10 record is historical. Contact setup and actual provider TLS/proxy/logging/retention/edge/resource verification remain prerequisites to public launch. No deployment was performed.

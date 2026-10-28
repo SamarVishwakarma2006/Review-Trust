@@ -43,3 +43,16 @@ Coverage is a native keyboard-operable eligible/evaluated radio selector with fi
 Supporting evidence uses native disclosures, actual returned pairs/references and truncation notes. Text and titles remain React text nodes. Returned single-review match spans use mark elements after code-point-aware splitting; overlapping spans merge, and the response boundary rejects reversed or out-of-range spans. Context stays visible, with a warning that highlighted wording does not establish conduct. Pair cosines remain distinct from authenticity probabilities.
 
 Targeted checks cover zero/withheld/100 presentation, priority stability, charts/text, missing methods, escaped HTML-like titles, emoji offsets, malformed spans and all original form/network/cancel/reset states. Live local JSON/CSV, keyboard chart/anchor/disclosure controls and responsive widths 320/1280 were checked. This is targeted accessibility verification, not a full audit. Exports/sharing/history are deferred; no dependency, scoring or model change was required.
+
+## Step 11 — Website content
+
+The synchronous home page keeps Analyzer at #analyze and adds an educational landing page. Shared layout navigation/footer link /how-it-works, /methodology, /privacy and /contact. Each page has one main/h1 and a focusable #content target for the keyboard skip link. Native links and responsive CSS require no new package. Static metadata provides route titles; noindex remains in force during development.
+
+User override: the contact destination is intentionally blank for later editing, so this does not block Step 11 completion. Edit CONTACT_EMAIL in web/lib/contact.ts and rebuild/restart when a real monitored address is available. Blank state leaves an empty address box with accessible and visible unavailability, no mailto and no fake form. Configured state creates only an explicit encoded mailto link; privacy text reads the same constant. Tests use synthetic addresses, never a real message. Contact is not operational until owner setup; a working destination remains required before public launch.
+
+See [content and owner setup](CONTENT.md) for routes, privacy/claim boundaries, actual checks and launch prerequisites. Five content tests complement the existing analyzer/result checks. API/methodology/contracts and the frozen research records are unchanged. Public numeric withholding, production retention/provider budgets and security/deployment approval remain later gates; copy does not enforce them.
+
+
+## Step 12 security update
+
+The local audit is complete: see [SECURITY_AUDIT.md](SECURITY_AUDIT.md). Both HTTP routes and UI enforce null scores; only the offline library retains numerical arithmetic. Methodology 0.3.0 adds normalized/masked text limits and 2 MiB serialization rejection. Next pages now render dynamically with fresh script nonces, no-store and anti-framing/referrer/permissions headers; inline chart styles remain documented. Escaped evidence, cancellation/reset and intentional blank contact are preserved. Current benchmark is benchmarks/20261028-step12.json; the original Step 10 record is historical. Contact setup and actual provider TLS/proxy/logging/retention/edge/resource verification remain prerequisites to public launch. No deployment was performed.

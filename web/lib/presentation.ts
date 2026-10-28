@@ -8,6 +8,7 @@ export const labels: Record<string, string> = {
   rating_text_disagreement: "Rating and wording",
 };
 export const withholding: Record<string, string> = {
+  public_score_not_validated: "Public numeric scores have not been validated. Inspect findings and coverage instead.",
   too_few_reviews: "At least 20 submitted reviews are needed for a score.",
   too_few_eligible_reviews: "At least 20 reviews need five remaining word tokens each.",
   low_text_coverage: "At least 80% of submitted reviews need eligible text.",

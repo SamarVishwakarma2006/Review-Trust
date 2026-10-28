@@ -57,3 +57,8 @@ Run `api/.venv/Scripts/python.exe -m ml.benchmark --output ml/artifacts/my-bench
 `--verify docs/benchmarks/20261028.json` checks the reviewed stored record against source/request hashes, summaries, outcomes and current no-train mechanics. It does not rerun noisy timings; missing memory is null. The report records the default settings, exact installed package versions and source freeze before/after the run. New output is create-only under ignored ml/artifacts/; an intentional reviewed synthetic snapshot lives in docs/benchmarks/. The existing unittest/CI workflow discovers benchmark integrity tests without adding a speed threshold on shared CI hosts.
 
 See [benchmark report](../docs/BENCHMARK.md) for actual measurements, sampling failures, Unicode response amplification, browser/provider gaps and the decision to withhold numeric scores before public release. No model, dataset, dependency or production methodology changed. The frozen Step 8 report remains valid.
+
+
+## Step 12 current records
+
+Verify `docs/benchmarks/20261028-step12.json` after the reviewed resource/public-policy version change. The old Step 10 JSON is retained as historical evidence and does not verify against changed code. Methodology 0.3.0 retains all seventeen mechanical outcomes/relations and the same offline arithmetic; the mechanics reference's version/source bindings were intentionally refreshed only after equality checks. HTTP resource samples now all require null public scores and the normalization stress case must reject with normalized_text_limit. No new dataset, training authorization or dependency was added. See ../docs/SECURITY_AUDIT.md.

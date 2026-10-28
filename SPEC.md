@@ -1,7 +1,7 @@
 # ReviewTrust specification
 
-Status: Steps 1–10 implemented through the interface, dataset audit, no-train evaluation and local synthetic resource/robustness benchmark. No real dataset is admitted. Public numeric scores are not approved; enforce withholding before deployment. Content, security and deployment steps remain pending. Date: 2026-10-28.
-Implemented methodology: `rt-patterns-0.2.0-experimental`, superseding the exact-only `rt-patterns-0.1.0-experimental`. Repetition (exact or TF-IDF near match) and the incentive phrase list contribute; timing, ratings and lexicon disagreement remain contextual only. All numerical thresholds are engineering hypotheses, not empirically validated authenticity thresholds.
+Status: Steps 1–12 implemented through the interface, dataset audit, no-train evaluation, local synthetic benchmark and website content. No real dataset is admitted. Public numeric scores are not approved; enforce withholding before deployment. Contact is intentionally blank by user override. Local security audit/fixes are complete; owner/provider gates and deployment remain pending. Date: 2026-10-28.
+Implemented methodology: `rt-patterns-0.3.0-experimental`, superseding `rt-patterns-0.2.0-experimental` for normalized-output limits and public score withholding. The underlying offline arithmetic/signals are unchanged. Repetition (exact or TF-IDF near match) and the incentive phrase list contribute; timing, ratings and lexicon disagreement remain contextual only. All numerical thresholds are engineering hypotheses, not empirically validated authenticity thresholds.
 
 ## 1. Product and boundaries
 
@@ -76,7 +76,7 @@ Step 4 multipart: required file, schema_version/category/language text fields; o
 
 `AnalysisResult`: schema_version, methodology_version, experimental=true, origin, scope="submitted_subset", review_count, score, coverage, confidence, findings, reviews (redacted text/title and local references only), limitations.
 
-`score`: status=`experimental` or `insufficient_evidence`, value=integer 0–100 or null, reason_codes[], evaluated_signal_ids[]. Never encode a withheld score as zero. `confidence`: status=`not_validated`, level=null, explanation. No Low/Medium/High confidence until a separate validation protocol justifies it.
+Public `score`: status=`withheld` or `insufficient_evidence`, value=null, reason_codes[] always includes public_score_not_validated, evaluated_signal_ids[]. Only the offline library permits experimental integer values under its existing evidence gates. Never encode a withheld score as zero. `confidence`: status=`not_validated`, level=null, explanation. No Low/Medium/High confidence until a separate validation protocol justifies it.
 
 `coverage`: total reviews, per-field present/missing counts, per-signal eligible/evaluated counts, evaluated and unavailable signal IDs, source declaration, unverified-subset limitation. Display counts with denominators, not a single accuracy-like coverage percentage.
 
@@ -123,9 +123,9 @@ Contextual values extend the response: burst value adds window_start/window_end/
 
 Only text_repetition and incentive_language contribute to the initial experimental index. Metadata-dependent and sentiment signals remain contextual until validation justifies inclusion. This fixed panel prevents missing timestamps/ratings from silently improving a score or correlated signals from stacking arbitrary penalties.
 
-For eligible submissions: `penalty = max(d, i)`; `Trust Score = floor(100 * (1 - penalty) + 0.5)`. Fractions use their explicitly reported eligible denominators. Max aggregation deliberately avoids adding correlated evidence; it is a transparent conservative prototype, not learned weighting. No risk-band cutoffs are proposed. A value of 100 means neither included pattern was observed in eligible text, never verified authenticity. Scores are comparable only under the same methodology and similar input sampling/coverage.
+For eligible offline research submissions: `penalty = max(d, i)`; `Trust Score = floor(100 * (1 - penalty) + 0.5)`. Fractions use their explicitly reported eligible denominators. Max aggregation deliberately avoids adding correlated evidence; it is a transparent conservative prototype, not learned weighting. No risk-band cutoffs are proposed. A value of 100 means neither included pattern was observed in eligible text, never verified authenticity. Scores are comparable only under the same methodology and similar input sampling/coverage.
 
-Withhold the score if fewer than 20 submitted reviews, fewer than 20 eligible text rows, eligible text coverage <80%, either scoring signal unavailable, unsupported declared domain/language, or analysis incomplete. Invalid inputs return errors rather than partial scores. Withheld results may still show available findings. Lack of validation is always visible as `experimental`; public launch requires Step 10 evaluation and Step 12 review to decide whether a numeric score remains defensible. If it is not, ship findings/coverage with score withheld. Sample-size cutoffs are product safeguards, not statistical confidence guarantees.
+Offline research gates withhold the index if fewer than 20 submitted reviews, fewer than 20 eligible text rows, eligible text coverage <80%, either scoring signal unavailable, unsupported declared domain/language, or analysis incomplete. Invalid inputs return errors rather than partial scores. Withheld results may still show available findings. Lack of validation is always visible as `experimental`; Step 12 enforces public HTTP score withholding regardless of origin/environment, including the local web analyzer. Both API routes and the browser expose findings/coverage, not numeric indices. Sample-size cutoffs are product safeguards, not statistical confidence guarantees.
 
 Arithmetic examples (design checks, not benchmarks): d=0,i=0 =>100; d=.25,i=.10 =>75; d=.25,i=.40 =>60; d=1 =>0. Increasing either penalty holding the other fixed cannot increase the score. Removing ratings/timestamps cannot change the index; dropping required text coverage below the gate withholds it. Fewer findings on a selected sample is not evidence about all product reviews.
 
@@ -175,6 +175,8 @@ Step 9: score/null/zero states, actionable withholding reasons, confidence unset
 
 Step 10: reproducible synthetic-only resource and robustness reports bind exact requests, runtime/settings and implementation hashes. Three isolated samples per resource case record actual wall/CPU time and process-lifetime peak RSS; metadata and sampling observations complement the 17 frozen mechanics cases. Controlled admission/rate/timeout probes and existing cancellation regressions verify local behavior. No independent accuracy, calibration, regression delta, browser/provider latency or trained model is inferred. Preserve existing limits; review measured Unicode normalization/response amplification, browser rendering and deployment resource budgets before release. See docs/BENCHMARK.md and its stored record. All relevant checks pass; public-score withholding is an explicit release prerequisite, not an already-deployed change.
 
+Step 11: local landing content, how-it-works, methodology/limitations, privacy and contact/dispute guidance use shared responsive navigation/footer, per-route titles and a keyboard skip link. Home remains synchronous and composes the existing client Analyzer. User explicitly deferred the contact destination: web/lib/contact.ts is blank, the address space remains empty, no mail link/form is offered and unavailability is visible. Adding an owner email and rebuilding enables only an explicit mailto link; privacy follows its configured state. Synthetic tests cover both states, internal route/hash targets, main/heading structure, noindex and method/privacy limits. Existing analyzer tests, targeted 320px/desktop keyboard/live analysis checks and full repository checks pass. No deployment, sender, storage, dependency, method or scoring change is introduced. Configure and verify contact, enforce public numeric withholding, review hosting retention and complete security/deployment gates before launch.
+
 MVP release gates:
 
 1. Both apps start from documented clean setup; CI passes backend tests, frontend tests, lint, type checks and production build.
@@ -183,9 +185,18 @@ MVP release gates:
 4. UI handles empty, loading, error, rate-limited, insufficient and experimental states; reset clears state, keyboard navigation/focus/labels and 320px/mobile layout are checked; charts have text equivalents.
 5. Requests above every limit, chunked bodies, malformed CSV/JSON, HTML/script strings and prompt-like content are tested server-side. Resource use is measured at maximum input and concurrent load; no uncontrolled timeout work remains.
 6. No raw review/PII logging, persistent uploads, arbitrary outbound requests or secrets in source. CORS, no-store, HTTPS, abuse limits, proxy trust and host retention are verified in production. No unresolved critical security finding before deployment.
-7. Methodology, limitations, privacy and a working contact/dispute channel are published. Contact destination must be supplied before Step 11 completion; no invented address.
+7. Methodology, limitations, privacy and a working contact/dispute channel are published. User override permits a blank address for Step 11 completion, clearly marked unavailable and editable later. A real contact destination must be supplied and verified before public launch; no invented address.
 8. Dataset/ML decisions and measured reports are reproducible. Confidence remains absent until validated. Step 10 did not justify public numeric scoring: publish findings/coverage with score withheld, and enforce/verify that policy before deployment in Step 12. Current local development may retain the experimental index.
 
 ## 8. Design references
 
 Upload boundary controls informed by [OWASP File Upload Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/File_Upload_Cheat_Sheet.html). Training-only preprocessing follows [scikit-learn common pitfalls](https://scikit-learn.org/stable/common_pitfalls.html). Consulted 2026-10-27. Neither source validates ReviewTrust's proposed scoring formula or thresholds.
+
+
+## Step 12 current security contract
+
+The post-NFKC/masking returned text is bounded to 5,000 code points per text, 300 per title and 250,000 aggregate. Overflow returns 413 normalized_text_limit atomically, without truncation. Public result serialization occurs inside the admitted worker; UTF-8 bytes above 2,097,152 return 413 response_limit, followed by a deadline check before returning a successful response. Raw input ceilings, two-slot admission, rate limits, safe logging and cancellation retention remain authoritative.
+
+Fresh nonce script CSP requires dynamic Next rendering; home stays synchronous. Production scripts disallow unsafe-inline/eval, request CSP is overwritten and page HTML is no-store. Existing chart widths require a documented inline style exception. Findings remain escaped React text. Review protocol/methodology changes require matching web/API versions; old numeric responses are rejected.
+
+Step 12 acceptance: documented scoped audit; source-backed dependency checks; fixed numeric publication, normalization/output amplification and absent browser policy; targeted regressions and full suite pass. Seventeen offline mechanical outcomes/relations remain unchanged under refreshed version/hash bindings; original Step 10 evidence preserved, new Step 12 resource report verifies current code. NO TRAIN and null confidence/independent metrics remain. Local audit completion is not public approval: contact, actual provider proxy/edge/TLS/logging/retention/resource evidence and remote CI remain launch gates for Step 13. See docs/SECURITY_AUDIT.md.

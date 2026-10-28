@@ -4,7 +4,7 @@ from typing import Literal
 
 from pydantic import BaseModel, ConfigDict, Field
 
-METHODOLOGY_VERSION = "rt-patterns-0.2.0-experimental"
+METHODOLOGY_VERSION = "rt-patterns-0.3.0-experimental"
 SignalId = Literal[
     "text_repetition",
     "incentive_language",
@@ -89,11 +89,11 @@ class Finding(ResultModel):
     required_fields: list[str]
     coverage: SignalCoverage
     availability_reason: AvailabilityReason | None
-    methodology_version: Literal["rt-patterns-0.2.0-experimental"] = METHODOLOGY_VERSION
+    methodology_version: Literal["rt-patterns-0.3.0-experimental"] = METHODOLOGY_VERSION
 
 
 class Score(ResultModel):
-    status: Literal["experimental", "insufficient_evidence"]
+    status: Literal["experimental", "insufficient_evidence", "withheld"]
     value: int | None = Field(ge=0, le=100)
     reason_codes: list[
         Literal[
@@ -101,6 +101,7 @@ class Score(ResultModel):
             "too_few_eligible_reviews",
             "low_text_coverage",
             "scoring_signal_unavailable",
+            "public_score_not_validated",
         ]
     ]
     evaluated_signal_ids: list[SignalId]
@@ -141,7 +142,7 @@ class WarningInfo(ResultModel):
 
 class AnalysisResult(ResultModel):
     schema_version: Literal["1"] = "1"
-    methodology_version: Literal["rt-patterns-0.2.0-experimental"] = METHODOLOGY_VERSION
+    methodology_version: Literal["rt-patterns-0.3.0-experimental"] = METHODOLOGY_VERSION
     experimental: Literal[True] = True
     origin: Literal["paste", "csv"]
     scope: Literal["submitted_subset"] = "submitted_subset"

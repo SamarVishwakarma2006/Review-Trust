@@ -44,7 +44,8 @@ def test_health_is_minimal_and_analysis_returns_structured_result(client):
     assert health.json() == {"status": "ok"}
     response = client.post("/v1/analyze", json=payload())
     assert response.status_code == 200
-    assert response.json()["score"]["value"] == 100
+    assert response.json()["score"]["value"] is None
+    assert response.json()["score"]["status"] == "withheld"
     assert response.json()["confidence"]["level"] is None
     assert response.headers["cache-control"] == "no-store"
     assert len(response.headers["x-request-id"]) == 32
@@ -450,7 +451,7 @@ def test_expanded_signal_contract_is_identical_for_json_and_csv(client):
     )
     assert json_response.status_code == csv_response.status_code == 200
     a, b = json_response.json(), csv_response.json()
-    assert a["methodology_version"] == "rt-patterns-0.2.0-experimental"
+    assert a["methodology_version"] == "rt-patterns-0.3.0-experimental"
     assert a["findings"] == b["findings"]
     assert a["score"] == b["score"]
     assert all(f["assessment"] == "observed" for f in a["findings"])

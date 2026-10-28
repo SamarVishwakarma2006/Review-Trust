@@ -10,7 +10,8 @@ from starlette.middleware.cors import CORSMiddleware
 
 from app.analysis import analyze, check_deadline
 from app.ingestion import ReviewInputError, parse_json
-from app.results import AnalysisResult, ErrorResponse
+from app.results import AnalysisResult, ErrorResponse, Score
+from app.schemas import MAX_BODY_BYTES
 from app.security import Controls, RequestBoundary, Settings, error_response, run_worker
 from app.uploads import content_type, parse_upload
 
@@ -92,7 +93,22 @@ def create_app(settings: Settings | None = None) -> FastAPI:
                     )
                 batch = parse_json(data)
             check_deadline(deadline)
-            return analyze(batch, deadline)
+            result = analyze(batch, deadline)
+            # Public endpoints never expose the unvalidated offline research index.
+            result.score = Score(
+                status="insufficient_evidence" if result.score.reason_codes else "withheld",
+                value=None,
+                reason_codes=["public_score_not_validated", *result.score.reason_codes],
+                evaluated_signal_ids=result.score.evaluated_signal_ids,
+            )
+            result.limitations.insert(
+                0, "Numeric scores are withheld: public validity is unproven."
+            )
+            body = result.model_dump_json().encode("utf-8")
+            if len(body) > 2 * MAX_BODY_BYTES:
+                raise ReviewInputError("response_limit", "Result exceeds the response limit.", 413)
+            check_deadline(deadline)
+            return Response(body, media_type="application/json")
 
         return await run_worker(request, work)
 

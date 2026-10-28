@@ -31,13 +31,13 @@ export default function Results({ result }: { result: AnalysisResult }) {
     </div>
     <div className="result-grid">
       <section className="score-card" aria-labelledby="score-title">
-        <span className="badge">Experimental index</span>
-        <h3 id="score-title">Experimental Trust Score</h3>
-        <p className={`score-value ${result.score.value === null ? "withheld" : ""}`}>{result.score.value === null ? "Insufficient evidence" : `${result.score.value} / 100`}</p>
-        <p>A higher value means fewer included patterns were observed. Even 100 does not verify authenticity. Missing evidence is not low risk.</p>
+        <span className="badge">Unvalidated methodology</span>
+        <h3 id="score-title">Findings and coverage</h3>
+        <p className="score-value withheld">{result.score.status === "insufficient_evidence" ? "Insufficient evidence" : "Score withheld"}</p>
+        <p>Numeric scores are withheld because public validity has not been established. Missing evidence is not low risk.</p>
         {result.score.reason_codes.length > 0 && <ul className="score-reasons">{result.score.reason_codes.map(reason => <li key={reason}>{withholding[reason] || readable(reason)}</li>)}</ul>}
-        <details className="method-note"><summary>How this index is calculated</summary>
-          <p>Only repetition and incentive-mention shares contribute. The index is 100 × (1 − the larger share), rounded half-up. Evidence gates can withhold it. Contextual findings do not change it.</p>
+        <details className="method-note"><summary>About the offline research index</summary>
+          <p>The offline baseline uses repetition and incentive-mention shares. Its experimental formula is 100 × (1 − the larger share), rounded half-up. No public numeric result is provided.</p>
           <p>Templates, duplicate ingestion, quotations and negations can explain the included patterns. Numerical values are not probabilities or purchasing advice.</p>
         </details>
       </section>
@@ -114,7 +114,7 @@ export default function Results({ result }: { result: AnalysisResult }) {
       <h3 id="limits-title">Scope and limitations</h3>
       <ul>{result.warnings.map((warning, i) => <li key={i}>{readable(warning.code)}{warning.column_positions.length > 0 ? `: column positions ${warning.column_positions.join(", ")}` : ""}</li>)}</ul>
       <ul>{result.limitations.map((limitation, i) => <li key={i}>{limitation}</li>)}</ul>
-      <p className="muted">Methodology: {result.methodology_version}. Numeric scoring remains subject to evaluation and release review.</p>
+      <p className="muted">Methodology: {result.methodology_version}. Public numeric scoring is withheld.</p>
     </section>
   </section>;
 }

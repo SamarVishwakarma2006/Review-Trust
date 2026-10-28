@@ -4,7 +4,7 @@ An electronics review-pattern analysis platform. It detects observable patterns,
 
 ## Current status
 
-Steps 1–11 are complete. The Next.js interface supports editable pasted reviews, CSV header mapping, direct API submission, cancel/reset, safe errors and an evidence view with explicit coverage, prioritised navigation, accessible charts and highlighted supporting text. FastAPI provides bounded analysis with experimental scoring, masking and explicit insufficient-evidence states. Dataset audits, a synthetic labelling/split workflow, a no-train baseline evaluation and local resource/robustness benchmarks are complete. No real dataset, trained model, independent accuracy or calibration is available. Public numeric scores are not approved: enforce withholding before deployment. Website content is implemented; the contact address is intentionally blank at the owner’s request. Security review and deployment remain pending. Local checks pass; GitHub Actions is configured but has not been verified remotely.
+Steps 1–12 are complete. The Next.js interface supports editable pasted reviews, CSV header mapping, direct API submission, cancel/reset, safe errors and an evidence view with explicit coverage, prioritised navigation, accessible charts and highlighted supporting text. FastAPI provides bounded analysis with experimental scoring, masking and explicit insufficient-evidence states. Dataset audits, a synthetic labelling/split workflow, a no-train baseline evaluation and local resource/robustness benchmarks are complete. No real dataset, trained model, independent accuracy or calibration is available. Public numeric scores are not approved and withholding is now enforced in both HTTP routes and the UI. Website content is implemented; the contact address is intentionally blank at the owner’s request. The local security audit is complete; public launch remains NO GO pending owner/provider verification. Local checks pass; GitHub Actions is configured but has not been verified remotely.
 
 Read [SPEC.md](SPEC.md), [API usage/configuration](docs/API.md), [input validation interface](docs/INPUT_VALIDATION.md), [decisions](docs/DECISIONS.md), [threat model](docs/THREAT_MODEL.md), [dataset audit](docs/DATASET_AUDIT.md), [offline workflow](ml/README.md), [model card](docs/MODEL_CARD.md), [evaluation record](docs/EVALUATION.md), [engineering guidance](AGENTS.md) and [handoff](docs/HANDOFF.md).
 
@@ -52,7 +52,7 @@ npm --prefix web run dev
 
 For macOS/Linux, run `.venv/bin/python -m uvicorn app.main:app --host 127.0.0.1 --port 8000 --reload --no-access-log --no-proxy-headers` from `api/`. Stop either server with Ctrl+C. API `GET /` retains the development status; `GET /health` returns `{"status":"ok"}`. `POST /v1/analyze` accepts canonical JSON; `POST /v1/analyze/csv` accepts multipart CSV plus required metadata. The web page calls the API directly; confirm English reviews for one electronics product before submitting. These development apps are not approved for public deployment.
 
-Methodology `rt-patterns-0.2.0-experimental` adds TF-IDF near repetition, timing windows, rating distributions and conservative lexicon disagreement. Only repetition and four incentive phrases affect the score; the other findings are contextual. Each signal has explicit evidence gates, and excessive similarity vocabulary withholds the score. See SPEC.md for exact rules and limitations. Scores are withheld below evidence gates; confidence remains unvalidated. Common email/phone masking is incomplete, so remove personal information before submitting.
+Methodology `rt-patterns-0.3.0-experimental` adds TF-IDF near repetition, timing windows, rating distributions and conservative lexicon disagreement. Only repetition and four incentive phrases affect the score; the other findings are contextual. Each signal has explicit evidence gates, and excessive similarity vocabulary withholds the score. See SPEC.md for exact rules and limitations. Public API scores are always withheld; only the offline library evaluates experimental arithmetic. Confidence remains unvalidated. Common email/phone masking is incomplete, so remove personal information before submitting.
 
 Default API budgets: 1 MiB total request including upload envelope, two admitted requests, ten-second body/processing deadline, peer token bucket with burst two/refill ten per minute. Optional process settings are listed in [docs/API.md](docs/API.md) and `api/.env.example`; the example file is not automatically loaded. Use one API process until deployment-specific shared abuse controls are verified. Do not trust forwarded identity headers by default.
 
@@ -104,13 +104,13 @@ Known tooling limitation: ESLint 9 is deprecated upstream but remains required b
 - [x] Step 9 — Final Trust Score and Evidence UI
 - [x] Step 10 — Benchmark and Model Report
 - [x] Step 11 — Public Website and Product Content
-- [ ] Step 12 — Pre-Deployment Security Audit
+- [x] Step 12 — Pre-Deployment Security Audit
 - [ ] Step 13 — Deployment and Production Verification
 - [ ] Step 14 — OPTIONAL URL Input (not authorized)
 
-One approved step per message. Next: Step 12 with GPT-6 Astra, High reasoning, after user says `next`. Contact is intentionally blank under the user’s Step 11 override; add and verify a real destination before public launch.
+One approved step per message. Next: Step 13 with GPT-6.1 Sol, Medium reasoning, after user says `next`. Contact is intentionally blank under the user’s Step 11 override; add and verify a real destination before public launch.
 
-Step 10: [benchmark and release report](docs/BENCHMARK.md), [measured synthetic record](docs/benchmarks/20261028.json) and [model card](docs/MODEL_CARD.md). Reproduce with `api/.venv/Scripts/python.exe -m ml.benchmark --output ml/artifacts/my-benchmark.json`; verify the committed record with `--verify docs/benchmarks/20261028.json`. No independent accuracy/calibration is available. Public numeric scores are not approved: enforce findings/coverage with score withheld before deployment, subject to Step 12 review. Local development retains the experimental index. Provider/browser performance and Unicode response amplification remain release gates.
+Step 10: [benchmark and release report](docs/BENCHMARK.md), [measured synthetic record](docs/benchmarks/20261028.json) and [model card](docs/MODEL_CARD.md). Reproduce with `api/.venv/Scripts/python.exe -m ml.benchmark --output ml/artifacts/my-benchmark.json`; verify the committed record with `--verify docs/benchmarks/20261028-step12.json`. No independent accuracy/calibration is available. Public numeric scores are not approved: enforce findings/coverage with score withheld before deployment, subject to Step 12 review. Only the offline research library retains the experimental index. Provider/browser performance and Unicode response amplification remain release gates.
 
 ## Website content and contact setup
 
@@ -123,3 +123,10 @@ To add your contact address later, edit `CONTACT_EMAIL` in [web/lib/contact.ts](
 Repository: `https://github.com/SamarVishwakarma2006/Review-Trust.git`, remote `origin`, branch `main`. The previously committed README merge markers were removed in Step 2. Commits and pushes are manual; the assistant provides commands after each step and does not stage or commit automatically.
 
 Benchmark CI repair (2026-10-28): isolated the worker test's subprocess mock so Linux processor detection can run independently. The regression and full local checks pass; the frozen benchmark record remains unchanged. See [repair details](docs/BENCHMARK.md#ci-test-repair--2026-10-28). Remote CI rerun remains unverified.
+
+
+## Step 12 security audit
+
+See [audit findings and launch gates](docs/SECURITY_AUDIT.md), [dependency query evidence](docs/security/dependencies-20261028.json) and [current measurement record](docs/benchmarks/20261028-step12.json). Both HTTP routes return null scores. Normalized/masked display limits and a 2 MiB serialized-response cap reject atomically. Methodology 0.3.0 supersedes 0.2.0; pair/phrase arithmetic is unchanged offline. The Step 10 record is historical; current integrity tests use the new Step 12 record.
+
+Next now renders pages dynamically for fresh CSP script nonces; page HTML is no-store. Production scripts have no unsafe-inline/eval exception; bounded chart styles retain inline styles. No new dependency or distributed infrastructure was added. All local checks pass, including 194 backend, 28 offline and 27 frontend tests. Remote CI and hosting readiness are not claimed. Configure monitored contact and verify actual HTTPS origins, one-process edge/proxy limits, resource/timeouts and provider logging/retention before public launch. Step 13 must resolve these gates; Step 12 did not deploy anything.
