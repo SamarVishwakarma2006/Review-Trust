@@ -105,10 +105,10 @@ Known tooling limitation: ESLint 9 is deprecated upstream but remains required b
 - [x] Step 10 — Benchmark and Model Report
 - [x] Step 11 — Public Website and Product Content
 - [x] Step 12 — Pre-Deployment Security Audit
-- [ ] Step 13 — Deployment and Production Verification
-- [ ] Step 14 — OPTIONAL URL Input (not authorized)
+- [ ] Step 13 — Deployment and Production Verification (preparation complete; deployment deferred by owner)
+- [ ] Step 14 — URL expansion (planned as E01–E19; implementation pending)
 
-One approved step per message. Next: Step 13 with GPT-6.1 Sol, Medium reasoning, after user says `next`. Contact is intentionally blank under the user’s Step 11 override; add and verify a real destination before public launch.
+The next active development roadmap is [PRODUCT_ROADMAP.md](docs/PRODUCT_ROADMAP.md): E00 planning complete; E01 source/category feasibility is next. Execute one expansion step per `next`, with acceptance checks and manual Git checkpoints. Original Step 13 and E20 deployment stay deferred; contact stays blank. E01–E03 review source access and network security before live collection; training remains conditional on admitted data. Existing v1 runtime behavior is unchanged.
 
 Step 10: [benchmark and release report](docs/BENCHMARK.md), [measured synthetic record](docs/benchmarks/20261028.json) and [model card](docs/MODEL_CARD.md). Reproduce with `api/.venv/Scripts/python.exe -m ml.benchmark --output ml/artifacts/my-benchmark.json`; verify the committed record with `--verify docs/benchmarks/20261028-step12.json`. No independent accuracy/calibration is available. Public numeric scores are not approved: enforce findings/coverage with score withheld before deployment, subject to Step 12 review. Only the offline research library retains the experimental index. Provider/browser performance and Unicode response amplification remain release gates.
 

@@ -109,3 +109,12 @@ Framework guidance consulted locally: bundled Next.js server/client component an
 - D59: Use Next's native per-request nonce/strict-dynamic support and force-dynamic rendering, trading static HTML caching for a fresh nonce. Keep the synchronous home component; no new security dependency. Production scripts allow neither inline nor eval exemption; style inline is retained for numeric chart widths. No-store and anti-framing/referrer/permissions headers accompany CSP.
 - D60: Preserve historical Step 10 measurements, intentionally capture a new source-bound Step 12 record, and compare all seventeen mechanical outcomes/relations before refreshing reference hashes. Keep NO TRAIN and unavailable independent metrics. Point-in-time npm/OSV checks returned no advisories; retain compatible ESLint pins without forcing peer resolution.
 - D61: Finish the repository audit while explicitly withholding public-launch approval until monitored contact and actual provider TLS/origins/proxy/edge/resource/logging/retention evidence are verified. No speculative distributed infrastructure or deployment in this step. Ponytail full governs minimal fixes, never removal of security/validation.
+
+## Step 13 — Preparation only by owner request
+
+- D62: The owner explicitly requested “prepare only, keep contact blank.” Prepare native Render/Vercel dashboard settings and a hosted verification/rollback runbook; create no services, deploy nothing and keep Step 13 unchecked. Reuse pinned runtimes, existing checks and native hosting; no Docker, deployment SDK, new dependency or speculative infrastructure. Contact remains empty. Future public release requires actual owner/provider evidence and a compatible API/web pair; pre-withholding methodology 0.2.0 is not a safe rollback target.
+
+
+## E00 — Product-link expansion planning
+
+- D63: Preserve historical steps and use E01–E20 for incremental product-link development, with owner/assistant tasks, dependencies, acceptance and manual commit checkpoints. Start with source feasibility and permitted access before network implementation. Reuse existing analysis; distinguish product feedback, manipulation, AI authorship and authenticity. Training and LLM experiments are conditional on target validity, rights and measured need. Deployment remains deferred. Planning is not implementation or data admission.
