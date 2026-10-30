@@ -1,3 +1,32 @@
+# Current handoff — E03 URL-ingestion design
+
+Date: 2026-10-31 (Asia/Calcutta).
+
+REVIEWTRUST STEP HANDOFF: E03 COMPLETE — source-neutral contracts and security design only, explicitly requested by the owner while E02 is blocked. docs/URL_INGESTION.md is adopted by SPEC.md; THREAT_MODEL.md records proposed controls and residual gates. No collector, URL endpoint, new runtime contract, source admission, dataset, training or deployment was implemented. This supersedes historical next-action instructions below.
+
+Changes: URL_INGESTION.md defines proposed POST /v2/products/analyze, strict URL/registry parsing, collected provenance, partial/empty/atomic failure states, fixed safe errors, shared synchronous admission/deadlines, collection byte/page/header/attempt quotas, DNS/IP-to-connection binding/TLS/egress, secrets/PII handling and future acceptance tests. SPEC, THREAT_MODEL, README, PRODUCT_ROADMAP tracker, AGENTS and DECISIONS (D66–D68) record design and authorization scope. Existing v1 API, methodology 0.3.0 and stored reports remain unchanged.
+
+Actual verification: OWASP SSRF guidance read in browser after an empty search-service error; existing schemas, result/error/admission behavior inspected. Documentation local links, unique error mappings, budgets/tracker consistency and git diff --check passed. No runtime tests rerun for documentation-only work, no network security tests claimed passed and no remote CI claim. All planned limits are unmeasured ceilings requiring implementation evidence.
+
+Git: started clean on main at 9e5cb25 (docs: prepare source access review and record E02 blocker). Verified origin: https://github.com/SamarVishwakarma2006/Review-Trust.git. Nothing staged, committed or pushed by the assistant.
+
+```powershell
+git status --short
+git diff
+git add AGENTS.md README.md SPEC.md docs/DECISIONS.md docs/HANDOFF.md docs/PRODUCT_ROADMAP.md docs/THREAT_MODEL.md docs/URL_INGESTION.md
+git diff --cached --stat
+git diff --cached
+git commit -m "docs: specify bounded product-link ingestion and threat controls"
+git show --stat --oneline HEAD
+git status --short
+```
+
+Manual TODO: review/commit E03. Continue seeking a permitted real source for E02; no credentials in chat/Git. Next `next` starts E04 authored source-parser fixtures only, independent of real access. E05 live collection remains blocked until E02 permissions/access and transport/egress are demonstrably satisfied. No fake live success. Contact stays blank and E20 deployment deferred.
+
+ACTION REQUIRED — CODEX MODEL FOR NEXT STEP: current E03 design (roadmap recommendation GPT-6 Astra High); next E04 parser with authored fixtures only, Moderate complexity. SWITCH manually to GPT-6.1 Sol High if needed; fallback GPT-5.6 Sol High if selectable. No switch claimed. Rationale: bounded deterministic source parsing, reusing canonical validation. Next checks: malformed/empty source schema, HTML/PII, rating-zero/UTC rules, product/variant and ID association; no outbound request. Escalate concrete parsing/security blockers to GPT-6 Astra High. Stop until `next`.
+
+---
+
 # Current handoff — E02 source access
 
 Date: 2026-10-30 (Asia/Calcutta).

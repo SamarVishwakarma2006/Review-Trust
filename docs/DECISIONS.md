@@ -128,3 +128,10 @@ Framework guidance consulted locally: bundled Next.js server/client component an
 ## E02 — Access preparation and live-source blocker
 
 - D65: The owner confirmed no store/provider access. Record E02 as BLOCKED rather than equating a technical API schema, a Read key or a synthetic store with permission to analyze real reviews. Prepare an unapproved source card, separate-use checklist, least-privilege access guidance, unsent merchant request and future minimal probe plan. No access grant, merchant message, agreement, data request or source admission occurred. Keep E03 dependent work pending until the gate is satisfied or the owner explicitly changes scope.
+
+
+## E03 — Independent source-neutral URL ingestion design
+
+- D66: Treat explicit owner “do step 3” as E03 design authorization despite E02 access being blocked. Complete source-neutral design, preserve the access blocker, and allow only authored-fixture E04 work next. No live fetcher or source permission is created by this exception.
+- D67: Proposed version-2 product endpoint/envelope preserves collection provenance and server-assigned collected origin without falsifying existing v1 paste/csv/research types. Reuse pure signal behavior with null public scores/confidence, explicit empty/partial sample states and atomic failure on invalid/upstream errors. Existing runtime schemas and methodology stay unchanged until implementation.
+- D68: Fixed source/product requests, empty approved registry, DNS-to-peer binding with hostname-verified TLS, no redirects/retries/ambient credentials, restricted egress and scoped secrets/rights/quotas are activation requirements. Begin synchronous within shared two-slot/ten-second admission, four-second collection and bounded page/byte/header budgets; measure before introducing jobs/infrastructure or raising limits. These are design decisions, not verified controls.
