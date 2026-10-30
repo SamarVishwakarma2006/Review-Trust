@@ -1,0 +1,33 @@
+# E05 checkpoint — safeguards before live collection
+
+Date: 2026-10-31. Status: **BLOCKED for full E05 acceptance; offline guards implemented and tested.** E02 still has no approved merchant/provider, access or quotas. Actual connection-bound DNS/TLS, restricted egress, timed network reads and cancellation cleanup are not implemented or verified. E06 has not started. This checkpoint must not be described as a working crawler.
+
+## Implemented
+
+`api/app/source_collection.py` contains transport-free helpers. No resolver, socket/HTTP client, credentials, environment activation switch, source registration or public endpoint is added. Serving endpoints do not import this module. No dependency changed.
+
+- `SourcePolicy` validates a candidate trusted host/expiry configuration. `SOURCE_REGISTRY` is an immutable empty mapping. Construction or test injection of a policy is not permission evidence; no source is approved. Candidate host matching is exact, with no wildcard, IP literal, single-label host, trailing dot or punycode registration in this initial subset.
+- `product_request` validates a bounded ASCII HTTPS product link and extracts its slug from `/product/<slug>/`; requests with userinfo, unsupported ports, percent escapes, controls, backslashes, query/fragment or a different path reject. An unregistered host is unsupported and an expired/mismatched policy is not ready. A valid candidate resolves to a fixed `/wp-json/wc/v3/products` metadata lookup with slug/per_page/selected fields; the original URL never becomes a request target. It does not resolve the product ID, parse a lookup collection or build/paginate review requests yet.
+- `validate_addresses` validates a complete bounded list of supplied IP answers; it does not perform DNS. It rejects mixed allowed/prohibited answers, private/non-global/special-use, multicast/reserved, scoped IPv6, mapped IPv4 and explicit translation/tunnel ranges. Additional real internal network ranges can be denied even when globally addressed. This does not bind a connection to an IP or provide an egress firewall.
+- `SourceQuota` is a shared, single-event-loop, process-local fixed-window attempt budget. Configuration must be supplied by a future reviewed source. Reservations are consumed even if a later attempt fails or is cancelled; no refund method exists. Provider 429 responses establish a 1–60 second cooldown, without sleeping/retrying. Restart/rollout/multiple-process accounting and provider spending enforcement still require the E03 controls.
+- `CollectionBudget` clips its accounting deadline to four seconds or the earlier supplied overall deadline, permits at most six reserved attempts and tracks aggregate bytes. The caller must reserve before a real request; this helper has no request orchestration. It neither implements the API's existing two-slot admission nor independently interrupts a stalled DNS/socket operation.
+- Response checks reject redirects, provider access failures and non-200 results with fixed safe messages. UTF-8 JSON/identity encoding is required. Ambiguous content framing, malformed/oversized parsed headers and unexpected compression reject. Headers are limited to 32 fields/16 KiB, declared body to 256 KiB, and consumed body chunks to 256 KiB per response/1 MiB total. Framing length must match on finish; finished bodies cannot accept more chunks. Accounting between chunks checks the absolute deadline. A future transport must enforce limits while reading raw headers/body, not buffer arbitrary data before calling these helpers.
+
+All counts are in-memory request/source state. These helpers retain no response text, credentials or upstream error messages. Source host/path are suppressed in repr. IP/URL values and provider strings are not included in fixed public errors. This does not authorize logging internal objects or guarantee provider privacy.
+
+## What is still required for E05
+
+1. Finish E02: actual source/market and permitted uses, appropriate scoped access, quotas/fees and expiry/revocation evidence. No credentials in chat/Git. Candidate store configuration cannot stand in for agreement or access.
+2. Select and implement a source-appropriate transport which pins validated DNS answers to the actual peer while verifying the original TLS host/SNI. No unchecked second resolution, ambient proxy/netrc/cookie auth, redirect or insecure fallback. Verify actual egress restrictions and private/metadata blocking outside mocks. Rights/revocation must be rechecked before output.
+3. Add source-bound secret handling and safe request orchestration, bounded DNS/connect/header/body waits, global source concurrency, streaming raw-header limits and reliable close/cancel behavior. Reserve quotas for every attempt; retain API admission until live I/O and any running worker are cleaned up. Do not treat helper clock checks as timed I/O cancellation.
+4. Verify actual provider access with a minimal permitted request and prove transport/cleanup behavior using isolated tests. Source-specific rate/cost caps, revoked source and other security gates must fail closed. No public route/front-end integration before the later E07/E08 contracts are implemented.
+
+The user may explicitly authorize further offline transport development, but no sequence of mocked tests can mark real access/egress evidence passed. E06 remains pending; do not silently advance after this partial checkpoint.
+
+## Verification and browser review
+
+79 authored offline cases in `api/tests/test_source_collection.py` cover URL/host/expiry errors, fixed metadata request construction, IPv4/IPv6 and mixed answers, internal public-range overrides, shared quotas/cooldown, attempt/deadline limits, redirects/access failures, compression/framing/header limits, chunk/body/aggregate accounting and completion checks. Public IP literals used in tests are values only; no DNS/network call occurs. DNS rebinding, TLS and cancellation are not claimed tested through a live transport.
+
+Full local check: 330 backend tests, 28 offline tests and 27 frontend tests plus dependency consistency, Ruff, frontend lint/typecheck/build pass. Both existing frozen research reports verify without changes. No runtime integration or new benchmark claim. See current HANDOFF.md for the Git checkpoint and exact verification.
+
+The local website was opened at `http://127.0.0.1:3000/#analyze` after verification. API health returned ok. It still displays paste/CSV because E05 guards are not wired into the UI; no product-link feature is simulated. Local servers were left available for the owner to review. This is not a hosted deployment.

@@ -140,3 +140,9 @@ Framework guidance consulted locally: bundled Next.js server/client component an
 ## E04 — Authored source-parser mechanics
 
 - D69: Add one pure offline WooCommerce-shaped parser using existing strict JSON decoding, safe ReviewInputError, canonical ReviewInput/Title validation and standard-library HTMLParser. Retain positive source IDs only internally, reject wrong identity/nonapproved status/duplicate IDs/malformed supplied metadata atomically, preserve duplicate wording from distinct source IDs, require explicit UTC source-field semantics and caller date. Ignore unconsumed provider fields including reviewer identity. Bound raw HTML, response bytes, page rows and text; defer masking/signals/public collected origin to their reviewed integration boundaries. No HTTP integration, source admission, new dependency or rewritten source-bound benchmark.
+
+
+## E05 — Offline collection safeguards and remaining blocker
+
+- D70: Implement reusable, transport-free request/destination/response/quota guards with an empty default registry and no dependency/credentials/network integration. Keep E05 BLOCKED: E02 rights/access and actual connection-bound TLS, restricted egress, timed I/O and cancellation cannot be certified by isolated accounting tests. No mock result is a real collection success; do not advance E06 automatically.
+- D71: Honor owner workflow preferences: open the local site after each step and identify backend-only changes honestly; use natural, descriptive human commit messages from this checkpoint onward. No automatic staging/committing/pushing.

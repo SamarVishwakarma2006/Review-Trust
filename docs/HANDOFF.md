@@ -1,3 +1,34 @@
+# Current handoff — E05 safeguards checkpoint
+
+Date: 2026-10-31 (Asia/Calcutta).
+
+REVIEWTRUST STEP HANDOFF: E05 BLOCKED for full acceptance; offline safeguards implemented and verified. E02 still has no permitted source/access; transport/DNS-to-peer TLS/egress/timed I/O/cancellation remain unimplemented. E06 has not started. This is useful partial code, not a working crawler. No source/dataset admitted, training or deployment. Current serving API/UI unchanged.
+
+Changes/files: api/app/source_collection.py and api/tests/test_source_collection.py: strict supported product-link to fixed metadata request, empty immutable registry, candidate policy expiry/binding, supplied-IP policy, process-local shared attempt/cooldown budgets, response status/media/header/framing checks and body/deadline accounting. No HTTP client/resolver/secret or serving import. docs/SOURCE_COLLECTION.md explains exact implemented/missing controls. README, SPEC, THREAT_MODEL, URL_INGESTION, PRODUCT_ROADMAP, DECISIONS (D70/D71), AGENTS and this handoff updated. Natural human commit wording and browser demonstration preferences persisted.
+
+Actual verification: final ./scripts/check.ps1 PASS (exit 0): dependency check, 330 backend tests including 79 new offline guard cases, Ruff lint/format (19 API files), 28 offline tests/Ruff (eight files), 27 frontend tests/four files, ESLint/typecheck/production build. Existing mechanics and benchmark frozen-report verification both pass unchanged. Initial lint found one overlong comment, fixed before full checks. Documentation link/tracker checks and git diff --check pass. No live provider, DNS rebinding, TLS/egress, cancellation or remote CI result claimed.
+
+Browser demonstration: opened actual local analyzer at http://127.0.0.1:3000/#analyze and verified paste/CSV remains visible. No new website controls because guards are unconnected; no simulated crawler. Local API health ok. The inactive local web server was restarted; servers left running for owner review. Existing-tab binding failed, so a fresh visible preview tab was opened and retained. No remote hosting change.
+
+Git: started clean on main at 1b4f5b5 (feat: parse the first supported product source). Origin verified https://github.com/SamarVishwakarma2006/Review-Trust.git. Nothing staged/committed/pushed by assistant. This commit records safeguards and blocked status, not E05 completion:
+
+```powershell
+git status --short
+git diff
+git add api/app/source_collection.py api/tests/test_source_collection.py AGENTS.md README.md SPEC.md docs/DECISIONS.md docs/HANDOFF.md docs/PRODUCT_ROADMAP.md docs/SOURCE_COLLECTION.md docs/THREAT_MODEL.md docs/URL_INGESTION.md
+git diff --cached --stat
+git diff --cached
+git commit -m "Add safeguards before collecting product reviews"
+git show --stat --oneline HEAD
+git status --short
+```
+
+Manual TODO: review/commit this partial checkpoint. Obtain an approved source and bounded access/quota evidence for E02; keep credentials out of chat/Git. SourcePolicy construction in tests is not approval. Further E05 transport development may be explicitly scoped offline, but live acceptance still requires actual rights/access and verified network controls. Do not automatically advance E06. Contact remains blank; deployment deferred.
+
+ACTION REQUIRED — CODEX MODEL FOR NEXT STEP: current E05 BLOCKED; next resume E05 rather than E06. Recommendation GPT-6.1 Sol High; KEEP if selected, fallback GPT-5.6 Sol High if selectable. High complexity: actual transport/egress binding and source-dependent lifecycle. Escalate concrete networking/security blockers to GPT-6 Astra High, fallback GPT-6.1 Sol High. No switch claimed. Next verification requires peer-pinned TLS, bounded raw reads, correct cancellation/admission, quota/revocation and a permitted provider probe once E02 exists. Wait for the owner; no fabricated completion.
+
+---
+
 # Current handoff — E04 offline source parser
 
 Date: 2026-10-31 (Asia/Calcutta).

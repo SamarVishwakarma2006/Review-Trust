@@ -140,3 +140,8 @@ Design follows the allowlisting, redirect, connection-time DNS and network-layer
 ## E04 implementation checkpoint
 
 The offline product/page parser and authored fixtures are implemented as documented in [SOURCE_PARSER.md](SOURCE_PARSER.md). This is one internal component of the design; the endpoint, registry, collector, proposed v2 public contract and network controls remain unimplemented. No source is admitted. E04's stricter within-page duplicate-ID rejection is explicit; cross-page overlap handling remains E06. Original budget hypotheses require later integrated verification.
+
+
+## E05 partial implementation checkpoint
+
+[Offline safeguards](SOURCE_COLLECTION.md) now implement a subset of the planned policy/accounting. Registry remains empty, no network transport or HTTP integration exists, and source access/egress evidence is absent. The budgets/error mappings above are still future integrated acceptance requirements. E05 is BLOCKED, not complete; E06 has not begun.
