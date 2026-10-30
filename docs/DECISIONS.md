@@ -118,3 +118,8 @@ Framework guidance consulted locally: bundled Next.js server/client component an
 ## E00 — Product-link expansion planning
 
 - D63: Preserve historical steps and use E01–E20 for incremental product-link development, with owner/assistant tasks, dependencies, acceptance and manual commit checkpoints. Start with source feasibility and permitted access before network implementation. Reuse existing analysis; distinguish product feedback, manipulation, AI authorship and authenticity. Training and LLM experiments are conditional on target validity, rights and measured need. Deployment remains deferred. Planning is not implementation or data admission.
+
+
+## E01 — Source feasibility
+
+- D64: Complete documentation-level source feasibility with a conditional merchant-authorized WooCommerce/headphones pilot recommendation and an explicit unresolved live-access blocker. Catalog/average-rating APIs do not establish review-body access. Amazon's current docs direct PA-API users to Creators API; Best Buy reviewed fields are aggregates; Bazaarvoice documents Enterprise/client prerequisites; Flipkart review-text access remains unverified. Country, final retailer/category, budget and actual permissions/access require owner choices in E02. No data source, dataset, training, purchase or network implementation is admitted by this research.

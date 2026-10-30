@@ -1,6 +1,6 @@
 # ReviewTrust product-link expansion roadmap
 
-Planning checkpoint E00: complete. Implementation E01–E20: not started. This document records the owner's request for a monitored, step-by-step expansion of the existing project. It does not claim any source access, trained model, dataset admission or deployed capability.
+Planning checkpoint E00: complete. E01 feasibility: complete with explicit source-access blocker; see [SOURCE_FEASIBILITY.md](SOURCE_FEASIBILITY.md). E02–E20: not started. This document records the owner's request for a monitored, step-by-step expansion of the existing project. It does not claim any source access, trained model, dataset admission or deployed capability.
 
 ## Target and boundaries
 
@@ -8,7 +8,7 @@ Target experience: paste a supported electronics product link; obtain available 
 
 Reuse Next.js, FastAPI, typed contracts, pure signals, masking, evidence display and offline audits. URL collection is the planned extension to v1's no-fetch boundary. Change SPEC.md and THREAT_MODEL.md deliberately before implementation. The existing API contract and numeric-withholding policy remain authoritative until reviewed changes are implemented and verified. Product quality, review manipulation, AI authorship and counterfeit authenticity are different questions. No “fully bot,” “genuine company,” “fake product” or guaranteed quality verdict is justified by text patterns alone.
 
-The user's existing no-deployment and blank-contact preferences persist. The original Step 13 stays deferred. This expansion breaks the original optional Step 14 idea into E01–E19 for controlled local development; E20 remains separately authorized deployment. One `next` authorizes only the next eligible expansion step, beginning with E01's feasibility review. It does not authorize purchases, credentials disclosure, restricted-site bypass, data collection without permission, training without admitted labels or public release.
+The user's existing no-deployment and blank-contact preferences persist. The original Step 13 stays deferred. This expansion breaks the original optional Step 14 idea into E01–E19 for controlled local development; E20 remains separately authorized deployment. One `next` authorizes only the next eligible expansion step, with E02 permission/access review next after E01's completed feasibility report. It does not authorize purchases, credentials disclosure, restricted-site bypass, data collection without permission, training without admitted labels or public release.
 
 ## Working agreement and Git records
 
@@ -18,7 +18,7 @@ Use PENDING, IN_PROGRESS, COMPLETE, BLOCKED or SKIPPED_WITH_REASON in the checkl
 
 At each checkpoint, I provide exact file paths and a commit message. You run `git diff`, stage only listed files, inspect `git diff --cached`, commit, and optionally push after verifying the remote/branch. GitHub Actions must be inspected on the pushed SHA; a local test pass is not remote CI evidence. Avoid mixing steps in one commit. Manual commit pending does not block verified completion, but separate commits are strongly preferred for tracking.
 
-Current Git baseline: main at 987dd2e. Prior deployment preparation changes are still uncommitted. Review and checkpoint these together with E00 before E01; the initial checkpoint intentionally contains those existing documentation changes. Never include .env files, credentials, real reviews, restricted fixtures or private evidence in commits. Record public or minimized evidence references rather than secrets.
+E01 starting Git baseline: main at ebb631b. The owner committed E00 and earlier deployment preparation together; E01 began with a clean tree. Never include .env files, credentials, real reviews, restricted fixtures or private evidence in commits. Record public or minimized evidence references rather than secrets.
 
 ## Numbered steps
 
@@ -165,7 +165,7 @@ Current Git baseline: main at 987dd2e. Prior deployment preparation changes are 
 ## Tracker
 
 - [x] E00 — Record expansion roadmap (documentation only)
-- [ ] E01 — Source and category feasibility
+- [x] E01 — Source and category feasibility (report complete; source access unresolved)
 - [ ] E02 — Permission and access
 - [ ] E03 — Contracts and network threat model
 - [ ] E04 — Source parser and authored fixtures

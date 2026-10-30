@@ -1,3 +1,32 @@
+# Current handoff — E01 source feasibility
+
+Date: 2026-10-30 (Asia/Calcutta).
+
+REVIEWTRUST STEP HANDOFF: E01 COMPLETE — dated feasibility matrix, proposed first scope and explicit live-access blocker delivered in docs/SOURCE_FEASIBILITY.md. E02 permission/access review is next on `next`. Completion of research does not establish a supported live retailer. This handoff supersedes next-action instructions in historical entries below.
+
+Finding: recommend a cooperating WooCommerce merchant pilot, English headphones, one approved origin and market. This is conditional, not owner approval or an acquired source. Amazon Creators API/Best Buy reviewed catalog docs do not establish review-text access; Bazaarvoice documents Enterprise/client access; Flipkart API/review-text access unverified. Owner retailer/country/currency/category/budget and actual source access remain unresolved. Keep deployment deferred, contact blank, numeric scores withheld and NO TRAIN.
+
+Changes: new SOURCE_FEASIBILITY.md; updated PRODUCT_ROADMAP tracker, README, SPEC, AGENTS, DECISIONS (D64) and this handoff. No runtime changes, collection, account sign-in, purchase, training or deployment. Primary documentation was inspected via browser after two empty web-search tool failures. Application tests were not rerun for documentation-only changes. Documentation links/tracker and Git whitespace checks passed; no remote CI result claimed.
+
+Git: started clean on main at ebb631b (docs: record product-link expansion roadmap and deployment preparation). Verified origin https://github.com/SamarVishwakarma2006/Review-Trust.git. E00 is committed. Nothing staged, committed or pushed by the assistant.
+
+```powershell
+git status --short
+git diff
+git add AGENTS.md README.md SPEC.md docs/DECISIONS.md docs/HANDOFF.md docs/PRODUCT_ROADMAP.md docs/SOURCE_FEASIBILITY.md
+git diff --cached --stat
+git diff --cached
+git commit -m "docs: define product-link scope and source feasibility"
+git show --stat --oneline HEAD
+git status --short
+```
+
+Manual TODO: review/commit E01. For E02 choose country/currency, required retailers, category and monthly data budget; decide whether a cooperating merchant pilot is acceptable. Obtain provider/merchant permission and legitimate access through normal channels; keep credentials out of chat/Git. E02 can review access options but cannot pass its live-access gate or enable collection without evidence. No E02 work has started.
+
+ACTION REQUIRED — CODEX MODEL FOR NEXT STEP: current E01 feasibility; next E02 permission/access, Moderate complexity. Recommended GPT-6.1 Sol High; KEEP if selected, otherwise switch manually; fallback GPT-5.6 Sol High if selectable. Rationale: source-specific rights/access verification. Next verification is permitted-use evidence, scope/quotas and a minimal authorized source probe when access exists; runtime tests only if relevant code changes. Escalate concrete security/legal-access blockers to GPT-6 Astra High or qualified counsel as appropriate. No model switch claimed. Stop until `next`.
+
+---
+
 # Current handoff — E00 expansion roadmap
 
 REVIEWTRUST STEP HANDOFF: E00 COMPLETE (planning only). Next eligible step: E01 source/category feasibility in docs/PRODUCT_ROADMAP.md. This supersedes the next-action instructions in the historical Step 13 handoff below. Deployment remains deferred; contact blank; no URL fetching, real-data admission or model training implemented.
