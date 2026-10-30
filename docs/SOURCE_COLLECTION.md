@@ -1,6 +1,6 @@
 # E05 checkpoint — safeguards before live collection
 
-Date: 2026-10-31. Status: **BLOCKED for full E05 acceptance; offline guards implemented and tested.** E02 still has no approved merchant/provider, access or quotas. Actual connection-bound DNS/TLS, restricted egress, timed network reads and cancellation cleanup are not implemented or verified. E06 has not started. This checkpoint must not be described as a working crawler.
+Date: 2026-10-31. Status: **BLOCKED for full E05 acceptance; offline guards implemented and tested.** E02 still has no approved merchant/provider, access or quotas. A later [transport component](SOURCE_TRANSPORT.md) now implements pinned-IP metadata exchange, configured hostname-verified TLS, timed reads/writes and owned-stream cleanup with synthetic tests. A bounded resolver, actual resolver-to-peer/egress evidence, API admission/concurrency integration and permitted provider access are still missing. E06 has not started. This checkpoint must not be described as a working crawler.
 
 ## Implemented
 
@@ -15,11 +15,11 @@ Date: 2026-10-31. Status: **BLOCKED for full E05 acceptance; offline guards impl
 
 All counts are in-memory request/source state. These helpers retain no response text, credentials or upstream error messages. Source host/path are suppressed in repr. IP/URL values and provider strings are not included in fixed public errors. This does not authorize logging internal objects or guarantee provider privacy.
 
-## What is still required for E05
+## Remaining E05 work (updated by the transport continuation)
 
 1. Finish E02: actual source/market and permitted uses, appropriate scoped access, quotas/fees and expiry/revocation evidence. No credentials in chat/Git. Candidate store configuration cannot stand in for agreement or access.
-2. Select and implement a source-appropriate transport which pins validated DNS answers to the actual peer while verifying the original TLS host/SNI. No unchecked second resolution, ambient proxy/netrc/cookie auth, redirect or insecure fallback. Verify actual egress restrictions and private/metadata blocking outside mocks. Rights/revocation must be rechecked before output.
-3. Add source-bound secret handling and safe request orchestration, bounded DNS/connect/header/body waits, global source concurrency, streaming raw-header limits and reliable close/cancel behavior. Reserve quotas for every attempt; retain API admission until live I/O and any running worker are cleaned up. Do not treat helper clock checks as timed I/O cancellation.
+2. Integrate and verify the new metadata transport with a bounded source resolver and actual network restrictions; its synthetic stream tests establish configured peer/SNI behavior, not real DNS or provider security. No unchecked second resolution, ambient proxy/netrc/cookie auth, redirect or insecure fallback. Verify actual egress restrictions and private/metadata blocking outside mocks. Rights/revocation must be rechecked before output.
+3. Add approved source secret loading, bounded DNS and actual source-wide/API orchestration. The transport now bounds raw header reads and socket operations and closes owned streams; shared admission and source concurrency still require integration. Reserve quotas for every attempt; retain API admission until live I/O and any running worker are cleaned up. Do not treat helper clock checks as timed I/O cancellation.
 4. Verify actual provider access with a minimal permitted request and prove transport/cleanup behavior using isolated tests. Source-specific rate/cost caps, revoked source and other security gates must fail closed. No public route/front-end integration before the later E07/E08 contracts are implemented.
 
 The user may explicitly authorize further offline transport development, but no sequence of mocked tests can mark real access/egress evidence passed. E06 remains pending; do not silently advance after this partial checkpoint.

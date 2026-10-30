@@ -146,3 +146,8 @@ Framework guidance consulted locally: bundled Next.js server/client component an
 
 - D70: Implement reusable, transport-free request/destination/response/quota guards with an empty default registry and no dependency/credentials/network integration. Keep E05 BLOCKED: E02 rights/access and actual connection-bound TLS, restricted egress, timed I/O and cancellation cannot be certified by isolated accounting tests. No mock result is a real collection success; do not advance E06 automatically.
 - D71: Honor owner workflow preferences: open the local site after each step and identify backend-only changes honestly; use natural, descriptive human commit messages from this checkpoint onward. No automatic staging/committing/pushing.
+
+
+## E05 — Bounded metadata transport continuation
+
+- D72: Reuse installed AnyIO and h11 with native SSL rather than introduce an SDK/custom HTTP parser. Accept only the fixed metadata target from policy, supplied IPs revalidated at the boundary, original TLS hostname, secure default context and matching actual peer before authorization. Bound raw headers before normalization, wire/body bytes and actual await timeouts; use native forced close in finally. No DNS resolver, source activation or HTTP integration is claimed; full E05 remains blocked on E02 and actual egress/lifecycle integration evidence. Test with authored streams and local connector binding, never shared-global connector patches or real-source data.

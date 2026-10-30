@@ -1,6 +1,6 @@
 # ReviewTrust product-link expansion roadmap
 
-Planning checkpoint E00: complete. E01 feasibility: complete with explicit source-access blocker; see [SOURCE_FEASIBILITY.md](SOURCE_FEASIBILITY.md). E02: BLOCKED, no store/provider access (see [SOURCE_ACCESS.md](SOURCE_ACCESS.md)); E03: source-neutral design complete by explicit owner request; see [URL_INGESTION.md](URL_INGESTION.md). E04: authored-fixture parser complete ([SOURCE_PARSER.md](SOURCE_PARSER.md)); E05: offline safeguards implemented; BLOCKED for live acceptance ([SOURCE_COLLECTION.md](SOURCE_COLLECTION.md)). E06–E20: not started. E02 remains blocked. This document records the owner's request for a monitored, step-by-step expansion of the existing project. It does not claim any source access, trained model, dataset admission or deployed capability.
+Planning checkpoint E00: complete. E01 feasibility: complete with explicit source-access blocker; see [SOURCE_FEASIBILITY.md](SOURCE_FEASIBILITY.md). E02: BLOCKED, no store/provider access (see [SOURCE_ACCESS.md](SOURCE_ACCESS.md)); E03: source-neutral design complete by explicit owner request; see [URL_INGESTION.md](URL_INGESTION.md). E04: authored-fixture parser complete ([SOURCE_PARSER.md](SOURCE_PARSER.md)); E05: guards and an unwired metadata transport tested with synthetic streams; BLOCKED for live acceptance ([SOURCE_COLLECTION.md](SOURCE_COLLECTION.md)). E06–E20: not started. E02 remains blocked. This document records the owner's request for a monitored, step-by-step expansion of the existing project. It does not claim any source access, trained model, dataset admission or deployed capability.
 
 ## Target and boundaries
 
@@ -55,7 +55,7 @@ E01 starting Git baseline: main at ebb631b. The owner committed E00 and earlier 
 - You: make the approved source's credentials available locally; confirm any unavoidable request costs before they are incurred.
 - Me: implement the E03 network boundary with fixed permitted endpoints/product IDs where possible, bounded retries, timeout/byte limits, quota handling and safe errors. Keep fetching isolated from arbitrary user destinations; use mocked network tests and approved live probes.
 - Done: redirects/private targets/oversized bodies/timeouts are safely handled, secrets stay server-side, quotas and real provider access are verified. Security work cannot be waived for a demo.
-- Commit for the current partial checkpoint: `Add safeguards before collecting product reviews`. A later completion commit must describe actual verified collection.
+- Commit for the transport continuation: `Add a bounded connection for product metadata requests`. A later completion commit must describe actual verified collection.
 
 ### E06 — Normalize review samples and disclose coverage
 
@@ -169,7 +169,7 @@ E01 starting Git baseline: main at ebb631b. The owner committed E00 and earlier 
 - [ ] E02 — Permission and access (BLOCKED: no store/provider access; preparation documented)
 - [x] E03 — Contracts and network threat model (design only; E02/live access still blocked)
 - [x] E04 — Source parser and authored fixtures (offline only; no source admitted)
-- [ ] E05 — Controlled collection (offline safeguards tested; BLOCKED for source/transport evidence)
+- [ ] E05 — Controlled collection (guards/metadata transport tested; BLOCKED for source/resolver/egress/integration evidence)
 - [ ] E06 — Sample normalization and provenance
 - [ ] E07 — Product analysis API
 - [ ] E08 — Product-link website input

@@ -1,3 +1,34 @@
+# Current handoff — E05 bounded metadata transport continuation
+
+Date: 2026-10-31 (Asia/Calcutta).
+
+REVIEWTRUST STEP HANDOFF: E05 BLOCKED for full live acceptance; a further transport component is implemented and tested. E02 still lacks a permitted source/access. Bounded source DNS, actual egress evidence, reviewed secret loading and public admission/concurrency orchestration are pending. E06 has not started. No source registration, real network probe, dataset admission, training or deployment.
+
+Changes: api/app/source_transport.py, api/tests/test_source_transport.py and docs/SOURCE_TRANSPORT.md. Single fixed metadata GET uses existing AnyIO/h11/SSL: numeric checked peer, original TLS hostname/default verification, actual peer before auth, bounded raw headers/wire/body, timed connect/write/read/overall budget, h11 framing, strict JSON, source revocation/expiry check and forced owned-stream cleanup. No browser crawler, dependency or serving route changes. SOURCE_COLLECTION, URL_INGESTION, SPEC, THREAT_MODEL, README, PRODUCT_ROADMAP, AGENTS, DECISIONS (D72) and this handoff explain current capabilities and remaining gates.
+
+Actual verification: ./scripts/check.ps1 PASS, exit 0: 358 backend tests (28 new synthetic transport cases), Ruff lint/format (21 API files), 28 offline tests/Ruff (eight files), 27 frontend tests/four files, dependency consistency, ESLint, typecheck and production build. Both existing mechanics and benchmark frozen reports verify unchanged. Initial restricted async run was interrupted; synthetic tests passed outside that restriction. Large automatic byte-payload test IDs caused initial setup errors; short IDs corrected setup and all cases pass. No test/guard disabled. Documentation link/tracker and Git whitespace checks pass. No live certificate handshake, DNS rebinding, provider/network egress or remote CI claim.
+
+Browser demonstration: local site returned 200 and was opened visibly at http://127.0.0.1:3000/#analyze; existing paste/CSV form remains. Current component is not called from the website, so no product-link feature is simulated. Existing tab controls failed, so a fresh preview tab was retained. Servers left available for owner review.
+
+Git: started clean on main at e7f72d9 (Add safeguards before collecting product reviews). Origin verified https://github.com/SamarVishwakarma2006/Review-Trust.git. Nothing staged/committed/pushed. This is a component checkpoint, not an E05 completion claim:
+
+```powershell
+git status --short
+git diff
+git add api/app/source_transport.py api/tests/test_source_transport.py AGENTS.md README.md SPEC.md docs/DECISIONS.md docs/HANDOFF.md docs/PRODUCT_ROADMAP.md docs/SOURCE_COLLECTION.md docs/SOURCE_TRANSPORT.md docs/THREAT_MODEL.md docs/URL_INGESTION.md
+git diff --cached --stat
+git diff --cached
+git commit -m "Add a bounded connection for product metadata requests"
+git show --stat --oneline HEAD
+git status --short
+```
+
+Manual TODO: review/commit continuation; obtain a permitted source for E02. No credentials in chat/Git. Continue E05 resolver/egress/orchestration and authorized provider verification before marking it complete; do not automatically start E06. Contact stays blank; deployment deferred.
+
+ACTION REQUIRED — CODEX MODEL FOR NEXT STEP: current E05 BLOCKED; next resume E05. Recommendation GPT-6.1 Sol High, KEEP if selected; fallback GPT-5.6 Sol High if selectable. High complexity: bounded resolver and actual network/admission integration. Escalate concrete DNS/egress/cancellation blockers to GPT-6 Astra High, fallback GPT-6.1 Sol High. No switch claimed. Next checks must distinguish synthetic stream evidence from real resolver/provider evidence, preserve rights/quotas and safe cleanup, then reopen browser. Wait for owner instruction.
+
+---
+
 # Current handoff — E05 safeguards checkpoint
 
 Date: 2026-10-31 (Asia/Calcutta).
