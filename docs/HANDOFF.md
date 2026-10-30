@@ -1,3 +1,32 @@
+# Current handoff — E02 source access
+
+Date: 2026-10-30 (Asia/Calcutta).
+
+REVIEWTRUST STEP HANDOFF: E02 BLOCKED — owner explicitly answered “I have no store or provider access yet.” Access preparation is reviewable in docs/SOURCE_ACCESS.md; actual permission and working live access remain unverified. E03 has not started. This supersedes historical next-action instructions below. Deployment deferred, contact blank, NO TRAIN and score withholding persist.
+
+Changes/files: SOURCE_ACCESS.md adds an unapproved source card, distinct collection/display/retention/training rights, narrow Read-access guidance, owner actions, an unsent merchant message and a future minimal authorized probe plan. README, SPEC, AGENTS, PRODUCT_ROADMAP tracker, DECISIONS (D65) and this handoff record E02 BLOCKED. Official WooCommerce merchant/key and authentication/role documentation inspected in browser after an empty search-tool error. Read keys inherit user capabilities and may expose broader store information; Read alone is not product-only scope or a data-use license.
+
+Actual verification: documentation local links, E02/E03 tracker consistency and Git whitespace checks passed. No runtime code changed or application tests rerun. No account/key created, permission granted, message sent, terms accepted, review payload retrieved, real source/dataset admitted, training or deployment. No successful live probe or remote CI result is claimed.
+
+Git: started clean on main at c8e12a0 (docs: define product-link scope and source feasibility). E01 was manually committed. Origin verified: https://github.com/SamarVishwakarma2006/Review-Trust.git. Nothing staged/committed/pushed by the assistant. This is a blocked-step preparation checkpoint, not a completion commit:
+
+```powershell
+git status --short
+git diff
+git add AGENTS.md README.md SPEC.md docs/DECISIONS.md docs/HANDOFF.md docs/PRODUCT_ROADMAP.md docs/SOURCE_ACCESS.md
+git diff --cached --stat
+git diff --cached
+git commit -m "docs: prepare source access review and record E02 blocker"
+git show --stat --oneline HEAD
+git status --short
+```
+
+Manual TODO: identify a cooperating merchant or a legitimate review-data provider, or specify that Amazon/Flipkart must be first. Obtain allowed-use evidence and suitable access through normal channels; country/currency/category/budget remain undecided. Share a public source URL and non-sensitive permission summary when available, never credentials in chat/Git. Optional request draft is not legal advice and has not been sent. A synthetic-only demo would require explicit rescoping and would not satisfy real-source acceptance.
+
+ACTION REQUIRED — CODEX MODEL FOR NEXT STEP: current E02 BLOCKED; next resume E02 once access evidence exists, not E03. Recommendation GPT-6.1 Sol High, KEEP if selected; fallback GPT-5.6 Sol High if selectable. Complexity Moderate, blocker external source access. Next verification: source-use decision and minimal permitted GET after approved destination, scope, quotas and credentials exist. Escalate concrete security scope issues to GPT-6 Astra High and unclear rights to qualified review. No model switch claimed. Wait for the owner; do not bypass the gate on another `next`.
+
+---
+
 # Current handoff — E01 source feasibility
 
 Date: 2026-10-30 (Asia/Calcutta).

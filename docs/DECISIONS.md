@@ -123,3 +123,8 @@ Framework guidance consulted locally: bundled Next.js server/client component an
 ## E01 — Source feasibility
 
 - D64: Complete documentation-level source feasibility with a conditional merchant-authorized WooCommerce/headphones pilot recommendation and an explicit unresolved live-access blocker. Catalog/average-rating APIs do not establish review-body access. Amazon's current docs direct PA-API users to Creators API; Best Buy reviewed fields are aggregates; Bazaarvoice documents Enterprise/client prerequisites; Flipkart review-text access remains unverified. Country, final retailer/category, budget and actual permissions/access require owner choices in E02. No data source, dataset, training, purchase or network implementation is admitted by this research.
+
+
+## E02 — Access preparation and live-source blocker
+
+- D65: The owner confirmed no store/provider access. Record E02 as BLOCKED rather than equating a technical API schema, a Read key or a synthetic store with permission to analyze real reviews. Prepare an unapproved source card, separate-use checklist, least-privilege access guidance, unsent merchant request and future minimal probe plan. No access grant, merchant message, agreement, data request or source admission occurred. Keep E03 dependent work pending until the gate is satisfied or the owner explicitly changes scope.

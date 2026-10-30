@@ -1,6 +1,6 @@
 # ReviewTrust product-link expansion roadmap
 
-Planning checkpoint E00: complete. E01 feasibility: complete with explicit source-access blocker; see [SOURCE_FEASIBILITY.md](SOURCE_FEASIBILITY.md). E02–E20: not started. This document records the owner's request for a monitored, step-by-step expansion of the existing project. It does not claim any source access, trained model, dataset admission or deployed capability.
+Planning checkpoint E00: complete. E01 feasibility: complete with explicit source-access blocker; see [SOURCE_FEASIBILITY.md](SOURCE_FEASIBILITY.md). E02: BLOCKED, no store/provider access (see [SOURCE_ACCESS.md](SOURCE_ACCESS.md)); E03–E20: not started. This document records the owner's request for a monitored, step-by-step expansion of the existing project. It does not claim any source access, trained model, dataset admission or deployed capability.
 
 ## Target and boundaries
 
@@ -166,7 +166,7 @@ E01 starting Git baseline: main at ebb631b. The owner committed E00 and earlier 
 
 - [x] E00 — Record expansion roadmap (documentation only)
 - [x] E01 — Source and category feasibility (report complete; source access unresolved)
-- [ ] E02 — Permission and access
+- [ ] E02 — Permission and access (BLOCKED: no store/provider access; preparation documented)
 - [ ] E03 — Contracts and network threat model
 - [ ] E04 — Source parser and authored fixtures
 - [ ] E05 — Controlled collection
