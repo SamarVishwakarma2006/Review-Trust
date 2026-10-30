@@ -1,3 +1,32 @@
+# Current handoff — E04 offline source parser
+
+Date: 2026-10-31 (Asia/Calcutta).
+
+REVIEWTRUST STEP HANDOFF: E04 COMPLETE — pure source parser with authored fixtures and verification. E02 remains BLOCKED; E05 bounded collection is next but cannot satisfy live acceptance without source permission/access and E03 transport/egress evidence. No network/HTTP/frontend integration, source/dataset admission, training or deployment. This supersedes historical next-action entries below.
+
+Changes/files: api/app/source_parser.py (rt-woocommerce-parser-0.1.0), api/tests/test_source_parser.py and two authored fixtures under api/tests/fixtures/. Product identity/variants, source UTC/null metadata and canonical text/rating validation; inert HTML extraction; unknown/PII field discard; safe fixed errors; byte/page/raw-field/aggregate rejection; within-page duplicate-ID rejection with distinct-ID duplicate text retained. No source URL is returned as a fetch target. Internal text/title still need the existing masking/normalization boundary before signals/output. See docs/SOURCE_PARSER.md. Updated README, SPEC, AGENTS, PRODUCT_ROADMAP, URL_INGESTION, THREAT_MODEL, DECISIONS (D69) and this handoff.
+
+Actual verification: final ./scripts/check.ps1 PASS, exit 0. pip check clean; 251 backend tests (57 new parser cases); backend Ruff lint/format (17 files); 28 offline tests plus Ruff (eight files); 27 frontend tests across four files, ESLint, typecheck and production build passed. Current frozen mechanics verification: mechanics_passed no_train; benchmark verification: benchmark_record_verified no_train. Existing source-bound implementation files and reports unchanged. Initial lint found one overlong line, corrected by formatting; final checks pass. Documentation links/tracker and git diff --check passed. No live provider/proxy, source rights, hosted capacity or remote CI result claimed.
+
+Git: started clean on main at d51c5e7 (docs: specify bounded product-link ingestion and threat controls). Verified origin https://github.com/SamarVishwakarma2006/Review-Trust.git. Nothing staged/committed/pushed by the assistant.
+
+```powershell
+git status --short
+git diff
+git add api/app/source_parser.py api/tests/test_source_parser.py api/tests/fixtures/source_product.json api/tests/fixtures/source_reviews.json AGENTS.md README.md SPEC.md docs/DECISIONS.md docs/HANDOFF.md docs/PRODUCT_ROADMAP.md docs/SOURCE_PARSER.md docs/THREAT_MODEL.md docs/URL_INGESTION.md
+git diff --cached --stat
+git diff --cached
+git commit -m "feat: parse the first supported product source"
+git show --stat --oneline HEAD
+git status --short
+```
+
+Manual TODO: review/commit E04; obtain a permitted real source for E02. Contact stays blank and deployment deferred. No credentials in chat/Git. Authored response mechanics cannot be marketed as a live supported retailer. Cross-page collection/provenance and public v2 integration remain later steps.
+
+ACTION REQUIRED — CODEX MODEL FOR NEXT STEP: current E04 offline parser; next E05 bounded collection, High complexity because of DNS-to-connection/TLS/egress and lifecycle controls. Recommended GPT-6.1 Sol High; KEEP if selected, fallback GPT-5.6 Sol High if selectable. No switch claimed. Rationale: implement against strict E03 controls, test isolated transport/timeout/byte/error behavior; actual live operation remains gated by E02. Escalate concrete transport/security blockers to GPT-6 Astra High, fallback GPT-6.1 Sol High. Stop until `next`.
+
+---
+
 # Current handoff — E03 URL-ingestion design
 
 Date: 2026-10-31 (Asia/Calcutta).

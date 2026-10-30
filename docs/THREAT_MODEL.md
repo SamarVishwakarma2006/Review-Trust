@@ -99,3 +99,8 @@ Owner-authorized independent design dated 2026-10-31: [URL_INGESTION.md](URL_ING
 | Timeout/cancellation orphan work | One deadline from body through whole-envelope capped serialization; close upstream streams/cancel I/O and retain admission for running CPU work | Browser AbortController alone does not establish server cleanup |
 
 Review source: [OWASP SSRF Prevention Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/Server_Side_Request_Forgery_Prevention_Cheat_Sheet.html), read 2026-10-31 in the browser. Source principles informed design; specific limits are unmeasured project choices. E04 synthetic fixture work can proceed independently if requested; live collection, source admission, production privacy/egress/capacity and E20 deployment remain gated. No new security control is claimed implemented by this documentation.
+
+
+## E04 offline parser implementation evidence
+
+The new source parser is not imported by serving endpoints and cannot fetch a URL. Authored synthetic fixture tests cover strict source-byte decoding, safe fixed errors, schema/identity/UTC/rating checks, PII field exclusion, inert HTML extraction, page/field/aggregate rejection and preserved repeated wording. Repr suppresses raw content, but internal records are not safe public output or log payloads: common masking and post-normalization ceilings still belong to the shared analysis boundary. HTMLParser returns plain text, including decoded tag-looking prose, so future consumers must retain React escaping. No source rights or transport/egress/admission guarantees are established by this offline parser. Cross-page overlap and variant provenance remain E06; E02 access remains blocked.

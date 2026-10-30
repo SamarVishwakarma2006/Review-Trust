@@ -1,0 +1,9 @@
+{
+  "id": 101,
+  "slug": "example-headphones",
+  "name": "<b>Authored Example Headphones</b>",
+  "type": "variable",
+  "variations": [102, 103],
+  "permalink": "https://untrusted.example/not-a-fetch-target",
+  "description": "Authored fixture only; no real product or review data."
+}

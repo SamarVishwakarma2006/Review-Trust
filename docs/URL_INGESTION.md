@@ -135,3 +135,8 @@ E04 can implement only authored adapter/parser fixtures on explicit `next`; this
 - v2 envelope/UI rejection of old/forged numeric outputs, no raw URLs in error/logs, bounded envelope serialization, no credential/browser persistence and responsive accessible source/coverage display. Preserve all existing v1 regressions and source-bound reports intentionally.
 
 Design follows the allowlisting, redirect, connection-time DNS and network-layer principles in the [OWASP SSRF Prevention Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/Server_Side_Request_Forgery_Prevention_Cheat_Sheet.html), read 2026-10-31. These budgets and v2 choices are project design decisions, not OWASP-prescribed values or verified source capacity. Current E03 checks cover document consistency only; none of the future network controls or test cases is claimed implemented.
+
+
+## E04 implementation checkpoint
+
+The offline product/page parser and authored fixtures are implemented as documented in [SOURCE_PARSER.md](SOURCE_PARSER.md). This is one internal component of the design; the endpoint, registry, collector, proposed v2 public contract and network controls remain unimplemented. No source is admitted. E04's stricter within-page duplicate-ID rejection is explicit; cross-page overlap handling remains E06. Original budget hypotheses require later integrated verification.

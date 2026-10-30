@@ -1,6 +1,6 @@
 # ReviewTrust product-link expansion roadmap
 
-Planning checkpoint E00: complete. E01 feasibility: complete with explicit source-access blocker; see [SOURCE_FEASIBILITY.md](SOURCE_FEASIBILITY.md). E02: BLOCKED, no store/provider access (see [SOURCE_ACCESS.md](SOURCE_ACCESS.md)); E03: source-neutral design complete by explicit owner request; see [URL_INGESTION.md](URL_INGESTION.md). E04–E20: not started. E02 remains blocked. This document records the owner's request for a monitored, step-by-step expansion of the existing project. It does not claim any source access, trained model, dataset admission or deployed capability.
+Planning checkpoint E00: complete. E01 feasibility: complete with explicit source-access blocker; see [SOURCE_FEASIBILITY.md](SOURCE_FEASIBILITY.md). E02: BLOCKED, no store/provider access (see [SOURCE_ACCESS.md](SOURCE_ACCESS.md)); E03: source-neutral design complete by explicit owner request; see [URL_INGESTION.md](URL_INGESTION.md). E04: authored-fixture parser complete ([SOURCE_PARSER.md](SOURCE_PARSER.md)); E05–E20: not started. E02 remains blocked. This document records the owner's request for a monitored, step-by-step expansion of the existing project. It does not claim any source access, trained model, dataset admission or deployed capability.
 
 ## Target and boundaries
 
@@ -8,7 +8,7 @@ Target experience: paste a supported electronics product link; obtain available 
 
 Reuse Next.js, FastAPI, typed contracts, pure signals, masking, evidence display and offline audits. URL collection is the planned extension to v1's no-fetch boundary. Change SPEC.md and THREAT_MODEL.md deliberately before implementation. The existing API contract and numeric-withholding policy remain authoritative until reviewed changes are implemented and verified. Product quality, review manipulation, AI authorship and counterfeit authenticity are different questions. No “fully bot,” “genuine company,” “fake product” or guaranteed quality verdict is justified by text patterns alone.
 
-The user's existing no-deployment and blank-contact preferences persist. The original Step 13 stays deferred. This expansion breaks the original optional Step 14 idea into E01–E19 for controlled local development; E20 remains separately authorized deployment. One `next` authorizes only the next eligible expansion step, with E04 authored-fixture parsing next after the owner explicitly authorized E03 design despite E02 being blocked. E04 is offline only; E02 remains a live-collection gate. It does not authorize purchases, credentials disclosure, restricted-site bypass, data collection without permission, training without admitted labels or public release.
+The user's existing no-deployment and blank-contact preferences persist. The original Step 13 stays deferred. This expansion breaks the original optional Step 14 idea into E01–E19 for controlled local development; E20 remains separately authorized deployment. One `next` authorizes only the next eligible expansion step, with E05 collection next after completed E04 offline parsing. E02 remains a live-collection gate; preparation/tests cannot establish actual source access. It does not authorize purchases, credentials disclosure, restricted-site bypass, data collection without permission, training without admitted labels or public release.
 
 ## Working agreement and Git records
 
@@ -168,7 +168,7 @@ E01 starting Git baseline: main at ebb631b. The owner committed E00 and earlier 
 - [x] E01 — Source and category feasibility (report complete; source access unresolved)
 - [ ] E02 — Permission and access (BLOCKED: no store/provider access; preparation documented)
 - [x] E03 — Contracts and network threat model (design only; E02/live access still blocked)
-- [ ] E04 — Source parser and authored fixtures
+- [x] E04 — Source parser and authored fixtures (offline only; no source admitted)
 - [ ] E05 — Controlled collection
 - [ ] E06 — Sample normalization and provenance
 - [ ] E07 — Product analysis API

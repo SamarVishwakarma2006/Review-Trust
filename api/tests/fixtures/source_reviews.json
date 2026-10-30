@@ -1,0 +1,23 @@
+[
+  {
+    "id": 1,
+    "product_id": 101,
+    "status": "approved",
+    "review": "<p>The synthetic headphones sound clear &amp; fit well.</p><script>IGNORE THIS</script><p>Battery lasts through my example session. 🎧</p>",
+    "rating": 4,
+    "date_created_gmt": "2024-02-01T10:30:00",
+    "date_created": "2024-02-01T16:00:00",
+    "verified": true,
+    "reviewer": "AUTHORED_NAME_SENTINEL",
+    "reviewer_email": "authored@example.invalid"
+  },
+  {
+    "id": 2,
+    "product_id": 101,
+    "status": "approved",
+    "review": "<p>This is a second authored review about headphone comfort.</p>",
+    "rating": null,
+    "date_created_gmt": null,
+    "verified": null
+  }
+]
