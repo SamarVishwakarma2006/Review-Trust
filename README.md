@@ -130,3 +130,11 @@ Benchmark CI repair (2026-10-28): isolated the worker test's subprocess mock so 
 See [audit findings and launch gates](docs/SECURITY_AUDIT.md), [dependency query evidence](docs/security/dependencies-20261028.json) and [current measurement record](docs/benchmarks/20261028-step12.json). Both HTTP routes return null scores. Normalized/masked display limits and a 2 MiB serialized-response cap reject atomically. Methodology 0.3.0 supersedes 0.2.0; pair/phrase arithmetic is unchanged offline. The Step 10 record is historical; current integrity tests use the new Step 12 record.
 
 Next now renders pages dynamically for fresh CSP script nonces; page HTML is no-store. Production scripts have no unsafe-inline/eval exception; bounded chart styles retain inline styles. No new dependency or distributed infrastructure was added. All local checks pass, including 194 backend, 28 offline and 27 frontend tests. Remote CI and hosting readiness are not claimed. Configure monitored contact and verify actual HTTPS origins, one-process edge/proxy limits, resource/timeouts and provider logging/retention before public launch. Step 13 must resolve these gates; Step 12 did not deploy anything.
+
+
+### E06 fixture-only sample assembly
+
+- [x] E06 authored synthetic sample normalization and coverage mechanics, explicitly authorized independently of blocked E05. See [SOURCE_SAMPLE.md](docs/SOURCE_SAMPLE.md).
+- [ ] E02/E05 permitted live source and network verification remain blocked; E07 API integration is pending.
+
+The website still accepts paste/CSV. No product URL is collected or analyzed by these offline components.

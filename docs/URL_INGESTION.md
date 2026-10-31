@@ -150,3 +150,10 @@ The offline product/page parser and authored fixtures are implemented as documen
 ## E05 transport continuation
 
 [SOURCE_TRANSPORT.md](SOURCE_TRANSPORT.md) records an unwired bounded metadata transport built with existing AnyIO/h11 and tested with synthetic streams. Numeric peer/TLS-host configuration, pre-auth socket-peer checks, bounded raw header/HTTP reads, actual I/O timeouts and owned-stream cleanup are now implemented as internal components. A stricter per-exchange raw wire cap of 278,528 bytes includes chunk framing overhead. No bounded resolver, source registry activation, egress/provider proof or serving integration is supplied. E02/full E05 remain BLOCKED; E06 is not started. This is not a functional public URL analyzer.
+
+
+## E06 independent fixture checkpoint
+
+E06 owner override (2026-10-31): owner explicitly authorized authored synthetic fixtures only while keeping live collection blocked. Offline sample assembly is COMPLETE in api/app/source_sample.py; see [SOURCE_SAMPLE.md](SOURCE_SAMPLE.md). E02/E05 live gates remain BLOCKED; E07 is pending and no source, endpoint or URL UI is enabled. SourceSample is an internal authored_fixture record, never a v1 submission with a forged origin or a public v2 response. Earlier E06-not-started statements are historical.
+
+The explicit exhaustion marker is authored input, not verified provider evidence. A short page never proves exhaustion. No pagination requests are made; byte/page buffers are assembled offline. Network errors cannot be supplied as a successful partial page. E07 must preserve the distinct v2 origin and null-analysis empty contract when it is implemented.

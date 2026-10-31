@@ -1,3 +1,33 @@
+# Current handoff — E06 authored-fixture sample assembly
+
+Date: 2026-10-31 (Asia/Calcutta).
+
+REVIEWTRUST STEP HANDOFF: E06 COMPLETE for explicitly authorized authored synthetic fixtures only. Owner selected this independent path while keeping live collection blocked. E02/E05 remain BLOCKED; E07 pending. No source, URL endpoint, live collection, dataset, training or deployment is admitted.
+
+Changes: api/app/source_sample.py and api/tests/test_source_sample.py implement bounded sequential page assembly, stable-ID overlap/conflict handling, preserved duplicate prose/nulls, known-date newest-first checks, UTC windows, explicit exhaustion versus partial reasons, unknown totals/variant limits, existing masking and normalized bounds. docs/SOURCE_SAMPLE.md records policy and limitations. README, SPEC, AGENTS, PRODUCT_ROADMAP, URL_INGESTION, THREAT_MODEL and DECISIONS D73 updated. No new dependency or serving imports. Fixture provenance is explicit; do not forge v1 origin or call fixture output live collected evidence.
+
+Actual verification: scripts/check.ps1 PASS exit 0: 377 backend tests (19 new E06 cases), 28 offline tests, 27 frontend tests; pip consistency, Ruff lint/format, ESLint, typecheck and production build pass. Mechanics and current benchmark frozen reports verify unchanged. git diff --check passes. No remote CI or live provider verification claimed.
+
+Browser: initial restricted server could not serve the browser; stopped only the server started in this turn, restarted npm dev outside socket restrictions. Successfully opened http://127.0.0.1:3000/#analyze visibly; paste/CSV controls verified, unchanged. Server remains running for review. No simulated crawler UI.
+
+Git: started clean on main at e6bc117 (Add a bounded connection for product metadata requests). Nothing staged/committed/pushed by assistant. Manual commands:
+
+```powershell
+git status --short
+git diff
+git add api/app/source_sample.py api/tests/test_source_sample.py docs/SOURCE_SAMPLE.md AGENTS.md README.md SPEC.md docs/DECISIONS.md docs/HANDOFF.md docs/PRODUCT_ROADMAP.md docs/THREAT_MODEL.md docs/URL_INGESTION.md
+git diff --cached
+git commit -m "Track review sample coverage and pagination overlap"
+git show --stat --oneline HEAD
+git status --short
+```
+
+Manual TODO: review selection policy and commit. Obtain permitted source evidence for E02; E05 resolver/egress/secret/admission/live acceptance remains pending. E07 API integration is next in roadmap, but must retain live gates and explicit fixture provenance. No live activation follows from next. Contact blank, public score withheld, NO TRAIN and deployment deferral persist.
+
+ACTION REQUIRED — CODEX MODEL FOR NEXT STEP: current E06 fixture scope complete; next E07 API integration subject to existing E02/E05 gates. Recommend GPT-6.1 Sol High; KEEP if selected, fallback GPT-5.6 Sol High if available. High complexity: typed v2 contract, admission/deadlines/cleanup and atomic errors; preserve v1 and intentional report bindings, full checks and browser demonstration. Escalate concrete security blockers to GPT-6 Astra High (fallback GPT-6.1 Sol High). User manually selects; no switch claimed. Stop until next.
+
+---
+
 # Current handoff — E05 bounded metadata transport continuation
 
 Date: 2026-10-31 (Asia/Calcutta).

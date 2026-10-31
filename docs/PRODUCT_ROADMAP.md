@@ -1,6 +1,6 @@
 # ReviewTrust product-link expansion roadmap
 
-Planning checkpoint E00: complete. E01 feasibility: complete with explicit source-access blocker; see [SOURCE_FEASIBILITY.md](SOURCE_FEASIBILITY.md). E02: BLOCKED, no store/provider access (see [SOURCE_ACCESS.md](SOURCE_ACCESS.md)); E03: source-neutral design complete by explicit owner request; see [URL_INGESTION.md](URL_INGESTION.md). E04: authored-fixture parser complete ([SOURCE_PARSER.md](SOURCE_PARSER.md)); E05: guards and an unwired metadata transport tested with synthetic streams; BLOCKED for live acceptance ([SOURCE_COLLECTION.md](SOURCE_COLLECTION.md)). E06–E20: not started. E02 remains blocked. This document records the owner's request for a monitored, step-by-step expansion of the existing project. It does not claim any source access, trained model, dataset admission or deployed capability.
+Planning checkpoint E00: complete. E01 feasibility: complete with explicit source-access blocker; see [SOURCE_FEASIBILITY.md](SOURCE_FEASIBILITY.md). E02: BLOCKED, no store/provider access (see [SOURCE_ACCESS.md](SOURCE_ACCESS.md)); E03: source-neutral design complete by explicit owner request; see [URL_INGESTION.md](URL_INGESTION.md). E04: authored-fixture parser complete ([SOURCE_PARSER.md](SOURCE_PARSER.md)); E05: guards and an unwired metadata transport tested with synthetic streams; BLOCKED for live acceptance ([SOURCE_COLLECTION.md](SOURCE_COLLECTION.md)). E06: authored-fixture sample mechanics complete by explicit owner override; E07–E20: not started. E02 remains blocked. This document records the owner's request for a monitored, step-by-step expansion of the existing project. It does not claim any source access, trained model, dataset admission or deployed capability.
 
 ## Target and boundaries
 
@@ -170,7 +170,7 @@ E01 starting Git baseline: main at ebb631b. The owner committed E00 and earlier 
 - [x] E03 — Contracts and network threat model (design only; E02/live access still blocked)
 - [x] E04 — Source parser and authored fixtures (offline only; no source admitted)
 - [ ] E05 — Controlled collection (guards/metadata transport tested; BLOCKED for source/resolver/egress/integration evidence)
-- [ ] E06 — Sample normalization and provenance
+- [x] E06 — Sample normalization and provenance (authored fixtures only; explicit owner override, live integration pending)
 - [ ] E07 — Product analysis API
 - [ ] E08 — Product-link website input
 - [ ] E09 — Product feedback summaries
@@ -191,3 +191,8 @@ First useful URL-only milestone: E08. Quality and comparison milestone: E14. Bra
 ## Model recommendations
 
 These are recommendations for manual selection, not claims of availability or automatic switches. E00–E02 and E16: GPT-6.1 Sol High for scope/evidence review; E03 and E19: GPT-6 Astra High for security review; E04–E08 and E10–E15: GPT-6.1 Sol High for implementation; E09, E17–E18: GPT-6.1 Sol High for evidence/ML work; E20: GPT-6.1 Sol Medium unless concrete security blockers require Astra High. Fallbacks: Astra -> GPT-6.1 Sol High; Sol -> GPT-5.6 Sol at the same effort, if selectable. Keep Ponytail full: reuse native features, add infrastructure and dependencies only for measured needs.
+
+
+## E06 owner-authorized independent checkpoint — 2026-10-31
+
+Owner explicitly authorized E06 using authored synthetic fixtures only, keeping live collection blocked. This supersedes the earlier prohibition on automatically advancing E06: this is explicit authorization, not a passed E05 gate. Offline assembly, overlap/conflict checks, newest-first known-date checks, masking and bounded coverage provenance are complete; see [SOURCE_SAMPLE.md](SOURCE_SAMPLE.md). Provider limits/actual exhaustion/sort and live variant attribution remain unverified. E07 remains pending; no automatic live API/source activation. Commit: `Track review sample coverage and pagination overlap`.

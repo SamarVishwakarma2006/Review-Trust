@@ -55,3 +55,6 @@ E05 partial checkpoint: api/app/source_collection.py implements offline request/
 
 
 E05 transport continuation: source_transport.py adds an unwired fixed product-metadata GET with native AnyIO/h11, numeric IP/original TLS host, verified-default SSL, pre-auth peer check, bounded raw reads/I/O timeouts and forced owned-stream cleanup. Twenty-eight synthetic-stream cases pass. Default registry remains empty; no bounded resolver/source access/egress verification or public admission/concurrency integration. E02/full E05 remain BLOCKED; E06 not started. Earlier “no transport implemented” statements refer to the prior checkpoint, not current component code. Read docs/SOURCE_TRANSPORT.md; never claim simulated certificate/peer tests prove live TLS/DNS/egress. Human commit messages and after-step browser demonstration persist.
+
+
+E06 owner override (2026-10-31): owner explicitly authorized authored synthetic fixtures only while keeping live collection blocked. Offline sample assembly is COMPLETE in api/app/source_sample.py; see docs/SOURCE_SAMPLE.md. E02/E05 live gates remain BLOCKED; E07 is pending and no source, endpoint or URL UI is enabled. SourceSample is an internal authored_fixture record, never a v1 submission with a forged origin or a public v2 response. Earlier E06-not-started statements are historical.
