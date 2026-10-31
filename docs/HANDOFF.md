@@ -1,3 +1,35 @@
+# Current handoff — E07 collected-result contracts
+
+Date: 2026-10-31 (Asia/Calcutta).
+
+REVIEWTRUST STEP HANDOFF: E07 contracts component implemented/verified; full E07 remains PARTIAL. Production success assembly/orchestration and matching consumed frontend contracts are pending. E02/E05 permission/network gates remain BLOCKED; E08 not started. No source, network access, model training or deployment enabled.
+
+Changes: api/app/product_results.py defines source/product/collection envelope and schema-v2 collected analysis subclasses of existing result models. PublicScore forbids numbers/experimental status and requires the public withholding reason. Cross-field validators bind nested analysis/coverage counts, fetched/overlap/retained accounting, page bounds, complete/empty/partial stop reasons, known/unknown total scope, aware UTC windows/retrieval time and selected-variant labels. Existing v1 result/input and fixture-analysis origin are unchanged. These are output-shape contracts, not authorization: canonical registry host/path binding, masking during assembly, byte/deadline checks and actual source integration are still required. Structural URL checks alone do not approve any destination.
+
+api/tests/test_product_results.py has 31 authored contract cases, including hypothetical complete/partial/empty collected-wire shapes, unknown-zero-partial, serialization round trip, invalid origin/version/count/window/variant/link/score/total combinations. Test examples are authored, not collected data; no fixture result is relabeled in production. Models are not imported by production success code or the frontend. No new dependency. README/SPEC/AGENTS/PRODUCT_API/URL_INGESTION/THREAT_MODEL/PRODUCT_ROADMAP and DECISIONS D76 updated.
+
+Actual verification: scripts/check.ps1 PASS exit 0: 429 backend tests, 28 offline tests, 27 frontend tests; dependency consistency, Ruff lint/format, ESLint, typecheck and production build all pass. Current mechanics and docs/benchmarks/20261031-e07-fixture-analysis.json verify unchanged. Existing bound implementations were unchanged, so no snapshot regeneration. git diff --check passes. No remote CI/live-source claim.
+
+Browser: visibly opened http://127.0.0.1:3000/#analyze; paste/CSV controls remain unchanged and preview retained. No live collection result simulated.
+
+Git: started clean on main at b8c5572 (Analyze authored review samples with explicit fixture provenance). Nothing staged/committed/pushed. Manual commands:
+
+```powershell
+git status --short
+git diff
+git add api/app/product_results.py api/tests/test_product_results.py AGENTS.md README.md SPEC.md docs/PRODUCT_API.md docs/PRODUCT_ROADMAP.md docs/HANDOFF.md docs/THREAT_MODEL.md docs/URL_INGESTION.md docs/DECISIONS.md
+git diff --cached
+git commit -m "Validate product analysis results and collection coverage"
+git show --stat --oneline HEAD
+git status --short
+```
+
+Manual TODO: review/commit component. Resume E07 output assembly and admitted lifecycle/error/byte/cancellation tests without enabling live collection or forging provenance. Actual live completion requires permitted E02 source and verified E05 networking. Do not mark E07 complete or auto-start E08. Public scores remain withheld, NO TRAIN, contact blank and deployment deferred.
+
+ACTION REQUIRED — CODEX MODEL FOR NEXT STEP: current E07 contracts component; next resume E07 integration. Recommend keep GPT-6.1 Sol High if selected; fallback GPT-5.6 Sol High if selectable. High complexity: source binding/provenance, bounded serialization and lifecycle. Run focused API regressions, existing v1/frozen reports/full checks and browser preview; escalate concrete security blockers to GPT-6 Astra High (fallback GPT-6.1 Sol High). User manually selects; no switch claimed. Stop until next.
+
+---
+
 # Current handoff — E07 authored-fixture analysis continuation
 
 Date: 2026-10-31 (Asia/Calcutta).

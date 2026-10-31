@@ -70,3 +70,6 @@ E07 fixture-analysis continuation (2026-10-31): api/app/fixture_analysis.py now 
 
 
 Current E07 fixture-analysis benchmark: docs/benchmarks/20261031-e07-fixture-analysis.json. Intentional synthetic rerun binds the shared analyzer extraction; prior E07 ingress and Step 12 records remain historical. Mechanics comparison confirms all outcomes unchanged, with only implementation hashes and report checksum refreshed. No training, timing equality or independent accuracy claim.
+
+
+E07 collected-result contracts checkpoint (2026-10-31): api/app/product_results.py defines typed source/product/collection and schema-v2 collected analysis models. PublicScore forbids numeric values/experimental status and requires public_score_not_validated. Cross-field checks enforce selected-window completion/empty/partial reasons, page/count accounting, unknown versus source-reported totals, UTC windows/retrieval agreement, variant-label scope and nested analysis counts/origin/version. Thirty-one authored contract cases pass. These models do not collect or authorize data, do not convert fixture origin and are not wired to a production success route or frontend consumer. E07 remains PARTIAL; E02/E05 live gates blocked, E08 pending. Existing bound implementation files/reports unchanged; no dependency, training or deployment.

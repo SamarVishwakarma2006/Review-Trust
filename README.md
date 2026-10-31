@@ -144,3 +144,6 @@ The website still accepts paste/CSV. No product URL is collected or analyzed by 
 
 
 E07 continuation: authored samples can now be analyzed offline with explicit fixture provenance and withheld scores. Production product ingress remains fail-closed; E07 is partial, E08 pending. See [PRODUCT_API.md](docs/PRODUCT_API.md).
+
+
+E07 now includes validated collected-source result contracts and authored contract examples. Production ingress remains fail-closed; successful collected analysis and frontend integration are pending. See [PRODUCT_API.md](docs/PRODUCT_API.md).

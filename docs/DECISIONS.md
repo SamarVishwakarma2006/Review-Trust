@@ -166,3 +166,8 @@ Reuse existing safe decoding, URL validation and HTTP worker/admission controls.
 ## D75 — Share analysis fields without forging submission origin
 
 Extract the existing calculation body into analyze_fields, with v1 still validating its original result. Offline fixture analysis uses typed schema-v2 subclasses with authored_fixture origin and coverage declaration; no temporary paste/csv submission is created. Fixture output has no provider URL or collected claim. Public ingress remains unchanged. These tests cannot establish actual source availability or production v2 integration.
+
+
+## D76 — Validate v2 output consistency before success integration
+
+Use existing Pydantic models and typed v2 subclasses without expanding the v1 origin contract. Keep authored_fixture and collected separate; unit examples represent hypothetical wire shapes, not source access. Reject numeric public scores and inconsistent sample counts/states. Structural output URL checks do not establish registry ownership/permission; canonical host/path binding, masking at assembly, serialized-byte/deadline limits and route/consumer integration remain mandatory pending work. No general schema framework or dependency added.
