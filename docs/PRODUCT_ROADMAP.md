@@ -201,3 +201,6 @@ Owner explicitly authorized E06 using authored synthetic fixtures only, keeping 
 ## E07 ingress checkpoint
 
 E07 started: strict fail-closed product request endpoint and shared HTTP controls implemented. Full successful analysis integration remains pending; E02/E05 gates are unchanged, E08 not started. See [PRODUCT_API.md](PRODUCT_API.md). Commit: `Add a guarded product-link API entry point`.
+
+
+E07 fixture-analysis continuation (2026-10-31): api/app/fixture_analysis.py now validates/serializes authored-fixture schema-v2 analysis with explicit authored_fixture origin/declaration, null public score/confidence, collection counters/windows/order, masked bounded product title and null analysis for zero reviews. Existing analyzer field calculations are shared by a small analyze_fields extraction; v1 still validates AnalysisResult and accepts only paste/csv input. No production route loads fixtures or returns success. E07 remains PARTIAL for production collected-origin contracts/integration; E02/E05 live gates blocked, E08 pending. Seven authored cases include a test-only admitted HTTP route, not a production success claim. No new dependency, source, model or deployment.

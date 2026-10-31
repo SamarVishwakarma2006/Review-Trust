@@ -141,3 +141,6 @@ The website still accepts paste/CSV. No product URL is collected or analyzed by 
 
 
 - [ ] E07 — [Fail-closed product API ingress](docs/PRODUCT_API.md) implemented; full analysis integration remains blocked. No live collection or URL UI is enabled.
+
+
+E07 continuation: authored samples can now be analyzed offline with explicit fixture provenance and withheld scores. Production product ingress remains fail-closed; E07 is partial, E08 pending. See [PRODUCT_API.md](docs/PRODUCT_API.md).

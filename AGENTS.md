@@ -64,3 +64,9 @@ E07 ingress checkpoint (2026-10-31): POST /v2/products/analyze is implemented fa
 
 
 E07 benchmark checkpoint: docs/benchmarks/20261031-e07.json is the current intentionally rerun synthetic HTTP resource record after main.py/security.py ingress changes. The Step 12 record is historical and retains its original hashes; do not verify it against new source. No timing equality, provider capacity or independent accuracy is claimed. Mechanics implementation/report remains unchanged.
+
+
+E07 fixture-analysis continuation (2026-10-31): api/app/fixture_analysis.py now validates/serializes authored-fixture schema-v2 analysis with explicit authored_fixture origin/declaration, null public score/confidence, collection counters/windows/order, masked bounded product title and null analysis for zero reviews. Existing analyzer field calculations are shared by a small analyze_fields extraction; v1 still validates AnalysisResult and accepts only paste/csv input. No production route loads fixtures or returns success. E07 remains PARTIAL for production collected-origin contracts/integration; E02/E05 live gates blocked, E08 pending. Seven authored cases include a test-only admitted HTTP route, not a production success claim. No new dependency, source, model or deployment.
+
+
+Current E07 fixture-analysis benchmark: docs/benchmarks/20261031-e07-fixture-analysis.json. Intentional synthetic rerun binds the shared analyzer extraction; prior E07 ingress and Step 12 records remain historical. Mechanics comparison confirms all outcomes unchanged, with only implementation hashes and report checksum refreshed. No training, timing equality or independent accuracy claim.

@@ -161,3 +161,8 @@ Owner explicitly approved E06 synthetic-only work on 2026-10-31 despite blocked 
 ## D74 — Keep product ingress fail-closed while source gates remain open
 
 Reuse existing safe decoding, URL validation and HTTP worker/admission controls. Do not create a fake collected success, load synthetic examples through a live URL, or relabel a v1 paste submission. E07 is partial until versioned success analysis and cancellation/serialization acceptance are verified. No dependency added.
+
+
+## D75 — Share analysis fields without forging submission origin
+
+Extract the existing calculation body into analyze_fields, with v1 still validating its original result. Offline fixture analysis uses typed schema-v2 subclasses with authored_fixture origin and coverage declaration; no temporary paste/csv submission is created. Fixture output has no provider URL or collected claim. Public ingress remains unchanged. These tests cannot establish actual source availability or production v2 integration.

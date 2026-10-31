@@ -8,7 +8,6 @@ from app.ingestion import IngestedReviews, ReviewInputError
 from app.results import (
     AnalysisResult,
     Confidence,
-    Coverage,
     DisplayReview,
     FieldCoverage,
     Finding,
@@ -92,6 +91,11 @@ def _text_finding(signal_id, eligible, total, matching, evidence, explanation, f
 
 
 def analyze(batch: IngestedReviews, deadline: float) -> AnalysisResult:
+    return AnalysisResult(**analyze_fields(batch, deadline))
+
+
+def analyze_fields(batch, deadline: float) -> dict:
+    """Shared signal fields; callers must validate their versioned result model."""
     check_deadline(deadline)
     total = len(batch.submission.reviews)
     counts = {"email": 0, "phone": 0}
@@ -182,7 +186,7 @@ def analyze(batch: IngestedReviews, deadline: float) -> AnalysisResult:
     for name in sorted(REVIEW_FIELDS):
         present = sum(getattr(review, name) is not None for review in batch.submission.reviews)
         field_coverage[name] = FieldCoverage(present=present, missing=total - present)
-    result = AnalysisResult(
+    result = dict(
         origin=batch.submission.origin,
         review_count=total,
         score=Score(
@@ -191,7 +195,7 @@ def analyze(batch: IngestedReviews, deadline: float) -> AnalysisResult:
             reason_codes=reasons,
             evaluated_signal_ids=scoring_evaluated,
         ),
-        coverage=Coverage(
+        coverage=dict(
             total_reviews=total,
             fields=field_coverage,
             signals={finding.signal_id: finding.coverage for finding in findings},

@@ -18,7 +18,9 @@ from ml.audit import AuditError, digest, encoded
 class BenchmarkTests(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
-        cls.report = json.loads((benchmark.ROOT / "docs/benchmarks/20261031-e07.json").read_bytes())
+        cls.report = json.loads(
+            (benchmark.ROOT / "docs/benchmarks/20261031-e07-fixture-analysis.json").read_bytes()
+        )
 
     def test_frozen_record_binds_inputs_code_and_no_train_outcomes(self):
         benchmark.verify_report(self.report)

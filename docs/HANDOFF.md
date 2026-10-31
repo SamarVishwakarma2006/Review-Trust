@@ -1,3 +1,35 @@
+# Current handoff — E07 authored-fixture analysis continuation
+
+Date: 2026-10-31 (Asia/Calcutta).
+
+REVIEWTRUST STEP HANDOFF: E07 fixture analysis component verified; full E07 remains PARTIAL/BLOCKED for production collected-source integration. E02/E05 live gates remain blocked; E08 not started. No live collection, source admission, training, deployment or public success is enabled.
+
+Changes: api/app/analysis.py extracts unchanged calculations as analyze_fields; v1 wrapper still validates the original AnalysisResult. api/app/fixture_analysis.py adds typed schema-v2 authored_fixture result/coverage, complete/partial/empty envelope, unknown total, variant scope, collection windows/order/counters, masked bounded product title, withheld numeric score/null confidence, null analysis for zero rows and whole-envelope 2 MiB/deadline checks. It creates no forged v1 paste/csv submission. Existing masking is reused; the limitation explains that redaction counts apply to this analysis pass over an already masked sample. No new dependencies.
+
+Seven authored cases in api/tests/test_fixture_analysis.py verify complete/partial/empty/zero-partial, explicit provenance/null score/confidence, deadline/title amplification and whole-response bounds. A test-only route exercises existing RequestBoundary/run_worker with the fixture report; the production product route is unchanged and never imports the fixture helper. This is not proof of production success or live cancellation/transport behavior.
+
+Verification: scripts/check.ps1 runs 398 backend tests, 28 offline tests, 27 frontend tests; dependency consistency, Ruff lint/format, ESLint, typecheck and production build. Both current mechanics and benchmark reports verify. Mechanics comparison asserts all fields except implementation_sha256/report_sha256 unchanged; initial comparison incorrectly excluded only hashes and was corrected to account for the checksum. No outcome change was accepted. New synthetic benchmark docs/benchmarks/20261031-e07-fixture-analysis.json was intentionally rerun; prior records remain historical. ml/tests/test_benchmark.py references the new record, ml/fixtures/mechanics.expected.json intentionally refreshes bindings. No timing equality, classifier accuracy or remote CI claim.
+
+Browser: opened http://127.0.0.1:3000/#analyze visibly and verified paste/CSV remains; preview retained. No simulated collection/UI success.
+
+Git: started clean on main at bbca6bf (Add a guarded product-link API entry point). Nothing staged, committed or pushed. Review and commit manually:
+
+```powershell
+git status --short
+git diff
+git add api/app/analysis.py api/app/fixture_analysis.py api/tests/test_fixture_analysis.py AGENTS.md README.md SPEC.md docs/PRODUCT_API.md docs/PRODUCT_ROADMAP.md docs/HANDOFF.md docs/THREAT_MODEL.md docs/URL_INGESTION.md docs/DECISIONS.md docs/BENCHMARK.md docs/benchmarks/20261031-e07-fixture-analysis.json ml/README.md ml/fixtures/mechanics.expected.json ml/tests/test_benchmark.py
+git diff --cached
+git commit -m "Analyze authored review samples with explicit fixture provenance"
+git show --stat --oneline HEAD
+git status --short
+```
+
+Manual TODO: review/commit fixture component. Full E07 still requires typed production collected-origin inputs/results, approved source orchestration, atomic error/deadline/cancellation/serialization integration and matching consumed web contracts. Do not infer E08 authorization or live-source approval from fixture success. E02 access and E05 network controls remain prerequisites for live behavior. Contact blank, scores withheld, NO TRAIN and deployment deferred.
+
+ACTION REQUIRED — CODEX MODEL FOR NEXT STEP: current E07 fixture component; next resume E07 production contract/integration preparation while preserving live gates. Recommend keep GPT-6.1 Sol High if selected; fallback GPT-5.6 Sol High if selectable. High complexity: provenance, lifecycle and matching typed contracts; test complete/partial/empty/error/cancellation paths, v1 regressions, source-bound reports and browser preview. Escalate concrete security blockers to GPT-6 Astra High, fallback GPT-6.1 Sol High. No model switch claimed. Stop until next.
+
+---
+
 # Current handoff — E07 guarded product ingress
 
 Date: 2026-10-31 (Asia/Calcutta).

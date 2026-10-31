@@ -65,3 +65,6 @@ Verify `docs/benchmarks/20261028-step12.json` after the reviewed resource/public
 
 
 E07 benchmark checkpoint: docs/benchmarks/20261031-e07.json is the current intentionally rerun synthetic HTTP resource record after main.py/security.py ingress changes. The Step 12 record is historical and retains its original hashes; do not verify it against new source. No timing equality, provider capacity or independent accuracy is claimed. Mechanics implementation/report remains unchanged.
+
+
+Current E07 fixture-analysis benchmark: docs/benchmarks/20261031-e07-fixture-analysis.json. Intentional synthetic rerun binds the shared analyzer extraction; prior E07 ingress and Step 12 records remain historical. Mechanics comparison confirms all outcomes unchanged, with only implementation hashes and report checksum refreshed. No training, timing equality or independent accuracy claim.
