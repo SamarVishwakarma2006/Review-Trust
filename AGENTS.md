@@ -79,3 +79,6 @@ Owner override 2026-10-31: explicitly authorized an end-to-end synthetic demo in
 
 
 Current synthetic benchmark: docs/benchmarks/20261031-e08-demo.json, intentionally rerun after main/security demo-route changes; prior records are historical. Mechanics unchanged. No timing equality or independent accuracy claim.
+
+
+India source-access update (2026-10-31): owner prioritizes real access over E09 demo expansion and confirmed India, with paid access possible but budget unspecified. Conditional first validation target: Amazon.in via Canopy cookie-free top reviews; no provider/account/rights/probe admitted. Top-review selection differs from current newest_first design and requires explicit contract/adapter work after access verification. E02 stays BLOCKED. See docs/INDIA_SOURCE_PILOT.md.

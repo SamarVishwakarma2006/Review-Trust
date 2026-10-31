@@ -1,3 +1,26 @@
+# Current handoff — India source-access recommendation
+
+REVIEWTRUST STEP HANDOFF: source-choice research COMPLETE; E02 access still BLOCKED. Date 2026-10-31. Owner selected real access and India; paid budget unspecified. Recommend validating Amazon.in through Canopy top reviews first, conditional on current functionality/rights/quota confirmation. No cookie-based pagination, account creation, purchase, external communication or review fetching occurred. Bright Data backup; Rainforest deprecation documented. See INDIA_SOURCE_PILOT.md for primary-source citations and probe checklist.
+
+Changes: INDIA_SOURCE_PILOT.md, SOURCE_ACCESS, PRODUCT_ROADMAP, README, AGENTS and handoff. Runtime unchanged. Verified current official provider pages, Git clean at start c14f709/main; documentation whitespace checked. No tests rerun or live-source claim. Demo remains available and unchanged.
+
+Manual commands:
+```powershell
+git status --short
+git diff
+git add docs/INDIA_SOURCE_PILOT.md docs/SOURCE_ACCESS.md docs/PRODUCT_ROADMAP.md docs/HANDOFF.md README.md AGENTS.md
+git diff --cached
+git commit -m "Choose an India review-data pilot and document access requirements"
+git show --stat --oneline HEAD
+git status --short
+```
+
+Manual TODO: supply monthly INR cap, review provider account/terms and clarify India top-review rights/access. No secrets in chat. Then verify minimal permitted access before adapter integration. Contact blank, NO TRAIN, live collection blocked and deployment deferred.
+
+ACTION REQUIRED — CODEX MODEL FOR NEXT STEP: next E02 permitted-access validation; recommend GPT-6.1 Sol High, manual switch from current GPT-6 Astra if desired; fallback GPT-5.6 Sol High if available. Keep Astra High for concrete network/security review. Complexity medium research/high integration; validate source fields/selection/rights and retain synthetic regression tests. No model switch claimed. Stop until next or owner access/budget update.
+
+---
+
 # Current handoff — Authorized end-to-end synthetic demo
 
 REVIEWTRUST STEP HANDOFF: E07/E08 SYNTHETIC DEMO COMPLETE, 2026-10-31. Owner explicitly authorized this scope override. Real-source E02/E05/E07/E08 acceptance stays blocked. See SYNTHETIC_DEMO.md.

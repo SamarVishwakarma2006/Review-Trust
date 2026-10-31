@@ -151,3 +151,6 @@ E07 now includes validated collected-source result contracts and authored contra
 
 - [x] Owner-authorized E07/E08 synthetic demo: open http://127.0.0.1:3000/#demo with API running, choose an authored example, and analyze. Complete/partial/empty cases work through the real local API. [Demo details](docs/SYNTHETIC_DEMO.md).
 - [ ] Real product-link collection remains blocked by E02/E05.
+
+
+India source-access update (2026-10-31): owner prioritizes real access over E09 demo expansion and confirmed India, with paid access possible but budget unspecified. Conditional first validation target: Amazon.in via Canopy cookie-free top reviews; no provider/account/rights/probe admitted. Top-review selection differs from current newest_first design and requires explicit contract/adapter work after access verification. E02 stays BLOCKED. See docs/INDIA_SOURCE_PILOT.md.
