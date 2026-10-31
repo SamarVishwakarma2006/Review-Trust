@@ -10,6 +10,7 @@ from starlette.middleware.cors import CORSMiddleware
 
 from app.analysis import analyze, check_deadline
 from app.ingestion import ReviewInputError, parse_json
+from app.product_api import PRODUCT_PATH, product_analysis
 from app.results import AnalysisResult, ErrorResponse, Score
 from app.schemas import MAX_BODY_BYTES
 from app.security import Controls, RequestBoundary, Settings, error_response, run_worker
@@ -111,6 +112,8 @@ def create_app(settings: Settings | None = None) -> FastAPI:
             return Response(body, media_type="application/json")
 
         return await run_worker(request, work)
+
+    api.add_api_route(PRODUCT_PATH, product_analysis, methods=["POST"], responses=errors)
 
     api.add_middleware(
         CORSMiddleware,

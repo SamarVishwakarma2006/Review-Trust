@@ -119,3 +119,6 @@ The unwired metadata transport configures numeric peer/original-host certificate
 ## E06 fixture-only evidence
 
 Offline sample assembly rejects conflicting stable IDs and malformed pages atomically, bounds cross-page bytes/text/rows, masks prose with existing incomplete masking and preserves null metadata/unknown totals. Known-date sort checks cannot establish source stability or ordering of undated records. Provider totals, variant-level review attribution, pagination exhaustion and rights remain unverified. No serving route imports the fixture assembler, no real data is admitted and E02/E05 gates remain blocked. See [SOURCE_SAMPLE.md](SOURCE_SAMPLE.md).
+
+
+E07 ingress checkpoint (2026-10-31): POST /v2/products/analyze is implemented fail-closed with strict typed request validation, 8 KiB actual-body limit and shared v1 rate/admission/deadline/worker controls. No success analysis path, fixture loader, collector or source activation is wired. E07 remains PARTIAL/BLOCKED for full integration; E02/E05 live gates remain blocked, E08 pending. See PRODUCT_API.md. Earlier no-product-endpoint statements are historical.

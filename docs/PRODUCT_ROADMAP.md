@@ -196,3 +196,8 @@ These are recommendations for manual selection, not claims of availability or au
 ## E06 owner-authorized independent checkpoint — 2026-10-31
 
 Owner explicitly authorized E06 using authored synthetic fixtures only, keeping live collection blocked. This supersedes the earlier prohibition on automatically advancing E06: this is explicit authorization, not a passed E05 gate. Offline assembly, overlap/conflict checks, newest-first known-date checks, masking and bounded coverage provenance are complete; see [SOURCE_SAMPLE.md](SOURCE_SAMPLE.md). Provider limits/actual exhaustion/sort and live variant attribution remain unverified. E07 remains pending; no automatic live API/source activation. Commit: `Track review sample coverage and pagination overlap`.
+
+
+## E07 ingress checkpoint
+
+E07 started: strict fail-closed product request endpoint and shared HTTP controls implemented. Full successful analysis integration remains pending; E02/E05 gates are unchanged, E08 not started. See [PRODUCT_API.md](PRODUCT_API.md). Commit: `Add a guarded product-link API entry point`.

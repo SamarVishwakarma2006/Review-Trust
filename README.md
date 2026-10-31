@@ -138,3 +138,6 @@ Next now renders pages dynamically for fresh CSP script nonces; page HTML is no-
 - [ ] E02/E05 permitted live source and network verification remain blocked; E07 API integration is pending.
 
 The website still accepts paste/CSV. No product URL is collected or analyzed by these offline components.
+
+
+- [ ] E07 — [Fail-closed product API ingress](docs/PRODUCT_API.md) implemented; full analysis integration remains blocked. No live collection or URL UI is enabled.

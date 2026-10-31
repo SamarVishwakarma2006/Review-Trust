@@ -58,3 +58,9 @@ E05 transport continuation: source_transport.py adds an unwired fixed product-me
 
 
 E06 owner override (2026-10-31): owner explicitly authorized authored synthetic fixtures only while keeping live collection blocked. Offline sample assembly is COMPLETE in api/app/source_sample.py; see docs/SOURCE_SAMPLE.md. E02/E05 live gates remain BLOCKED; E07 is pending and no source, endpoint or URL UI is enabled. SourceSample is an internal authored_fixture record, never a v1 submission with a forged origin or a public v2 response. Earlier E06-not-started statements are historical.
+
+
+E07 ingress checkpoint (2026-10-31): POST /v2/products/analyze is implemented fail-closed with strict typed request validation, 8 KiB actual-body limit and shared v1 rate/admission/deadline/worker controls. No success analysis path, fixture loader, collector or source activation is wired. E07 remains PARTIAL/BLOCKED for full integration; E02/E05 live gates remain blocked, E08 pending. See docs/PRODUCT_API.md. Earlier no-product-endpoint statements are historical.
+
+
+E07 benchmark checkpoint: docs/benchmarks/20261031-e07.json is the current intentionally rerun synthetic HTTP resource record after main.py/security.py ingress changes. The Step 12 record is historical and retains its original hashes; do not verify it against new source. No timing equality, provider capacity or independent accuracy is claimed. Mechanics implementation/report remains unchanged.

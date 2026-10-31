@@ -22,7 +22,7 @@ from app.ingestion import ReviewInputError
 from app.results import ErrorDetail, ErrorResponse
 from app.schemas import MAX_BODY_BYTES
 
-ANALYSIS_PATHS = {"/v1/analyze", "/v1/analyze/csv"}
+ANALYSIS_PATHS = {"/v1/analyze", "/v1/analyze/csv", "/v2/products/analyze"}
 _LOGGER = logging.getLogger("reviewtrust.api")
 
 
@@ -145,8 +145,9 @@ async def _read_body(scope, receive, deadline):
         raise ReviewInputError(
             "content_length", "Content-Length must be a single nonnegative integer.", 400
         )
+    limit = 8192 if scope["path"] == "/v2/products/analyze" else MAX_BODY_BYTES
     expected = int(lengths[0]) if lengths else None
-    if expected is not None and expected > MAX_BODY_BYTES:
+    if expected is not None and expected > limit:
         raise ReviewInputError("body_limit", "Input exceeds the byte limit.", 413)
     data = bytearray()
     with anyio.fail_after(max(0, deadline - time.monotonic())):
@@ -155,7 +156,7 @@ async def _read_body(scope, receive, deadline):
             if message["type"] == "http.disconnect":
                 raise ReviewInputError("client_disconnected", "Request body was interrupted.", 400)
             chunk = message.get("body", b"")
-            if len(data) + len(chunk) > MAX_BODY_BYTES:
+            if len(data) + len(chunk) > limit:
                 raise ReviewInputError("body_limit", "Input exceeds the byte limit.", 413)
             data.extend(chunk)
             if not message.get("more_body", False):

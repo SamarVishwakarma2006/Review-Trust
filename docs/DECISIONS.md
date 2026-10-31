@@ -156,3 +156,8 @@ Framework guidance consulted locally: bundled Next.js server/client component an
 ## D73 — Independently assemble authored review pages for E06
 
 Owner explicitly approved E06 synthetic-only work on 2026-10-31 despite blocked live access. Use a small pure function over existing parser output and reuse existing masking; no new dependency, fetcher, persistence or alternate analyzer contract. Compare IDs before normalization so masking cannot hide conflicting records. Never infer exhaustion from short pages or fabricate totals. Fixture provenance is explicit; public endpoint integration remains E07 and live E05 acceptance remains blocked.
+
+
+## D74 — Keep product ingress fail-closed while source gates remain open
+
+Reuse existing safe decoding, URL validation and HTTP worker/admission controls. Do not create a fake collected success, load synthetic examples through a live URL, or relabel a v1 paste submission. E07 is partial until versioned success analysis and cancellation/serialization acceptance are verified. No dependency added.

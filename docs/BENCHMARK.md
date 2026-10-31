@@ -101,3 +101,6 @@ The test now replaces only the benchmark module's subprocess binding. An explici
 ## Step 12 superseding measurements
 
 The measurements and checksum above remain historical Step 10 evidence. They are not the current verification target after the reviewed 0.3.0 resource/public-policy change. Current command: `api/.venv/Scripts/python.exe -m ml.benchmark --verify docs/benchmarks/20261028-step12.json`. The original JSON was not overwritten or relabelled. See [security audit](SECURITY_AUDIT.md) and [new record](benchmarks/20261028-step12.json). All HTTP resource-case scores are null. The Unicode case now expects 413 normalized_text_limit (175-byte response); ordinary accepted cases remain 200 and the offline sampling/arithmetic observations are unchanged. This is an intentional outcome change, not a like-for-like speed comparison.
+
+
+E07 benchmark checkpoint: docs/benchmarks/20261031-e07.json is the current intentionally rerun synthetic HTTP resource record after main.py/security.py ingress changes. The Step 12 record is historical and retains its original hashes; do not verify it against new source. No timing equality, provider capacity or independent accuracy is claimed. Mechanics implementation/report remains unchanged.

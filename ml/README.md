@@ -62,3 +62,6 @@ See [benchmark report](../docs/BENCHMARK.md) for actual measurements, sampling f
 ## Step 12 current records
 
 Verify `docs/benchmarks/20261028-step12.json` after the reviewed resource/public-policy version change. The old Step 10 JSON is retained as historical evidence and does not verify against changed code. Methodology 0.3.0 retains all seventeen mechanical outcomes/relations and the same offline arithmetic; the mechanics reference's version/source bindings were intentionally refreshed only after equality checks. HTTP resource samples now all require null public scores and the normalization stress case must reject with normalized_text_limit. No new dataset, training authorization or dependency was added. See ../docs/SECURITY_AUDIT.md.
+
+
+E07 benchmark checkpoint: docs/benchmarks/20261031-e07.json is the current intentionally rerun synthetic HTTP resource record after main.py/security.py ingress changes. The Step 12 record is historical and retains its original hashes; do not verify it against new source. No timing equality, provider capacity or independent accuracy is claimed. Mechanics implementation/report remains unchanged.

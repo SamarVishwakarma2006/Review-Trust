@@ -1,3 +1,35 @@
+# Current handoff — E07 guarded product ingress
+
+Date: 2026-10-31 (Asia/Calcutta).
+
+REVIEWTRUST STEP HANDOFF: E07 PARTIAL, full analysis integration BLOCKED/pending. Implemented POST /v2/products/analyze with strict exact typed request and existing safe decoder/URL validation. Unknown source returns 422; a registry entry alone still returns source_not_ready/503. No collector, fixture loader or successful analysis is wired. E02/E05 still blocked; E08 not started.
+
+Files: api/app/product_api.py, main.py, security.py, tests/test_product_api.py; docs/PRODUCT_API.md documents implemented limits and pending acceptance. Shared rate/admission/deadline/worker controls cover v2; request bytes capped at 8 KiB while reading, and worker captures input before request cleanup. No dependencies or methodology changes. SPEC, AGENTS, README, roadmap, threat model, URL design and DECISIONS D74 updated.
+
+Verification: 14 new API cases pass; total 391 backend, 28 offline, 27 frontend tests. Initial decoder assertions incorrectly expected 422 instead of existing malformed-JSON 400; corrected. Initial full check found formatting after changing benchmark test path; corrected. Ruff, dependency check, frontend lint/typecheck/build checked by scripts/check.ps1. Final worker input capture separately passed focused tests/lint/format. Restricted async test attempt was interrupted; tests completed outside the restricted sandbox. No remote CI/provider result claimed.
+
+Benchmark: intentionally reran all synthetic measurements because main/security source bindings changed. New create-only artifact copied to docs/benchmarks/20261031-e07.json, verified; test reference updated and old Step 12 report retained historically. docs/BENCHMARK.md and ml/README.md explain the change. Mechanics report verifies unchanged. No timing equality or new accuracy claim.
+
+Browser: visibly opened http://127.0.0.1:3000/#analyze and verified existing paste/CSV controls. No URL UI or collection success is simulated. Preview retained.
+
+Git: started clean on main at b25a8f3. Nothing staged/committed/pushed. Manual review and commit:
+
+```powershell
+git status --short
+git diff
+git add api/app/product_api.py api/app/main.py api/app/security.py api/tests/test_product_api.py AGENTS.md README.md SPEC.md docs/PRODUCT_API.md docs/PRODUCT_ROADMAP.md docs/HANDOFF.md docs/THREAT_MODEL.md docs/URL_INGESTION.md docs/DECISIONS.md docs/BENCHMARK.md docs/benchmarks/20261031-e07.json ml/README.md ml/tests/test_benchmark.py
+git diff --cached
+git commit -m "Add a guarded product-link API entry point"
+git show --stat --oneline HEAD
+git status --short
+```
+
+Manual TODO: review/commit checkpoint. Continue E07 versioned sample-to-analysis/result contracts and complete/partial/empty/error/cancellation/serialization acceptance, preserving explicit fixture provenance and E02/E05 live gates. Do not claim this error-only endpoint completes E07. Public score withholding, NO TRAIN, blank contact and deployment deferral persist.
+
+ACTION REQUIRED — CODEX MODEL FOR NEXT STEP: current/next E07 partial/resume E07; keep GPT-6.1 Sol High if selected, fallback GPT-5.6 Sol High if available. High complexity: versioned success contract and lifecycle integration; run API regressions, full checks and intentional source-bound report verification. Escalate concrete security blockers to GPT-6 Astra High, fallback GPT-6.1 Sol High. User selects manually; no switch claimed. Stop until next.
+
+---
+
 # Current handoff — E06 authored-fixture sample assembly
 
 Date: 2026-10-31 (Asia/Calcutta).
