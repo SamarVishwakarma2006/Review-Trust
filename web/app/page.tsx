@@ -1,3 +1,4 @@
+import Demo from "./demo";
 import Analyzer from "./analyzer";
 import Link from "next/link";
 
@@ -31,6 +32,7 @@ export default function Home() {
           <li><h3>Read findings with context</h3><p>Review counts, supporting excerpts and unavailable methods together. This is not a purchasing recommendation.</p></li>
         </ol>
       </section>
+      <Demo />
       <div id="analyze" className="analyzer-anchor" tabIndex={-1}><Analyzer /></div>
       <section className="panel limitations" aria-labelledby="release-title">
         <h2 id="release-title">An experimental development preview</h2>

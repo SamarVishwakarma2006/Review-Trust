@@ -107,3 +107,6 @@ E07 benchmark checkpoint: docs/benchmarks/20261031-e07.json is the current inten
 
 
 Current E07 fixture-analysis benchmark: docs/benchmarks/20261031-e07-fixture-analysis.json. Intentional synthetic rerun binds the shared analyzer extraction; prior E07 ingress and Step 12 records remain historical. Mechanics comparison confirms all outcomes unchanged, with only implementation hashes and report checksum refreshed. No training, timing equality or independent accuracy claim.
+
+
+Current synthetic benchmark: docs/benchmarks/20261031-e08-demo.json, intentionally rerun after main/security demo-route changes; prior records are historical. Mechanics unchanged. No timing equality or independent accuracy claim.

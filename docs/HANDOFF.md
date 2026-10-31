@@ -1,3 +1,29 @@
+# Current handoff — Authorized end-to-end synthetic demo
+
+REVIEWTRUST STEP HANDOFF: E07/E08 SYNTHETIC DEMO COMPLETE, 2026-10-31. Owner explicitly authorized this scope override. Real-source E02/E05/E07/E08 acceptance stays blocked. See SYNTHETIC_DEMO.md.
+
+Changes: demo_api.py route uses fixed authored scenarios and existing fixture pipeline; main/security integrate route with shared controls. web/app/demo.tsx, web/lib/demo.ts and homepage add labeled interactive results and request cancellation/reset. API/frontend tests added, existing analyzer status test scoped to its region. New synthetic resource record and test reference updated intentionally; docs/guidance updated. No source/network/dependency/training/deployment activation.
+
+Actual verification: scripts/check.ps1 PASS exit 0, 433 backend/28 offline/30 frontend, lint/typecheck/build/dependency checks. Both mechanics and current 20261031-e08-demo benchmark verify. Browser successfully exercised patterns, empty and partial through local API; screenshot saved and preview retained. Initial lint line length, old global status assertion and visual encoding issue fixed. No remote CI claim.
+
+Git started clean at 87df82c on main. No staging/commit/push. Manual review commands:
+
+```powershell
+git status --short
+git diff
+git add api/app/demo_api.py api/app/main.py api/app/security.py api/tests/test_demo_api.py web/app/demo.tsx web/app/page.tsx web/lib/demo.ts web/tests/demo.test.tsx web/tests/page.test.tsx ml/tests/test_benchmark.py ml/README.md docs/benchmarks/20261031-e08-demo.json AGENTS.md SPEC.md README.md docs/PRODUCT_API.md docs/PRODUCT_ROADMAP.md docs/THREAT_MODEL.md docs/BENCHMARK.md docs/SYNTHETIC_DEMO.md docs/HANDOFF.md
+git diff --cached
+git commit -m "Let visitors explore review analysis with synthetic examples"
+git show --stat --oneline HEAD
+git status --short
+```
+
+Manual TODO: review/demo/commit. Local API running loopback with no access logging; web remains available. Obtain permitted source access before live collection. Contact blank, NO TRAIN and deployment deferred.
+
+ACTION REQUIRED — CODEX MODEL FOR NEXT STEP: current authorized demo complete; next resolve real-source access/integration or explicitly scope further demo work. Current model GPT-6 Astra; recommend GPT-6.1 Sol High for routine implementation (manual switch if available; fallback GPT-5.6 Sol High). Keep Astra High for concrete network/security blockers. Complexity high for real collection; verify rights/network/admission/cancellation and v1 regressions before activation. No automatic switch; stop until next.
+
+---
+
 # Current handoff — E07 collected-result contracts
 
 Date: 2026-10-31 (Asia/Calcutta).

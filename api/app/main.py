@@ -9,6 +9,7 @@ from starlette.exceptions import HTTPException
 from starlette.middleware.cors import CORSMiddleware
 
 from app.analysis import analyze, check_deadline
+from app.demo_api import demo_analysis
 from app.ingestion import ReviewInputError, parse_json
 from app.product_api import PRODUCT_PATH, product_analysis
 from app.results import AnalysisResult, ErrorResponse, Score
@@ -113,6 +114,7 @@ def create_app(settings: Settings | None = None) -> FastAPI:
 
         return await run_worker(request, work)
 
+    api.add_api_route("/v2/demo/analyze", demo_analysis, methods=["POST"], responses=errors)
     api.add_api_route(PRODUCT_PATH, product_analysis, methods=["POST"], responses=errors)
 
     api.add_middleware(

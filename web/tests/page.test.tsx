@@ -50,7 +50,7 @@ test("cancel and reset abort active requests and ignore late completion", async 
   let resolve!: (value: Response) => void;
   const fetcher = vi.fn(() => new Promise<Response>(r => { resolve = r; })); vi.stubGlobal("fetch", fetcher);
   render(<Home />); fill(); submit();
-  expect(screen.getByRole("status").textContent).toContain("Analyzing");
+  expect(within(screen.getByRole("region", { name: "Analyze a review subset" })).getByRole("status").textContent).toContain("Analyzing");
   fireEvent.click(screen.getByRole("button", { name: "Cancel analysis" }));
   expect((fetcher.mock.calls[0] as unknown as [string, RequestInit])[1].signal?.aborted).toBe(true);
   await act(async () => { resolve(response()); });

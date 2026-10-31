@@ -147,3 +147,7 @@ E07 continuation: authored samples can now be analyzed offline with explicit fix
 
 
 E07 now includes validated collected-source result contracts and authored contract examples. Production ingress remains fail-closed; successful collected analysis and frontend integration are pending. See [PRODUCT_API.md](docs/PRODUCT_API.md).
+
+
+- [x] Owner-authorized E07/E08 synthetic demo: open http://127.0.0.1:3000/#demo with API running, choose an authored example, and analyze. Complete/partial/empty cases work through the real local API. [Demo details](docs/SYNTHETIC_DEMO.md).
+- [ ] Real product-link collection remains blocked by E02/E05.
