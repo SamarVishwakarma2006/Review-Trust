@@ -1,4 +1,26 @@
-# Current handoff — E15 authored brand feedback
+# Current handoff — E16 dataset admission
+
+2026-11-01. REVIEWTRUST STEP HANDOFF: E16 COMPLETE — NO TRAIN. Reviewed the
+existing registry, audit, labelling protocol, model card and authored expansion.
+docs/TRAINING_ADMISSION.md records target distinctions, evidence gaps and concrete
+reopening requirements. No real source, data, labels, split or training admitted.
+No fresh external terms verification claimed. README, roadmap, model card and AGENTS
+updated; runtime, frozen registry/manifests and methodology unchanged.
+
+Started clean on main at 1cdc7d3. No staging, commit or push performed. Verification:
+28 offline unittest cases PASS; ml.evaluate --verify ml/fixtures/mechanics.expected.json
+returned mechanics_passed no_train. Documentation-only change; full frontend/backend
+suite not rerun. Local site opened and retained at /#demo; interface unchanged.
+Manual TODO: review/commit these documentation files. Provider setup remains deferred.
+
+ACTION REQUIRED — CODEX MODEL FOR NEXT STEP: current GPT-6 Astra; recommend
+GPT-6.1 Sol High (manual switch), fallback GPT-5.6 Sol High if available. E17 is
+a low-complexity SKIPPED_WITH_REASON checkpoint under E16, not training code or an
+LLM experiment. Verify no-training gates remain intact; new admission evidence
+requires scoped review before any training. Escalate concrete evidence/security
+blockers to GPT-6 Astra High. E18 is separate; stop until next.
+
+## Previous handoff — E15 authored brand feedback
 
 2026-11-01. REVIEWTRUST STEP HANDOFF: approved synthetic E15 COMPLETE, real-source
 acceptance pending. Fixed three-model brand view reuses the E14 API pipeline and

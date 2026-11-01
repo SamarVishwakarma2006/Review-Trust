@@ -52,3 +52,11 @@ NFKC expansion of a valid 756,092-byte stress request produces an 8,275,593-byte
 ## Step 12 security update
 
 Both HTTP routes and the browser now enforce public numeric withholding, without an opt-out. The offline library retains the unvalidated formula and all seventeen authored outcomes. Methodology 0.3.0 adds normalized/masked text budgets and bounded public serialization. The prior expansion stress input now returns a safe 413 instead of an 8.3 MB response. Source/version bindings were intentionally reviewed/refreshed; current measurements are in [Step 12 record](benchmarks/20261028-step12.json), with the original Step 10 record preserved as historical. [Security audit](SECURITY_AUDIT.md) records local fixes and unresolved owner/provider launch gates. NO TRAIN, unsupported independent metrics and unset confidence remain unchanged.
+## E16 admission review — 2026-11-01
+
+NO TRAIN remains the current decision after the product expansion. See
+[E16 admission report](TRAINING_ADMISSION.md) for the evidence inventory, separate
+manipulation/authorship/sentiment targets and reopening requirements. Authored brand
+and comparison demos do not supply independent training labels. No model or public
+score approval follows from provider account access. Historical decisions below
+remain intact; the frozen source registry and reports are unchanged.

@@ -190,3 +190,6 @@ See [comparison behavior and verification](docs/PRODUCT_COMPARISON.md).
 - [x] E15 synthetic brand view: select either Brand feedback example at `/#demo`.
   Shows per-model coverage and shared wording without a company verdict.
   [Scope and verification](docs/BRAND_FEEDBACK.md). Live brand analysis remains pending.
+
+- [x] E16 dataset-admission review: [NO TRAIN](docs/TRAINING_ADMISSION.md).
+  No permitted independent real target is admitted; E17 remains a separate checkpoint.

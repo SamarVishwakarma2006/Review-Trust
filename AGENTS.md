@@ -128,3 +128,9 @@ unknown. UI derives per-product issue counts and exact masked-body overlap group
 neither establishes independent incidents or company quality. Next E16 is dataset
 admission/NO TRAIN review only. Real-source E15, provider setup and deployment remain
 pending; no automatic training authorization.
+
+E16 COMPLETE (2026-11-01): docs/TRAINING_ADMISSION.md records NO TRAIN based on
+existing project evidence; no new external rights verification or dataset acquired.
+Registry/manifests/rubric remain frozen. Next E17 records SKIPPED_WITH_REASON unless
+new reviewed admission evidence resolves rights, independent target and privacy
+gates. Do not jump to training or mark E17/E18 completed from this checkpoint.
