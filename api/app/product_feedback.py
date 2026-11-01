@@ -1,10 +1,41 @@
 """Offline aspect wording counts over already validated, masked display reviews."""
 
 import re
+from typing import Literal
+
+from pydantic import Field
 
 from app.analysis import check_deadline
 from app.ingestion import ReviewInputError
-from app.results import DisplayReview
+from app.results import DisplayReview, ResultModel
+
+
+class FeedbackSpan(ResultModel):
+    start: int = Field(ge=0)
+    end: int = Field(gt=0)
+
+
+class FeedbackEvidence(ResultModel):
+    ref: str
+    spans: list[FeedbackSpan] = Field(min_length=1, max_length=2)
+
+
+FeedbackState = Literal["positive", "negative", "mixed", "unassessed"]
+
+
+class AspectFeedback(ResultModel):
+    aspect: Literal["battery", "comfort", "durability", "sound"]
+    mentioned: int = Field(ge=0, le=500)
+    counts: dict[FeedbackState, int]
+    evidence: dict[FeedbackState, list[FeedbackEvidence]]
+    omitted: dict[FeedbackState, int]
+
+
+class ProductFeedback(ResultModel):
+    version: Literal["rt-feedback-0.1.0"]
+    analyzed_reviews: int = Field(ge=0, le=500)
+    aspects: list[AspectFeedback] = Field(min_length=4, max_length=4)
+
 
 VERSION = "rt-feedback-0.1.0"
 ASPECTS = {

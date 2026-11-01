@@ -1,5 +1,14 @@
 # ReviewTrust engineering guidance
 
+E09 update 2026-11-01: synthetic feedback integration complete; full E09 still
+awaits permitted human-reviewed evaluation. Read docs/PRODUCT_FEEDBACK.md.
+FixtureReport.feedback is typed and null for empty samples; generated from
+masked display reviews inside existing serialization/deadline limits. Browser
+validates accounting, references and Unicode spans before escaped rendering.
+Current checks: 443 backend, 28 offline, 31 frontend. Existing bound benchmark
+files are unchanged and do not benchmark the new feedback feature. Bright Data
+setup remains deferred by owner; no live source, training or deployment enabled.
+
 Build an evidence-based electronics review-pattern analyzer, never an authenticity authority. Stack: Next.js App Router/React/TypeScript/Tailwind and Python FastAPI/Pydantic/Uvicorn. Offline ML only when justified; no database, accounts, paid LLM, URL fetching or browser extension in v1.
 
 Read this file, SPEC.md, README.md roadmap and docs/HANDOFF.md before each step; inspect Git status/branch/recent commits and relevant files. Preserve existing user work. Implement exactly one approved roadmap step per user message. Completed: Steps 1–12; Step 13 preparation is complete but deployment/production verification remain pending. Owner explicitly requested “prepare only, keep contact blank.” Read docs/DEPLOYMENT.md before resuming. Do not deploy until the owner changes that scope; do not infer optional Step 14 approval from `next`.

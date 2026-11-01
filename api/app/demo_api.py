@@ -55,11 +55,15 @@ async def demo_analysis(request: Request):
                     product_id=101,
                     status="approved",
                     review=(
-                        "These authored headphones have clear sound and comfortable ear cushions."
+                        "The sound is good. These headphones are comfortable. Battery included."
                         if i < 10
                         else (
                             f"Authored sample {i}: received this product for free. "
-                            "Battery lasted through an example listening session."
+                            + (
+                                "The battery is bad. These headphones are broken."
+                                if i < 15
+                                else "The battery is good. The battery is bad. Sound is not good."
+                            )
                         )
                     ),
                     rating=4 if i % 2 else 3,

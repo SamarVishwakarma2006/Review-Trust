@@ -2,6 +2,7 @@
 import { useEffect, useRef, useState } from "react";
 import { apiBase } from "../lib/api";
 import { isDemo, type DemoResult } from "../lib/demo";
+import { states } from "../lib/feedback";
 
 export default function Demo() {
   const [example, setExample] = useState("patterns");
@@ -41,6 +42,21 @@ export default function Demo() {
       <p><strong>Authored synthetic data.</strong> {result.analyzed_reviews} reviews analyzed. Example coverage: {result.status}. Total real-world reviews: unknown.</p>
       <p>Numeric score and confidence are withheld. This does not establish authenticity or product quality.</p>
       {result.status === "partial" && <p>This example intentionally stops before exhaustion. The sample does not represent all reviews.</p>}
+      {result.feedback && result.analysis && <section aria-label="Product feedback">
+        <h3>Reported product feedback</h3>
+        <p>Experimental wording counts from synthetic reviews. Unassessed mentions include unsupported or ambiguous wording. Repeated reviews count separately; these are not independent buyers or verified product performance.</p>
+        {result.feedback.aspects.map(a => <div className="finding" key={a.aspect}>
+          <h4>{a.aspect}</h4>
+          <p>Mentioned in {a.mentioned} of {result.analyzed_reviews} sampled reviews.</p>
+          {a.mentioned === 0 ? <p>No evidence for this aspect.</p> : states.map(state => <div key={state}>
+            <p>{state}: {a.counts[state]}</p>
+            {a.evidence[state].length > 0 && <details><summary>Supporting wording ({state})</summary>
+              {a.evidence[state].map(e => <blockquote key={e.ref}><p>{e.ref}</p>{e.spans.map((span, i) => <p key={i}>{Array.from(result.analysis!.reviews.find(r => r.ref === e.ref)!.text).slice(span.start, span.end).join("")}</p>)}</blockquote>)}
+              {a.omitted[state] > 0 && <p>{a.omitted[state]} additional matching reviews omitted from this evidence preview.</p>}
+            </details>}
+          </div>)}
+        </div>)}
+      </section>}
       {!result.analysis ? <p>No reviews are available in this example; there is no analysis.</p> : result.analysis.findings.map((finding, i) => <div className="finding" key={i}><h4>{finding.signal_id.replaceAll("_", " ")}</h4><p>{finding.assessment.replaceAll("_", " ")}: {finding.explanation}</p></div>)}
     </div>}
   </section>;

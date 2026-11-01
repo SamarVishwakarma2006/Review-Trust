@@ -17,11 +17,24 @@ def test_demo_runs_authored_analysis(example, status, count):
         assert result["evidence_origin"] == "authored_fixture"
         assert result["status"] == status and result["analyzed_reviews"] == count
         if count:
+            feedback = result["feedback"]
+            assert feedback["version"] == "rt-feedback-0.1.0"
+            assert feedback["analyzed_reviews"] == count
+            battery = feedback["aspects"][0]
+            assert battery["counts"] == dict(positive=0, negative=5, mixed=0, unassessed=15)
+            display = {row["ref"]: row["text"] for row in result["analysis"]["reviews"]}
+            for aspect in feedback["aspects"]:
+                assert sum(aspect["counts"].values()) == aspect["mentioned"]
+                for evidence in aspect["evidence"].values():
+                    for row in evidence:
+                        for span in row["spans"]:
+                            assert display[row["ref"]][span["start"] : span["end"]]
             assert result["analysis"]["score"]["value"] is None
             assert result["analysis"]["origin"] == "authored_fixture"
             assert any(f["assessment"] == "observed" for f in result["analysis"]["findings"])
         else:
             assert result["analysis"] is None
+            assert result["feedback"] is None
         assert client.app.state.controls.active == 0
 
 

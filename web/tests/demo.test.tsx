@@ -2,7 +2,7 @@ import { act, cleanup, fireEvent, render, screen } from "@testing-library/react"
 import { afterEach, expect, test, vi } from "vitest";
 import Demo from "../app/demo";
 import { isDemo } from "../lib/demo";
-const empty = { schema_version: "2", ingestion_version: "rt-fixture-analysis-0.1.0", evidence_origin: "authored_fixture", status: "empty", product_title: "Synthetic headphones", analyzed_reviews: 0, analysis: null };
+const empty = { schema_version: "2", ingestion_version: "rt-fixture-analysis-0.1.0", evidence_origin: "authored_fixture", status: "empty", product_title: "Synthetic headphones", analyzed_reviews: 0, analysis: null, feedback: null };
 afterEach(() => { cleanup(); vi.unstubAllGlobals(); });
 test("demo requests a fixed example and renders explicit synthetic empty state", async () => {
  const fetcher = vi.fn().mockResolvedValue(new Response(JSON.stringify(empty))); vi.stubGlobal("fetch", fetcher);

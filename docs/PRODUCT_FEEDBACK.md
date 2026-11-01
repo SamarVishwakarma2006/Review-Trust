@@ -1,6 +1,6 @@
 # E09 product feedback preparation
 
-Date: 2026-11-01. Status: OFFLINE EXTRACTOR IMPLEMENTED; demo integration and evaluation pending.
+Date: 2026-11-01. Status: SYNTHETIC DEMO INTEGRATION COMPLETE; real-data evaluation pending.
 Owner deferred Bright Data setup and requested the next step. This permits
 independent E09 preparation; it does not complete the live-source gates.
 
@@ -83,10 +83,20 @@ deadline/response limits. Do not derive sentiment from star ratings.
 
 ## Completion path
 
-Next integrate the pure extractor and authored regression cases
-into the explicitly synthetic demo with typed API/browser validation. Keep
-current v1 contracts stable; intentionally review any changed source-bound
-mechanics/benchmark records. Run relevant checks and browser demonstration.
+The fixture report now adds typed `feedback` (null for empty samples), computed
+from the analyzer's masked display reviews before the existing serialization
+size/deadline checks. Feedback has its own version; existing v1 contracts and
+pattern methodology remain unchanged. Browser validation checks counts, aspect
+order, references, preview limits, omitted counts and Unicode span bounds before
+rendering escaped supporting excerpts in native disclosures. Authored examples
+exercise explicit positive/negative and unassessed wording. Whole-review negation
+intentionally withholds even otherwise explicit battery wording in that review.
+
+Full local checks pass: 443 backend, 28 offline, 31 frontend tests; lint, formatting,
+types and production build. Complete feedback and excerpt disclosure exercised
+in the browser; partial/empty paths covered by API tests. Existing frozen reports
+remain valid: their bound source files did not change; they do not measure this
+new feedback feature's resource usage or independent accuracy.
 
 Full E09 acceptance additionally requires a permitted, human-reviewed sample
 with independently recorded aspect/polarity/unknown annotations and documented

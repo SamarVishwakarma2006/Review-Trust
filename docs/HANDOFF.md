@@ -1,4 +1,30 @@
-# Current handoff — E09 offline extractor
+# Current handoff — E09 synthetic feedback integration
+
+2026-11-01. REVIEWTRUST STEP HANDOFF: synthetic integration COMPLETE; full E09
+PARTIAL pending permitted human-reviewed evaluation. Typed feedback models and
+fixture serialization reuse masked display reviews and existing output/deadline
+limits. Demo examples, browser validation, aspect counts and native excerpt
+disclosures implemented. No dependency or real-source activation.
+
+Verification: scripts/check.ps1 passed (443 backend, 28 offline, 30 then-existing
+frontend tests plus lint/types/build). New feedback test was renamed to the
+configured .test.tsx extension, then all 31 frontend tests passed. Browser ran
+the complete example and expanded battery evidence: 5 negative, 15 unassessed,
+3 preview references and 2 omitted. API tests cover partial/empty. No remote CI
+claim or independent accuracy/resource measurement for feedback. Existing
+frozen reports' bound code unchanged. Local web/API running; browser retained.
+
+Git started clean at 975c61c on main. Owner reviews/stages/commits manually.
+ACTION REQUIRED — CODEX MODEL FOR NEXT STEP: recommend GPT-6.1 Sol High,
+manual switch from GPT-6 Astra if desired; fallback GPT-5.6 Sol High if available.
+Next roadmap feature is E10 catalog access preparation; actual access and E09
+real evaluation remain deferred/blocked. Moderate research complexity; verify
+catalog identity, fields, source rights and costs before live adapters. Escalate
+concrete network/security concerns to Astra High. Stop until next.
+
+---
+
+# Historical handoff — E09 offline extractor
 
 2026-11-01. E09 PARTIAL: api/app/product_feedback.py implements the documented
 four-aspect conservative method on validated masked display records. Counts are

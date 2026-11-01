@@ -1,5 +1,12 @@
 # ReviewTrust specification
 
+E09 update (2026-11-01): authored fixture reports include typed `feedback`, null
+for zero reviews, otherwise version `rt-feedback-0.1.0` with four aspect counts,
+bounded references and Unicode spans into masked analysis reviews. See
+docs/PRODUCT_FEEDBACK.md for extraction/abstention and accounting rules. The demo
+validates and renders this additive field. No collected-source integration or
+independent validation is claimed; existing pattern methodology is unchanged.
+
 Status: Steps 1–12 implemented through the interface, dataset audit, no-train evaluation, local synthetic benchmark and website content. No real dataset is admitted. Public numeric scores are not approved; enforce withholding before deployment. Contact is intentionally blank by user override. Local security audit/fixes are complete; owner/provider gates and deployment remain pending. Date: 2026-10-28.
 Implemented methodology: `rt-patterns-0.3.0-experimental`, superseding `rt-patterns-0.2.0-experimental` for normalized-output limits and public score withholding. The underlying offline arithmetic/signals are unchanged. Repetition (exact or TF-IDF near match) and the incentive phrase list contribute; timing, ratings and lexicon disagreement remain contextual only. All numerical thresholds are engineering hypotheses, not empirically validated authenticity thresholds.
 

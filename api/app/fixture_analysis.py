@@ -7,6 +7,7 @@ from typing import Literal
 from pydantic import Field
 
 from app.analysis import analyze_fields, check_deadline, redact
+from app.product_feedback import ProductFeedback, summarize_feedback
 from app.results import AnalysisResult, Coverage, ResultModel, Score
 from app.schemas import ReviewInput
 from app.source_sample import SourceSample
@@ -41,6 +42,7 @@ class FixtureReport(ResultModel):
     available_reviews: None = None
     count_scope: Literal["unknown"] = "unknown"
     analysis: FixtureAnalysis | None
+    feedback: ProductFeedback | None
 
 
 @dataclass(frozen=True)
@@ -97,6 +99,11 @@ def analyze_fixture_sample(sample: SourceSample, deadline: float) -> bytes:
         window_started_at=sample.window_started_at,
         window_finished_at=sample.window_finished_at,
         analysis=analysis,
+        feedback=(
+            ProductFeedback.model_validate(summarize_feedback(tuple(analysis.reviews), deadline))
+            if analysis
+            else None
+        ),
     )
     body = report.model_dump_json().encode("utf-8")
     if len(body) > 2_097_152:
