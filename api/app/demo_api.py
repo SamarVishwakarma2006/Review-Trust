@@ -7,6 +7,7 @@ from typing import Literal
 from fastapi import Request, Response
 from pydantic import ValidationError
 
+from app.demo_comparison import compare_demo
 from app.fixture_analysis import analyze_fixture_sample
 from app.ingestion import ReviewInputError, decode_json
 from app.schemas import InputModel
@@ -17,7 +18,7 @@ from app.uploads import content_type
 
 
 class DemoRequest(InputModel):
-    example: Literal["patterns", "partial", "empty"]
+    example: Literal["patterns", "partial", "empty", "compare", "compare_gaps", "compare_empty"]
 
 
 async def demo_analysis(request: Request):
@@ -33,6 +34,8 @@ async def demo_analysis(request: Request):
             raise ReviewInputError(
                 "invalid_request", "Choose an available synthetic example."
             ) from None
+        if example.startswith("compare"):
+            return Response(compare_demo(example, deadline), media_type="application/json")
         now = datetime.now(UTC)
         product = parse_product(
             json.dumps(

@@ -111,3 +111,12 @@ Current synthetic benchmark: docs/benchmarks/20261031-e08-demo.json, intentional
 
 
 India source-access update (2026-10-31): owner prioritizes real access over E09 demo expansion and confirmed India, with paid access possible but budget unspecified. Conditional first validation target: Amazon.in via Canopy cookie-free top reviews; no provider/account/rights/probe admitted. Top-review selection differs from current newest_first design and requires explicit contract/adapter work after access verification. E02 stays BLOCKED. See docs/INDIA_SOURCE_PILOT.md.
+
+## E14 checkpoint (2026-11-01)
+
+Synthetic comparison is complete: demo_comparison.py composes candidate selection,
+fixture analysis and per-product offers for at most three authored products. New
+demo selectors compare/compare_gaps/compare_empty; no URL fetching. Browser validates
+nested provenance and renders fixed-order comparisons with unknowns and ties. Read
+docs/PRODUCT_COMPARISON.md. Full real-source E14 remains pending. E15 needs selection
+and company-language scope review; do not infer permission for company verdicts.

@@ -179,3 +179,10 @@ E07 now includes validated collected-source result contracts and authored contra
 
 
 India source-access update (2026-10-31): owner prioritizes real access over E09 demo expansion and confirmed India, with paid access possible but budget unspecified. Conditional first validation target: Amazon.in via Canopy cookie-free top reviews; no provider/account/rights/probe admitted. Top-review selection differs from current newest_first design and requires explicit contract/adapter work after access verification. E02 stays BLOCKED. See docs/INDIA_SOURCE_PILOT.md.
+
+## E14 comparison checkpoint
+
+- [x] Authored side-by-side comparison: choose a Compare headphones example at `/#demo`.
+- [ ] Live comparison remains gated on provider access and collection verification.
+
+See [comparison behavior and verification](docs/PRODUCT_COMPARISON.md).

@@ -279,3 +279,11 @@ E07 collected-result contracts checkpoint (2026-10-31): api/app/product_results.
 
 
 Owner override 2026-10-31: explicitly authorized an end-to-end synthetic demo including E08 interface. This scoped E07/E08 demo is COMPLETE: POST /v2/demo/analyze accepts only example=patterns|partial|empty, uses fixed authored examples and existing sample/analyzer pipeline under shared admission/rate/deadline/8 KiB input/2 MiB output controls. Homepage demo calls the API, validates consumed fields and fixture provenance, renders escaped findings with synthetic labels, cancel/reset/stale-response guards and complete/partial/empty states. No submitted URL or external fetch is accepted. Production /v2/products/analyze remains fail-closed; E02/E05 and real-source E07/E08 acceptance remain blocked. No training/deployment. Next scope must distinguish the completed demo from real product-link functionality; do not keep repeating unconnected E07 component checkpoints. See docs/SYNTHETIC_DEMO.md.
+
+## E14 synthetic comparison contract
+
+The demo endpoint adds fixed compare/compare_gaps/compare_empty examples with
+rt-comparison-0.1.0 authored provenance, at most three embedded fixture reports
+and per-product offer comparisons. Original-first catalog order is not a quality
+ranking. Aggregate output retains the 2 MiB ceiling and shared worker deadline.
+See docs/PRODUCT_COMPARISON.md. No real-source or scoring contract is relaxed.

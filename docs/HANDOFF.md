@@ -1,4 +1,29 @@
-# Current handoff — E13 authored offer handling
+# Current handoff — E14 authored comparison
+
+2026-11-01. REVIEWTRUST STEP HANDOFF: synthetic E14 COMPLETE; real-source E14
+pending. Added bounded API composition, three comparison examples, validated
+responsive comparison cards, evidence disclosures, unknown-price and tie handling.
+See docs/PRODUCT_COMPARISON.md for contracts and local measurements. No external
+calls, dependencies, model, deployment or source activation.
+
+Started clean on main at d7dd8ef. No staging, commit or push performed. Full elevated
+scripts/check.ps1 PASS: 498 backend, 28 offline, 33 frontend tests; pip, Ruff,
+ESLint, types and production build. An initial sandboxed focused pytest stalled;
+the elevated full run passed all its cases. Browser verified full and missing-evidence
+examples plus expanded supporting wording; retained local demo tab. No dedicated
+320px viewport measurement or live-provider performance claim.
+
+Manual TODO: review and commit the step files, inspect example priorities. Source
+access remains deferred. E15 first needs the owner to approve product selection and
+bounded brand-level wording; a next message does not authorize a company verdict.
+
+ACTION REQUIRED — CODEX MODEL FOR NEXT STEP: current GPT-6 Astra; recommended
+manual switch to GPT-6.1 Sol High, fallback GPT-5.6 Sol High if selectable. E15
+is medium/high complexity: scope brand selection before authored implementation,
+then test identity distinctions, coverage, duplicate handling and insufficient
+evidence. Escalate concrete security/evidence blockers to GPT-6 Astra High.
+
+## Previous handoff — E13 authored offer handling
 
 2026-11-01. REVIEWTRUST STEP HANDOFF: offline E13 implemented; live integration
 pending. product_offers.py validates bounded decimal prices, explicit charges,

@@ -178,7 +178,7 @@ E01 starting Git baseline: main at ebb631b. The owner committed E00 and earlier 
 - [ ] E11 — Exact product matching ([offline matcher implemented](PRODUCT_IDENTITY.md); source integration pending)
 - [ ] E12 — Relevant alternative candidates ([authored selector implemented](PRODUCT_CANDIDATES.md); live retrieval/UI pending)
 - [ ] E13 — Prices and freshness ([authored offer handling implemented](PRODUCT_OFFERS.md); live integration pending)
-- [ ] E14 — Comparison and recommendations
+- [x] E14 — Authored comparison UI (real-source acceptance pending; see PRODUCT_COMPARISON.md)
 - [ ] E15 — Cross-product brand feedback
 - [ ] E16 — Dataset admission/no-train decision
 - [ ] E17 — Conditional baseline training

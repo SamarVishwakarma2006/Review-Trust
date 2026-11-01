@@ -3,10 +3,12 @@ import { useEffect, useRef, useState } from "react";
 import { apiBase } from "../lib/api";
 import { isDemo, type DemoResult } from "../lib/demo";
 import { states } from "../lib/feedback";
+import { isComparison, type Comparison } from "../lib/comparison";
+import ComparisonView from "./comparison";
 
 export default function Demo() {
   const [example, setExample] = useState("patterns");
-  const [result, setResult] = useState<DemoResult | null>(null);
+  const [result, setResult] = useState<DemoResult | Comparison | null>(null);
   const [message, setMessage] = useState("");
   const [busy, setBusy] = useState(false);
   const current = useRef<AbortController | null>(null);
@@ -20,7 +22,8 @@ export default function Demo() {
       const response = await fetch(`${apiBase()}/v2/demo/analyze`, { method: "POST", credentials: "omit", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ example }), signal: controller.signal });
       if (!response.ok) throw new Error(response.status === 429 ? "Please wait before running another demo." : "The demo API is unavailable. Check the local API server and try again.");
       const data: unknown = await response.json();
-      if (!isDemo(data)) throw new Error("The demo returned an unsupported result.");
+      if (!(example.startsWith("compare") ? isComparison(data) : isDemo(data))) throw new Error("The demo returned an unsupported result.");
+      if (!isDemo(data) && !isComparison(data)) throw new Error("Unsupported result.");
       if (current.current === controller) { setResult(data); setMessage("Synthetic example analyzed. No website was crawled."); }
     } catch (error) { if (current.current === controller && !controller.signal.aborted) setMessage(error instanceof Error ? error.message : "Demo request failed."); }
     finally { if (current.current === controller) { setBusy(false); current.current = null; } }
@@ -34,10 +37,13 @@ export default function Demo() {
       <option value="patterns">Headphones — repeated wording and incentive mentions</option>
       <option value="partial">Headphones — incomplete review sample</option>
       <option value="empty">Headphones — no reviews in the example</option>
+      <option value="compare">Compare headphones — dated offers and ties</option>
+      <option value="compare_gaps">Compare headphones — missing evidence</option>
+      <option value="compare_empty">Compare headphones — no alternatives</option>
     </select>
     <div className="actions"><button className="primary" disabled={busy} onClick={run}>Analyze synthetic example</button><button onClick={cancel}>{busy ? "Cancel demo" : "Reset demo"}</button></div>
     <p role="status">{message}</p>
-    {result && <div aria-label="Synthetic demo result">
+    {result && ("products" in result ? <ComparisonView result={result} /> : <div aria-label="Synthetic demo result">
       <h3>{result.product_title}</h3>
       <p><strong>Authored synthetic data.</strong> {result.analyzed_reviews} reviews analyzed. Example coverage: {result.status}. Total real-world reviews: unknown.</p>
       <p>Numeric score and confidence are withheld. This does not establish authenticity or product quality.</p>
@@ -58,6 +64,6 @@ export default function Demo() {
         </div>)}
       </section>}
       {!result.analysis ? <p>No reviews are available in this example; there is no analysis.</p> : result.analysis.findings.map((finding, i) => <div className="finding" key={i}><h4>{finding.signal_id.replaceAll("_", " ")}</h4><p>{finding.assessment.replaceAll("_", " ")}: {finding.explanation}</p></div>)}
-    </div>}
+    </div>)}
   </section>;
 }
