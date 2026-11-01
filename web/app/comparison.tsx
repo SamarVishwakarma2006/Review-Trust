@@ -1,8 +1,10 @@
 import type { Comparison } from "../lib/comparison";
 import { states } from "../lib/feedback";
+import BrandView from "./brand";
 
 export default function ComparisonView({ result }: { result: Comparison }) {
   return <section aria-label="Synthetic product comparison">
+    {result.brand && <BrandView result={result} />}
     <h3>Compare authored alternatives</h3>
     <p>All products, reviews and offers here are synthetic. Eligibility: wireless over-ear headphones with a microphone. Original first, then catalog order; no ranking weights or quality winner. Prices do not determine the order.</p>
     <p>Specifications shared by these examples: black, new, India region, one pair of headphones. Offer context: demo_IN; unconditional INR totals include shipping, tax and mandatory fees when known. Observations must be within 24 hours of analysis. They are not live quotes.</p>

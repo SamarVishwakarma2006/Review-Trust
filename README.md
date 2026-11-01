@@ -186,3 +186,7 @@ India source-access update (2026-10-31): owner prioritizes real access over E09 
 - [ ] Live comparison remains gated on provider access and collection verification.
 
 See [comparison behavior and verification](docs/PRODUCT_COMPARISON.md).
+
+- [x] E15 synthetic brand view: select either Brand feedback example at `/#demo`.
+  Shows per-model coverage and shared wording without a company verdict.
+  [Scope and verification](docs/BRAND_FEEDBACK.md). Live brand analysis remains pending.

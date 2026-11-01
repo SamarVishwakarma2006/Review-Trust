@@ -22,7 +22,7 @@ export default function Demo() {
       const response = await fetch(`${apiBase()}/v2/demo/analyze`, { method: "POST", credentials: "omit", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ example }), signal: controller.signal });
       if (!response.ok) throw new Error(response.status === 429 ? "Please wait before running another demo." : "The demo API is unavailable. Check the local API server and try again.");
       const data: unknown = await response.json();
-      if (!(example.startsWith("compare") ? isComparison(data) : isDemo(data))) throw new Error("The demo returned an unsupported result.");
+      if (!((example.startsWith("compare") || example.startsWith("brand")) ? isComparison(data) && Boolean(data.brand) === example.startsWith("brand") : isDemo(data))) throw new Error("The demo returned an unsupported result.");
       if (!isDemo(data) && !isComparison(data)) throw new Error("Unsupported result.");
       if (current.current === controller) { setResult(data); setMessage("Synthetic example analyzed. No website was crawled."); }
     } catch (error) { if (current.current === controller && !controller.signal.aborted) setMessage(error instanceof Error ? error.message : "Demo request failed."); }
@@ -40,6 +40,8 @@ export default function Demo() {
       <option value="compare">Compare headphones — dated offers and ties</option>
       <option value="compare_gaps">Compare headphones — missing evidence</option>
       <option value="compare_empty">Compare headphones — no alternatives</option>
+      <option value="brand">Brand feedback — three authored models</option>
+      <option value="brand_gaps">Brand feedback — incomplete and missing samples</option>
     </select>
     <div className="actions"><button className="primary" disabled={busy} onClick={run}>Analyze synthetic example</button><button onClick={cancel}>{busy ? "Cancel demo" : "Reset demo"}</button></div>
     <p role="status">{message}</p>

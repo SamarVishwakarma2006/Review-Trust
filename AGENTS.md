@@ -120,3 +120,11 @@ demo selectors compare/compare_gaps/compare_empty; no URL fetching. Browser vali
 nested provenance and renders fixed-order comparisons with unknowns and ties. Read
 docs/PRODUCT_COMPARISON.md. Full real-source E14 remains pending. E15 needs selection
 and company-language scope review; do not infer permission for company verdicts.
+
+E15 owner approved the fixed three-model synthetic brand view on 2026-11-01.
+Implementation complete; see docs/BRAND_FEEDBACK.md. Brand is an explicit fixed
+catalog declaration, never inferred from seller. Manufacturer/publication dates
+unknown. UI derives per-product issue counts and exact masked-body overlap groups;
+neither establishes independent incidents or company quality. Next E16 is dataset
+admission/NO TRAIN review only. Real-source E15, provider setup and deployment remain
+pending; no automatic training authorization.

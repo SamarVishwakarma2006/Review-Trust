@@ -32,9 +32,13 @@ class ComparisonReport(ResultModel):
     version: Literal["rt-comparison-0.1.0"] = "rt-comparison-0.1.0"
     evidence_origin: Literal["authored_fixture"] = "authored_fixture"
     products: list[ComparedProduct] = Field(min_length=1, max_length=3)
+    brand: Literal["Example (authored brand)"] | None = None
 
 
 def compare_demo(example: str, deadline: float) -> bytes:
+    brand_view = example in ("brand", "brand_gaps")
+    if brand_view:
+        example = "compare_gaps" if example == "brand_gaps" else "compare"
     now = datetime.now(UTC)
     candidates = [
         AuthoredCandidate(
@@ -139,7 +143,15 @@ def compare_demo(example: str, deadline: float) -> bytes:
                 role="original" if index == 0 else "alternative", report=report, offers=compared
             )
         )
-    data = ComparisonReport(products=products).model_dump_json().encode()
+    # This fixed catalog explicitly declares one brand and three distinct models.
+    # Seller IDs are never used to infer brand; manufacturer is not declared.
+    data = (
+        ComparisonReport(
+            products=products, brand="Example (authored brand)" if brand_view else None
+        )
+        .model_dump_json()
+        .encode()
+    )
     if len(data) > 2097152:
         raise ReviewInputError("response_limit", "Comparison exceeds the response limit.", 413)
     check_deadline(deadline)

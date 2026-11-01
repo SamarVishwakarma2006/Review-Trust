@@ -287,3 +287,10 @@ rt-comparison-0.1.0 authored provenance, at most three embedded fixture reports
 and per-product offer comparisons. Original-first catalog order is not a quality
 ranking. Aggregate output retains the 2 MiB ceiling and shared worker deadline.
 See docs/PRODUCT_COMPARISON.md. No real-source or scoring contract is relaxed.
+
+E15 adds brand/brand_gaps fixed demo selectors and an optional literal brand label
+to the comparison report. It declares only the authored Example H0/H1/H2 catalog.
+Product-sample negative-wording counts and exact shared-body groups are browser
+derivations from validated per-product results, not independent incident counts or
+company verdicts. Assembly windows are displayed separately from unknown review
+publication dates. See docs/BRAND_FEEDBACK.md for limits and selection disclosure.

@@ -1,4 +1,25 @@
-# Current handoff — E14 authored comparison
+# Current handoff — E15 authored brand feedback
+
+2026-11-01. REVIEWTRUST STEP HANDOFF: approved synthetic E15 COMPLETE, real-source
+acceptance pending. Fixed three-model brand view reuses the E14 API pipeline and
+per-product evidence. Shows assembly dates, sample coverage, model-level negative
+wording and exact shared-text groups. Brand/seller/manufacturer distinctions and
+company-wide insufficient evidence are explicit. See docs/BRAND_FEEDBACK.md.
+
+Started clean on main at 64ae9f5. No staging, committing or pushing performed.
+Full scripts/check.ps1 PASS: 500 backend, 28 offline, 35 frontend tests plus pip,
+Ruff, ESLint, types and build. Frozen reports unchanged. Local browser demonstrated
+brand_gaps after restarting the stale API process. No live provider/remote CI claim.
+Manual TODO: inspect the brand example and commit step files; provider setup remains
+deferred. No new dependency, live fetching, dataset admission, training or deployment.
+
+ACTION REQUIRED — CODEX MODEL FOR NEXT STEP: current GPT-6 Astra; recommend manual
+switch to GPT-6.1 Sol High for E16 dataset admission/no-train review (medium/high
+evidence complexity). Fallback GPT-5.6 Sol High if selectable. Check source rights,
+target validity and existing audit freezes; keep NO TRAIN without admissible evidence.
+Escalate concrete evidence/security blockers to GPT-6 Astra High. Stop until next.
+
+## Previous handoff — E14 authored comparison
 
 2026-11-01. REVIEWTRUST STEP HANDOFF: synthetic E14 COMPLETE; real-source E14
 pending. Added bounded API composition, three comparison examples, validated

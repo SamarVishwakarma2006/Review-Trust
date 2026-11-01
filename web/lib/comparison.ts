@@ -1,10 +1,12 @@
 import { isDemo, type DemoResult } from "./demo";
 
 type Offer = { ref: string; status: "comparable" | "unavailable"; total: string | null; observed_at: string; reasons: string[] };
-export type Comparison = { version: "rt-comparison-0.1.0"; products: { role: "original" | "alternative"; report: DemoResult; offers: { decisions: Offer[]; comparison_complete: boolean; lowest_total_refs: string[] } }[] };
+export type Comparison = { version: "rt-comparison-0.1.0"; brand?: "Example (authored brand)" | null; products: { role: "original" | "alternative"; report: DemoResult & { window_started_at?: string; window_finished_at?: string }; offers: { decisions: Offer[]; comparison_complete: boolean; lowest_total_refs: string[] } }[] };
 export function isComparison(value: unknown): value is Comparison {
   if (!value || typeof value !== "object") return false;
   const v = value as Record<string, unknown>;
+  if (v.brand != null && v.brand !== "Example (authored brand)") return false;
+  if (v.brand && (!Array.isArray(v.products) || v.products.length !== 3 || !v.products.every((p, i) => p?.report?.product_title === `Synthetic Headphones H${i}` && [p.report.window_started_at, p.report.window_finished_at].every(d => typeof d === "string" && /Z$/.test(d) && Number.isFinite(Date.parse(d))) && Date.parse(p.report.window_started_at) <= Date.parse(p.report.window_finished_at)))) return false;
   return v.version === "rt-comparison-0.1.0" && v.evidence_origin === "authored_fixture" && Array.isArray(v.products) && v.products.length >= 1 && v.products.length <= 3 && v.products.every((p, i) => {
     if (!p || p.role !== (i === 0 ? "original" : "alternative") || !isDemo(p.report)) return false;
     const o = p.offers;

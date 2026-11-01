@@ -4,6 +4,20 @@ from fastapi.testclient import TestClient
 from app.main import create_app
 
 
+@pytest.mark.parametrize("example,counts", [("brand", [20, 8, 12]), ("brand_gaps", [20, 8, 0])])
+def test_brand_scope_is_fixed_and_preserves_product_samples(example, counts):
+    with TestClient(create_app()) as client:
+        response = client.post("/v2/demo/analyze", json={"example": example})
+    assert response.status_code == 200
+    result = response.json()
+    assert result["brand"] == "Example (authored brand)"
+    assert [p["report"]["analyzed_reviews"] for p in result["products"]] == counts
+    assert [p["report"]["product_title"] for p in result["products"]] == [
+        f"Synthetic Headphones H{i}" for i in range(3)
+    ]
+    assert all(p["report"]["window_finished_at"].endswith("Z") for p in result["products"])
+
+
 @pytest.mark.parametrize(
     "example,count", [("compare", 3), ("compare_gaps", 3), ("compare_empty", 1)]
 )

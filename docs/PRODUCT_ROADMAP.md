@@ -179,7 +179,7 @@ E01 starting Git baseline: main at ebb631b. The owner committed E00 and earlier 
 - [ ] E12 — Relevant alternative candidates ([authored selector implemented](PRODUCT_CANDIDATES.md); live retrieval/UI pending)
 - [ ] E13 — Prices and freshness ([authored offer handling implemented](PRODUCT_OFFERS.md); live integration pending)
 - [x] E14 — Authored comparison UI (real-source acceptance pending; see PRODUCT_COMPARISON.md)
-- [ ] E15 — Cross-product brand feedback
+- [x] E15 — Approved synthetic brand feedback ([scope](BRAND_FEEDBACK.md)); real-source acceptance pending
 - [ ] E16 — Dataset admission/no-train decision
 - [ ] E17 — Conditional baseline training
 - [ ] E18 — Conditional model evaluation/integration decision
