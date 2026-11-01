@@ -4,6 +4,10 @@ An electronics review-pattern analysis platform. It detects observable patterns,
 
 ## Current status
 
+E11 [offline product identity](docs/PRODUCT_IDENTITY.md) compares explicit model,
+variant/bundle/condition fields and keeps seller identity separate. Twenty authored
+checks pass; catalog integration remains pending.
+
 E10 [catalog access preparation](docs/CATALOG_ACCESS.md) is complete: conditional
 Amazon.in/Flipkart candidate fields, rights review and a bounded verification
 plan. Provider setup remains deferred; no alternative catalog is connected.

@@ -1,4 +1,22 @@
-# Current handoff — E10 catalog preparation
+# Current handoff — E11 offline identity
+
+2026-11-01. REVIEWTRUST STEP HANDOFF: E11 offline matcher implemented; integration
+pending. product_identity.py validates strict bounded source-declared fields;
+returns same_variant/different/unresolved and separate site-scoped seller relation.
+PRODUCT_IDENTITY.md records exact comparison, missing/conflict semantics and limits.
+Twenty authored pytest cases and Ruff format/check pass. Existing runtime and
+source-bound files unchanged; full suite not rerun. No source activated.
+Git started clean; no stage/commit/push. Owner manually reviews and commits.
+
+ACTION REQUIRED — CODEX MODEL FOR NEXT STEP: current GPT-6 Astra; recommend manual
+switch to GPT-6.1 Sol High for E12 authored candidate preparation, fallback GPT-5.6
+Sol High if selectable. Moderate complexity: category/specification compatibility,
+unknown evidence and identity exclusions. Keep real catalog/source gates; escalate
+concrete security blockers to Astra High. Stop until next.
+
+---
+
+# Historical handoff — E10 catalog preparation
 
 2026-11-01. REVIEWTRUST STEP HANDOFF: E10 preparation COMPLETE, live acceptance
 BLOCKED. CATALOG_ACCESS.md audits official advertised Amazon/Flipkart fields and
