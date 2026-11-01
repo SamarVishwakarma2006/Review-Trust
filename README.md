@@ -4,6 +4,11 @@ An electronics review-pattern analysis platform. It detects observable patterns,
 
 ## Current status
 
+E12 [authored alternative selection](docs/PRODUCT_CANDIDATES.md) filters up to 50
+records by explicit category/form/connection requirements, excludes exact matches
+and returns at most five candidates with reasons and omitted counts. Live discovery
+and comparison UI are pending; the current website remains the synthetic feedback demo.
+
 E11 [offline product identity](docs/PRODUCT_IDENTITY.md) compares explicit model,
 variant/bundle/condition fields and keeps seller identity separate. Twenty authored
 checks pass; catalog integration remains pending.

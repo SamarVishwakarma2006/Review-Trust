@@ -1,5 +1,14 @@
 # ReviewTrust specification
 
+E12 offline checkpoint (2026-11-01): `rt-candidates-0.1.0` selects from a strict
+authored catalog of at most 50 records with explicit category, form factor,
+connectivity and optional microphone preferences. Reuses E11 identity; returns
+candidate/same_product/incompatible/unresolved decisions and up to five selected
+input-order references with omitted counts. Unknown required evidence abstains;
+conflicting source/listing records reject. See docs/PRODUCT_CANDIDATES.md.
+This is not a public endpoint or live catalog. Budget/offer logic is E13; public
+pattern methodology, scoring and source admission remain unchanged.
+
 E09 update (2026-11-01): authored fixture reports include typed `feedback`, null
 for zero reviews, otherwise version `rt-feedback-0.1.0` with four aspect counts,
 bounded references and Unicode spans into masked analysis reviews. See

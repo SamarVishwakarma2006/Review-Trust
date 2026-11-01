@@ -1,4 +1,32 @@
-# Current handoff — E11 offline identity
+# Current handoff — E12 authored candidate selection
+
+2026-11-01. REVIEWTRUST STEP HANDOFF: E12 offline selection implemented; live
+retrieval and comparison UI pending. Added product_candidates.py and eight
+authored tests; PRODUCT_CANDIDATES.md, README, SPEC, AGENTS and roadmap document
+rules and limits. Reuses E11 identity with required features, same-product
+exclusions, explicit unknown/mismatch decisions, deduplication/conflict rejection,
+50-record ceiling, deadline checks and five selected references with omitted count.
+No dependency, source activation or model added. Budget/offer comparison is E13.
+
+Git started clean on main at eba3ec6. Nothing staged/committed/pushed. Owner review
+and commit remain manual. Full verification and browser outcome recorded below.
+
+Verification: scripts/check.ps1 passed, exit 0: 471 backend, 28 offline, 31
+frontend tests; dependency consistency, Ruff, ESLint, typecheck and build passed.
+Existing frozen-report integrity tests pass without snapshot changes. Browser
+opened and retained http://127.0.0.1:3000/#demo; UI unchanged for this offline
+checkpoint. No live retrieval or remote CI result claimed. git diff --check passes.
+
+ACTION REQUIRED — CODEX MODEL FOR NEXT STEP: current GPT-6 Astra; recommend manual
+switch to GPT-6.1 Sol High for E13 authored prices/freshness. Fallback GPT-5.6 Sol
+High if available. Moderate complexity: decimal amounts, currencies, missing fees,
+conditional offers, timestamps and stale evidence. Verify those boundaries and
+preserve source gates; escalate concrete security blockers to Astra High.
+Stop until next. Full live E12 acceptance awaits permitted catalog evidence.
+
+---
+
+# Historical handoff — E11 offline identity
 
 2026-11-01. REVIEWTRUST STEP HANDOFF: E11 offline matcher implemented; integration
 pending. product_identity.py validates strict bounded source-declared fields;

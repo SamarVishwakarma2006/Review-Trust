@@ -176,7 +176,7 @@ E01 starting Git baseline: main at ebb631b. The owner committed E00 and earlier 
 - [ ] E09 — Product feedback summaries ([synthetic demo integrated](PRODUCT_FEEDBACK.md); permitted human-reviewed evaluation pending)
 - [ ] E10 — Alternative catalog/source access ([preparation complete](CATALOG_ACCESS.md); live verification/adapters blocked)
 - [ ] E11 — Exact product matching ([offline matcher implemented](PRODUCT_IDENTITY.md); source integration pending)
-- [ ] E12 — Relevant alternative candidates
+- [ ] E12 — Relevant alternative candidates ([authored selector implemented](PRODUCT_CANDIDATES.md); live retrieval/UI pending)
 - [ ] E13 — Prices and freshness
 - [ ] E14 — Comparison and recommendations
 - [ ] E15 — Cross-product brand feedback

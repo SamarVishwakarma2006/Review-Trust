@@ -1,5 +1,12 @@
 # ReviewTrust engineering guidance
 
+E12 2026-11-01: offline authored candidate selector implemented in
+api/app/product_candidates.py, reusing E11 product_identity.py. Read
+docs/PRODUCT_CANDIDATES.md: 50 records, five selected input-order refs, exact
+listing duplicate/conflict checks, required-feature abstention and separate
+same-product decisions. No HTTP/UI/live retrieval. Next E13 may implement authored
+offer prices/freshness; E14 composes comparison UI. Provider setup remains deferred.
+
 E10 2026-11-01: catalog preparation in docs/CATALOG_ACCESS.md is complete; live
 acceptance/adapters remain blocked. Owner deferred Bright Data setup. Logged-in
 account/key visibility is not source admission. Proposed Amazon.in then Flipkart
