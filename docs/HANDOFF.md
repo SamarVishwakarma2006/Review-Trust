@@ -1,4 +1,26 @@
-# Current handoff — E09 synthetic feedback integration
+# Current handoff — E10 catalog preparation
+
+2026-11-01. REVIEWTRUST STEP HANDOFF: E10 preparation COMPLETE, live acceptance
+BLOCKED. CATALOG_ACCESS.md audits official advertised Amazon/Flipkart fields and
+Creators API constraints; records missing actual access/rights/budget evidence,
+identity/offer requirements and bounded future probe. README/roadmap/AGENTS updated.
+Current runtime unchanged; no provider requests, credentials or purchases.
+
+Verification: primary provider/Amazon documentation reviewed; git diff --check
+passed. Application tests not rerun for documentation-only work. Started clean
+on main at 70251c5. No staging/commit/push. Owner review/commit remains manual.
+Browser opened and retained http://127.0.0.1:3000/#demo; interface unchanged.
+
+ACTION REQUIRED — CODEX MODEL FOR NEXT STEP: current GPT-6.1 Sol; recommend keep
+GPT-6.1 Sol High for E11 authored exact-product/variant matching preparation.
+Fallback GPT-5.6 Sol High if selectable. Moderate design complexity; verify
+variant/bundle/seller ambiguity with authored cases, retain source gates. Escalate
+concrete transport/security blockers to GPT-6 Astra High. No switch claimed.
+Stop until next. Bright Data setup, E09 real evaluation and deployment deferred.
+
+---
+
+# Historical handoff — E09 synthetic feedback integration
 
 2026-11-01. REVIEWTRUST STEP HANDOFF: synthetic integration COMPLETE; full E09
 PARTIAL pending permitted human-reviewed evaluation. Typed feedback models and

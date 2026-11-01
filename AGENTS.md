@@ -1,5 +1,12 @@
 # ReviewTrust engineering guidance
 
+E10 2026-11-01: catalog preparation in docs/CATALOG_ACCESS.md is complete; live
+acceptance/adapters remain blocked. Owner deferred Bright Data setup. Logged-in
+account/key visibility is not source admission. Proposed Amazon.in then Flipkart
+pilot is conditional; second retailer/budget/rights/live fields not verified.
+Next independent E11 may prepare authored identity/variant rules only. Provider
+async jobs/storage/polling need reviewed contracts before reusing E05 transport.
+
 E09 update 2026-11-01: synthetic feedback integration complete; full E09 still
 awaits permitted human-reviewed evaluation. Read docs/PRODUCT_FEEDBACK.md.
 FixtureReport.feedback is typed and null for empty samples; generated from

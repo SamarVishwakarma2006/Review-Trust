@@ -4,6 +4,10 @@ An electronics review-pattern analysis platform. It detects observable patterns,
 
 ## Current status
 
+E10 [catalog access preparation](docs/CATALOG_ACCESS.md) is complete: conditional
+Amazon.in/Flipkart candidate fields, rights review and a bounded verification
+plan. Provider setup remains deferred; no alternative catalog is connected.
+
 Steps 1–12 are complete. The Next.js interface supports editable pasted reviews, CSV header mapping, direct API submission, cancel/reset, safe errors and an evidence view with explicit coverage, prioritised navigation, accessible charts and highlighted supporting text. FastAPI provides bounded analysis with experimental scoring, masking and explicit insufficient-evidence states. Dataset audits, a synthetic labelling/split workflow, a no-train baseline evaluation and local resource/robustness benchmarks are complete. No real dataset, trained model, independent accuracy or calibration is available. Public numeric scores are not approved and withholding is now enforced in both HTTP routes and the UI. Website content is implemented; the contact address is intentionally blank at the owner’s request. The local security audit is complete; public launch remains NO GO pending owner/provider verification. Local checks pass; GitHub Actions is configured but has not been verified remotely.
 
 Read [SPEC.md](SPEC.md), [API usage/configuration](docs/API.md), [input validation interface](docs/INPUT_VALIDATION.md), [decisions](docs/DECISIONS.md), [threat model](docs/THREAT_MODEL.md), [dataset audit](docs/DATASET_AUDIT.md), [offline workflow](ml/README.md), [model card](docs/MODEL_CARD.md), [evaluation record](docs/EVALUATION.md), [engineering guidance](AGENTS.md) and [handoff](docs/HANDOFF.md).
