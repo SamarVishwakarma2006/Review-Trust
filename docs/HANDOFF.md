@@ -1,4 +1,28 @@
-# Current handoff — India source-access recommendation
+# Current handoff — E09 preparation
+
+2026-11-01. REVIEWTRUST STEP HANDOFF: E09 DESIGN PREPARED, not implemented or
+fully complete. Owner deferred provider setup and requested subsequent work.
+PRODUCT_FEEDBACK.md defines a conservative four-aspect English headphones
+extractor, explicit abstention, per-review denominators, bounded evidence and
+authored acceptance examples. README and roadmap link the checkpoint.
+No runtime/schema change or source admission. Application tests not rerun for
+documentation only. Manual review and commit remain with the owner.
+
+Verification: git diff --check passed. Browser preview attempted twice but
+returned ERR_CONNECTION_REFUSED, including after the development server reported
+Ready on loopback:3000. UI unchanged; no successful browser demonstration claimed.
+
+Next: implement E09 authored extraction and synthetic demo presentation;
+full E09 needs permitted human-reviewed evaluation. Live fetching remains blocked.
+ACTION REQUIRED — CODEX MODEL FOR NEXT STEP: current GPT-6 Astra; recommend
+GPT-6.1 Sol High for implementation, fallback GPT-5.6 Sol High if selectable.
+Manual switch only. Moderate complexity: polarity abstention, evidence offsets,
+typed integration and regression checks. Escalate concrete security issues to
+GPT-6 Astra High. Stop until next.
+
+---
+
+# Historical handoff — India source-access recommendation
 
 REVIEWTRUST STEP HANDOFF: source-choice research COMPLETE; E02 access still BLOCKED. Date 2026-10-31. Owner selected real access and India; paid budget unspecified. Recommend validating Amazon.in through Canopy top reviews first, conditional on current functionality/rights/quota confirmation. No cookie-based pagination, account creation, purchase, external communication or review fetching occurred. Bright Data backup; Rainforest deprecation documented. See INDIA_SOURCE_PILOT.md for primary-source citations and probe checklist.
 

@@ -93,6 +93,11 @@ Known tooling limitation: ESLint 9 is deprecated upstream but remains required b
 
 ## Roadmap
 
+Current update (2026-11-01): owner deferred Bright Data setup. E09
+[product feedback preparation](docs/PRODUCT_FEEDBACK.md) defines aspects,
+conservative extraction, evidence and acceptance cases. Implementation and
+permitted human-reviewed evaluation remain pending; the website is unchanged.
+
 - [x] Step 1 — Architecture, Scoring Definition and Threat Model
 - [x] Step 2 — Repository and Development Foundation
 - [x] Step 3 — Schemas and Review Validation
