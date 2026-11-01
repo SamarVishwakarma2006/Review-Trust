@@ -193,3 +193,6 @@ See [comparison behavior and verification](docs/PRODUCT_COMPARISON.md).
 
 - [x] E16 dataset-admission review: [NO TRAIN](docs/TRAINING_ADMISSION.md).
   No permitted independent real target is admitted; E17 remains a separate checkpoint.
+
+- [x] E17 conditional training: SKIPPED_WITH_REASON on 2026-11-02 under E16 NO TRAIN.
+  No training code or model added. E18's integration decision remains next.

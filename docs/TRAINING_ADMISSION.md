@@ -73,3 +73,24 @@ E16 checkpoint. Deployment and live collection remain deferred/blocked independe
 
 Verification: the existing 28 offline tests and frozen mechanics verification were
 run for this documentation-only checkpoint; actual outcomes are recorded in HANDOFF.md.
+
+## E17 — Conditional training checkpoint, 2026-11-02
+
+Status: **SKIPPED_WITH_REASON**. The conditional step is resolved without an
+experiment because E16 remains NO TRAIN: no approved real artifact, independent
+in-domain target or scoped training authorization has been admitted. No new evidence
+was supplied between E16 and this checkpoint. A provider account or synthetic demo
+does not satisfy those conditions.
+
+No training script, fitted preprocessing, classifier, model artifact or dependency
+is added. No training/validation/test performance or cost is claimed. Existing
+mechanical fixtures remain software checks, not supervised training data. The
+evidence-only analyzer continues unchanged with public scores and confidence withheld.
+
+Reopening requires the admission evidence above and explicit authorization for the
+specific target/artifact. Start with a simple offline baseline only after those
+conditions pass; an LLM experiment needs separate justification and scope.
+
+E18 remains the next separate step: record the no-model integration decision and
+continue evidence-only output. This checkpoint does not mark E18 complete or
+authorize live collection/deployment.

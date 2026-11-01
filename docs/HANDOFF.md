@@ -1,4 +1,24 @@
-# Current handoff — E16 dataset admission
+# Current handoff — E17 conditional training
+
+2026-11-02. REVIEWTRUST STEP HANDOFF: E17 resolved as SKIPPED_WITH_REASON under
+E16 NO TRAIN. Added the checkpoint to docs/TRAINING_ADMISSION.md and updated
+README, roadmap and AGENTS. No model, training code, dependency or runtime change.
+Ponytail full retained: existing evidence and gates suffice; no speculative trainer.
+
+Started clean on main at 8398226. No staging, committing or pushing performed.
+Verification: all 28 offline tests passed; frozen mechanics verification returned
+mechanics_passed no_train. Full application suite not rerun for documentation only.
+Local website opened and retained at /#demo; UI unchanged. Manual TODO: review and
+commit these documentation changes. Live collection and deployment remain deferred.
+
+ACTION REQUIRED — CODEX MODEL FOR NEXT STEP: current GPT-6 Astra; recommend manual
+switch to GPT-6.1 Sol High, fallback GPT-5.6 Sol High if selectable. E18 is the
+separate no-model integration decision, low implementation complexity with evidence
+discipline: preserve unavailable metrics and withheld score/confidence, verify the
+existing gates. Escalate concrete security/evidence blockers to GPT-6 Astra High.
+No training without reviewed admission and scoped authorization. Stop until next.
+
+## Previous handoff — E16 dataset admission
 
 2026-11-01. REVIEWTRUST STEP HANDOFF: E16 COMPLETE — NO TRAIN. Reviewed the
 existing registry, audit, labelling protocol, model card and authored expansion.

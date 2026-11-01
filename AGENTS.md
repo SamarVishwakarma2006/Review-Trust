@@ -134,3 +134,8 @@ existing project evidence; no new external rights verification or dataset acquir
 Registry/manifests/rubric remain frozen. Next E17 records SKIPPED_WITH_REASON unless
 new reviewed admission evidence resolves rights, independent target and privacy
 gates. Do not jump to training or mark E17/E18 completed from this checkpoint.
+
+E17 resolved 2026-11-02 as SKIPPED_WITH_REASON under E16 NO TRAIN; see the E17
+section in docs/TRAINING_ADMISSION.md. No experiment, code or artifact introduced.
+Next is E18's separate no-model integration decision. Reopening training requires
+reviewed admission evidence and explicit target/artifact authorization.
