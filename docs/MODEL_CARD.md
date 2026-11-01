@@ -60,3 +60,15 @@ manipulation/authorship/sentiment targets and reopening requirements. Authored b
 and comparison demos do not supply independent training labels. No model or public
 score approval follows from provider account access. Historical decisions below
 remain intact; the frozen source registry and reports are unchanged.
+
+## E18 integration decision — 2026-11-02
+
+Decision: NO MODEL. E16 admitted no independent real target and E17 skipped training.
+There is no candidate artifact to evaluate or integrate. Precision, recall, F1,
+confusion matrix, calibration and real-world error rates remain unavailable, not
+zero. Synthetic regression passes are not classifier accuracy. Continue the existing
+evidence-only output, unknown/abstention and withheld public score/confidence.
+No contract, methodology, dependency or model-loading change is warranted. Reopen
+only after reviewed admission, scoped training authorization and a frozen independent
+evaluation with predeclared acceptance. No test-driven tuning or automatic public
+probabilities. E18 is complete through this explicit no-model decision.

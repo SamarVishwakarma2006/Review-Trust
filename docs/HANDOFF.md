@@ -1,4 +1,25 @@
-# Current handoff — E17 conditional training
+# Current handoff — remaining eligible work
+
+2026-11-02. Owner authorized remaining tasks together; Ponytail full retained.
+E18 COMPLETE: NO MODEL, documented in MODEL_CARD.md. E19 local synthetic checks
+PASS but full acceptance remains BLOCKED on live-source and release QA gates.
+E20 DEFERRED under existing no-deployment scope. See LOCAL_VERIFICATION.md.
+
+Started clean at 5183304 on main. Full scripts/check.ps1 PASS: 500 backend,
+28 offline, 35 frontend tests plus pip/Ruff/ESLint/types/build. Fresh bounded
+benchmark created and verified at docs/benchmarks/20261102-e19.json. Browser
+brand_gaps walkthrough passed; retained local tab. No new runtime code, dependencies,
+training, real data or external services. No stage/commit/push performed.
+
+Manual TODO: review/commit files; resume provider setup to unblock actual URL
+collection and E19 representative acceptance. Deployment/contact remain deferred.
+ACTION REQUIRED — CODEX MODEL FOR NEXT STEP: recommend GPT-6.1 Sol High for provider
+integration after access evidence; fallback GPT-5.6 Sol High if selectable. Security
+and live network verification are high complexity: escalate concrete blockers to
+GPT-6 Astra High. User switches manually. No more synthetic checkpoints substitute
+for real-source acceptance; details and missing QA are in LOCAL_VERIFICATION.md.
+
+## Previous handoff — E17 conditional training
 
 2026-11-02. REVIEWTRUST STEP HANDOFF: E17 resolved as SKIPPED_WITH_REASON under
 E16 NO TRAIN. Added the checkpoint to docs/TRAINING_ADMISSION.md and updated

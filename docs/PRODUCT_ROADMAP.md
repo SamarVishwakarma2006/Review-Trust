@@ -182,8 +182,8 @@ E01 starting Git baseline: main at ebb631b. The owner committed E00 and earlier 
 - [x] E15 — Approved synthetic brand feedback ([scope](BRAND_FEEDBACK.md)); real-source acceptance pending
 - [x] E16 — Dataset admission decision: [NO TRAIN](TRAINING_ADMISSION.md), 2026-11-01
 - [x] E17 — SKIPPED_WITH_REASON: E16 NO TRAIN ([checkpoint](TRAINING_ADMISSION.md))
-- [ ] E18 — Conditional model evaluation/integration decision
-- [ ] E19 — Full local verification
+- [x] E18 — NO MODEL; continue evidence-only output (MODEL_CARD.md, 2026-11-02)
+- [ ] E19 — Local synthetic checks passed; real-source acceptance still blocked (LOCAL_VERIFICATION.md)
 - [ ] E20 — Deployment (DEFERRED by owner)
 
 First useful URL-only milestone: E08. Quality and comparison milestone: E14. Brand view: E15. Learned prediction remains conditional E16–E18. Source access may block these milestones; no milestone promises universal retailer support.

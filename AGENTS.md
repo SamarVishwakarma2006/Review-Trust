@@ -139,3 +139,9 @@ E17 resolved 2026-11-02 as SKIPPED_WITH_REASON under E16 NO TRAIN; see the E17
 section in docs/TRAINING_ADMISSION.md. No experiment, code or artifact introduced.
 Next is E18's separate no-model integration decision. Reopening training requires
 reviewed admission evidence and explicit target/artifact authorization.
+
+Owner authorized remaining tasks together on 2026-11-02, superseding one-step-per-message
+for this batch only. E18 COMPLETE: NO MODEL in MODEL_CARD.md. E19 synthetic checks
+pass but real-source acceptance remains blocked; see LOCAL_VERIFICATION.md. E20
+still DEFERRED, no deployment authorization inferred. Next useful work requires
+resuming provider access; do not manufacture more completed live checkpoints.
