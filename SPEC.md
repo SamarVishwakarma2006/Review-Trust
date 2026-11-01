@@ -1,5 +1,12 @@
 # ReviewTrust specification
 
+E13 offline checkpoint (2026-11-01): `rt-offers-0.1.0` compares at most 50 authored
+offers with E11 identity, strict decimal strings and explicit currency, delivery
+context, aware timestamps, freshness policy, stock and purchase terms. Missing
+fees/stale/conditional/different-currency or variant evidence withholds comparison.
+Totals and tied lowest refs apply only to fully comparable supplied offers. See
+docs/PRODUCT_OFFERS.md. No live route, cache or scoring change.
+
 E12 offline checkpoint (2026-11-01): `rt-candidates-0.1.0` selects from a strict
 authored catalog of at most 50 records with explicit category, form factor,
 connectivity and optional microphone preferences. Reuses E11 identity; returns

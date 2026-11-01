@@ -1,4 +1,32 @@
-# Current handoff — E12 authored candidate selection
+# Current handoff — E13 authored offer handling
+
+2026-11-01. REVIEWTRUST STEP HANDOFF: offline E13 implemented; live integration
+pending. product_offers.py validates bounded decimal prices, explicit charges,
+currency/context/identity, aware observations, stock and conditional terms. Only
+fully comparable nonempty supplied offers produce lowest-total refs, including ties.
+24 authored tests added; docs/PRODUCT_OFFERS.md, roadmap, README, SPEC and AGENTS
+updated. No runtime endpoint, dependency, persistence, source or model added.
+
+Started clean on main at edc2aa6. Manual review/staging/commit only; none performed.
+Focused tests and Ruff pass. Full check/browser result recorded below.
+
+Actual verification: scripts/check.ps1 PASS exit 0: 495 backend, 28 offline and
+31 frontend tests, pip consistency, Ruff, ESLint, typecheck and production build.
+git diff --check passes. Frozen-report checks pass without changes to bound code.
+Local browser opened and retained at http://127.0.0.1:3000/#demo; website unchanged
+for this offline step. No live price, remote CI or new performance claim.
+
+ACTION REQUIRED — CODEX MODEL FOR NEXT STEP: current GPT-6 Astra; recommend manual
+switch to GPT-6.1 Sol High for E14 synthetic comparison UI, fallback GPT-5.6 Sol
+High if selectable. High integration complexity: candidate/identity/offer/feedback
+provenance and typed API/UI, missing evidence, ties, cancellation, output limits
+and responsive keyboard behavior. Reuse current native demo controls; verify
+full regressions and browser flows. Escalate security blockers to Astra High.
+Stop until next. Provider setup and deployment remain deferred.
+
+---
+
+# Historical handoff — E12 authored candidate selection
 
 2026-11-01. REVIEWTRUST STEP HANDOFF: E12 offline selection implemented; live
 retrieval and comparison UI pending. Added product_candidates.py and eight

@@ -4,6 +4,11 @@ An electronics review-pattern analysis platform. It detects observable patterns,
 
 ## Current status
 
+E13 [authored offer comparison](docs/PRODUCT_OFFERS.md) now handles exact decimal
+totals, explicit fees, currencies, stock, conditional offers and freshness. A
+lowest-total result requires every supplied offer to be comparable. UI composition
+is planned for E14; live provider setup remains deferred.
+
 E12 [authored alternative selection](docs/PRODUCT_CANDIDATES.md) filters up to 50
 records by explicit category/form/connection requirements, excludes exact matches
 and returns at most five candidates with reasons and omitted counts. Live discovery

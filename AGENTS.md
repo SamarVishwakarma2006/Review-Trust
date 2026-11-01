@@ -1,5 +1,11 @@
 # ReviewTrust engineering guidance
 
+E13 2026-11-01: authored offer module product_offers.py is implemented; read
+docs/PRODUCT_OFFERS.md. Strict bounded decimal strings, explicit charges/terms,
+aware observation/now and caller freshness cap; no unknown total or stale/conditional
+offer can win a comparison. INR default, no FX. E14 may compose synthetic UI;
+actual source/offer access and public evaluation remain pending.
+
 E12 2026-11-01: offline authored candidate selector implemented in
 api/app/product_candidates.py, reusing E11 product_identity.py. Read
 docs/PRODUCT_CANDIDATES.md: 50 records, five selected input-order refs, exact
