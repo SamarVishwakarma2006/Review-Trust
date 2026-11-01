@@ -94,6 +94,8 @@ Known tooling limitation: ESLint 9 is deprecated upstream but remains required b
 ## Roadmap
 
 Current update (2026-11-01): owner deferred Bright Data setup. E09
+now has an offline extractor with 10 passing authored checks; demo integration
+and human-reviewed evaluation remain pending. The runtime interface is unchanged.
 [product feedback preparation](docs/PRODUCT_FEEDBACK.md) defines aspects,
 conservative extraction, evidence and acceptance cases. Implementation and
 permitted human-reviewed evaluation remain pending; the website is unchanged.

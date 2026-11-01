@@ -173,7 +173,7 @@ E01 starting Git baseline: main at ebb631b. The owner committed E00 and earlier 
 - [x] E06 — Sample normalization and provenance (authored fixtures only; explicit owner override, live integration pending)
 - [ ] E07 — Product analysis API
 - [ ] E08 — Product-link website input
-- [ ] E09 — Product feedback summaries ([design prepared](PRODUCT_FEEDBACK.md); implementation/evaluation pending)
+- [ ] E09 — Product feedback summaries ([offline extractor implemented](PRODUCT_FEEDBACK.md); demo integration/evaluation pending)
 - [ ] E10 — Alternative catalog/source access
 - [ ] E11 — Exact product matching
 - [ ] E12 — Relevant alternative candidates

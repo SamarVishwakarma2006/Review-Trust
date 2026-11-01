@@ -1,6 +1,6 @@
 # E09 product feedback preparation
 
-Date: 2026-11-01. Status: DESIGN PREPARED; implementation and evaluation pending.
+Date: 2026-11-01. Status: OFFLINE EXTRACTOR IMPLEMENTED; demo integration and evaluation pending.
 Owner deferred Bright Data setup and requested the next step. This permits
 independent E09 preparation; it does not complete the live-source gates.
 
@@ -9,8 +9,11 @@ independent E09 preparation; it does not complete the live-source gates.
 English headphone/earphone reviews. Four aspects: battery, comfort, durability
 and sound. Use a small deterministic method, with no LLM or training dependency.
 Keep this feedback separate from review-pattern findings and withheld scores.
-The proposed feedback version is `rt-feedback-0.1.0`; it is not an implemented
-methodology version. SPEC.md remains authoritative for current contracts.
+The offline feedback version is `rt-feedback-0.1.0`, implemented in
+api/app/product_feedback.py. SPEC.md remains authoritative for current HTTP contracts.
+The extractor accepts only pipeline display records that are already validated
+and masked; it is not a public ingestion function. Ten authored regression cases
+pass, covering attribution, abstention, mixed wording, caps, Unicode spans and deadlines.
 
 ## Extraction contract for implementation
 
@@ -80,7 +83,7 @@ deadline/response limits. Do not derive sentiment from star ratings.
 
 ## Completion path
 
-Next implement the pure extractor and authored regression cases, then integrate
+Next integrate the pure extractor and authored regression cases
 into the explicitly synthetic demo with typed API/browser validation. Keep
 current v1 contracts stable; intentionally review any changed source-bound
 mechanics/benchmark records. Run relevant checks and browser demonstration.

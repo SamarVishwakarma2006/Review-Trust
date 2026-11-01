@@ -1,4 +1,22 @@
-# Current handoff — E09 preparation
+# Current handoff — E09 offline extractor
+
+2026-11-01. E09 PARTIAL: api/app/product_feedback.py implements the documented
+four-aspect conservative method on validated masked display records. Counts are
+per review/aspect, evidence has at most three references per state with Unicode
+spans and omitted counts. API and UI integration are pending; no public route calls
+the extractor. Ten focused pytest cases pass; Ruff format/check pass. Existing
+bound implementations are unchanged. Full suite not rerun for this isolated module.
+Started clean on main at a60c41e. No staging, commit or push performed.
+Browser preview succeeded after starting the web server outside the sandbox:
+http://127.0.0.1:3000/#demo is visible and retained. Interface unchanged; API demo
+execution was not tested this turn. git diff --check passes.
+Next integrate with the synthetic demo and test typed contracts/response limits;
+full E09 still needs permitted human-reviewed evaluation. Recommend GPT-6.1 Sol
+High (manual switch from GPT-6 Astra; fallback GPT-5.6 Sol High if available).
+
+---
+
+# Historical handoff — E09 preparation
 
 2026-11-01. REVIEWTRUST STEP HANDOFF: E09 DESIGN PREPARED, not implemented or
 fully complete. Owner deferred provider setup and requested subsequent work.
