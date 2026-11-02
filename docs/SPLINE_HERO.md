@@ -27,3 +27,11 @@ keyboard Enter starts/stops the frame and Tab reaches attribution. Confirmed a
 320px viewport with document scroll width 305px (no horizontal overflow), inspected
 the stacked still/control layout, and reset the viewport afterward. Scene remains
 opt-in; no claim of broad mobile GPU/performance testing or provider retention audit.
+
+## Approved visual redesign — 2026-11-03
+
+The home hero now uses local AI-generated `web/public/review-desk.webp`, derived
+from the approved concept, with real HTML headings/links over it. It is an artistic
+interpretation, not a capture of the live Spline scene. The original opt-in scene
+is below the analyzer in its own section. Its sandbox, CSP, stop control and
+attribution are unchanged. No external asset request is needed for the hero.

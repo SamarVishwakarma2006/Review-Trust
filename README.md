@@ -4,6 +4,10 @@ An electronics review-pattern analysis platform. It detects observable patterns,
 
 ## Current status
 
+- [x] Approved immersive homepage redesign (2026-11-03): local illustrated hero,
+  warm cream/orange styling, responsive navigation and feature overview. Existing
+  demo/analyzer retained; original Spline scene stays optional below the tools.
+
 E13 [authored offer comparison](docs/PRODUCT_OFFERS.md) now handles exact decimal
 totals, explicit fees, currencies, stock, conditional offers and freshness. A
 lowest-total result requires every supplied offer to be comparable. UI composition

@@ -1,6 +1,6 @@
 @import "tailwindcss";
 
-:root { color-scheme: light; background: #f5f7f6; color: #162b26; font-family: Arial, Helvetica, sans-serif; }
+:root { color-scheme: light; background: #faf7ef; color: #182420; font-family: Arial, Helvetica, sans-serif; }
 body { margin: 0; }
 main { max-width: 66rem; margin: auto; padding: 3rem 1rem; }
 header { margin-bottom: 2rem; }
@@ -145,3 +145,66 @@ button, input, select, textarea { scroll-margin: 1rem; }
 .spline-caption { padding: 1rem; font-size: .85rem; }
 .spline-caption a { color: #9fe5c3; }
 .spline-caption button { background: #f5a344; color: #172018; }
+
+/* The landing artwork is local; the separate Spline scene stays opt-in. */
+.site-header { background: #111c19; border-color: #34413a; color: #fff8eb; }
+.site-header .brand, .site-header nav a { color: #fff8eb; }
+.site-header .brand span { color: #bdc6bd; }
+.brand::before { content: ""; display: inline-block; width: .65rem; height: .65rem; border-radius: 50%; background: #ff722e; margin-right: .55rem; }
+.site-header nav a { text-decoration: none; }
+.site-header nav a:hover { text-decoration: underline; }
+.site-header .nav-demo { border: 1px solid #9aab9f; border-radius: 2rem; padding: .1rem 1rem; }
+body:has(.home-page) .site-header { position: absolute; z-index: 2; width: 100%; background: linear-gradient(#0b1715d9, #0b171500); border: 0; }
+body:has(.home-page) .site-shell { max-width: 84rem; padding-inline: clamp(1.25rem, 5vw, 5rem); }
+.home-page { max-width: none; padding: 0; }
+.home-page .hero { position: relative; isolation: isolate; display: flex; min-height: 800px; min-height: min(900px, 100svh); margin: 0; padding: 10rem max(5vw, 1.25rem) 7rem; background: #101b18; color: #fff8e9; overflow: hidden; }
+.hero-art { object-fit: cover; object-position: center; z-index: -2; }
+.home-page .hero::after { content: ""; position: absolute; inset: 0; z-index: -1; background: linear-gradient(90deg, #091411eb 0%, #091411b3 30%, #09141118 65%), linear-gradient(0deg, #09141166, transparent 25%); }
+.hero-copy { max-width: 40rem; }
+.home-page .hero h1 { font-size: clamp(3.5rem, 6.6vw, 6.7rem); letter-spacing: -.065em; line-height: .99; margin: 1.6rem 0; }
+.home-page .hero .eyebrow { color: #d5d9cf; font-weight: 400; letter-spacing: .24em; }
+.home-page .hero .intro { max-width: 31rem; font-size: clamp(1.15rem, 1.7vw, 1.65rem); color: #e6e7dc; line-height: 1.5; }
+.home-page .hero .actions { gap: 1.6rem; margin-top: 2rem; }
+.home-page .hero .text-link { color: #fff8e9; }
+.home-page .hero .button-link { background: #ff722e; color: #17211b; border: 0; border-radius: 3rem; padding: 1rem 1.6rem; gap: 1.7rem; }
+.home-page .hero .button-link:hover { background: #ff955b; }
+.hero-disclosure { color: #c1c9bf; font-size: .85rem; margin-top: 1.5rem; }
+.hero-analyzer-link { font-size: .85rem; }
+.hero-label { position: absolute; right: 4%; bottom: 3rem; padding: 1rem 1.3rem; border: 1px solid #ffffff40; border-radius: 1rem; background: #14221be6; color: #e3e9db; font-size: .85rem; line-height: 1.6; }
+.hero-label span { color: #ff955b; float: left; margin-right: .8rem; font-size: 1.6rem; }
+.feature-intro { max-width: 84rem; margin: auto; padding: 4.5rem max(5vw, 1.25rem); }
+.feature-intro > .eyebrow, .feature-intro > h2 { text-align: center; }
+.feature-intro h2 { font-size: clamp(2rem, 3.4vw, 3.1rem); letter-spacing: -.055em; line-height: 1.1; }
+.feature-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); margin-top: 3rem; gap: 2rem; }
+.feature-grid article + article { border-left: 1px solid #deded1; padding-left: 2rem; }
+.feature-number { color: #a84016; font-size: .8rem; letter-spacing: .12em; }
+.feature-grid h3 { margin-top: .7rem; }
+.feature-grid p { color: #526057; font-size: .95rem; }
+.home-content { max-width: 66rem; margin: auto; padding: 0 1.25rem 3rem; }
+.home-content .hero-note { border-radius: 1rem; margin-bottom: 3rem; background: #ecefe5; }
+.scene-section { display: grid; grid-template-columns: 1fr 1fr; align-items: center; gap: 3rem; margin: 4rem 0 1rem; }
+.scene-section h2 { font-size: 2.5rem; line-height: 1.1; letter-spacing: -.04em; }
+.site-footer { background: #e9ece1; }
+@media (max-width: 900px) {
+  .site-topbar { gap: .5rem; }
+  .site-header nav { gap: .25rem .8rem; }
+  .site-header nav a { font-size: .8rem; }
+  .home-page .hero { min-height: 850px; padding-top: 12rem; align-items: start; }
+  .hero-copy { max-width: 30rem; }
+}
+@media (max-width: 640px) {
+  body:has(.home-page) .site-header { position: relative; background: #101b18; }
+  .site-header .brand span { display: none; }
+  .site-header nav { gap: .15rem .85rem; }
+  .home-page .hero { min-height: 780px; padding: 2.5rem 1.25rem 22rem; align-items: start; }
+  .home-page .hero-art { top: auto !important; height: 22rem !important; object-position: 75% bottom; }
+  .home-page .hero::after { background: linear-gradient(0deg, transparent 0%, #101b1800 15%, #101b18 37%); }
+  .home-page .hero h1 { font-size: clamp(3rem, 11vw, 4.8rem); }
+  .home-page .hero .eyebrow { font-size: .65rem; }
+  .home-page .hero .actions { gap: 1rem; }
+  .hero-label { right: 1.25rem; bottom: 1.25rem; font-size: .75rem; }
+  .feature-intro { padding-block: 3rem; }
+  .feature-grid, .scene-section { grid-template-columns: 1fr; gap: 1.5rem; }
+  .feature-grid article + article { border-left: 0; border-top: 1px solid #deded1; padding: 1.5rem 0 0; }
+  .scene-section { margin-top: 3rem; }
+}

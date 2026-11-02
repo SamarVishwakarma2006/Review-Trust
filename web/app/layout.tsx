@@ -23,6 +23,7 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
               <Link href="/methodology">Methodology</Link>
               <Link href="/privacy">Privacy</Link>
               <Link href="/contact">Contact</Link>
+              <Link className="nav-demo" href="/#demo">Explore demo ↗</Link>
             </nav>
           </div>
         </header>

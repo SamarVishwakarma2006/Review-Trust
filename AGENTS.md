@@ -1,5 +1,10 @@
 # ReviewTrust engineering guidance
 
+2026-11-03 approved visual redesign: homepage uses local review-desk.webp with
+native HTML copy/controls. Original opt-in Spline scene is below the tools; its
+isolation and attribution remain mandatory. Keep synthetic/live disclosures and
+responsive text readability. No source or deployment gate changed.
+
 E13 2026-11-01: authored offer module product_offers.py is implemented; read
 docs/PRODUCT_OFFERS.md. Strict bounded decimal strings, explicit charges/terms,
 aware observation/now and caller freshness cap; no unknown total or stale/conditional

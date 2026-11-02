@@ -1,4 +1,26 @@
-# Current handoff — optional Spline hero
+# Current handoff — approved homepage redesign
+
+2026-11-03. COMPLETE. Owner approved the illustrated concept. Reworked page.tsx,
+globals.css and layout.tsx; added local review-desk.webp (78,212 bytes). Full-width
+dark hero, cream feature overview, orange CTA, mobile stacked presentation. Hero
+copy is native HTML; synthetic/live limitations remain visible. Original opt-in
+Spline component moved below tools, with attribution and isolation unchanged.
+No API, model, dependency, source access or deployment changes.
+
+Started clean on main at c715c08. Frontend 36 tests, lint, typecheck and production
+build pass. Initial sandbox build hit EPERM on generated Next files; elevated
+build passed. Desktop and 320px browser layout inspected (scroll width 305px at
+320px); keyboard demo anchor verified. Existing behavior tests cover analyzer and
+Spline controls; no new live API/source verification claimed. CSS mobile refinement
+was browser-checked after the build. git diff --check passed.
+
+Manual TODO: review and commit; no files staged or committed by Codex. Next scope
+is owner feedback or deferred provider access, not deployment. Recommend manual
+switch to GPT-6.1 Sol High for UI refinements; fallback GPT-5.6 Sol High if available.
+Medium complexity; check mobile, keyboard and frontend suite; escalate concrete
+security blockers to GPT-6 Astra High.
+
+## Previous handoff — optional Spline hero
 
 2026-11-02. Owner authorized homepage integration of supplied Spline scene. Added
 local still, opt-in sandboxed 3D frame and stop control, attribution/privacy copy,
