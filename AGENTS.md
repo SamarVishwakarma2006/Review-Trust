@@ -145,3 +145,11 @@ for this batch only. E18 COMPLETE: NO MODEL in MODEL_CARD.md. E19 synthetic chec
 pass but real-source acceptance remains blocked; see LOCAL_VERIFICATION.md. E20
 still DEFERRED, no deployment authorization inferred. Next useful work requires
 resuming provider access; do not manufacture more completed live checkpoints.
+
+2026-11-02 owner-authorized Spline hero implemented. Read docs/SPLINE_HERO.md.
+Local still by default; explicit opt-in loads /scene in an opaque allow-scripts
+sandbox. This exact route owns its CSP including response sandbox and scoped
+WebAssembly/dependency permissions; parent analyzer nonce policy is unchanged.
+Never add allow-same-origin or pass reviews to the decorative scene. Attribution,
+stop control and optional-request privacy disclosure must remain. No dependency
+or deployment introduced; 36 frontend tests and desktop/320px checks pass.

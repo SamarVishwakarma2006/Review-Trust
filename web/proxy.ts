@@ -2,6 +2,8 @@ import { NextRequest, NextResponse } from "next/server";
 import { apiBase } from "./lib/api";
 
 export function proxy(request: NextRequest) {
+  // The sandboxed decorative scene has its own narrowly scoped response policy.
+  if (request.nextUrl.pathname === "/scene") return NextResponse.next();
   const nonce = Buffer.from(crypto.randomUUID()).toString("base64");
   const dev = process.env.NODE_ENV === "development";
   // ponytail: native Next nonce support; dynamic rendering avoids a build-time nonce cache.

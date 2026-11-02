@@ -1,4 +1,5 @@
 import Demo from "./demo";
+import SplineHero from "./spline-hero";
 import Analyzer from "./analyzer";
 import Link from "next/link";
 
@@ -12,10 +13,13 @@ export default function Home() {
         <p className="intro">Explore shared wording, incentive mentions and missing evidence in the reviews you supply.</p>
         <p>ReviewTrust explains observable patterns in an English-language review subset for one electronics product. Patterns are not proven deception.</p>
         <div className="actions">
-          <a className="button-link primary" href="#analyze">Analyze your reviews</a>
+          <a className="button-link primary" href="#demo">Explore the demo</a>
+          <a className="text-link" href="#analyze">Analyze your reviews</a>
           <Link className="text-link" href="/how-it-works">See how it works →</Link>
         </div>
         </div>
+        <SplineHero />
+      </header>
         <aside className="hero-note" aria-labelledby="read-evidence">
           <p className="eyebrow">Read the evidence</p>
           <h2 id="read-evidence">A pattern is a starting point.</h2>
@@ -23,7 +27,6 @@ export default function Home() {
           <p>Inspect the supporting text and coverage before drawing a conclusion. Missing evidence is a gap, never a low-risk finding.</p>
           <Link className="text-link" href="/methodology">Understand the limits →</Link>
         </aside>
-      </header>
       <section className="before-analysis" aria-labelledby="prepare-title">
         <h2 id="prepare-title">Before you begin</h2>
         <ol className="steps-grid">

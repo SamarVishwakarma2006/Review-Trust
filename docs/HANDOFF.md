@@ -1,4 +1,18 @@
-# Current handoff — remaining eligible work
+# Current handoff — optional Spline hero
+
+2026-11-02. Owner authorized homepage integration of supplied Spline scene. Added
+local still, opt-in sandboxed 3D frame and stop control, attribution/privacy copy,
+exact route CSP and frontend checks. See SPLINE_HERO.md. Started clean on main at
+573f36d. No dependency, stage, commit, push or deployment. Frontend tests (36),
+lint, types and build passed. Browser scene rendering and keyboard controls verified;
+320px viewport had no horizontal overflow. See SPLINE_HERO.md for limits.
+Manual TODO: review/commit integration and confirm creator credit before launch.
+ACTION REQUIRED — CODEX MODEL FOR NEXT STEP: current GPT-6 Astra; recommend
+GPT-6.1 Sol High for further UI work, fallback GPT-5.6 Sol High if selectable.
+Medium complexity; verify mobile/keyboard and preserve scene isolation. Escalate
+concrete CSP/security blockers to Astra High. Provider/live gates remain blocked.
+
+## Previous handoff — remaining eligible work
 
 2026-11-02. Owner authorized remaining tasks together; Ponytail full retained.
 E18 COMPLETE: NO MODEL, documented in MODEL_CARD.md. E19 local synthetic checks

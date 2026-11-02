@@ -200,3 +200,6 @@ See [comparison behavior and verification](docs/PRODUCT_COMPARISON.md).
 - [x] E18: NO MODEL integration decision; evidence-only output continues.
 - [ ] E19: [local synthetic verification passed](docs/LOCAL_VERIFICATION.md), live-source acceptance blocked.
 - [ ] E20: deployment remains deferred by owner; contact stays blank.
+
+- [x] Optional Spline homepage illustration with local still and explicit 3D control.
+  See [integration boundaries](docs/SPLINE_HERO.md).

@@ -26,6 +26,11 @@ test("all public pages have one main/heading, focusable skip target and resolvab
     expect(doc.querySelector('nav[aria-label="Footer navigation"]')).toBeTruthy();
     for (const anchor of doc.querySelectorAll<HTMLAnchorElement>("a[href]")) {
       const url = new URL(anchor.getAttribute("href")!, "http://localhost/");
+      if (url.origin === "https://app.spline.design") {
+        expect(url.pathname).toBe("/community/file/63aa1f20-fbd1-4b3d-9a99-6a8a825917ca");
+        expect(anchor.rel).toContain("noopener");
+        continue;
+      }
       expect(url.origin).toBe("http://localhost");
       const Target = pages[url.pathname as keyof typeof pages];
       expect(Target).toBeTruthy();
