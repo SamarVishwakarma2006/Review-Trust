@@ -2,13 +2,11 @@ import Demo from "./demo";
 import SplineHero from "./spline-hero";
 import Analyzer from "./analyzer";
 import Link from "next/link";
-import Image from "next/image";
 
 export default function Home() {
   return (
     <main id="content" className="home-page" tabIndex={-1}>
       <header className="hero">
-        <Image className="hero-art" src="/review-desk.webp" alt="" fill sizes="100vw" preload />
         <div className="hero-copy">
         <p className="eyebrow">Electronics / Review evidence</p>
         <h1>Look beyond<br />the stars.</h1>
@@ -20,7 +18,7 @@ export default function Home() {
         <p className="hero-disclosure">Synthetic preview · Live collection is not connected</p>
         <a className="text-link hero-analyzer-link" href="#analyze">Have your own reviews? Open the analyzer →</a>
         </div>
-        <div className="hero-label"><span aria-hidden="true">✦</span> A little more curiosity.<br />A lot more context.</div>
+        <SplineHero />
       </header>
       <section className="feature-intro" aria-labelledby="context-title">
         <p className="eyebrow">Read between the ratings</p>
@@ -54,10 +52,6 @@ export default function Home() {
         <p>The analyzer returns findings and coverage with numeric scores withheld. It is not a probability that reviews are genuine, a product-quality rating or validated confidence. A value of 100 does not verify authenticity.</p>
         <p>Public numeric scores are not approved. Before public deployment, the release must withhold the score and show findings and coverage. Both API routes and this interface now enforce withholding. Production configuration and release approval remain pending.</p>
         <p><Link className="text-link" href="/methodology">Read the methodology</Link> or <Link className="text-link" href="/privacy">learn what happens to your input</Link>.</p>
-      </section>
-      <section className="scene-section" aria-labelledby="scene-title">
-        <div><p className="eyebrow">Meet the desk companion</p><h2 id="scene-title">A moment of curiosity.</h2><p>Explore the original interactive Spline scene. This optional illustration is separate from your review analysis.</p><p className="muted">The hero artwork is an AI-generated interpretation; the interactive scene has its own framing.</p></div>
-        <SplineHero />
       </section>
       </div>
     </main>

@@ -133,6 +133,14 @@ E07 collected-result contracts checkpoint (2026-10-31): api/app/product_results.
 Owner override 2026-10-31: explicitly authorized an end-to-end synthetic demo including E08 interface. This scoped E07/E08 demo is COMPLETE: POST /v2/demo/analyze accepts only example=patterns|partial|empty, uses fixed authored examples and existing sample/analyzer pipeline under shared admission/rate/deadline/8 KiB input/2 MiB output controls. Homepage demo calls the API, validates consumed fields and fixture provenance, renders escaped findings with synthetic labels, cancel/reset/stale-response guards and complete/partial/empty states. No submitted URL or external fetch is accepted. Production /v2/products/analyze remains fail-closed; E02/E05 and real-source E07/E08 acceptance remain blocked. No training/deployment. Next scope must distinguish the completed demo from real product-link functionality; do not keep repeating unconnected E07 component checkpoints. See docs/SYNTHETIC_DEMO.md.
 ## Optional Spline illustration (2026-11-02)
 
+2026-11-03 owner override: homepage now automatically loads the same isolated
+scene, increasing third-party request exposure to every homepage visit. Privacy
+copy discloses this and Pause 3D removes the frame. No sandbox/CSP permission was
+expanded and no review data is shared. Earlier opt-in statements are historical.
+Rendering fix: /scene additionally admits generated blob fetches, embedded
+data/blob media, and the exact Roboto v30 font URL found in the supplied scene.
+No arbitrary font/media origins or JS eval; the analyzer CSP remains unchanged.
+
 Owner-authorized third-party decorative runtime is isolated in an opaque sandboxed
 frame; /scene has its own restrictive CSP including response-level sandbox. Parent
 nonce policy remains. Explicit load/stop controls and local still avoid automatic

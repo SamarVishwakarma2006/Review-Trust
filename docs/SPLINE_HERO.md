@@ -1,5 +1,24 @@
 # Optional homepage illustration — 2026-11-02
 
+## Current behavior — 2026-11-03 owner override
+
+The owner requested automatic interaction inside the full-bleed hero. The scene
+now starts on page load behind the text, with no card or Explore in 3D gate.
+Pointer-transparent decorative overlays preserve canvas input; links remain
+clickable. Pause/Resume removes/recreates the iframe; local artwork is the paused
+fallback. Attribution is in the footer. Privacy disclosure now reflects automatic
+third-party requests. Sandbox, scene route CSP and review-data isolation unchanged.
+The following opt-in description is historical. The existing scene's camera and
+lighting differ from the AI mockup; exact asset
+matching requires editing the original scene. Spline's official logo removal is
+an export setting on supported paid plans, not a CSS workaround implemented here.
+
+Black-face diagnosis: the standalone preview rendered the face while /scene did
+not. Temporary CSP event diagnostics identified blocked blob fetches, the exact
+Roboto font and embedded data/blob media. Admitting those only in /scene restores
+the green face and head animation. No JS eval, same-origin sandbox permission or
+parent CSP relaxation. Diagnostic code removed; viewer uses loading="eager".
+
 Owner supplied scene K5UevsEfu27gxzSe and authorized integration. The homepage uses
 a local still capture by default and an explicit Explore in 3D / Stop animation
 control. No autoplay, including for reduced-motion users. Responsive square sizing

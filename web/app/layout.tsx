@@ -38,6 +38,7 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
               <Link href="/contact">Questions and disputes</Link>
             </nav>
             <p className="muted">Development preview. Security and deployment reviews are pending.</p>
+            <p className="muted">3D illustration: <a className="text-link" href="https://app.spline.design/community/file/63aa1f20-fbd1-4b3d-9a99-6a8a825917ca" target="_blank" rel="noopener noreferrer">Cute Computer Follow Cursor · original scene on Spline</a>. Loads automatically on the homepage; use Pause 3D to stop.</p>
           </div>
         </footer>
       </body>

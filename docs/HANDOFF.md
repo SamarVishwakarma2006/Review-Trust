@@ -1,4 +1,26 @@
-# Current handoff — approved homepage redesign
+# Current handoff — automatic full-bleed Spline hero
+
+2026-11-03. Implemented owner-requested automatic live scene in the hero instead
+of a fixed card/still. Removed Explore in 3D, retained small Pause/Resume control,
+moved attribution to footer and updated automatic-request privacy disclosure.
+Opaque iframe and parent page CSP unchanged. Restored green face/head animation
+by admitting generated blob fetches, embedded data/blob media and the exact Roboto
+font URL in /scene only. JavaScript eval remains blocked. Temporary CSP diagnostics
+were removed. Existing scene camera/lighting differs from AI reference; exact
+reference match and watermark removal require scene editing/authorized export.
+
+Started main at 9e9a343 with interrupted fix changes in page/CSS/component.
+36 frontend tests, lint, typecheck and production build passed. Browser confirms
+automatic canvas, green face/head animation, canvas input, pause/removal/resume
+and 320px no horizontal overflow. Coordinate-based two-position cursor verification
+was blocked by browser automation's fractional iframe coordinate guard. No claim
+of broad device/GPU coverage. No stage/commit/push/deployment.
+Manual TODO: review change and provide adjusted watermark-free scene export.
+Next recommendation: GPT-6.1 Sol High, fallback GPT-5.6 Sol High if selectable;
+medium UI complexity; repeat browser and frontend checks. Escalate concrete
+scene/security blockers to GPT-6 Astra High; user switches manually.
+
+## Previous handoff — approved homepage redesign
 
 2026-11-03. COMPLETE. Owner approved the illustrated concept. Reworked page.tsx,
 globals.css and layout.tsx; added local review-desk.webp (78,212 bytes). Full-width

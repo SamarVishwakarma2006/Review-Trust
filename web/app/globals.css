@@ -146,7 +146,7 @@ button, input, select, textarea { scroll-margin: 1rem; }
 .spline-caption a { color: #9fe5c3; }
 .spline-caption button { background: #f5a344; color: #172018; }
 
-/* The landing artwork is local; the separate Spline scene stays opt-in. */
+/* The isolated live scene fills the hero; Pause restores local artwork. */
 .site-header { background: #111c19; border-color: #34413a; color: #fff8eb; }
 .site-header .brand, .site-header nav a { color: #fff8eb; }
 .site-header .brand span { color: #bdc6bd; }
@@ -158,9 +158,15 @@ body:has(.home-page) .site-header { position: absolute; z-index: 2; width: 100%;
 body:has(.home-page) .site-shell { max-width: 84rem; padding-inline: clamp(1.25rem, 5vw, 5rem); }
 .home-page { max-width: none; padding: 0; }
 .home-page .hero { position: relative; isolation: isolate; display: flex; min-height: 800px; min-height: min(900px, 100svh); margin: 0; padding: 10rem max(5vw, 1.25rem) 7rem; background: #101b18; color: #fff8e9; overflow: hidden; }
-.hero-art { object-fit: cover; object-position: center; z-index: -2; }
-.home-page .hero::after { content: ""; position: absolute; inset: 0; z-index: -1; background: linear-gradient(90deg, #091411eb 0%, #091411b3 30%, #09141118 65%), linear-gradient(0deg, #09141166, transparent 25%); }
-.hero-copy { max-width: 40rem; }
+.home-page .hero > .spline-hero { position: absolute; inset: 0; width: 100%; border-radius: 0; background: #121614; z-index: -2; }
+.home-page .hero .spline-stage { position: absolute; inset: 0; aspect-ratio: auto; }
+.home-page .hero .spline-stage iframe { left: 20vw; width: calc(100% - 20vw); }
+.home-page .hero .spline-caption { position: absolute; left: 1rem; bottom: .5rem; z-index: 1; padding: 0; }
+.home-page .hero .spline-caption p { color: #c1c9bf; font-size: .8rem; }
+.home-page .hero .spline-caption button { border-radius: 2rem; background: #14221b; color: #fff8e9; padding: .4rem .8rem; font-size: .75rem; }
+.home-page .hero::after { content: ""; position: absolute; inset: 0; z-index: -1; pointer-events: none; background: linear-gradient(90deg, #091411eb 0%, #091411b3 30%, #09141118 65%), linear-gradient(0deg, #09141166, transparent 25%); }
+.hero-copy { max-width: 40rem; min-width: 0; pointer-events: none; }
+.hero-copy a { pointer-events: auto; }
 .home-page .hero h1 { font-size: clamp(3.5rem, 6.6vw, 6.7rem); letter-spacing: -.065em; line-height: .99; margin: 1.6rem 0; }
 .home-page .hero .eyebrow { color: #d5d9cf; font-weight: 400; letter-spacing: .24em; }
 .home-page .hero .intro { max-width: 31rem; font-size: clamp(1.15rem, 1.7vw, 1.65rem); color: #e6e7dc; line-height: 1.5; }
@@ -196,8 +202,9 @@ body:has(.home-page) .site-shell { max-width: 84rem; padding-inline: clamp(1.25r
   body:has(.home-page) .site-header { position: relative; background: #101b18; }
   .site-header .brand span { display: none; }
   .site-header nav { gap: .15rem .85rem; }
-  .home-page .hero { min-height: 780px; padding: 2.5rem 1.25rem 22rem; align-items: start; }
-  .home-page .hero-art { top: auto !important; height: 22rem !important; object-position: 75% bottom; }
+  .home-page .hero { min-height: 0; padding: 2.5rem 1.25rem 26rem; align-items: stretch; flex-direction: column; }
+  .home-page .hero > .spline-hero { width: 100%; }
+  .home-page .hero .spline-stage iframe { left: 0; top: auto; bottom: 0; width: 100%; height: 26rem; }
   .home-page .hero::after { background: linear-gradient(0deg, transparent 0%, #101b1800 15%, #101b18 37%); }
   .home-page .hero h1 { font-size: clamp(3rem, 11vw, 4.8rem); }
   .home-page .hero .eyebrow { font-size: .65rem; }

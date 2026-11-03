@@ -6,7 +6,8 @@ An electronics review-pattern analysis platform. It detects observable patterns,
 
 - [x] Approved immersive homepage redesign (2026-11-03): local illustrated hero,
   warm cream/orange styling, responsive navigation and feature overview. Existing
-  demo/analyzer retained; original Spline scene stays optional below the tools.
+  demo/analyzer retained. Owner-requested follow-up brings the live Spline scene
+  into the full-width hero with automatic loading and Pause/Resume 3D.
 
 E13 [authored offer comparison](docs/PRODUCT_OFFERS.md) now handles exact decimal
 totals, explicit fees, currencies, stock, conditional offers and freshness. A

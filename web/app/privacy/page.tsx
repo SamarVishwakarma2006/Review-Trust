@@ -20,8 +20,8 @@ export default function Privacy() {
         <p>Analysis and error responses request no caching. Application code does not log raw review bodies; unexpected API failures log only a fixed error code and request ID. Infrastructure and access logs are a separate deployment concern.</p>
       </section>
       <section className="panel" aria-labelledby="privacy-metadata">
-        <h2>Optional Spline illustration</h2>
-        <p>The homepage initially shows a locally hosted still image. Choosing Explore in 3D loads a decorative scene from Spline’s CDN and scene servers and a pinned geometry file from unpkg and a decoder from the Google gstatic CDN. These services receive connection information such as your IP address. The scene runs in a sandboxed frame without access to the analyzer page. Stop animation removes that frame. Their service policies apply to those requests; we have not verified their retention practices.</p>
+        <h2>Homepage Spline illustration</h2>
+        <p>The homepage automatically loads a decorative scene from Spline’s CDN and scene servers, a pinned geometry file from unpkg, and a decoder and font from Google’s gstatic CDN. These services receive connection information such as your IP address. The scene runs in a sandboxed frame without access to the analyzer page. Pause 3D removes that frame and restores a local still image. Their service policies apply to those requests; we have not verified their retention practices.</p>
         <h2 id="privacy-metadata">Connection information and limits</h2>
         <p>Serving the site and API requires processing network connection information. The API’s in-memory rate limiter uses a process-scoped hash of the peer address, with bounded entries and idle expiry. This is not a promise of anonymous use.</p>
         <p>Production hosting, proxy headers, provider access logs, log retention and provider access have not been approved or verified. We cannot promise that hosting infrastructure records nothing. Deployment is pending those reviews.</p>

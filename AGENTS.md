@@ -1,5 +1,10 @@
 # ReviewTrust engineering guidance
 
+2026-11-03 owner override: hero scene now autoloads as a full-bleed background,
+with Pause/Resume 3D and footer attribution. Earlier opt-in requirements are
+superseded for this scene only. Preserve opaque sandbox/CSP and no review-data
+access. Exact mockup camera/lighting and watermark-free export remain owner work.
+
 2026-11-03 approved visual redesign: homepage uses local review-desk.webp with
 native HTML copy/controls. Original opt-in Spline scene is below the tools; its
 isolation and attribution remain mandatory. Keep synthetic/live disclosures and
