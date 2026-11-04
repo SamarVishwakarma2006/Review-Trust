@@ -1,3 +1,26 @@
+# Current handoff — Spline room details
+
+2026-11-04. REVIEWTRUST STEP HANDOFF: room-detail integration complete;
+exact mockup matching and scene performance optimization remain open.
+One authorized Spline Agent request added shelving/books/plants, brown desk and
+warm/emerald lights. Displayed balance remained 500; no billing claim or purchase.
+Export reused the existing asset URL. Updated web/app/scene/route.ts to the supplied
+2.0.133 WebGL viewer and pinned WASM path; README and SPLINE_HERO record details.
+
+Verification: 36 frontend tests, lint, typecheck, production build and diff check
+passed. Browser: visible new decor/green face, autoload, canvas input, pause/resume,
+320px scroll width 305px. Two-position cursor test limited by browser tool guard.
+Spline optimization flag/shader warnings remain; no broad performance claim.
+No app deployment, staging, commit or push. Started clean main at 20955d2.
+Manual TODO: review the scene in browser; Git versions the integration/docs only,
+not mutable Spline CDN contents. Original .spline file remains in Downloads.
+
+ACTION REQUIRED — CODEX MODEL FOR NEXT STEP: current room integration; next owner
+visual feedback/performance refinement. Recommend GPT-6.1 Sol High; keep if selected,
+otherwise switch manually. Fallback GPT-5.6 Sol High if available. Medium complexity:
+visual verification and frontend checks; escalate concrete rendering/isolation
+blockers to GPT-6 Astra High. No model switch claimed. Await next.
+
 # Current handoff — automatic full-bleed Spline hero
 
 2026-11-03. Implemented owner-requested automatic live scene in the hero instead

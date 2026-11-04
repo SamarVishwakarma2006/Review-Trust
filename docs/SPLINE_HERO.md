@@ -54,3 +54,23 @@ from the approved concept, with real HTML headings/links over it. It is an artis
 interpretation, not a capture of the live Spline scene. The original opt-in scene
 is below the analyzer in its own section. Its sandbox, CSP, stop control and
 attribution are unchanged. No external asset request is needed for the hero.
+## Room-detail follow-up — 2026-11-04
+
+One owner-authorized Spline Agent run (Fast, Low, minimum Refine 2x) added
+charcoal shelving, books and plants, brown desk material and amber/emerald lights.
+The editor still displayed 500 credits after completion; this is a displayed
+balance, not a billing audit. No additional generation or purchase was made.
+Editable project: https://app.spline.design/file/8252496f-49a8-40cc-85fd-b09e5c94a610
+
+Export unexpectedly reused the existing K5UevsEfu27gxzSe asset URL, so its hosted
+contents changed in place. The app now uses the export's pinned WebGL viewer
+2.0.133 and corresponding bevel WASM allowlist path. Original source file remains
+in the owner's Downloads. The hosted scene is mutable and is not versioned by Git.
+No application deployment occurred. Opaque sandbox and parent CSP are preserved.
+
+Desktop browser confirmed shelves, books, plants, green face, autoload and
+Pause/Resume iframe removal/recreation. Canvas click succeeds; two-position cursor
+testing remains limited by the automation iframe-coordinate guard. At 320px the
+page scroll width is 305px. This is a stylized room, not an exact mockup match.
+Spline flags scene optimization and the browser logs shader warnings; broad GPU
+performance is unverified. Official Spline branding remains; no paid removal used.

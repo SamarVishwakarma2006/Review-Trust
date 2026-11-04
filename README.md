@@ -8,6 +8,8 @@ An electronics review-pattern analysis platform. It detects observable patterns,
   warm cream/orange styling, responsive navigation and feature overview. Existing
   demo/analyzer retained. Owner-requested follow-up brings the live Spline scene
   into the full-width hero with automatic loading and Pause/Resume 3D.
+  Room-detail follow-up (2026-11-04) adds shelves, plants, books and warm desk
+  colors; see [scene notes](docs/SPLINE_HERO.md) for remaining visual/performance limits.
 
 E13 [authored offer comparison](docs/PRODUCT_OFFERS.md) now handles exact decimal
 totals, explicit fees, currencies, stock, conditional offers and freshness. A
