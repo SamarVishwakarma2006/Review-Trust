@@ -1,5 +1,5 @@
 export function GET() {
-  return new Response(`<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Interactive computer</title><style>html,body,spline-viewer{margin:0;width:100%;height:100%;display:block;background:#121614}</style></head><body><script type="module" src="https://cdn.spline.design/@splinetool/viewer@2.0.133/build/spline-viewer.webgl.js"></script><spline-viewer loading="eager" url="https://prod.spline.design/K5UevsEfu27gxzSe/scene.splinecode"></spline-viewer></body></html>`, {
+  return new Response(`<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Interactive computer</title><style>html,body,spline-viewer{margin:0;width:100%;height:100%;display:block;background:transparent}</style></head><body><script type="module" src="https://cdn.spline.design/@splinetool/viewer@2.0.133/build/spline-viewer.webgl.js"></script><spline-viewer loading="eager" url="https://prod.spline.design/K5UevsEfu27gxzSe/scene.splinecode"></spline-viewer></body></html>`, {
     headers: {
       "Content-Type": "text/html; charset=utf-8",
       "Cache-Control": "no-store",

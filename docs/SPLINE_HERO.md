@@ -74,3 +74,16 @@ testing remains limited by the automation iframe-coordinate guard. At 320px the
 page scroll width is 305px. This is a stylized room, not an exact mockup match.
 Spline flags scene optimization and the browser logs shader warnings; broad GPU
 performance is unverified. Official Spline branding remains; no paid removal used.
+## Viewer performance follow-up
+
+The homepage mounts the viewer only while the hero intersects the viewport, the
+tab is visible and the visitor has enabled 3D. Returning to the hero recreates
+the frame, so the scene may take time to initialize again. The transparent
+frame lets the local still show while the viewer starts. The iframe sandbox and
+scene content policy continue to isolate the viewer.
+
+The hosted Spline export uses a 1x pixel ratio on desktop and mobile and the
+Performance geometry compression preset. These settings trade some sharpness
+and geometry precision for less rendering and download work. This pass did not
+reduce the model's polygon count. No frame-rate or download improvement was measured.
+
