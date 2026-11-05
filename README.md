@@ -118,7 +118,9 @@ Known tooling limitation: ESLint 9 is deprecated upstream but remains required b
 
 ## Roadmap
 
-Current update (2026-11-01): owner deferred Bright Data setup. E09
+Current update (2026-11-05): owner reports Bright Data login/API-key visibility;
+no secret was shared. Live source access, rights, Amazon.in fields and cost limits
+are still unverified. E09
 now has feedback counts and supporting excerpts in the synthetic demo;
 human-reviewed real-data evaluation remains pending.
 [product feedback preparation](docs/PRODUCT_FEEDBACK.md) defines aspects,
@@ -140,7 +142,7 @@ an authored example to inspect battery, comfort, durability and sound feedback.
 - [ ] Step 13 — Deployment and Production Verification (preparation complete; deployment deferred by owner)
 - [ ] Step 14 — URL expansion (planned as E01–E19; implementation pending)
 
-The next active development roadmap is [PRODUCT_ROADMAP.md](docs/PRODUCT_ROADMAP.md): E00 planning and E01 feasibility are complete; [source findings and access blockers](docs/SOURCE_FEASIBILITY.md) are recorded. E02 permission/access is [BLOCKED](docs/SOURCE_ACCESS.md): the owner has no store/provider access yet. An access checklist and unsent merchant request are prepared; no live source is approved. E03 [URL-ingestion/security design](docs/URL_INGESTION.md) is complete by explicit owner request; E04 [offline source parsing](docs/SOURCE_PARSER.md) is complete with 57 authored-fixture cases; E05 [collection safeguards](docs/SOURCE_COLLECTION.md) and an unwired [bounded metadata transport](docs/SOURCE_TRANSPORT.md) have synthetic tests; full E05 remains BLOCKED on source access, resolver/egress and API integration evidence. E06 has not started. Execute one expansion step per `next`, with acceptance checks and manual Git checkpoints. Original Step 13 and E20 deployment stay deferred; contact stays blank. E01–E03 review source access and network security before live collection; training remains conditional on admitted data. Existing v1 runtime behavior is unchanged.
+The next active development roadmap is [PRODUCT_ROADMAP.md](docs/PRODUCT_ROADMAP.md): E00 planning and E01 feasibility are complete; [source findings and access blockers](docs/SOURCE_FEASIBILITY.md) are recorded. E02 permission/access is [BLOCKED](docs/SOURCE_ACCESS.md): the owner reports a Bright Data account/API key, but source terms, Amazon.in support, fields, cost limits and a permitted probe are unverified. No live source is approved. E03 [URL-ingestion/security design](docs/URL_INGESTION.md) and E04 [offline source parsing](docs/SOURCE_PARSER.md) are complete; E05 [collection safeguards](docs/SOURCE_COLLECTION.md) and an unwired [bounded metadata transport](docs/SOURCE_TRANSPORT.md) have synthetic tests, while live acceptance remains blocked on source access and network verification. E06 fixture assembly, E07/E08 synthetic demo, E09 synthetic feedback, E11–E15 authored comparison modules and E16–E18 no-train/no-model decisions are complete within their documented limits. Real product-link collection and E19 acceptance still require permitted live source access; E20 deployment remains deferred. Contact stays blank. Existing v1 runtime behavior is unchanged.
 
 Step 10: [benchmark and release report](docs/BENCHMARK.md), [measured synthetic record](docs/benchmarks/20261028.json) and [model card](docs/MODEL_CARD.md). Reproduce with `api/.venv/Scripts/python.exe -m ml.benchmark --output ml/artifacts/my-benchmark.json`; verify the committed record with `--verify docs/benchmarks/20261028-step12.json`. No independent accuracy/calibration is available. Public numeric scores are not approved: enforce findings/coverage with score withheld before deployment, subject to Step 12 review. Only the offline research library retains the experimental index. Provider/browser performance and Unicode response amplification remain release gates.
 
@@ -185,7 +187,7 @@ E07 now includes validated collected-source result contracts and authored contra
 - [ ] Real product-link collection remains blocked by E02/E05.
 
 
-India source-access update (2026-10-31): owner prioritizes real access over E09 demo expansion and confirmed India, with paid access possible but budget unspecified. Conditional first validation target: Amazon.in via Canopy cookie-free top reviews; no provider/account/rights/probe admitted. Top-review selection differs from current newest_first design and requires explicit contract/adapter work after access verification. E02 stays BLOCKED. See docs/INDIA_SOURCE_PILOT.md.
+India source-access update (2026-11-05): owner reports Bright Data account/API-key visibility; terms, Amazon.in schema/entitlement, budget and permitted probe remain unverified. Conditional first target is same-site Amazon.in product discovery, offers and bounded review retrieval. No live source is admitted and E02/E05 remain blocked. See docs/INDIA_SOURCE_PILOT.md.
 
 ## E14 comparison checkpoint
 

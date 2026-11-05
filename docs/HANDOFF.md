@@ -730,6 +730,51 @@ ACTION REQUIRED — CODEX MODEL FOR NEXT STEP: current E00 planning; next E01 fe
 
 ---
 
+# Current handoff — Bright Data access preparation (2026-11-05)
+
+REVIEWTRUST STEP HANDOFF: E02 access remains **BLOCKED**. The owner reports
+Bright Data login/API-key visibility; no credential was shared and no live
+request was made. This documentation update supersedes the old Canopy-first
+recommendation and old claim that no provider account existed. Account access
+does not verify usage rights, Amazon.in entitlement, product/review fields,
+allowed analysis/excerpt display, budget/limits or a permitted bounded probe.
+
+Changes: `docs/INDIA_SOURCE_PILOT.md` now names Amazon.in product discovery plus
+review retrieval through the owner's Bright Data account as the conditional
+validation target and lists the exact manual checks. `docs/PRODUCT_ROADMAP.md`,
+`docs/SOURCE_ACCESS.md`, `README.md` and `AGENTS.md` reflect the account update
+without marking a source approved. No runtime, API, UI, provider credential,
+dataset, training or deployment changed. The website behavior is unchanged.
+
+Actual verification: reviewed current official Bright Data scraper descriptions
+and Amazon Creators API requirements; `git diff --check` and documentation
+status consistency checked. No application tests were run because runtime code
+is unchanged. No live provider result, entitlement or legal permission is
+claimed.
+
+Git: branch `main`, remote `origin` is the existing Review-Trust GitHub remote;
+no files staged, committed or pushed. Review the diff and commit manually using
+the commands in the final response. After committing, the owner may push the
+verified current branch to `origin`.
+
+Manual TODO: confirm free-only or set an INR spend cap; inspect the Bright Data
+account agreement, Amazon.in product and review scraper support, actual output
+fields, selection/coverage, usage/quota and hard billing limits. Confirm the
+permitted collection, analysis, display and retention terms. Only then consider
+a capped probe, with secrets kept local. E03/E05 network and provider gates
+remain before live integration.
+
+ACTION REQUIRED — CODEX MODEL FOR NEXT STEP: current E02 access verification;
+next eligible work remains E02, GPT-6.1 Sol High (keep if selected; fallback
+GPT-5.6 Sol High if selectable). Complexity is moderate and evidence-focused.
+Next scope: review sanitized provider schema/terms/quota evidence and decide
+whether a bounded sample is allowed; no code integration before those gates.
+Escalate concrete network-security blockers to GPT-6 Astra High. No model switch
+or provider approval is claimed. Stop until the owner provides the permitted
+access evidence or changes scope.
+
+---
+
 # ReviewTrust handoff
 
 Date: 2026-10-28. Last fully completed roadmap step: Step 12.

@@ -1,6 +1,6 @@
 # E02 — Permission and source access
 
-Date: 2026-10-30 (Asia/Calcutta). Status: **BLOCKED — no actual store/provider or permission/access evidence.** The owner answered: “I have no store or provider access yet.” E01's WooCommerce merchant/headphones recommendation remains conditional. No country, currency, retailer or monthly budget has been approved.
+Historical source-card baseline dated 2026-10-30 (Asia/Calcutta). Status: **BLOCKED — no permitted source or live-access evidence.** At that time the owner answered: “I have no store or provider access yet.” A Bright Data login/API-key was later reported on 2026-11-05; this does not resolve the permission, entitlement, field, budget or probe gates below. E01's WooCommerce merchant/headphones recommendation remains conditional. India is the target market; the provider budget is still unconfirmed.
 
 This is an access-preparation checkpoint, not an approved source card. E02 cannot be marked complete or dependent live collection enabled from this document. No credentials, permission grant, merchant communication, product-data request, purchase, training or deployment occurred. Current v1 no-fetch behavior, NO TRAIN and public score withholding persist.
 
@@ -74,4 +74,4 @@ This is a future verification plan, not an implemented collector:
 Prepared the source card, field/use distinctions, owner actions, unsent request and future minimal probe plan. **Actual permission, live fields and working access are not verified.** E02 stays BLOCKED until the owner provides a real permitted source. E03 has not started. Checks for this documentation checkpoint: local links, tracker consistency and `git diff --check`; no application tests needed for unchanged code. No source is added to `ml/sources.json`.
 
 
-India source-access update (2026-10-31): owner prioritizes real access over E09 demo expansion and confirmed India, with paid access possible but budget unspecified. Conditional first validation target: Amazon.in via Canopy cookie-free top reviews; no provider/account/rights/probe admitted. Top-review selection differs from current newest_first design and requires explicit contract/adapter work after access verification. E02 stays BLOCKED. See INDIA_SOURCE_PILOT.md.
+India source-access update (2026-11-05): owner reports Bright Data login/API-key visibility; no credential was shared. This supersedes the 2026-10-31 Canopy-first recommendation and prior statement that no provider account exists. It does not verify rights, plan entitlement, Amazon.in schema, review selection, budget/limits or a permitted probe. Current conditional target is Bright Data Amazon.in product discovery plus bounded review retrieval; E02 remains BLOCKED. See INDIA_SOURCE_PILOT.md.
