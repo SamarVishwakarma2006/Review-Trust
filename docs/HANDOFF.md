@@ -1,3 +1,33 @@
+# Current handoff — README and screenshot refresh
+
+2026-11-06. REVIEWTRUST STEP HANDOFF: documentation refresh COMPLETE.
+README.md now presents current features, synthetic/live boundaries, setup,
+architecture, endpoints, checklist and documentation links without repeated stale
+checkpoint prose. ml/README.md uses current documented benchmark commands and
+explicitly distinguishes the latest E19 measurement from the older record bound
+by the integrity test. docs/images contains three actual local application
+screenshots and a provenance/attribution README. The hero illustration is reused
+from the existing repository asset.
+
+Verification: inspected the captured homepage, authored comparison and brand
+results; checked local Markdown links/image files and git diff --check. The documented
+mechanics and E19 benchmark verification commands both passed (no_train). No
+application test suite rerun for documentation/images only. No implementation, source
+admission, deployment or training change. Browser homepage retained for the owner.
+Started clean on main at 68ad5c2; nothing staged, committed or pushed.
+
+Manual TODO: review the README rendering and images, then commit the documented
+files manually. E02 provider access/terms/schema/quota verification remains the
+next product milestone; account/key visibility alone does not satisfy it.
+
+ACTION REQUIRED — CODEX MODEL FOR NEXT STEP: current documentation refresh;
+next E02 source-access evidence, recommend GPT-6.1 Sol High. Keep if selected;
+fallback GPT-5.6 Sol High if available. Moderate evidence review; inspect sanitized
+provider schema/terms/limits before an allowed bounded probe. Escalate concrete
+transport-security blockers to GPT-6 Astra High. No model switch claimed.
+
+---
+
 # Current handoff — Spline room details
 
 2026-11-04. REVIEWTRUST STEP HANDOFF: room-detail integration complete;

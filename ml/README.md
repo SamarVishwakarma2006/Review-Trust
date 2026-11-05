@@ -1,4 +1,4 @@
-# Offline research — Step 7
+# Offline audit, evaluation and benchmarks
 
 The source audit and bounded labelling/split workflow are implemented. No real dataset is admitted for training. Step 8 completed the no-train decision and synthetic mechanics evaluation; no classifier has been trained.
 
@@ -54,20 +54,22 @@ The current runner rejects changed source admission/training flags for manual re
 
 Run `api/.venv/Scripts/python.exe -m ml.benchmark --output ml/artifacts/my-benchmark.json` with a new output name. Each of nine fixed synthetic resource workloads runs in three fresh bounded child processes; default API TestClient POST timings and process peak RSS are measured without socket/provider latency. Controlled admission, rate and shortened slow-body budget probes remain separate. Six sampling cases use seed 20261028 without rerolling. No raw review bodies or local paths are written to reports. Only generated synthetic requests are used; there is no arbitrary input path or acquisition/training option.
 
-`--verify docs/benchmarks/20261028.json` checks the reviewed stored record against source/request hashes, summaries, outcomes and current no-train mechanics. It does not rerun noisy timings; missing memory is null. The report records the default settings, exact installed package versions and source freeze before/after the run. New output is create-only under ignored ml/artifacts/; an intentional reviewed synthetic snapshot lives in docs/benchmarks/. The existing unittest/CI workflow discovers benchmark integrity tests without adding a speed threshold on shared CI hosts.
+`--verify docs/benchmarks/20261102-e19.json` checks the reviewed stored record against source/request hashes, summaries, outcomes and current no-train mechanics. It does not rerun noisy timings; missing memory is null. The report records the default settings, exact installed package versions and source freeze before/after the run. New output is create-only under ignored ml/artifacts/; an intentional reviewed synthetic snapshot lives in docs/benchmarks/. The existing unittest/CI workflow discovers benchmark integrity tests without adding a speed threshold on shared CI hosts.
 
 See [benchmark report](../docs/BENCHMARK.md) for actual measurements, sampling failures, Unicode response amplification, browser/provider gaps and the decision to withhold numeric scores before public release. No model, dataset, dependency or production methodology changed. The frozen Step 8 report remains valid.
 
 
-## Step 12 current records
+## Current verification records
 
-Verify `docs/benchmarks/20261028-step12.json` after the reviewed resource/public-policy version change. The old Step 10 JSON is retained as historical evidence and does not verify against changed code. Methodology 0.3.0 retains all seventeen mechanical outcomes/relations and the same offline arithmetic; the mechanics reference's version/source bindings were intentionally refreshed only after equality checks. HTTP resource samples now all require null public scores and the normalization stress case must reject with normalized_text_limit. No new dataset, training authorization or dependency was added. See ../docs/SECURITY_AUDIT.md.
+Run from the repository root using the existing API environment:
 
+```powershell
+& ./api/.venv/Scripts/python.exe -m ml.evaluate --verify ml/fixtures/mechanics.expected.json
+& ./api/.venv/Scripts/python.exe -m ml.benchmark --verify docs/benchmarks/20261102-e19.json
+```
 
-E07 benchmark checkpoint: docs/benchmarks/20261031-e07.json is the current intentionally rerun synthetic HTTP resource record after main.py/security.py ingress changes. The Step 12 record is historical and retains its original hashes; do not verify it against new source. No timing equality, provider capacity or independent accuracy is claimed. Mechanics implementation/report remains unchanged.
+The E19 record is the latest documented local synthetic resource run; see [local verification](../docs/LOCAL_VERIFICATION.md). The benchmark integrity test currently binds the earlier `20261031-e08-demo.json` record. Both are retained intentionally; they do not measure live providers or comparison/brand browser capacity. Older Step 10, Step 12 and E07 records are historical and must not be verified against unrelated changed implementation hashes.
 
+Methodology 0.3.0 preserves the seventeen authored mechanics cases and offline arithmetic. HTTP numeric scores remain null; no trained model or confidence is authorized. Source-bound records require an intentional reviewed refresh when bound code changes. Do not overwrite historical measurements or interpret fixture pass counts as classifier accuracy.
 
-Current E07 fixture-analysis benchmark: docs/benchmarks/20261031-e07-fixture-analysis.json. Intentional synthetic rerun binds the shared analyzer extraction; prior E07 ingress and Step 12 records remain historical. Mechanics comparison confirms all outcomes unchanged, with only implementation hashes and report checksum refreshed. No training, timing equality or independent accuracy claim.
-
-
-Current synthetic benchmark: docs/benchmarks/20261031-e08-demo.json, intentionally rerun after main/security demo-route changes; prior records are historical. Mechanics unchanged. No timing equality or independent accuracy claim.
+The [main README](../README.md) includes application screenshots and current feature/source status. The public product endpoint still has no live collector; these offline tools do not grant source access, admit real data or authorize training.

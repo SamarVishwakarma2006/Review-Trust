@@ -1,43 +1,48 @@
 # ReviewTrust
 
-An electronics review-pattern analysis platform. It detects observable patterns, not proven deception. Proposed scores are experimental and apply only to the submitted subset.
+**Look beyond the stars.** Explore electronics review patterns, reported product feedback and alternative-product comparisons with supporting evidence.
 
-## Current status
+![ReviewTrust illustrated desk and computer hero](web/public/review-desk.webp)
 
-- [x] Approved immersive homepage redesign (2026-11-03): local illustrated hero,
-  warm cream/orange styling, responsive navigation and feature overview. Existing
-  demo/analyzer retained. Owner-requested follow-up brings the live Spline scene
-  into the full-width hero with automatic loading and Pause/Resume 3D.
-  Room-detail follow-up (2026-11-04) adds shelves, plants, books and warm desk
-  colors; see [scene notes](docs/SPLINE_HERO.md) for remaining visual/performance limits.
+> Local development preview. Product comparisons and brand examples use authored synthetic data. Live product-link collection is not connected. Numeric scores and confidence are withheld; findings do not establish authenticity or product quality.
 
-E13 [authored offer comparison](docs/PRODUCT_OFFERS.md) now handles exact decimal
-totals, explicit fees, currencies, stock, conditional offers and freshness. A
-lowest-total result requires every supplied offer to be comparable. UI composition
-is planned for E14; live provider setup remains deferred.
+[Quick start](#quick-start) · [Screenshots](#screenshots) · [Project status](#project-status) · [Documentation](#documentation)
 
-E12 [authored alternative selection](docs/PRODUCT_CANDIDATES.md) filters up to 50
-records by explicit category/form/connection requirements, excludes exact matches
-and returns at most five candidates with reasons and omitted counts. Live discovery
-and comparison UI are pending; the current website remains the synthetic feedback demo.
+## What you can try
 
-E11 [offline product identity](docs/PRODUCT_IDENTITY.md) compares explicit model,
-variant/bundle/condition fields and keeps seller identity separate. Twenty authored
-checks pass; catalog integration remains pending.
+| Feature | Current behavior |
+| --- | --- |
+| Review-pattern analysis | Analyze submitted English electronics reviews through paste or CSV; inspect repetition, incentive mentions and contextual findings with coverage and excerpts. |
+| Product feedback | Explore battery, comfort, durability and sound mentions in authored headphone samples, with counts and supporting wording. |
+| Alternatives and offers | Compare authored products, dated INR offers, complete/partial/empty samples, unknown costs and ties. |
+| Brand feedback | Inspect themes across three explicitly identified synthetic models, with per-product coverage and shared-text disclosures. |
+| Interactive homepage | Full-bleed Spline computer scene with Pause/Resume 3D. The scene unloads outside the hero or when the document is hidden; returning reloads it. |
 
-E10 [catalog access preparation](docs/CATALOG_ACCESS.md) is complete: conditional
-Amazon.in/Flipkart candidate fields, rights review and a bounded verification
-plan. Provider setup remains deferred; no alternative catalog is connected.
+Missing evidence remains unknown. No real dataset, trained classifier, validated accuracy or calibrated confidence is available. Automatic masking is incomplete: remove personal information before submitting reviews.
 
-Steps 1–12 are complete. The Next.js interface supports editable pasted reviews, CSV header mapping, direct API submission, cancel/reset, safe errors and an evidence view with explicit coverage, prioritised navigation, accessible charts and highlighted supporting text. FastAPI provides bounded analysis with experimental scoring, masking and explicit insufficient-evidence states. Dataset audits, a synthetic labelling/split workflow, a no-train baseline evaluation and local resource/robustness benchmarks are complete. No real dataset, trained model, independent accuracy or calibration is available. Public numeric scores are not approved and withholding is now enforced in both HTTP routes and the UI. Website content is implemented; the contact address is intentionally blank at the owner’s request. The local security audit is complete; public launch remains NO GO pending owner/provider verification. Local checks pass; GitHub Actions is configured but has not been verified remotely.
+## Screenshots
 
-Read [SPEC.md](SPEC.md), [API usage/configuration](docs/API.md), [input validation interface](docs/INPUT_VALIDATION.md), [decisions](docs/DECISIONS.md), [threat model](docs/THREAT_MODEL.md), [dataset audit](docs/DATASET_AUDIT.md), [offline workflow](ml/README.md), [model card](docs/MODEL_CARD.md), [evaluation record](docs/EVALUATION.md), [engineering guidance](AGENTS.md) and [handoff](docs/HANDOFF.md).
+Captured from the local application on 2026-11-06. Results shown below are synthetic, not live retailer data; displayed timestamps and prices are demonstration values.
 
-## Development setup
+### Homepage
 
-Prerequisites: Node.js 24 LTS with npm, Python 3.12 with pip/venv, and Git. Python 3.12 is the tested backend baseline; the Windows Store command alias alone is not a Python installation.
+![Homepage with cream typography, orange controls and computer illustration](docs/images/homepage.jpg)
 
-From the repository root in PowerShell:
+The hero artwork above is the local fallback illustration. The interactive scene can differ in camera, lighting and decoration; its published asset is maintained outside Git. [Scene isolation, attribution and performance notes](docs/SPLINE_HERO.md).
+
+### Authored product comparison
+
+![Synthetic headphone comparison showing sample coverage, dated INR offers, ties and feedback disclosures](docs/images/comparison.jpg)
+
+### Authored brand feedback
+
+![Synthetic brand feedback showing per-model coverage, recurring reported wording and limits on independent evidence](docs/images/brand-feedback.jpg)
+
+See [screenshot provenance](docs/images/README.md) for capture details and 3D attribution.
+
+## Quick start
+
+Prerequisites: **Node.js 24**, **Python 3.12** and Git. Run these commands from the repository root in PowerShell:
 
 ```powershell
 python -m venv api/.venv
@@ -45,13 +50,19 @@ python -m venv api/.venv
 npm --prefix web ci
 ```
 
-If this machine's `python` alias fails, the Codex bundled runtime used for local verification can create the environment:
+Start the API and website in separate terminals:
 
 ```powershell
-& "$env:USERPROFILE/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/python.exe" -m venv api/.venv
+# Terminal 1 — API on http://127.0.0.1:8000
+./scripts/dev-api.ps1
 ```
 
-This fallback path is machine-specific; a normal Python 3.12 installation is preferred for independent development. Do not commit the virtual environment. No environment secrets or `.env` file are needed for the current foundation.
+```powershell
+# Terminal 2 — website on http://127.0.0.1:3000
+npm --prefix web run dev
+```
+
+Open [the homepage](http://127.0.0.1:3000/). At `/#demo`, select a review, comparison or brand example and click **Analyze synthetic example**. At `/#analyze`, submit your own permitted, minimized review subset. Both servers must be running for analysis results.
 
 On macOS/Linux:
 
@@ -59,156 +70,77 @@ On macOS/Linux:
 python3.12 -m venv api/.venv
 api/.venv/bin/python -m pip install -r api/requirements-dev.txt
 npm --prefix web ci
-```
-
-## Run locally
-
-Open two terminals at the repository root:
-
-```powershell
-# Terminal 1: API (http://127.0.0.1:8000)
-./scripts/dev-api.ps1
-```
-
-```powershell
-# Terminal 2: web (http://127.0.0.1:3000)
+# In a separate terminal, from api/:
+.venv/bin/python -m uvicorn app.main:app --host 127.0.0.1 --port 8000 --reload --no-access-log --no-proxy-headers
+# From the repository root:
 npm --prefix web run dev
 ```
 
-For macOS/Linux, run `.venv/bin/python -m uvicorn app.main:app --host 127.0.0.1 --port 8000 --reload --no-access-log --no-proxy-headers` from `api/`. Stop either server with Ctrl+C. API `GET /` retains the development status; `GET /health` returns `{"status":"ok"}`. `POST /v1/analyze` accepts canonical JSON; `POST /v1/analyze/csv` accepts multipart CSV plus required metadata. The web page calls the API directly; confirm English reviews for one electronics product before submitting. These development apps are not approved for public deployment.
+No provider API key is required for the current synthetic demo. Browser API configuration defaults to `http://127.0.0.1:8000`; set `NEXT_PUBLIC_API_URL` in `web/.env.local` only to a trusted API origin, then restart/rebuild. This variable is public: never put a secret in it. API settings do not automatically load `.env` files. See [API configuration](docs/API.md) and [frontend configuration](docs/FRONTEND.md).
 
-Methodology `rt-patterns-0.3.0-experimental` adds TF-IDF near repetition, timing windows, rating distributions and conservative lexicon disagreement. Only repetition and four incentive phrases affect the score; the other findings are contextual. Each signal has explicit evidence gates, and excessive similarity vocabulary withholds the score. See SPEC.md for exact rules and limitations. Public API scores are always withheld; only the offline library evaluates experimental arithmetic. Confidence remains unvalidated. Common email/phone masking is incomplete, so remove personal information before submitting.
+## Architecture
 
-Default API budgets: 1 MiB total request including upload envelope, two admitted requests, ten-second body/processing deadline, peer token bucket with burst two/refill ten per minute. Optional process settings are listed in [docs/API.md](docs/API.md) and `api/.env.example`; the example file is not automatically loaded. Use one API process until deployment-specific shared abuse controls are verified. Do not trust forwarded identity headers by default.
+| Location | Responsibility |
+| --- | --- |
+| `web/` | Next.js App Router, React, TypeScript and Tailwind; validated API responses, escaped evidence, request cancellation and synthetic comparison/brand views. |
+| `api/app/` | FastAPI/Pydantic validation, bounded ingestion and analysis, source contracts and authored comparison modules. |
+| `ml/` | Offline source audit, frozen synthetic splits, heuristic mechanics evaluation and resource benchmarks; no training pipeline is authorized. |
+| `scripts/` | Loopback development commands and verification workflow. |
+| `docs/` | Contracts, source gates, methodology, threat model, measurements and handoffs. |
 
-Browser configuration: the default API origin is `http://127.0.0.1:8000`. To change it, copy `web/.env.example` to `web/.env.local` and set `NEXT_PUBLIC_API_URL` to the trusted API origin (no path, credentials, query or fragment). Restart development or rebuild: Next.js embeds this public value at build time. Match the browser origin in the API CORS settings. Never put secrets in this variable. See [frontend usage](docs/FRONTEND.md).
+The browser calls the configured API directly. Uploads/results remain in application memory, with no saved history or database. Decorative 3D runs in an opaque sandbox without review-data access; loading it makes external Spline-related requests. [Privacy](docs/CONTENT.md) · [3D integration](docs/SPLINE_HERO.md).
 
-Production frontend smoke check, after building: `npm --prefix web run start`.
+Key endpoints:
+
+| Endpoint | Behavior |
+| --- | --- |
+| `GET /health` | Development health check. |
+| `POST /v1/analyze` | Submitted JSON review analysis. |
+| `POST /v1/analyze/csv` | Bounded multipart CSV ingestion. |
+| `POST /v2/demo/analyze` | Fixed authored review/comparison/brand examples. |
+| `POST /v2/products/analyze` | Validates product requests and fails closed; live collection is unavailable. |
+
+## Project status
+
+- [x] Steps 1–12: application foundation, evidence presentation, offline audits and local security preparation.
+- [x] E03/E04/E06: source contracts, offline parser and authored sample assembly.
+- [x] E07/E08 synthetic demo, E09 synthetic feedback, E11–E15 authored identity/candidate/offer/comparison/brand functionality.
+- [x] E16–E18: NO TRAIN, training skipped with reason, NO MODEL integration decision.
+- [x] Homepage redesign and automatic Spline hero with visibility controls.
+- [ ] E02/E05: permitted source access and complete live network/collection verification.
+- [ ] E07–E15 real-source integration and representative evaluation.
+- [ ] E19: real product-link release acceptance; existing synthetic verification does not satisfy it.
+- [ ] Original Step 13 / E20: deployment and production verification, deferred by the owner.
+
+The owner reports Bright Data login/API-key visibility. Amazon.in entitlement, permitted uses, actual fields, quotas, budget and an allowed probe remain unverified. The current conditional pilot is Amazon.in product discovery plus bounded review retrieval; cross-site support is not available. [Source pilot](docs/INDIA_SOURCE_PILOT.md) · [Full tracker](docs/PRODUCT_ROADMAP.md).
+
+Public numeric scores remain withheld under methodology `rt-patterns-0.3.0-experimental`. Contact is intentionally blank in `web/lib/contact.ts`; a monitored destination and provider/release gates must be resolved before public launch. [Model decision](docs/MODEL_CARD.md) · [Deployment preparation](docs/DEPLOYMENT.md).
 
 ## Verification
 
-Run all current checks on Windows from the repository root:
+Run the full local workflow from the repository root:
 
 ```powershell
 ./scripts/check.ps1
 ```
 
-Equivalent individual commands:
+It covers dependency consistency, backend/offline tests, Ruff, frontend tests, ESLint, TypeScript and the production build. For frontend-only work:
 
 ```powershell
-Push-Location api
-& ./.venv/Scripts/python.exe -m pytest
-& ./.venv/Scripts/python.exe -m ruff check .
-& ./.venv/Scripts/python.exe -m ruff format --check .
-Pop-Location
-& ./api/.venv/Scripts/python.exe -m unittest discover -s ml/tests -v
-& ./api/.venv/Scripts/python.exe -m ruff check ml --config api/pyproject.toml
-& ./api/.venv/Scripts/python.exe -m ruff format --check ml --config api/pyproject.toml
 npm --prefix web run test
 npm --prefix web run lint
 npm --prefix web run typecheck
 npm --prefix web run build
 ```
 
-On macOS/Linux substitute `.venv/bin/python` for `.venv/Scripts/python.exe`, and run the backend checks inside `api/`. CI runs the same checks plus `pip check` on Python 3.12 and Node 24 under Ubuntu. The workflow runs after a manual push or pull request; adding it does not mean a remote run has passed.
+See [offline verification commands](ml/README.md), [local verification evidence](docs/LOCAL_VERIFICATION.md) and [benchmark limitations](docs/BENCHMARK.md). Synthetic checks verify software behavior, not detection accuracy. Recorded checks are historical observations; configured GitHub Actions does not establish that remote CI passed for a new commit.
 
-Runtime and development Python requirements are separately pinned, including transitive packages. npm uses exact direct versions and `web/package-lock.json`; use `npm ci` for reproducible installs. Dependency updates require rerunning checks. No ML dependencies are installed yet.
+## Documentation
 
-Known tooling limitation: ESLint 9 is deprecated upstream but remains required by the current Next.js React/import/accessibility lint plugins. It is pinned for peer compatibility; see D15 in the decisions log. This must be revisited during maintenance and the pre-deployment audit.
+- [Specification and methodology](SPEC.md) · [API](docs/API.md) · [Input validation](docs/INPUT_VALIDATION.md)
+- [Synthetic demo](docs/SYNTHETIC_DEMO.md) · [Feedback](docs/PRODUCT_FEEDBACK.md) · [Comparisons](docs/PRODUCT_COMPARISON.md) · [Brand view](docs/BRAND_FEEDBACK.md)
+- [Threat model](docs/THREAT_MODEL.md) · [Security audit](docs/SECURITY_AUDIT.md) · [Decisions](docs/DECISIONS.md)
+- [Dataset audit](docs/DATASET_AUDIT.md) · [Offline workflow](ml/README.md) · [Model card](docs/MODEL_CARD.md)
+- [Engineering guidance](AGENTS.md) · [Handoff](docs/HANDOFF.md) · [Expansion roadmap](docs/PRODUCT_ROADMAP.md)
 
-## Roadmap
-
-Current update (2026-11-05): owner reports Bright Data login/API-key visibility;
-no secret was shared. Live source access, rights, Amazon.in fields and cost limits
-are still unverified. E09
-now has feedback counts and supporting excerpts in the synthetic demo;
-human-reviewed real-data evaluation remains pending.
-[product feedback preparation](docs/PRODUCT_FEEDBACK.md) defines aspects,
-conservative extraction, evidence and acceptance cases. Open `/#demo` and analyze
-an authored example to inspect battery, comfort, durability and sound feedback.
-
-- [x] Step 1 — Architecture, Scoring Definition and Threat Model
-- [x] Step 2 — Repository and Development Foundation
-- [x] Step 3 — Schemas and Review Validation
-- [x] Step 4 — FastAPI Analysis Foundation
-- [x] Step 5 — Functional Next.js Application
-- [x] Step 6 — Explainable Detection Signals
-- [x] Step 7 — Dataset Audit and Labelling System
-- [x] Step 8 — ML Baseline and Evaluation (no-train decision and mechanical evaluation)
-- [x] Step 9 — Final Trust Score and Evidence UI
-- [x] Step 10 — Benchmark and Model Report
-- [x] Step 11 — Public Website and Product Content
-- [x] Step 12 — Pre-Deployment Security Audit
-- [ ] Step 13 — Deployment and Production Verification (preparation complete; deployment deferred by owner)
-- [ ] Step 14 — URL expansion (planned as E01–E19; implementation pending)
-
-The next active development roadmap is [PRODUCT_ROADMAP.md](docs/PRODUCT_ROADMAP.md): E00 planning and E01 feasibility are complete; [source findings and access blockers](docs/SOURCE_FEASIBILITY.md) are recorded. E02 permission/access is [BLOCKED](docs/SOURCE_ACCESS.md): the owner reports a Bright Data account/API key, but source terms, Amazon.in support, fields, cost limits and a permitted probe are unverified. No live source is approved. E03 [URL-ingestion/security design](docs/URL_INGESTION.md) and E04 [offline source parsing](docs/SOURCE_PARSER.md) are complete; E05 [collection safeguards](docs/SOURCE_COLLECTION.md) and an unwired [bounded metadata transport](docs/SOURCE_TRANSPORT.md) have synthetic tests, while live acceptance remains blocked on source access and network verification. E06 fixture assembly, E07/E08 synthetic demo, E09 synthetic feedback, E11–E15 authored comparison modules and E16–E18 no-train/no-model decisions are complete within their documented limits. Real product-link collection and E19 acceptance still require permitted live source access; E20 deployment remains deferred. Contact stays blank. Existing v1 runtime behavior is unchanged.
-
-Step 10: [benchmark and release report](docs/BENCHMARK.md), [measured synthetic record](docs/benchmarks/20261028.json) and [model card](docs/MODEL_CARD.md). Reproduce with `api/.venv/Scripts/python.exe -m ml.benchmark --output ml/artifacts/my-benchmark.json`; verify the committed record with `--verify docs/benchmarks/20261028-step12.json`. No independent accuracy/calibration is available. Public numeric scores are not approved: enforce findings/coverage with score withheld before deployment, subject to Step 12 review. Only the offline research library retains the experimental index. Provider/browser performance and Unicode response amplification remain release gates.
-
-## Website content and contact setup
-
-The landing page keeps the analyzer at `/#analyze`. Public information routes: `/how-it-works`, `/methodology`, `/privacy` and `/contact`. See [content and owner setup](docs/CONTENT.md). These are local development pages; indexing and public deployment remain disabled/pending review.
-
-To add your contact address later, edit `CONTACT_EMAIL` in [web/lib/contact.ts](web/lib/contact.ts), replacing the empty string with a real monitored email, then rebuild/restart the web app. Until then, the address space is blank and the page clearly states contact/dispute submission is unavailable. There is no contact form, message storage, automatic sending or invented address. The privacy page follows the same setting. Verify the configured email application/recipient and mailbox privacy practices before launch.
-
-## Git
-
-Repository: `https://github.com/SamarVishwakarma2006/Review-Trust.git`, remote `origin`, branch `main`. The previously committed README merge markers were removed in Step 2. Commits and pushes are manual; the assistant provides commands after each step and does not stage or commit automatically.
-
-Benchmark CI repair (2026-10-28): isolated the worker test's subprocess mock so Linux processor detection can run independently. The regression and full local checks pass; the frozen benchmark record remains unchanged. See [repair details](docs/BENCHMARK.md#ci-test-repair--2026-10-28). Remote CI rerun remains unverified.
-
-
-## Step 12 security audit
-
-See [audit findings and launch gates](docs/SECURITY_AUDIT.md), [dependency query evidence](docs/security/dependencies-20261028.json) and [current measurement record](docs/benchmarks/20261028-step12.json). Both HTTP routes return null scores. Normalized/masked display limits and a 2 MiB serialized-response cap reject atomically. Methodology 0.3.0 supersedes 0.2.0; pair/phrase arithmetic is unchanged offline. The Step 10 record is historical; current integrity tests use the new Step 12 record.
-
-Next now renders pages dynamically for fresh CSP script nonces; page HTML is no-store. Production scripts have no unsafe-inline/eval exception; bounded chart styles retain inline styles. No new dependency or distributed infrastructure was added. All local checks pass, including 194 backend, 28 offline and 27 frontend tests. Remote CI and hosting readiness are not claimed. Configure monitored contact and verify actual HTTPS origins, one-process edge/proxy limits, resource/timeouts and provider logging/retention before public launch. Step 13 must resolve these gates; Step 12 did not deploy anything.
-
-
-### E06 fixture-only sample assembly
-
-- [x] E06 authored synthetic sample normalization and coverage mechanics, explicitly authorized independently of blocked E05. See [SOURCE_SAMPLE.md](docs/SOURCE_SAMPLE.md).
-- [ ] E02/E05 permitted live source and network verification remain blocked; E07 API integration is pending.
-
-The website still accepts paste/CSV. No product URL is collected or analyzed by these offline components.
-
-
-- [ ] E07 — [Fail-closed product API ingress](docs/PRODUCT_API.md) implemented; full analysis integration remains blocked. No live collection or URL UI is enabled.
-
-
-E07 continuation: authored samples can now be analyzed offline with explicit fixture provenance and withheld scores. Production product ingress remains fail-closed; E07 is partial, E08 pending. See [PRODUCT_API.md](docs/PRODUCT_API.md).
-
-
-E07 now includes validated collected-source result contracts and authored contract examples. Production ingress remains fail-closed; successful collected analysis and frontend integration are pending. See [PRODUCT_API.md](docs/PRODUCT_API.md).
-
-
-- [x] Owner-authorized E07/E08 synthetic demo: open http://127.0.0.1:3000/#demo with API running, choose an authored example, and analyze. Complete/partial/empty cases work through the real local API. [Demo details](docs/SYNTHETIC_DEMO.md).
-- [ ] Real product-link collection remains blocked by E02/E05.
-
-
-India source-access update (2026-11-05): owner reports Bright Data account/API-key visibility; terms, Amazon.in schema/entitlement, budget and permitted probe remain unverified. Conditional first target is same-site Amazon.in product discovery, offers and bounded review retrieval. No live source is admitted and E02/E05 remain blocked. See docs/INDIA_SOURCE_PILOT.md.
-
-## E14 comparison checkpoint
-
-- [x] Authored side-by-side comparison: choose a Compare headphones example at `/#demo`.
-- [ ] Live comparison remains gated on provider access and collection verification.
-
-See [comparison behavior and verification](docs/PRODUCT_COMPARISON.md).
-
-- [x] E15 synthetic brand view: select either Brand feedback example at `/#demo`.
-  Shows per-model coverage and shared wording without a company verdict.
-  [Scope and verification](docs/BRAND_FEEDBACK.md). Live brand analysis remains pending.
-
-- [x] E16 dataset-admission review: [NO TRAIN](docs/TRAINING_ADMISSION.md).
-  No permitted independent real target is admitted; E17 remains a separate checkpoint.
-
-- [x] E17 conditional training: SKIPPED_WITH_REASON on 2026-11-02 under E16 NO TRAIN.
-  No training code or model added. E18's integration decision remains next.
-
-- [x] E18: NO MODEL integration decision; evidence-only output continues.
-- [ ] E19: [local synthetic verification passed](docs/LOCAL_VERIFICATION.md), live-source acceptance blocked.
-- [ ] E20: deployment remains deferred by owner; contact stays blank.
-
-- [x] Optional Spline homepage illustration with local still and explicit 3D control.
-  See [integration boundaries](docs/SPLINE_HERO.md).
+Commits and pushes are performed manually by the owner. Keep credentials, real review datasets, local environments and generated build output out of Git.
